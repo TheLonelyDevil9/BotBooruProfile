@@ -1,0 +1,228 @@
+{
+  "topCard": {
+    "avatarUrl": "https://file.garden/aeRvgfxptRQB-dB-/Firefly%20Spring%20Missive.png",
+    "profileName": "@The_Lonely_Devil",
+    "whoLinkLabel": "...Who?",
+    "whoLinkUrl": "https://www.youtube.com/watch?v=iVXa0_Sk95A&t=5s",
+    "aboutBullets": [
+      "Just a lazy bum, now hobbyist cardmaker. Mostly into Hoyoverse games and Anime stuff.",
+      "Let there be em dashes (yes, they are AI-written with tremendous human oversight, in case it wasn't obvious)",
+      "Knows some things (not a TOTAL dunce)",
+      "Been around in the 'scene' since mid-2024, starting with pre-lobotomy CharacterAI. Yeah, **that** C.Ai.",
+      "The creator of [Discord Pals](https://github.com/TheLonelyDevil9/discord-pals) (with heavy inspiration and lots of feedback!)",
+      {
+        "text": "Also a contributor in the following projects I'm very passionate about currently:",
+        "children": [
+          "[SillyBunny by Platerblitz](https://github.com/platberlitz/SillyBunny), a super-fast and customized fork of [SillyTavern, the frontend that started it all.](https://github.com/SillyTavern/SillyTavern)",
+          "[Marinara Engine by Marinara Spaghetti & the Pasta Devs](https://github.com/Pasta-Devs/Marinara-Engine), the next evolution in roleplaying as a branch-out from typical UIs."
+        ]
+      }
+    ],
+    "jumpCopy": "Only here for the cards? Use the button below or the floating shortcut on the bottom right.",
+    "jumpLabel": "Jump to card browser",
+    "jumpUrl": "https://chub.ai/users/The_Lonely_Devil#rc-tabs-0-tab-characters"
+  },
+  "hero": {
+    "title": "Firefly!",
+    "titleUrl": "https://chub.ai/characters/The_Lonely_Devil/firefly-acbe9d8b183b",
+    "focusLabel": "Currently focusing on:",
+    "focusItems": [
+      "Releasing new cards",
+      "Auditing currently-posted cards (again)"
+    ],
+    "actions": [
+      {
+        "label": "Requests?",
+        "url": "https://marshmallow-qa.com/xivrxgkzwdryg9k"
+      },
+      {
+        "label": "Marinara's Kitchen",
+        "url": "https://discord.com/invite/marinara"
+      },
+      {
+        "label": "LinkAPI",
+        "url": "https://linkapi.ai/"
+      }
+    ],
+    "cornerGifUrl": "https://file.garden/aeRvgfxptRQB-dB-/_7%20FFSquish.gif",
+    "endingGifUrl": "https://file.garden/aeRvgfxptRQB-dB-/_5%20Ending%20GIF.gif",
+    "peekGifUrl": "https://file.garden/aeRvgfxptRQB-dB-/fireflypeek.gif",
+    "bannerUrl": "https://file.garden/aeRvgfxptRQB-dB-/_2%20Top%20Firefly.GIF"
+  },
+  "leftColumn": {
+    "philosophy": {
+      "title": "Cardmaking Philosophy",
+      "introLines": [
+        "Detail.",
+        "Detail.",
+        "More detail.",
+        "Then some more."
+      ],
+      "paragraphs": [
+        "I typically collect 20-50k+ tokens of mostly canonical (unless stated otherwise) character data, to consume and condense into every single card I release. Expect them to be foot-focused, large, fleshed-out, and hopefully as lore-accurate as possible (at least as of the time the card is released).",
+        "Even OCs are fleshed out similarly, to have a detailed personality and their own quirks, then condensed.",
+        "This is all done with a massive amount of heavy lifting done by AI."
+      ],
+      "whyLabel": "...but why?",
+      "whyUrl": "https://file.garden/aeRvgfxptRQB-dB-/but-why.gif",
+      "whyBullets": [
+        "I was sick of cards with no substance or wrong information, and wanted cards anyone could pick up to use as a baseline, to modify to their liking, or use as-is.",
+        "I'm also allergic to lorebooks.",
+        "Heavily inspired by [SleepDeprived03's work](https://discord.gg/Nbv9pQ88Xb) (search \"Sleep\" in the NSFW cards channel to find his two main threads - rest in peace, you legend), as well as [Bronya Rand's work](https://bronya-rand.github.io/reimagined-couscous/). Thank you for your hard work."
+      ],
+      "mediaUrl": "https://file.garden/aeRvgfxptRQB-dB-/_6%20Wa%20Arararagi%20dance.gif"
+    },
+    "dividerImageUrl": "https://file.garden/aeRvgfxptRQB-dB-/_3%20After%20Firefly%2C%20before%20other%20content.png",
+    "presetRecommendations": [
+      {
+        "label": "Marinara Spaghetti's Recipe",
+        "url": "https://github.com/SpicyMarinara/SillyTavern-Settings/tree/main/Marinara's%20Essentials/Preset",
+        "description": "GOAT, v10 last I checked, newer versions are baked into [Marinara Engine.](https://github.com/Pasta-Devs/Marinara-Engine)"
+      },
+      {
+        "label": "Geechan's Universal Roleplay Chat Completions",
+        "url": "https://rentry.org/geechan#universal-roleplay-prompt",
+        "description": "Great and compressed, many variants for your needs, really efficient and gets the prose flowing well regardless of model"
+      },
+      {
+        "label": "OG Alert! PixiJB",
+        "url": "https://pixibots.neocities.org/#prompts/pixijb",
+        "description": "I still use this as a sanity check, and it is just so clean and good. It can work anywhere. Amazing work on this one, even if they are now inactive. What a legacy."
+      }
+    ],
+    "modelRecommendations": {
+      "title": "Model Recommendations",
+      "bullets": [
+        {
+          "text": "My go-to: **Opus 4.7 xHigh/Max** for creative tasks, **GPT-5.5 xHigh** for anything execution-related. Anthropic fucking up recently",
+          "children": [
+            "I have a saying... [Opus can't be beat. The writing is too fucking good. The smarts even more so. Nothing compares right now.](https://www.youtube.com/watch?v=Q-RGkVZFwtI)"
+          ]
+        },
+        {
+          "text": "How do I afford these top tier LLMs without selling a kidney a day? I use [LinkAPI.](https://linkapi.ai/)",
+          "children": [
+            "Trustworthy, great service, comms, and pricing. Works out of the box. I pay for the service too. Professional shilling.",
+            "**Update: As of 21st April 2026, ClaudeCheap and ClaudeCodeCheap groups are incredible again, with the lowest pricing to boot (think half a dollar in & $2.80 out/MToks).**",
+            "GPT 5.5 xHigh for peanuts? You got it. 15 cents in, 85 out/MToks. We're back to incredible savings.\nI swear I get to shill this service for all the good reasons."
+          ]
+        }
+      ],
+      "otherRecsTitle": "Other Recs",
+      "otherRecs": [
+        "[Openrouter trendlists](https://openrouter.ai/rankings) for the day/week are good indicators as well.",
+        "Also, worth checking [Marinara's Recommendations in the respective tab](https://spicymarinara.github.io/) - frequently updated, includes model revisits. (that almost nobody else does)"
+      ]
+    }
+  },
+  "rightColumn": {
+    "sizeProblem": {
+      "title": "If the card size is the problem",
+      "items": [
+        {
+          "text": "Primarily, trim interview questions if you must - PLists reinforce the data, so you only lose tonal info.",
+          "childCopy": ""
+        },
+        {
+          "text": "All you really need are the first 3 questions.",
+          "childCopy": "I still argue that most of your token consumption, especially with frontier LLMs, should be towards the character(s) themselves, but if you're more token-averse, this will work for you."
+        },
+        {
+          "text": "Use higher context LLMs.",
+          "childCopy": "Manage summarization better. Yeah.. skill issue. Please do not swipe 10 times at 100k context. Stay <32k tokens at all times, unless you have a lot of messages like someone that I know."
+        }
+      ]
+    },
+    "statement": "If none of this works, look elsewhere. This is a personal endeavor I quite enjoy, and I'm only ever going to do things my way.",
+    "recommendedReading": {
+      "title": "Recommended Reading",
+      "guideIntro": "All your RP questions will likely be answered here.\nThis guide is incredible:",
+      "sukinoLabel": "Sukino's Findings",
+      "sukinoUrl": "https://rentry.org/Sukino-Findings",
+      "promptingIntro": "Some excellent guides here for prompting, from one of the best people I know of in the AI space:",
+      "geechanLabel": "Geechan's rentry and excellent guides",
+      "geechanUrl": "https://rentry.org/geechan",
+      "impersonationLine": "[Impersonations Guide](https://rentry.org/modelimpersonation) / also featured on [RPWithAI](https://rpwithai.com/dealing-with-model-impersonation-during-ai-roleplay/)",
+      "samplersLine": "[Sampler Guide (using LLMs locally? This SPECIFICALLY helps you!)](https://rentry.org/samplersettings)"
+    },
+    "midImageUrl": "https://file.garden/aeRvgfxptRQB-dB-/_4.jpg",
+    "requests": {
+      "title": "Requests",
+      "linkLabel": "Cardmaking requests? Send them here.",
+      "linkUrl": "https://marshmallow-qa.com/xivrxgkzwdryg9k",
+      "subtext": "No guarantees though, only made (at all) or prioritized if I like the character."
+    },
+    "artCredits": {
+      "title": "Art Credits",
+      "items": [
+        {
+          "label": "Background",
+          "url": "https://danbooru.donmai.us/posts/10950266"
+        },
+        {
+          "label": "Tablefly",
+          "url": "https://danbooru.donmai.us/posts/7720371"
+        },
+        {
+          "label": "Bedfly",
+          "url": "https://danbooru.donmai.us/posts/8708728"
+        },
+        {
+          "label": "Pockyfly",
+          "url": "https://danbooru.donmai.us/posts/9066613"
+        },
+        {
+          "label": "Post-school-Fly",
+          "url": "https://danbooru.donmai.us/posts/10970151"
+        }
+      ]
+    },
+    "disclaimers": {
+      "title": "Disclaimers",
+      "items": [
+        {
+          "text": "I can't believe I have to say this, but if you really nitpick measurement units as part of a global audience (cm/UK foot sizing/etc) you're going to be laughed at.",
+          "childCopy": ""
+        },
+        {
+          "text": "If you come to me saying the card is giving you response issues with remembering things, I'm going to laugh at you. Again. Join the discord and educate yourself, or just read Sukino's guide.",
+          "childCopy": ""
+        },
+        {
+          "text": "Card not to your expectations? Fork it. Zero qualms with that. Too large? Look elsewhere.",
+          "childCopy": ""
+        },
+        {
+          "text": "LinkAPI is partnered with Marinara's Kitchen, where I'm a member of the staff.",
+          "childCopy": "Most of the work I've done here on chub was only possible thanks to the service.\nI am definitely going to say I'm biased towards the service, and for good reason.\nAnyone else remember MegaLLM and other famous proxies?"
+        },
+        {
+          "text": "Why, yes, I like feet. How could you tell?",
+          "childCopy": ""
+        }
+      ]
+    }
+  },
+  "artShowcase": {
+    "items": [
+      {
+        "label": "Post-school-Fly",
+        "url": "https://file.garden/aeRvgfxptRQB-dB-/_9%20Firefly%20After%20School.jpg",
+        "creditUrl": "https://danbooru.donmai.us/posts/10970151",
+        "alt": "Firefly after school artwork"
+      },
+      {
+        "label": "Pockyfly",
+        "url": "https://file.garden/aeRvgfxptRQB-dB-/_8%20Firefly%20Pocky%20Couch.png",
+        "creditUrl": "https://danbooru.donmai.us/posts/9066613",
+        "alt": "Firefly pocky couch artwork"
+      }
+    ]
+  },
+  "floatingNav": {
+    "profileLabel": "Jump to Profile",
+    "profileUrl": "#root",
+    "cardsLabel": "Jump to Cards",
+    "cardsUrl": "https://chub.ai/users/The_Lonely_Devil#rc-tabs-0-tab-characters"
+  }
+}

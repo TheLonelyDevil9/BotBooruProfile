@@ -1,0 +1,54 @@
+# Local browser/runtime state
+.chrome-profile/
+.playwright-mcp/
+.impeccable-live/
+.stfolder/
+
+# Local screenshots and visual scratch artifacts
+app/profile/profile-*.png
+chub-card-polish-mock.png
+
+# Recovery/backup scratch files
+*.bak
+*.backup
+*.tmp
+Profile Backup*.md
+
+# Stray bundled app chunks copied into the workspace root
+appearance-settings-*.js
+use-resolved-theme-variant-*.js
+
+# Logs and dependency caches
+*.log
+node_modules/
+.cache/
+.parcel-cache/
+.vite/
+dist/
+build/
+coverage/
+
+# Editor/OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+
+# Secrets and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.csr
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+*.kdbx
+*.sqlite
+*.db

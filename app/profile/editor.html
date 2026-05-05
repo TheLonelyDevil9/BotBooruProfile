@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chub Profile Content Editor</title>
+  <style>
+    :root {
+      --bg: #120b05;
+      --panel: #181818;
+      --panel-2: #202020;
+      --text: #f2f2f2;
+      --muted: rgba(242, 242, 242, 0.68);
+      --accent: #ff8a00;
+      --accent-strong: #ffb703;
+      --border: rgba(255, 138, 0, 0.24);
+      --shadow: 0 22px 50px rgba(0, 0, 0, 0.36);
+      --radius: 22px;
+      --font-ui: "Segoe UI", "Helvetica Neue", sans-serif;
+      --font-mono: "Cascadia Code", "Consolas", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-ui);
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 138, 0, 0.12), transparent 24%),
+        linear-gradient(180deg, #0c0c0c 0%, var(--bg) 100%);
+    }
+
+    .app {
+      max-width: 1700px;
+      margin: 0 auto;
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero,
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255, 138, 0, 0.06), rgba(255, 138, 0, 0) 18%), var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: end;
+      flex-wrap: wrap;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 3.2rem);
+      line-height: 0.95;
+      color: var(--accent-strong);
+    }
+
+    .hero p {
+      margin: 10px 0 0;
+      max-width: 72ch;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    button {
+      appearance: none;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--accent);
+      color: #111;
+      font: inherit;
+      font-weight: 700;
+      padding: 0.8rem 1.15rem;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      background: rgba(255, 138, 0, 0.08);
+      color: var(--text);
+    }
+
+    .status {
+      color: var(--muted);
+      min-height: 1.4em;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(420px, 0.8fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .editor-panel {
+      padding: 18px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .section {
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 18px;
+      background: var(--panel-2);
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .section-header strong {
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    .section-body {
+      padding: 16px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field label {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 12px 13px;
+      background: #0f0f0f;
+      color: var(--text);
+      font: inherit;
+      line-height: 1.5;
+    }
+
+    .field textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .field textarea.code {
+      min-height: 320px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.5;
+    }
+
+    .list-editor {
+      display: grid;
+      gap: 10px;
+    }
+
+    .list-item {
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.18);
+      display: grid;
+      gap: 10px;
+    }
+
+    .list-toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .list-toolbar button {
+      padding: 0.55rem 0.85rem;
+      font-size: 0.9rem;
+    }
+
+    .preview-panel {
+      overflow: hidden;
+    }
+
+    .preview-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: var(--panel-2);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .preview-header strong {
+      color: var(--accent);
+    }
+
+    .preview-body {
+      padding: 16px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .preview-body textarea {
+      width: 100%;
+      min-height: 260px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 14px;
+      background: #0c0c0c;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.5;
+      resize: vertical;
+    }
+
+    details {
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      background: rgba(0, 0, 0, 0.16);
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      padding: 14px 16px;
+      color: var(--accent);
+      font-weight: 700;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .details-body {
+      padding: 0 16px 16px;
+    }
+
+    @media (max-width: 1280px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <section class="hero">
+      <div>
+        <h1>Chub Profile Content Editor</h1>
+        <p>Edit the creator profile as plain content fields, not raw code. When you click <code>Save + Write Blob</code>, this tool regenerates <code>deploy-bio.html</code> and <code>paste-blob.html</code> for you.</p>
+      </div>
+      <div class="actions">
+        <button id="reloadBtn" class="secondary" type="button">Reload Sources</button>
+        <button id="buildBtn" class="secondary" type="button">Build Blob</button>
+        <button id="saveBtn" type="button">Save + Write Blob</button>
+        <button id="copyBtn" class="secondary" type="button">Copy Blob</button>
+      </div>
+    </section>
+
+    <div class="status" id="status">Loading profile content...</div>
+
+    <section class="layout">
+      <section class="panel editor-panel">
+        <div class="section">
+          <div class="section-header">
+            <strong>Top Card</strong>
+          </div>
+          <div class="section-body">
+            <div class="grid-2">
+              <div class="field">
+                <label for="avatarUrl">Avatar URL</label>
+                <input id="avatarUrl" type="text">
+              </div>
+              <div class="field">
+                <label for="profileName">Creator Name</label>
+                <input id="profileName" type="text">
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="whoLabel">Who Link Label</label>
+                <input id="whoLabel" type="text">
+              </div>
+              <div class="field">
+                <label for="whoUrl">Who Link URL</label>
+                <input id="whoUrl" type="text">
+              </div>
+            </div>
+            <div class="field">
+              <label for="aboutBullets">About Bullets</label>
+              <textarea id="aboutBullets"></textarea>
+              <div class="hint">One bullet per line. Supports <code>**bold**</code> and <code>[label](url)</code>.</div>
+            </div>
+            <div class="field">
+              <label for="jumpCopy">Quick Jump Copy</label>
+              <textarea id="jumpCopy"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <strong>Hero</strong>
+          </div>
+          <div class="section-body">
+            <div class="grid-2">
+              <div class="field">
+                <label for="heroTitle">Hero Title</label>
+                <input id="heroTitle" type="text">
+              </div>
+              <div class="field">
+                <label for="heroTitleUrl">Hero Title URL</label>
+                <input id="heroTitleUrl" type="text">
+              </div>
+            </div>
+            <div class="field">
+              <label for="heroFocusItems">Currently focusing on</label>
+              <textarea id="heroFocusItems"></textarea>
+              <div class="hint">One item per line.</div>
+            </div>
+            <div class="grid-3">
+              <div class="field">
+                <label for="heroAction1">Action 1 Label</label>
+                <input id="heroAction1" type="text">
+              </div>
+              <div class="field">
+                <label for="heroAction1Url">Action 1 URL</label>
+                <input id="heroAction1Url" type="text">
+              </div>
+              <div></div>
+              <div class="field">
+                <label for="heroAction2">Action 2 Label</label>
+                <input id="heroAction2" type="text">
+              </div>
+              <div class="field">
+                <label for="heroAction2Url">Action 2 URL</label>
+                <input id="heroAction2Url" type="text">
+              </div>
+              <div></div>
+              <div class="field">
+                <label for="heroAction3">Action 3 Label</label>
+                <input id="heroAction3" type="text">
+              </div>
+              <div class="field">
+                <label for="heroAction3Url">Action 3 URL</label>
+                <input id="heroAction3Url" type="text">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <strong>Recommended Reading</strong>
+          </div>
+          <div class="section-body">
+            <div class="field">
+              <label for="readingIntro1">Intro 1</label>
+              <textarea id="readingIntro1"></textarea>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="sukinoLabel">Sukino Label</label>
+                <input id="sukinoLabel" type="text">
+              </div>
+              <div class="field">
+                <label for="sukinoUrl">Sukino URL</label>
+                <input id="sukinoUrl" type="text">
+              </div>
+            </div>
+            <div class="field">
+              <label for="readingIntro2">Intro 2</label>
+              <textarea id="readingIntro2"></textarea>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="geechanLabel">Geechan Label</label>
+                <input id="geechanLabel" type="text">
+              </div>
+              <div class="field">
+                <label for="geechanUrl">Geechan URL</label>
+                <input id="geechanUrl" type="text">
+              </div>
+            </div>
+            <div class="field">
+              <label for="impersonationLine">Indented Line 1</label>
+              <textarea id="impersonationLine"></textarea>
+            </div>
+            <div class="field">
+              <label for="samplersLine">Indented Line 2</label>
+              <textarea id="samplersLine"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <strong>Requests</strong>
+          </div>
+          <div class="section-body">
+            <div class="grid-2">
+              <div class="field">
+                <label for="requestsTitle">Section Title</label>
+                <input id="requestsTitle" type="text">
+              </div>
+              <div class="field">
+                <label for="requestsUrl">Request URL</label>
+                <input id="requestsUrl" type="text">
+              </div>
+            </div>
+            <div class="field">
+              <label for="requestsLabel">Request Link Label</label>
+              <input id="requestsLabel" type="text">
+            </div>
+            <div class="field">
+              <label for="requestsSubtext">Subtext</label>
+              <textarea id="requestsSubtext"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <strong>Jump Buttons</strong>
+          </div>
+          <div class="section-body">
+            <div class="grid-2">
+              <div class="field">
+                <label for="profileJumpLabel">Profile Button Label</label>
+                <input id="profileJumpLabel" type="text">
+              </div>
+              <div class="field">
+                <label for="profileJumpUrl">Profile Button URL</label>
+                <input id="profileJumpUrl" type="text">
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="cardsJumpLabel">Cards Button Label</label>
+                <input id="cardsJumpLabel" type="text">
+              </div>
+              <div class="field">
+                <label for="cardsJumpUrl">Cards Button URL</label>
+                <input id="cardsJumpUrl" type="text">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <details>
+          <summary>Advanced CSS</summary>
+          <div class="details-body">
+            <div class="field">
+              <label for="cssInput">deploy.css</label>
+              <textarea id="cssInput" class="code" spellcheck="false"></textarea>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <section class="panel preview-panel">
+        <div class="preview-header">
+          <strong>Generated paste-blob.html</strong>
+          <span id="blobMeta"></span>
+        </div>
+        <div class="preview-body">
+          <textarea id="blobOutput" spellcheck="false" readonly></textarea>
+          <div class="hint">
+            Save flow:
+            <code>1.</code> edit the human-readable fields,
+            <code>2.</code> click <code>Save + Write Blob</code>,
+            <code>3.</code> paste the generated blob into Chub's About Me field.
+          </div>
+        </div>
+      </section>
+    </section>
+  </div>
+
+  <script>
+    const status = document.getElementById('status');
+    const cssInput = document.getElementById('cssInput');
+    const blobOutput = document.getElementById('blobOutput');
+    const blobMeta = document.getElementById('blobMeta');
+
+    let currentContent = null;
+
+    const fieldMap = {
+      avatarUrl: ['topCard', 'avatarUrl'],
+      profileName: ['topCard', 'profileName'],
+      whoLabel: ['topCard', 'whoLinkLabel'],
+      whoUrl: ['topCard', 'whoLinkUrl'],
+      jumpCopy: ['topCard', 'jumpCopy'],
+      heroTitle: ['hero', 'title'],
+      heroTitleUrl: ['hero', 'titleUrl'],
+      requestsTitle: ['rightColumn', 'requests', 'title'],
+      requestsLabel: ['rightColumn', 'requests', 'linkLabel'],
+      requestsUrl: ['rightColumn', 'requests', 'linkUrl'],
+      requestsSubtext: ['rightColumn', 'requests', 'subtext'],
+      readingIntro1: ['rightColumn', 'recommendedReading', 'guideIntro'],
+      sukinoLabel: ['rightColumn', 'recommendedReading', 'sukinoLabel'],
+      sukinoUrl: ['rightColumn', 'recommendedReading', 'sukinoUrl'],
+      readingIntro2: ['rightColumn', 'recommendedReading', 'promptingIntro'],
+      geechanLabel: ['rightColumn', 'recommendedReading', 'geechanLabel'],
+      geechanUrl: ['rightColumn', 'recommendedReading', 'geechanUrl'],
+      impersonationLine: ['rightColumn', 'recommendedReading', 'impersonationLine'],
+      samplersLine: ['rightColumn', 'recommendedReading', 'samplersLine'],
+      profileJumpLabel: ['floatingNav', 'profileLabel'],
+      profileJumpUrl: ['floatingNav', 'profileUrl'],
+      cardsJumpLabel: ['floatingNav', 'cardsLabel'],
+      cardsJumpUrl: ['floatingNav', 'cardsUrl']
+    };
+
+    function setStatus(message) {
+      status.textContent = message;
+    }
+
+    function getAtPath(obj, path) {
+      return path.reduce((acc, key) => acc[key], obj);
+    }
+
+    function setAtPath(obj, path, value) {
+      let ref = obj;
+      for (let i = 0; i < path.length - 1; i += 1) {
+        ref = ref[path[i]];
+      }
+      ref[path[path.length - 1]] = value;
+    }
+
+    function toMultiline(values) {
+      return values.join('\n');
+    }
+
+    function fromMultiline(value) {
+      return value.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+    }
+
+    function fillForm(content, css) {
+      currentContent = JSON.parse(JSON.stringify(content));
+      cssInput.value = css;
+
+      for (const [id, path] of Object.entries(fieldMap)) {
+        document.getElementById(id).value = getAtPath(currentContent, path) ?? '';
+      }
+
+      document.getElementById('aboutBullets').value = toMultiline(currentContent.topCard.aboutBullets);
+      document.getElementById('heroFocusItems').value = toMultiline(currentContent.hero.focusItems);
+      document.getElementById('heroAction1').value = currentContent.hero.actions[0]?.label || '';
+      document.getElementById('heroAction1Url').value = currentContent.hero.actions[0]?.url || '';
+      document.getElementById('heroAction2').value = currentContent.hero.actions[1]?.label || '';
+      document.getElementById('heroAction2Url').value = currentContent.hero.actions[1]?.url || '';
+      document.getElementById('heroAction3').value = currentContent.hero.actions[2]?.label || '';
+      document.getElementById('heroAction3Url').value = currentContent.hero.actions[2]?.url || '';
+    }
+
+    function collectForm() {
+      const next = JSON.parse(JSON.stringify(currentContent));
+
+      for (const [id, path] of Object.entries(fieldMap)) {
+        setAtPath(next, path, document.getElementById(id).value.trim());
+      }
+
+      next.topCard.aboutBullets = fromMultiline(document.getElementById('aboutBullets').value);
+      next.hero.focusItems = fromMultiline(document.getElementById('heroFocusItems').value);
+      next.hero.actions = [
+        { label: document.getElementById('heroAction1').value.trim(), url: document.getElementById('heroAction1Url').value.trim() },
+        { label: document.getElementById('heroAction2').value.trim(), url: document.getElementById('heroAction2Url').value.trim() },
+        { label: document.getElementById('heroAction3').value.trim(), url: document.getElementById('heroAction3Url').value.trim() }
+      ].filter((item) => item.label || item.url);
+
+      return next;
+    }
+
+    async function loadSources() {
+      setStatus('Loading profile content...');
+      const response = await fetch('/api/sources');
+      const data = await response.json();
+      fillForm(data.content, data.css);
+      blobOutput.value = data.blob;
+      blobMeta.textContent = `${data.blob.length.toLocaleString()} chars`;
+      setStatus('Profile content loaded.');
+    }
+
+    async function build(persist) {
+      setStatus(persist ? 'Saving content and writing blob...' : 'Building blob...');
+      const response = await fetch('/api/build', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          css: cssInput.value,
+          content: collectForm(),
+          persist
+        })
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Build failed');
+      }
+      blobOutput.value = data.blob;
+      blobMeta.textContent = `${data.blob.length.toLocaleString()} chars`;
+      if (persist) {
+        currentContent = collectForm();
+      }
+      setStatus(persist ? 'Saved content and regenerated deploy-bio.html + paste-blob.html.' : 'Blob rebuilt.');
+    }
+
+    async function copyBlob() {
+      await navigator.clipboard.writeText(blobOutput.value);
+      setStatus('Generated blob copied to clipboard.');
+    }
+
+    document.getElementById('reloadBtn').addEventListener('click', () => {
+      loadSources().catch((error) => setStatus(`Reload failed: ${error.message}`));
+    });
+
+    document.getElementById('buildBtn').addEventListener('click', () => {
+      build(false).catch((error) => setStatus(`Build failed: ${error.message}`));
+    });
+
+    document.getElementById('saveBtn').addEventListener('click', () => {
+      build(true).catch((error) => setStatus(`Save failed: ${error.message}`));
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', () => {
+      copyBlob().catch((error) => setStatus(`Copy failed: ${error.message}`));
+    });
+
+    loadSources().catch((error) => setStatus(`Initial load failed: ${error.message}`));
+  </script>
+</body>
+</html>
