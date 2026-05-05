@@ -19,6 +19,11 @@ Before changing profile HTML, CSS, copy, deployment snippets, or visual layout, 
 - The deploy artifact is `app/profile/paste-blob.html`.
 - For browser checks, use the Codex Browser plugin with the Node REPL `iab` backend first. Treat external Playwright/CDP, including `127.0.0.1:9222`, as a fallback only when the in-app browser path is unavailable.
 
+## Git History
+
+- This repo is tracked on a private remote. After completing any code, profile, CSS, copy, generated artifact, or documentation contribution, create a git commit and push it to the current branch before final handoff unless the user explicitly asks not to.
+- Keep commits focused on the completed contribution. Do not include temporary screenshots, local browser artifacts, server logs, or unrelated workspace changes.
+
 ## Local Tooling Notes
 
 - WSL is now the preferred execution path for Codex and OpenCode in this repo. Use the verified `Debian-Dev` distro by default.

@@ -46,6 +46,12 @@ wsl -d Debian-Dev --cd /mnt/d/AIStuff/ChubProfile/app/profile --exec bash -lc 'n
 
 The editor runs at `http://127.0.0.1:4312`.
 
+## Git History
+
+This repo is tracked on a private remote. After completing any code, profile, CSS, copy, generated artifact, or documentation contribution, commit and push to the current branch before final handoff unless the user explicitly asks not to.
+
+Keep commits focused on the completed contribution. Do not include temporary screenshots, local browser artifacts, server logs, or unrelated workspace changes.
+
 ## Browser Checks
 
 Use the Codex Browser plugin through the Node REPL `iab` backend as the default browser surface for this project. External Playwright/CDP, including the old `127.0.0.1:9222` endpoint, is backup-only.
