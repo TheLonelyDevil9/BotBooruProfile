@@ -6,6 +6,7 @@ OpenCode compatibility entrypoint for this Chub profile project.
 
 - Before substantial project work, use `D:\AIStuff\_MDs\_Harness engineering leveraging Codex in an agent-first world.md` as the north star: keep the repo legible to agents, encode durable guidance in versioned docs/tooling, favor small verifiable feedback loops, and treat human attention as the scarce resource.
 - For prompts, agent instructions, or workflow shaping, use `D:\AIStuff\_MDs\_Claude Prompting Guide.md` as the prompting guide: be clear and direct, provide context and examples where useful, structure long inputs, and ask for explicit output formats.
+- Keep `D:\AIStuff\_MDs\Geechan's Desloppifier.md` in persistent mind as a standing prose-quality filter: preserve the author's intent while avoiding dialogue echoing, negative parallelisms, tricolon abuse, superficial analyses, punchy fragment emphasis, em-dash overuse, thematic conclusions, verbose copulatives, inflated stakes, forced zeugmas, magic adverbs, ornate nouns, somatic cliches, poetic metaphor overuse, and crutch vocabulary.
 - Keep this file as a map, not a manual. Put project-specific details in `CLAUDE.md`, `docs/`, or source-adjacent notes when they need to persist.
 
 Before changing profile HTML, CSS, copy, deployment snippets, or visual layout, read `CLAUDE.md` and follow it as active project guidance.
