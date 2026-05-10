@@ -1895,6 +1895,22 @@ html body .ant-col-lg-6 > button.ant-btn.ant-btn-default.ant-btn-color-default.a
   pointer-events: auto !important;
 }
 
+html body .ant-layout-header,
+html body header[role="banner"],
+html body .ant-layout-header *,
+html body header[role="banner"] *,
+html body .ant-dropdown,
+html body .ant-dropdown *,
+html body .ant-dropdown-menu,
+html body .ant-popover,
+html body .ant-popover *,
+html body .ant-popover-content,
+html body .ant-menu-submenu-popup,
+html body .ant-menu-submenu-popup * {
+  z-index: 2147483647 !important;
+  pointer-events: auto !important;
+}
+
 html body .ld-bio .ld-float-nav::before,
 html body .ld-float-nav::before {
   content: "" !important;
