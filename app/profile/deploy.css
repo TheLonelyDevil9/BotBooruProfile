@@ -9,8 +9,8 @@
   --ld-copy: oklch(0.9 0.012 72 / 0.92);
   --ld-muted: oklch(0.8 0.012 72 / 0.78);
   --ld-bg: oklch(0.075 0.014 48);
-  --ld-panel: oklch(0.15 0.018 48 / 0.94);
-  --ld-panel-quiet: oklch(0.11 0.014 48 / 0.88);
+  --ld-panel: rgb(0 0 0 / 0.85);
+  --ld-panel-quiet: rgb(0 0 0 / 0.85);
   --ld-border: oklch(0.78 0.14 52 / 0.34);
   --ld-border-soft: oklch(0.92 0.01 72 / 0.12);
   --ld-shadow: 0 16px 42px oklch(0.025 0.012 48 / 0.34);
@@ -37,8 +37,8 @@
     --ld-copy: rgba(235, 228, 216, 0.92);
     --ld-muted: rgba(200, 194, 184, 0.78);
     --ld-bg: #121008;
-    --ld-panel: rgba(30, 24, 16, 0.94);
-    --ld-panel-quiet: rgba(22, 18, 12, 0.88);
+    --ld-panel: rgba(0, 0, 0, 0.85);
+    --ld-panel-quiet: rgba(0, 0, 0, 0.85);
     --ld-border: rgba(200, 140, 60, 0.34);
     --ld-border-soft: rgba(230, 226, 220, 0.12);
   }
@@ -342,9 +342,7 @@ html body .ant-pagination .ant-pagination-next button {
   padding: var(--ld-panel-pad);
   border: 2px solid var(--ld-border);
   border-radius: var(--ld-radius);
-  background:
-    linear-gradient(180deg, oklch(0.72 0.18 49 / 0.055), transparent 34%),
-    var(--ld-panel);
+  background: var(--ld-panel);
   box-shadow: var(--ld-shadow);
 }
 
@@ -356,6 +354,17 @@ html body .ant-pagination .ant-pagination-next button {
 .ld-profile-card,
 .ld-hero-panel {
   animation: ld-fade-up 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+html body .ant-layout .ld-bio .ld-profile-card,
+html body .ant-layout .ld-bio .ld-hero-panel,
+html body .ant-layout .ld-bio .ld-panel,
+html body .ant-layout .ld-bio .ld-quick-jump,
+html body .ant-layout .ld-bio .ld-update,
+html body .ant-layout .ld-bio .ld-statement,
+html body .ant-layout .ld-bio .ld-footer-link {
+  background: var(--ld-panel) !important;
+  background-image: none !important;
 }
 
 .ld-hero-panel {
@@ -757,16 +766,20 @@ html body .ant-pagination .ant-pagination-next button {
   margin: 0;
   padding: 14px 16px;
   color: var(--ld-orange-hot) !important;
-  font-size: 1.04rem;
-  font-style: italic;
-  font-weight: 700 !important;
-  line-height: 1.55;
+  font-size: clamp(1.13rem, 1.05rem + 0.28vw, 1.28rem);
+  font-style: normal;
+  font-weight: 800 !important;
+  line-height: 1.5;
 }
 
 .ld-panel--disclaimers .ld-list li,
 .ld-panel--disclaimers li,
 .ld-panel--disclaimers p {
   max-width: none;
+}
+
+.ld-panel--disclaimers .ld-list > li:last-child {
+  margin-top: clamp(12px, 1.2vw, 20px);
 }
 
 .ld-update {
@@ -792,6 +805,17 @@ html body .ant-pagination .ant-pagination-next button {
   width: min(100%, 560px);
   align-items: center;
   text-align: center;
+}
+
+.ld-hero-info-grid > .ld-panel--compact:first-child .ld-footer-link a {
+  font-size: clamp(1.08rem, 1rem + 0.28vw, 1.24rem);
+  font-weight: 900;
+  line-height: 1.18;
+}
+
+.ld-hero-info-grid > .ld-panel--compact:first-child .ld-footer-subtext {
+  font-size: clamp(0.98rem, 0.94rem + 0.14vw, 1.08rem);
+  line-height: 1.42;
 }
 
 .ld-media-card {
@@ -888,7 +912,7 @@ html body .ant-pagination .ant-pagination-next button {
 
 html body .ant-col-lg-18 .ant-tabs > .ant-tabs-nav,
 html body .ant-col-lg-18 .ant-tabs .ant-tabs-nav-wrap {
-  background: oklch(0.06 0.012 48 / 0.92) !important;
+  background: var(--ld-panel-quiet) !important;
   color: var(--ld-text) !important;
 }
 
@@ -923,8 +947,8 @@ html body .ant-col-lg-18 [role="tabpanel"] .character-list-container::before {
   padding: 7px 12px;
   border: 2px solid var(--ld-border);
   border-radius: 10px;
-  background: oklch(0.06 0.012 48 / 0.92);
-  color: var(--ld-text);
+  background: var(--ld-panel-quiet);
+  color: var(--ld-orange-hot);
   font-family: var(--ld-font-ui);
   font-size: 0.86rem;
   font-weight: 800;
@@ -972,8 +996,8 @@ html body .ant-col-lg-18 [role="tabpanel"] .ant-row:has(a.cursor-pointer[href*="
     padding: 7px 12px;
     border: 2px solid var(--ld-border);
     border-radius: 10px;
-    background: oklch(0.06 0.012 48 / 0.92);
-    color: var(--ld-text);
+    background: var(--ld-panel-quiet);
+    color: var(--ld-orange-hot);
     font-family: var(--ld-font-ui);
     font-size: 0.86rem;
     font-weight: 800;

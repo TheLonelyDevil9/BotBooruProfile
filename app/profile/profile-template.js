@@ -10,6 +10,8 @@ function escapeHtml(value) {
 function formatInline(text) {
   return escapeHtml(text)
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/~~(.+?)~~/g, '<s>$1</s>')
+    .replace(/\*(?!\*)([^*]+?)\*(?!\*)/g, '<em>$1</em>')
     .replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" rel="noopener noreferrer">$1</a>');
 }
 
@@ -67,13 +69,13 @@ function renderChildItems(items) {
 
 function renderRecommendations(items) {
   return items.map((item) => {
-    return `              <li>\n                <a class="ld-inline-link" href="${escapeHtml(item.url)}">${formatInline(item.label)}</a>\n                <div class="ld-child-copy">${formatInline(item.description)}</div>\n              </li>`;
+    return `              <li>\n                <a class="ld-inline-link" href="${escapeHtml(item.url)}">${formatInline(item.label)}</a>\n                <div class="ld-child-copy">${formatMultiline(item.description)}</div>\n              </li>`;
   }).join('\n');
 }
 
 function renderChildCopyBlocks(items, indent = '                ') {
   return items
-    .map((item) => `${indent}<div class="ld-child-copy">${formatInline(item)}</div>`)
+    .map((item) => `${indent}<div class="ld-child-copy">${formatMultiline(item)}</div>`)
     .join('\n');
 }
 
@@ -196,7 +198,7 @@ ${renderChildCopyBlocks(content.leftColumn.philosophy.whyBullets)}
           </a>
 
           <section class="ld-panel">
-            <h2>Preset Recommendations</h2>
+            <h2>Preset Recommendation</h2>
             <ul class="ld-list">
 ${renderRecommendations(content.leftColumn.presetRecommendations)}
             </ul>

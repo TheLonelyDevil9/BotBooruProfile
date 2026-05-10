@@ -67,7 +67,7 @@
       "whyUrl": "https://file.garden/aeRvgfxptRQB-dB-/but-why.gif",
       "whyBullets": [
         "I was sick of cards with no substance or wrong information, and wanted cards anyone could pick up to use as a baseline, to modify to their liking, or use as-is.",
-        "I'm also allergic to lorebooks.",
+        "~~I'm also allergic to lorebooks.~~\nWow, I just needed some motivation huh, fine. FINE. Condensed cards incoming with next round of audits.",
         "Heavily inspired by [SleepDeprived03's work](https://discord.gg/Nbv9pQ88Xb) (search \"Sleep\" in the NSFW cards channel to find his two main threads - rest in peace, you legend), as well as [Bronya Rand's work](https://bronya-rand.github.io/reimagined-couscous/). Thank you for your hard work."
       ],
       "mediaUrl": "https://file.garden/aeRvgfxptRQB-dB-/_6%20Wa%20Arararagi%20dance.gif"
@@ -75,28 +75,19 @@
     "dividerImageUrl": "https://file.garden/aeRvgfxptRQB-dB-/_3%20After%20Firefly%2C%20before%20other%20content.png",
     "presetRecommendations": [
       {
-        "label": "Marinara Spaghetti's Recipe",
-        "url": "https://github.com/SpicyMarinara/SillyTavern-Settings/tree/main/Marinara's%20Essentials/Preset",
-        "description": "GOAT, v10 last I checked, newer versions are baked into [Marinara Engine.](https://github.com/Pasta-Devs/Marinara-Engine)"
-      },
-      {
-        "label": "Geechan's Universal Roleplay Chat Completions",
+        "label": "Geechan's Universal Roleplay Prompt",
         "url": "https://rentry.org/geechan#universal-roleplay-prompt",
-        "description": "Great and compressed, many variants for your needs, really efficient and gets the prose flowing well regardless of model"
-      },
-      {
-        "label": "OG Alert! PixiJB",
-        "url": "https://pixibots.neocities.org/#prompts/pixijb",
-        "description": "I still use this as a sanity check, and it is just so clean and good. It can work anywhere. Amazing work on this one, even if they are now inactive. What a legacy."
+        "description": "With the version 5.2 coming up, I can confidently say it's the easiest, most excellent preset I have the pleasure of using. Highly recommended.\nHas baked-in variants. Token efficient. Plug, play, forget (literally zero changes necessary... scary).\nIt adapts to your style without injecting its own, and however you like it is how your prose will flow.\nHas provisions for reducing token usage in reasoning as well, for the particularly *scholarly* models like Kimi 2.6."
       }
     ],
     "modelRecommendations": {
       "title": "Model Recommendations",
       "bullets": [
         {
-          "text": "My go-to: **Opus 4.7 xHigh/Max** for creative tasks, **GPT-5.5 xHigh** for anything execution-related. Anthropic fucking up recently",
+          "text": "My go-to: Opus 4.7/4.6 Max for creative tasks depending on the side of the bed I woke up in the morning.",
           "children": [
-            "I have a saying... [Opus can't be beat. The writing is too fucking good. The smarts even more so. Nothing compares right now.](https://www.youtube.com/watch?v=Q-RGkVZFwtI)"
+            "GPT-5.5 xHigh for anything execution-related. ANYTHING. Words cannot describe how good GPT 5.5 is at execution, and how badly Opus can fuck your shit up. Anthropic fucking up recently.",
+            "I used to have a saying... Opus couldn't be beat."
           ]
         },
         {
@@ -150,7 +141,7 @@
       "title": "Requests",
       "linkLabel": "Cardmaking requests? Send them here.",
       "linkUrl": "https://marshmallow-qa.com/xivrxgkzwdryg9k",
-      "subtext": "No guarantees though, only made (at all) or prioritized if I like the character."
+      "subtext": "No guarantees though, only made (at all) OR prioritized, if I like the character."
     },
     "artCredits": {
       "title": "Art Credits",
@@ -197,7 +188,7 @@
           "childCopy": "Most of the work I've done here on chub was only possible thanks to the service.\nI am definitely going to say I'm biased towards the service, and for good reason.\nAnyone else remember MegaLLM and other famous proxies?"
         },
         {
-          "text": "Why, yes, I like feet. How could you tell?",
+          "text": "Why, yes, I like feet... How could you tell?",
           "childCopy": ""
         }
       ]
