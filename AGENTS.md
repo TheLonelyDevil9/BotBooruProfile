@@ -18,7 +18,8 @@ Before changing profile HTML, CSS, copy, deployment snippets, or visual layout, 
 - Keep Chub-facing selectors scoped with the `ld-` prefix where possible.
 - Avoid broad Ant Design overrides unless they are already proven necessary on the live page.
 - The deploy artifact is `app/profile/paste-blob.html`.
-- For browser checks, use the Codex Browser plugin with the Node REPL `iab` backend first. Treat external Playwright/CDP, including `127.0.0.1:9222`, as a fallback only when the in-app browser path is unavailable.
+- For visual tuning, vet changes on the real Chub profile before committing them: patch the live `https://chub.ai/users/The_Lonely_Devil` DOM temporarily, let the user judge the actual Chub shell, then mirror the approved values into `app/profile/deploy.css` and rebuild `paste-blob.html`.
+- For browser checks, use Chrome DevTools MCP and Playwright together against the same live or preview URL. If the shared CDP endpoint is unavailable, report the exact blocker before using a fallback.
 
 ## Git History
 

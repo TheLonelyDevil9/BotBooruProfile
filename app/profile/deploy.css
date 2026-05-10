@@ -55,14 +55,14 @@ body {
   color: var(--ld-text) !important;
   font-family: var(--ld-font-body) !important;
   background:
-    linear-gradient(180deg, oklch(0.035 0.012 48 / 0.48), oklch(0.025 0.012 48 / 0.82)),
-    radial-gradient(circle at 15% 5%, oklch(0.72 0.18 49 / 0.11), transparent 30%),
-    radial-gradient(circle at 86% 10%, oklch(0.66 0.06 190 / 0.08), transparent 28%),
+    linear-gradient(180deg, oklch(0.018 0.01 48 / 0.8), oklch(0.014 0.008 48 / 0.94)),
+    radial-gradient(circle at 15% 5%, oklch(0.72 0.18 49 / 0.055), transparent 30%),
+    radial-gradient(circle at 86% 10%, oklch(0.66 0.06 190 / 0.04), transparent 28%),
     var(--ld-wallpaper),
-    linear-gradient(180deg, oklch(0.09 0.016 48), var(--ld-bg) 32%, var(--ld-bg)) !important;
+    linear-gradient(180deg, oklch(0.045 0.012 48), var(--ld-bg) 22%, var(--ld-bg)) !important;
   background-position: center top, top left, top right, center top, center top !important;
   background-repeat: no-repeat !important;
-  background-size: cover, auto, auto, cover, auto !important;
+  background-size: cover, auto, auto, 100vw auto, auto !important;
   background-attachment: scroll !important;
 }
 
@@ -164,23 +164,27 @@ html body #root > .ant-layout > *:last-child {
   margin: 0 !important;
   padding: 7px 11px;
   transform: translateX(-50%) !important;
-  border: 1px solid var(--ld-border);
+  border: 2px solid oklch(0.8 0.17 56 / 0.62);
   border-radius: 999px;
-  background: var(--ld-panel-quiet);
+  background: oklch(0.035 0.012 48 / 0.94);
   box-shadow: var(--ld-shadow-soft);
-  color: var(--ld-muted) !important;
+  color: var(--ld-orange-hot) !important;
   font-family: var(--ld-font-ui);
   font-size: 0.9rem;
+  font-weight: 800;
   line-height: 1.35;
   white-space: nowrap;
+}
+
+.ant-col-lg-6 > .text-sm * {
+  color: var(--ld-orange-hot) !important;
+  font-weight: 800 !important;
 }
 
 .ant-col-lg-6 > .text-sm .mr-4 {
   display: inline-flex !important;
   flex: 0 0 auto;
   margin-right: 0 !important;
-  color: var(--ld-text) !important;
-  font-weight: 700;
 }
 
 .ant-col-lg-6 > .text-sm .ant-btn,
@@ -193,14 +197,15 @@ html body #root > .ant-layout > *:last-child {
   min-width: 0 !important;
   max-width: calc(100vw - 44px) !important;
   padding: 0.5rem 0.82rem !important;
-  border: 1px solid var(--ld-border) !important;
+  border: 2px solid oklch(0.8 0.17 56 / 0.72) !important;
   border-radius: 999px !important;
-  background: var(--ld-panel-quiet) !important;
-  box-shadow: var(--ld-shadow-soft) !important;
+  background: oklch(0.02 0.008 48 / 0.96) !important;
+  background-image: none !important;
+  box-shadow: inset 0 0 0 1px oklch(0.72 0.18 49 / 0.08), var(--ld-shadow-soft) !important;
   color: var(--ld-orange-hot) !important;
   font-family: var(--ld-font-ui) !important;
   font-size: 0.88rem !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
   line-height: 1 !important;
 }
 
@@ -219,8 +224,8 @@ html body #root > .ant-layout > *:last-child {
 
 .ant-col-lg-6 > .text-sm .ant-btn:hover,
 .ant-col-lg-6 > .ant-btn.ant-btn-default.ant-btn-color-default.ant-btn-variant-outlined:hover {
-  border-color: oklch(0.8 0.17 56 / 0.62) !important;
-  background: oklch(0.72 0.18 49 / 0.12) !important;
+  border-color: oklch(0.8 0.17 56 / 0.82) !important;
+  background: oklch(0.72 0.18 49 / 0.14) !important;
   color: var(--ld-text) !important;
 }
 
@@ -335,7 +340,7 @@ html body .ant-pagination .ant-pagination-next button {
 .ld-panel {
   min-width: 0;
   padding: var(--ld-panel-pad);
-  border: 1px solid var(--ld-border);
+  border: 2px solid var(--ld-border);
   border-radius: var(--ld-radius);
   background:
     linear-gradient(180deg, oklch(0.72 0.18 49 / 0.055), transparent 34%),
@@ -364,11 +369,11 @@ html body .ant-pagination .ant-pagination-next button {
 }
 
 .ld-avatar-frame {
-  width: min(100%, 226px);
+  width: min(100%, 280px);
   aspect-ratio: 1;
-  margin: 10px auto 18px;
+  margin: 4px auto 22px;
   overflow: hidden;
-  border: 1px solid var(--ld-teal-border);
+  border: 2px solid var(--ld-teal-border);
   border-radius: var(--ld-radius);
   background: oklch(0.05 0.01 48 / 0.8);
   box-shadow: var(--ld-shadow-soft);
@@ -408,7 +413,7 @@ html body .ant-pagination .ant-pagination-next button {
 .ld-profile-about {
   margin: 20px 0 22px;
   padding-top: 18px;
-  border-top: 1px solid var(--ld-border-soft);
+  border-top: 2px solid var(--ld-border-soft);
 }
 
 .ld-profile-subheading,
@@ -419,9 +424,10 @@ html body .ant-pagination .ant-pagination-next button {
 }
 
 .ld-profile-subheading {
-  margin-bottom: 12px;
-  font-size: 1.03rem;
-  line-height: 1.1;
+  margin-bottom: 15px;
+  font-size: clamp(1.22rem, 1.1rem + 0.42vw, 1.42rem);
+  font-weight: 800;
+  line-height: 1.05;
 }
 
 .ld-profile-list {
@@ -434,7 +440,7 @@ html body .ant-pagination .ant-pagination-next button {
 #ld-top .ld-statement,
 .ld-bio .ld-statement,
 .ld-footer-link {
-  border: 1px solid oklch(0.78 0.14 52 / 0.28);
+  border: 2px solid oklch(0.78 0.14 52 / 0.28);
   border-radius: 10px;
   background: var(--ld-panel-quiet);
 }
@@ -448,7 +454,8 @@ html body .ant-pagination .ant-pagination-next button {
 
 .ld-quick-jump p {
   margin: 0;
-  color: var(--ld-muted);
+  color: var(--ld-orange-hot);
+  font-weight: 700;
   text-align: center;
 }
 
@@ -459,7 +466,7 @@ html body .ant-pagination .ant-pagination-next button {
   justify-content: center;
   min-height: 40px;
   padding: 0.58rem 0.9rem;
-  border: 1px solid var(--ld-border);
+  border: 2px solid var(--ld-border);
   border-radius: 999px;
   background: linear-gradient(180deg, var(--ld-orange-hot), var(--ld-orange));
   box-shadow: var(--ld-shadow-soft);
@@ -481,6 +488,19 @@ html body .ant-pagination .ant-pagination-next button {
 .ld-float-link--secondary {
   background: var(--ld-panel-quiet);
   color: var(--ld-orange-hot) !important;
+}
+
+.ld-quick-jump .ld-jump-link {
+  border-color: oklch(0.8 0.17 56 / 0.72) !important;
+  background: oklch(0.72 0.18 49 / 0.1) !important;
+  background-image: none !important;
+  color: var(--ld-orange-hot) !important;
+  text-shadow: 0 1px 14px oklch(0.8 0.17 56 / 0.18) !important;
+}
+
+.ld-quick-jump .ld-jump-link:hover {
+  background: oklch(0.72 0.18 49 / 0.16) !important;
+  color: var(--ld-text) !important;
 }
 
 .ld-profile-intro {
@@ -576,7 +596,7 @@ html body .ant-pagination .ant-pagination-next button {
 .ld-hero-media,
 .ld-media-card,
 .ld-philosophy-media {
-  border: 1px solid var(--ld-teal-border);
+  border: 2px solid var(--ld-teal-border);
   border-radius: 10px;
   background: oklch(0.045 0.01 48 / 1);
   box-shadow: var(--ld-shadow-soft);
@@ -709,7 +729,7 @@ html body .ant-pagination .ant-pagination-next button {
 .ld-note {
   margin-top: 10px;
   padding-left: 0.9rem;
-  border-left: 1px solid var(--ld-teal-border);
+  border-left: 2px solid var(--ld-teal-border);
   color: var(--ld-muted);
   font-size: 0.94rem;
   line-height: 1.58;
@@ -752,6 +772,26 @@ html body .ant-pagination .ant-pagination-next button {
 .ld-update {
   margin: 12px 0;
   padding: 12px 14px;
+}
+
+.ld-hero-info-grid > .ld-panel--compact:first-child {
+  display: flex;
+  min-height: 230px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.ld-hero-info-grid > .ld-panel--compact:first-child h2 {
+  width: 100%;
+  text-align: center;
+}
+
+.ld-hero-info-grid > .ld-panel--compact:first-child .ld-footer-link {
+  width: min(100%, 560px);
+  align-items: center;
+  text-align: center;
 }
 
 .ld-media-card {
@@ -855,7 +895,7 @@ html body .ant-col-lg-18 .ant-tabs .ant-tabs-nav-wrap {
 html body .ant-col-lg-18 .ant-tabs > .ant-tabs-nav {
   margin-bottom: 16px !important;
   padding: 0 10px !important;
-  border-bottom: 1px solid var(--ld-border) !important;
+  border-bottom: 2px solid var(--ld-border) !important;
 }
 
 html body .ant-col-lg-18 .ant-tabs > .ant-tabs-nav::before {
@@ -879,9 +919,9 @@ html body .ant-col-lg-18 [role="tabpanel"] .character-list-container::before {
   place-items: center;
   width: 100%;
   min-height: 38px;
-  margin: 0 0 16px;
+  margin: 0 0 26px;
   padding: 7px 12px;
-  border: 1px solid var(--ld-border);
+  border: 2px solid var(--ld-border);
   border-radius: 10px;
   background: oklch(0.06 0.012 48 / 0.92);
   color: var(--ld-text);
@@ -889,6 +929,13 @@ html body .ant-col-lg-18 [role="tabpanel"] .character-list-container::before {
   font-size: 0.86rem;
   font-weight: 800;
   pointer-events: none;
+}
+
+html body .ant-col-lg-18 [role="tabpanel"] .ant-list-items:has(a.cursor-pointer[href*="/characters/"]),
+html body .ant-col-lg-18 [role="tabpanel"] #chara-list:has(a.cursor-pointer[href*="/characters/"]),
+html body .ant-col-lg-18 [role="tabpanel"] .character-list-container:has(a.cursor-pointer[href*="/characters/"]),
+html body .ant-col-lg-18 [role="tabpanel"] .ant-row:has(a.cursor-pointer[href*="/characters/"]) {
+  margin: 20px 0 36px !important;
 }
 
 @media (hover: hover) and (pointer: fine) and (min-width: 900px) {
@@ -910,7 +957,7 @@ html body .ant-col-lg-18 [role="tabpanel"] .character-list-container::before {
     gap: clamp(22px, 1.8vw, 30px) !important;
     align-items: start !important;
     width: 100% !important;
-    margin: 0 !important;
+    margin: 20px 0 36px !important;
     padding: 0 !important;
   }
 
@@ -920,9 +967,10 @@ html body .ant-col-lg-18 [role="tabpanel"] .character-list-container::before {
     grid-column: 1 / -1;
     display: grid;
     place-items: center;
+    margin-bottom: 26px;
     min-height: 38px;
     padding: 7px 12px;
-    border: 1px solid var(--ld-border);
+    border: 2px solid var(--ld-border);
     border-radius: 10px;
     background: oklch(0.06 0.012 48 / 0.92);
     color: var(--ld-text);
@@ -972,7 +1020,7 @@ html body .ant-col-lg-18 [role="tabpanel"] .character-list-container::before {
     max-width: none !important;
     max-height: none !important;
     overflow: hidden !important;
-    border: 1px solid oklch(0.78 0.14 52 / 0.34) !important;
+    border: 2px solid oklch(0.78 0.14 52 / 0.34) !important;
     border-radius: 10px !important;
     background: oklch(0.065 0.012 48 / 0.98) !important;
     box-shadow: var(--ld-shadow-soft) !important;
@@ -1052,7 +1100,7 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
   flex: 0 0 38px !important;
   min-height: 38px !important;
   padding: 7px 10px !important;
-  border-bottom: 1px solid var(--ld-border) !important;
+  border-bottom: 2px solid var(--ld-border) !important;
   background: oklch(0.095 0.016 48 / 0.98) !important;
   color: var(--ld-text) !important;
 }
@@ -1113,7 +1161,7 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
   min-width: 0 !important;
   min-height: 0 !important;
   overflow: hidden !important;
-  border-right: 1px solid var(--ld-teal-border) !important;
+  border-right: 2px solid var(--ld-teal-border) !important;
   background: oklch(0.04 0.01 48 / 1) !important;
 }
 
@@ -1222,7 +1270,7 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
   margin: 0 !important;
   padding: 2px 6px 3px !important;
   overflow: hidden !important;
-  border: 1px solid var(--ld-teal-border) !important;
+  border: 2px solid var(--ld-teal-border) !important;
   border-radius: 5px !important;
   background: oklch(0.125 0.016 48 / 0.96) !important;
   color: var(--ld-text) !important;
@@ -1260,13 +1308,13 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
 
 html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .stats {
   position: absolute !important;
-  inset: auto 8px 7px 8px !important;
+  inset: auto 9px 9px 9px !important;
   z-index: 5 !important;
   display: block !important;
   width: auto !important;
-  height: 24px !important;
-  min-height: 24px !important;
-  max-height: 24px !important;
+  height: 30px !important;
+  min-height: 30px !important;
+  max-height: 30px !important;
   margin: 0 !important;
   padding: 0 !important;
   overflow: visible !important;
@@ -1281,10 +1329,10 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
   flex-wrap: nowrap !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 7px !important;
+  gap: 8px !important;
   width: 100% !important;
   min-width: max-content !important;
-  height: 24px !important;
+  height: 30px !important;
   overflow: visible !important;
   background: transparent !important;
   box-shadow: none !important;
@@ -1296,18 +1344,19 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
   flex: 0 0 auto !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 3px !important;
+  gap: 4px !important;
   width: max-content !important;
   min-width: max-content !important;
-  min-height: 22px !important;
-  padding: 3px 7px !important;
+  height: 26px !important;
+  min-height: 26px !important;
+  padding: 4px 8px !important;
   overflow: visible !important;
-  border: 1px solid oklch(0.74 0.13 52 / 0.7) !important;
+  border: 2px solid oklch(0.74 0.13 52 / 0.7) !important;
   border-radius: 999px !important;
   background: oklch(0.07 0.014 48 / 0.92) !important;
   box-shadow: 0 5px 14px oklch(0.025 0.012 48 / 0.42) !important;
   color: var(--ld-text) !important;
-  font-size: 0.66rem !important;
+  font-size: 0.72rem !important;
   font-weight: 800 !important;
   line-height: 1 !important;
   white-space: nowrap !important;
@@ -1327,6 +1376,63 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
   height: 10px !important;
   min-width: 10px !important;
   color: var(--ld-orange-hot) !important;
+}
+
+html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .stats .fake-ribbon .anticon,
+html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .stats .fake-ribbon svg {
+  width: 12px !important;
+  height: 12px !important;
+  min-width: 12px !important;
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .stats,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .stats {
+    inset: auto 12px 12px 12px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .stats .fake-ribbon,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .stats .fake-ribbon {
+    height: 34px !important;
+    gap: 9px !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .stats .fake-ribbon > div,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .stats .fake-ribbon > div {
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 5px 10px !important;
+    font-size: 0.78rem !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .stats .fake-ribbon > div::after,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .stats .fake-ribbon > div::after {
+    margin-left: 1px !important;
+    color: var(--ld-muted) !important;
+    font-size: 0.56rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.04em !important;
+    line-height: 1 !important;
+    text-transform: uppercase !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .stats .fake-ribbon > div:nth-child(1)::after,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .stats .fake-ribbon > div:nth-child(1)::after {
+    content: "likes" !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .stats .fake-ribbon > div:nth-child(2)::after,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .stats .fake-ribbon > div:nth-child(2)::after {
+    content: "downloads" !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .stats .fake-ribbon > div:nth-child(3)::after,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .stats .fake-ribbon > div:nth-child(3)::after {
+    content: "tokens" !important;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) and (min-width: 900px) and (max-width: 1500px) {
@@ -1376,7 +1482,7 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
     min-height: 228px !important;
     max-width: none !important;
     overflow: hidden !important;
-    border: 1px solid var(--ld-border) !important;
+    border: 2px solid var(--ld-border) !important;
     border-radius: 10px !important;
     background: oklch(0.065 0.012 48 / 0.98) !important;
     box-shadow: var(--ld-shadow-soft) !important;
