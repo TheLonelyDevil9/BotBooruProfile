@@ -19,6 +19,7 @@ Before changing profile HTML, CSS, copy, deployment snippets, or visual layout, 
 - Avoid broad Ant Design overrides unless they are already proven necessary on the live page.
 - The deploy artifact is `app/profile/paste-blob.html`.
 - For browser checks, use the Codex Browser plugin with the Node REPL `iab` backend first. Treat external Playwright/CDP, including `127.0.0.1:9222`, as a fallback only when the in-app browser path is unavailable.
+- Browser cleanup means closing every verification browser instance an agent opened. In this repo that may include both the shared CDP Chrome using `C:\Users\TheLonelyDevil\AppData\Local\Codex\Chrome-Verification` on `127.0.0.1:9222` and the Chrome DevTools MCP Chrome using `C:\Users\TheLonelyDevil\.cache\chrome-devtools-mcp\chrome-profile` with `--remote-debugging-pipe`. Do not leave either visible window/profile running after checks.
 
 ## Git History
 
