@@ -1713,3 +1713,18 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Final live-Chub spacing correction: Chub's global list reset can win over the
+   earlier disclaimer rule after sanitization, so keep this last and explicit. */
+html body .ld-bio .ld-panel--disclaimers ul.ld-list > li:last-of-type {
+  margin-top: clamp(20px, 1.5vw, 28px) !important;
+}
+
+/* Final live-Chub chrome correction: keep the follower/follow pill pure black. */
+html body .ant-col-lg-6 > .text-sm,
+html body .ant-col-lg-6 > .text-sm .ant-btn,
+html body .ant-col-lg-6 > button.ant-btn.ant-btn-default.ant-btn-color-default.ant-btn-variant-outlined {
+  background: rgb(0 0 0) !important;
+  background-color: rgb(0 0 0) !important;
+  background-image: none !important;
+}
