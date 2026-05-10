@@ -39,12 +39,12 @@ http://127.0.0.1:4312
 
 CLI rebuild:
 
-```powershell
-cd D:\AIStuff\ChubProfile\app\profile
+```bash
+cd /d/AIStuff/ChubProfile/app/profile
 node build-profile-blob.js
 ```
 
-Paste `app/profile/paste-blob.html` into Chub's About Me field.
+Paste or publish `app/profile/paste-blob.html` into Chub's About Me field, then verify `https://chub.ai/users/The_Lonely_Devil` live. A local rebuild alone does not update Chub.
 
 ## Chub Notes
 
@@ -54,3 +54,4 @@ Paste `app/profile/paste-blob.html` into Chub's About Me field.
 - Avoid broad Ant Design selectors unless the live page requires them.
 - Desktop card hover previews use each card's live `data.avatar` URL from the gateway-pulled Published JSON, keyed by `Published/project-ids.json`.
 - Keep `docs/CHUB-PROFILE-QUIRKS.md` current when live Chub behavior forces a workaround.
+- For visual tuning, patch the live Chub DOM first with Chrome DevTools MCP and Playwright, let the user judge the actual shell, then mirror the approved values into source and deploy.

@@ -7,17 +7,51 @@ This document is the scratchpad for every hard-earned limitation in this profile
 - The only artifact the user actually pastes into Chub is `app/profile/paste-blob.html`.
 - `app/profile/deploy-bio.html` is generated for debugging and local inspection. It is not the intended paste target.
 - Do not hand-edit generated files. Change `app/profile/profile-content.json`, `app/profile/profile-template.js`, or `app/profile/deploy.css`, then rebuild with `node build-profile-blob.js` from `app/profile`.
+- A correct local blob does not mean the live Chub profile is current. The generated `paste-blob.html` must be saved back into Chub's About Me field before live verification can pass.
 - Chub's custom CSS upload path has been unreliable for this profile. The working path is an inline `<style>` inserted inside the root `<div class="ld-bio">`.
 - The builder injects the CSS into the first root `<div>` through `app/profile/blob-generator.js`.
+- The preferred visual-tuning loop is:
+  1. Patch the live Chub DOM with Chrome DevTools MCP and Playwright.
+  2. Let the user judge the real Chub shell.
+  3. Mirror approved values into source files.
+  4. Rebuild `paste-blob.html`.
+  5. Persist the blob into Chub.
+  6. Verify the live page again.
+
+## Live Chub Save Route
+
+The Chub profile editor saves through the gateway, not through this repo.
+
+- Account read:
+  `GET https://gateway.chub.ai/api/account?nocache=<timestamp>&tokens=false`
+- Profile save:
+  `POST https://gateway.chub.ai/user/update`
+- Auth headers used by Chub:
+  - `CH-API-KEY`
+  - `samwise`
+- Local token source pattern:
+  `D:/AIStuff/Cardmaking/Tools/chub-token.txt`
+
+Never print, paste, commit, or summarize token values. It is acceptable to document header names and file paths.
+
+When saving through the gateway route, preserve the existing account fields and change only the generated bio payload:
+
+- `about_me`: full contents of `app/profile/paste-blob.html`
+- `name`: existing account name
+- `profile`: existing account profile, or `""` if absent
+- `email`: existing account email
+- `preferred_language`: existing account language, defaulting to `en-us` only when absent
+
+After a save, reload `https://chub.ai/users/The_Lonely_Devil` and inspect the live DOM. Do not trust the local preview or the generated file as proof of deployment.
 
 ## Local Tooling
 
-- Prefer WSL Debian for this repo:
-  `wsl -d Debian-Dev --cd /mnt/d/AIStuff/ChubProfile --exec bash -lc '<cmd>'`
+- Use Git Bash for repo commands unless a task explicitly requires another shell:
+  `& 'C:\Program Files\Git\bin\bash.exe' -lc 'cd /d/AIStuff/ChubProfile && <cmd>'`
 - The Windows path for the repo is `D:\AIStuff\ChubProfile`.
-- The WSL path for the repo is `/mnt/d/AIStuff/ChubProfile`.
-- `D:\AIStuff\Cardmaking\Published` is available from WSL as `/mnt/d/AIStuff/Cardmaking/Published`.
-- `git` may not be installed inside the WSL distro. Use Windows-side Git only if needed, and remember this folder may not itself be a Git repo.
+- The Git Bash path for the repo is `/d/AIStuff/ChubProfile`.
+- `D:\AIStuff\Cardmaking\Published` is available from Git Bash as `/d/AIStuff/Cardmaking/Published`.
+- Older WSL notes are historical fallback guidance. If a task uses WSL, state why in the handoff.
 
 ## CSS Generation
 
@@ -30,6 +64,12 @@ This document is the scratchpad for every hard-earned limitation in this profile
 ## Chub DOM And Sanitizer
 
 - Chub injects `<spacer>` elements into bio markup. `deploy.css` hides them.
+- Chub can strip or reshape list wrappers. A `<ul class="ld-list">` in the generated blob may become direct `<li>` children under the section in the live DOM.
+- The disclaimer spacing fix therefore needs both shapes:
+  - `html body .ld-bio .ld-panel--disclaimers ul.ld-list > li:last-of-type`
+  - `html body .ld-bio .ld-panel--disclaimers > li:last-of-type`
+- Chub page text checks can false-negative. Some visible labels come from CSS pseudo-elements, and sanitizer changes can move text into a different DOM shape.
+- When verifying live copy or labels, inspect `.innerHTML`, `.textContent`, and computed pseudo-element content through `getComputedStyle(element, "::before" / "::after").content`.
 - Profile CSS can affect Chub's surrounding page, not only the bio. Keep selectors narrow and scoped where possible.
 - Custom profile classes use the `ld-` prefix.
 - Broad Ant Design selectors are risky. Prefer Chub-facing selectors scoped under `.ant-col-lg-18 [role="tabpanel"]` when touching the card browser.
@@ -52,6 +92,24 @@ This document is the scratchpad for every hard-earned limitation in this profile
 - Stale rules seen in the recovered chunk include old hover anchoring, old preview nth-child placement, and `display:none` for normal card `.stats`.
 - The safest pattern for urgent live fixes is an explicitly named final block at the end of `deploy.css`.
 - Long-term cleanup should normalize `deploy.css` into readable source and remove the recovered minified chunk only after checking the full profile visually.
+
+## Latest Live Chrome Fixes
+
+These were verified live on 2026-05-10 and should remain at the end of `deploy.css` unless the page is reworked.
+
+- Pure black follower/follow pill and Follow button require high-specificity page-chrome overrides:
+  - `html body .ant-col-lg-6 > .text-sm`
+  - `html body .ant-col-lg-6 > .text-sm .ant-btn`
+  - `html body .ant-col-lg-6 > button.ant-btn.ant-btn-default.ant-btn-color-default.ant-btn-variant-outlined`
+- The pure black fix must set all of:
+  - `background: rgb(0 0 0) !important`
+  - `background-color: rgb(0 0 0) !important`
+  - `background-image: none !important`
+- The final disclaimer spacing fix must account for Chub's list sanitizer:
+  - `html body .ld-bio .ld-panel--disclaimers ul.ld-list > li:last-of-type`
+  - `html body .ld-bio .ld-panel--disclaimers > li:last-of-type`
+- Live verification target for the feet-line spacing was `margin-top: 28px` at the inspected desktop viewport.
+- The hover hint text is expected to be orange. If text search misses it, check pseudo-element content before assuming the change failed.
 
 ## Card Browser Grid
 
@@ -151,7 +209,12 @@ This document is the scratchpad for every hard-earned limitation in this profile
 ## Verification Checklist
 
 - Rebuild from `app/profile` after every source edit.
+- If the user wants to see the real result, publish the rebuilt blob to Chub before asking them to judge it.
 - Check `paste-blob.html` for valid `:has()` selectors with required descendant spaces.
+- On the live page, confirm requested copy through `.textContent` and `.innerHTML`.
+- On the live page, confirm generated labels or hover helper text through pseudo-element computed styles where relevant.
+- On the live page, confirm follower/follow pill and Follow button backgrounds are `rgb(0, 0, 0)` when the design calls for pure black.
+- On the live page, confirm disclaimer spacing in computed styles, not just source CSS. The sanitizer can change the selector path.
 - Check normal card counts at browser zoom 100% and 120%.
 - Check hover previews near left, middle, and right columns.
 - Check that hover previews stay below the Chub header.
@@ -159,10 +222,14 @@ This document is the scratchpad for every hard-earned limitation in this profile
 - Check that the preview does not block mouse travel to nearby cards.
 - Check that normal-card tags have clean borders and are not shaved by the tag rail.
 - Check that generated `--ld-card-full-art` rules exist for the expected card count.
-- Use the Codex Browser plugin with the Node REPL `iab` backend first for browser checks. External Playwright/CDP is fallback-only for this project.
+- Use Chrome DevTools MCP and Playwright together against the same live or preview URL. If either cannot connect to the shared Chrome endpoint, report the exact blocker unless the user explicitly accepts a fallback.
 
 ## Known Failure Signatures
 
+- **Local preview is fixed but Chub is unchanged**: the rebuilt blob was not saved back into Chub. Persist `paste-blob.html` through the Chub editor or gateway route, then reload the live profile.
+- **Live copy appears unfixed but source is correct**: Chub may still be serving the previous About Me blob, or the check is reading the wrong DOM surface. Verify account save status, then inspect `.innerHTML`, `.textContent`, and pseudo-element content.
+- **Pure black pill is still tinted**: a Chub/Ant Design background or gradient is winning. Re-check the final high-specificity `html body .ant-col-lg-6` overrides and make sure `background-image:none` is included.
+- **Disclaimer spacing works locally but not live**: Chub may have stripped the `<ul>` wrapper. Keep both `ul.ld-list > li:last-of-type` and direct-section `> li:last-of-type` selectors.
 - **Hover preview opens off the right side of the browser**: old `nth-child(...):hover .char-card-class` placement is winning, or the preview is still anchored to the card/grid instead of the viewport.
 - **Hover preview is the right size but starts from the wrong origin**: a transformed/contained ancestor is trapping `position: fixed`, or a stale centering transform is still winning.
 - **Hover preview covers the Chub header**: top clearance is too low, or a later rule reset `top: var(--ld-card-preview-top-safe)`.
@@ -185,6 +252,8 @@ rg -n 'role="tabpanel"\]:(is|has)' app/profile/paste-blob.html
 rg -n 'Card browser hard stop v2|Card browser enhancement|Card browser approach lanes|position: fixed|pointer-events: none|font-variant-numeric: tabular-nums|--ld-card-preview-zoom-width' app/profile/deploy.css app/profile/paste-blob.html
 rg -n 'cursor: zoom|background-size: auto 132%|background-size: auto 168%|transition: background-size' app/profile/deploy.css app/profile/paste-blob.html
 rg -n 'post-school-Fly' app/profile/profile-content.json app/profile/deploy-bio.html app/profile/paste-blob.html
+rg -n 'Why, yes, I like feet\\.\\.\\. How could you tell\\?|Wow, I just needed some motivation|Geechan.s Universal Roleplay Prompt|Opus 4\\.7/4\\.6 Max|Hover over any card' app/profile/profile-content.json app/profile/paste-blob.html
+rg -n 'html body \\.ld-bio \\.ld-panel--disclaimers|html body \\.ant-col-lg-6 > \\.text-sm|background-image: none' app/profile/deploy.css app/profile/paste-blob.html
 ```
 
 Expected:
@@ -193,6 +262,8 @@ Expected:
 - The second command should find the final hard-stop, enhancement, and approach-lane card blocks.
 - The third command should produce no matches; CSS-only art hover zoom is intentionally removed.
 - The fourth command should produce no matches; the intended label is `Post-school-Fly`.
+- The fifth command should find the approved live copy.
+- The sixth command should find the final disclaimer-spacing and pure-black page-chrome overrides.
 
 ## Card-Map Count Nuance
 
