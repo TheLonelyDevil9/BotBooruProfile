@@ -10,7 +10,7 @@ function escapeHtml(value) {
 function formatInline(text) {
   return escapeHtml(text)
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2">$1</a>');
+    .replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" rel="noopener noreferrer">$1</a>');
 }
 
 function formatMultiline(text) {
@@ -104,7 +104,7 @@ function renderArtShowcase(showcase) {
 
   return `      <section class="ld-art-showcase" aria-label="Firefly artwork showcase">
 ${items.map((item) => `        <a class="ld-media-card ld-art-card" href="${escapeHtml(item.url)}"${imageWindowAttrs(item.label || item.alt)}>
-          <img src="${escapeHtml(item.url)}" alt="${escapeHtml(item.alt || item.label)}">
+          <img src="${escapeHtml(item.url)}" alt="${escapeHtml(item.alt || item.label)}" loading="lazy" decoding="async">
         </a>`).join('\n')}
       </section>`;
 }
@@ -117,12 +117,13 @@ function isVideoUrl(url) {
   return /\.(mp4|webm|mov)(?:[?#]|$)/i.test(String(url ?? ''));
 }
 
-function renderMedia(url, className, alt) {
+function renderMedia(url, className, alt, lazy = false) {
   if (!url) return '';
+  const loadAttrs = lazy ? ' loading="lazy" decoding="async"' : ' decoding="async"';
   if (isVideoUrl(url)) {
     return `<video class="${className}" src="${escapeHtml(url)}" autoplay muted loop playsinline preload="metadata" aria-label="${escapeHtml(alt)}"></video>`;
   }
-  return `<img class="${className}" src="${escapeHtml(url)}" alt="${escapeHtml(alt)}">`;
+  return `<img class="${className}" src="${escapeHtml(url)}" alt="${escapeHtml(alt)}"${loadAttrs}>`;
 }
 
 function buildDeployBio(content) {
@@ -186,12 +187,12 @@ ${content.leftColumn.philosophy.paragraphs.map((paragraph) => `                <
                 <h3 class="ld-link-heading"><a href="${escapeHtml(content.leftColumn.philosophy.whyUrl)}" target="_blank" rel="noreferrer">${formatInline(content.leftColumn.philosophy.whyLabel)}</a></h3>
 ${renderChildCopyBlocks(content.leftColumn.philosophy.whyBullets)}
               </div>
-              <img class="ld-philosophy-media" src="${escapeHtml(content.leftColumn.philosophy.mediaUrl)}" alt="Decorative dancing gif">
+              <img class="ld-philosophy-media" src="${escapeHtml(content.leftColumn.philosophy.mediaUrl)}" alt="Arararagi dance gif" loading="lazy" decoding="async">
             </div>
           </section>
 
           <a class="ld-media-card" href="${escapeHtml(content.leftColumn.dividerImageUrl)}"${imageWindowAttrs('divider image')}>
-            <img src="${escapeHtml(content.leftColumn.dividerImageUrl)}" alt="Decorative section image">
+            <img src="${escapeHtml(content.leftColumn.dividerImageUrl)}" alt="Firefly illustration divider" loading="lazy" decoding="async">
           </a>
 
           <section class="ld-panel">
@@ -249,7 +250,7 @@ ${renderChildItems(content.rightColumn.sizeProblem.items)}
           </section>
 
           <a class="ld-media-card" href="${escapeHtml(content.rightColumn.midImageUrl)}"${imageWindowAttrs('mid page image')}>
-            <img src="${escapeHtml(content.rightColumn.midImageUrl)}" alt="Decorative mid-page image">
+            <img src="${escapeHtml(content.rightColumn.midImageUrl)}" alt="Firefly bed illustration" loading="lazy" decoding="async">
           </a>
 
           <section class="ld-panel ld-panel--disclaimers">

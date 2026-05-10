@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chub Profile Preview - The_Lonely_Devil</title>
+  <link rel="icon" href="data:,">
+  <style>
+    /* Chub page shell simulation */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { background: #0a0a0a; }
+
+    body {
+      min-height: 100vh;
+      color: #e8e8e8;
+      font-family: -apple-system, 'Segoe UI', sans-serif;
+      font-size: 14px;
+    }
+
+    /* Simulated Chub header */
+    .ant-layout-header,
+    header[role="banner"] {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      padding: 0 24px;
+      background: #141414;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .sim-header-left { display: flex; align-items: center; gap: 18px; }
+    .sim-logo { color: #f59e0b; font-weight: 800; font-size: 1.2rem; }
+    .sim-header-right { display: flex; align-items: center; gap: 14px; }
+    .sim-header-btn {
+      padding: 6px 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      background: transparent;
+      color: #f59e0b;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .sim-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+    }
+
+    /* Simulated Chub layout */
+    .ant-layout { display: flex; flex-direction: column; min-height: calc(100vh - 64px); }
+    .ant-layout-content { flex: 1; }
+
+    /* Simulated sidebar column */
+    .ant-col-lg-6 {
+      display: block;
+      flex: 0 0 100%;
+      max-width: 100%;
+      position: relative;
+    }
+
+    .ant-col-lg-6 > .ant-avatar,
+    .ant-col-lg-6 > h5.ant-typography,
+    .ant-col-lg-6 > .ant-tag,
+    .ant-col-lg-6 > .galaxy-bg { display: none; }
+
+    /* Simulated follow bar */
+    .sim-follow-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+    }
+    .sim-follow-bar .mr-4 { color: #fff; font-weight: 700; }
+    .sim-follow-bar .ant-btn {
+      padding: 4px 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      background: transparent;
+      color: #f59e0b;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    /* Main content area */
+    .ant-col-lg-18 {
+      display: block;
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+
+    .ant-row { display: flex; flex-wrap: wrap; width: 100%; }
+
+    /* Simulated tab bar */
+    .ant-tabs { width: 100%; }
+    .ant-tabs-nav {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 0 16px;
+      background: rgba(10,10,10,0.92);
+    }
+    .ant-tabs-nav-wrap { display: flex; gap: 0; }
+    .ant-tabs-tab {
+      padding: 12px 16px;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 160ms ease-out;
+    }
+    .ant-tabs-tab:hover { color: rgba(255,255,255,0.8); }
+    .ant-tabs-tab-active { color: #f59e0b !important; border-bottom-color: #f59e0b; }
+    .ant-tabs-tab-btn { font-weight: 600; }
+    .ant-tabs-ink-bar { display: none; }
+
+    [role="tabpanel"] { padding: 16px; }
+    .tab-hidden { display: none; }
+
+    /* Simulated footer */
+    .ant-layout-footer {
+      padding: 24px 16px 32px;
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.82rem;
+    }
+    .ant-layout-footer a { color: #f59e0b; text-decoration: none; }
+    .sim-footer-links { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+    /* Dev toolbar */
+    .sim-devbar {
+      position: fixed;
+      bottom: 0; left: 0;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: rgba(0,0,0,0.9);
+      border-top: 1px solid rgba(255,138,0,0.3);
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.6);
+    }
+    .sim-devbar button {
+      padding: 4px 10px;
+      border: 1px solid rgba(255,138,0,0.3);
+      border-radius: 4px;
+      background: transparent;
+      color: #f59e0b;
+      font-size: 0.72rem;
+      cursor: pointer;
+    }
+    .sim-devbar button:hover { background: rgba(255,138,0,0.1); }
+    .sim-devbar button.active { background: rgba(255,138,0,0.2); border-color: #f59e0b; }
+    .sim-devbar .sim-width-display { min-width: 60px; text-align: right; }
+  </style>
+</head>
+<body>
+
+  <!-- Simulated Chub Header -->
+  <header class="ant-layout-header" role="banner">
+    <div class="sim-header-left">
+      <span class="sim-logo">chub.ai</span>
+    </div>
+    <div class="sim-header-right">
+      <button class="sim-header-btn">Create +</button>
+      <div class="sim-avatar" title="Profile avatar"></div>
+    </div>
+  </header>
+
+  <div class="ant-layout">
+    <main class="ant-layout-content">
+      <div class="ant-row">
+
+        <!-- Simulated sidebar -->
+        <div class="ant-col-lg-6">
+          <div class="sim-follow-bar text-sm">
+            <span class="mr-4">@The_Lonely_Devil</span>
+            <span>42 Following</span>
+            <button class="ant-btn">Unfollow</button>
+          </div>
+          <button class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined" style="position:fixed;top:82px;right:18px;">Nominate</button>
+        </div>
+
+        <!-- Main content -->
+        <div class="ant-col-lg-18">
+          <div class="ant-tabs">
+            <div class="ant-tabs-nav">
+              <div class="ant-tabs-nav-wrap">
+                <div class="ant-tabs-tab ant-tabs-tab-active" data-tab="about">
+                  <span class="ant-tabs-tab-btn">About</span>
+                </div>
+                <div class="ant-tabs-tab" data-tab="characters">
+                  <span class="ant-tabs-tab-btn">Characters</span>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" id="tab-about">
+              <!-- BIO CONTENT INJECTED HERE -->
+            </div>
+            <div role="tabpanel" id="tab-characters" class="tab-hidden">
+              <p style="padding:32px;text-align:center;color:rgba(255,255,255,0.4);">Character cards would appear here on the live site.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Simulated footer -->
+    <footer class="ant-layout-footer">
+      <div class="sim-footer-links">
+        <a href="#">Feedback &amp; Ideas</a>
+        <span>-</span>
+        <a href="#">System Status</a>
+        <span>-</span>
+        <a href="#">Careers</a>
+        <span>-</span>
+        <a href="#">Privacy Policy</a>
+        <span>-</span>
+        <a href="#">TOS</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Dev toolbar -->
+  <div class="sim-devbar">
+    <span>Viewport:</span>
+    <button data-w="375">375px</button>
+    <button data-w="768">768px</button>
+    <button data-w="1080">1080px</button>
+    <button data-w="1280">1280px</button>
+    <button data-w="1920">1920px</button>
+    <button data-w="full" class="active">Full</button>
+    <span class="sim-width-display"></span>
+  </div>
+
+  <script>
+    // Load bio content
+    async function loadBio() {
+      try {
+        const res = await fetch('/api/sources');
+        const data = await res.json();
+        document.getElementById('tab-about').innerHTML = data.blob;
+      } catch {
+        // Fallback: try loading paste-blob.html as static file
+        try {
+          const res = await fetch('paste-blob.html');
+          const html = await res.text();
+          document.getElementById('tab-about').innerHTML = html;
+        } catch {
+          document.getElementById('tab-about').innerHTML =
+            '<p style="padding:32px;text-align:center;color:#f59e0b;">Start the editor server (node editor-server.js) or place paste-blob.html alongside this file.</p>';
+        }
+      }
+    }
+
+    // Tab switching
+    document.querySelectorAll('.ant-tabs-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.ant-tabs-tab').forEach(t => t.classList.remove('ant-tabs-tab-active'));
+        tab.classList.add('ant-tabs-tab-active');
+        const id = tab.dataset.tab;
+        document.querySelectorAll('[role="tabpanel"]').forEach(p => {
+          p.classList.toggle('tab-hidden', p.id !== `tab-${id}`);
+        });
+      });
+    });
+
+    // Viewport presets
+    const widthDisplay = document.querySelector('.sim-width-display');
+    function updateWidth() {
+      widthDisplay.textContent = `${window.innerWidth}px`;
+    }
+    window.addEventListener('resize', updateWidth);
+    updateWidth();
+
+    document.querySelectorAll('.sim-devbar button[data-w]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.sim-devbar button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const w = btn.dataset.w;
+        if (w === 'full') {
+          document.body.style.maxWidth = '';
+          document.body.style.margin = '';
+          document.body.style.boxShadow = '';
+        } else {
+          document.body.style.maxWidth = `${w}px`;
+          document.body.style.margin = '0 auto';
+          document.body.style.boxShadow = '0 0 0 1px rgba(255,138,0,0.2)';
+        }
+        updateWidth();
+      });
+    });
+
+    loadBio();
+  </script>
+</body>
+</html>

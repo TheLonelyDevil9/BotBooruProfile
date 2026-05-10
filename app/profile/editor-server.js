@@ -53,11 +53,21 @@ function serveFile(res, filePath, contentType) {
   res.end(fs.readFileSync(filePath));
 }
 
+const staticFiles = new Map([
+  ['/preview.html', ['preview.html', 'text/html']],
+  ['/paste-blob.html', ['paste-blob.html', 'text/html']],
+]);
+
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
 
   if (req.method === 'GET' && url.pathname === '/') {
     return serveFile(res, path.join(rootDir, 'editor.html'), 'text/html');
+  }
+
+  if (req.method === 'GET' && staticFiles.has(url.pathname)) {
+    const [fileName, contentType] = staticFiles.get(url.pathname);
+    return serveFile(res, path.join(rootDir, fileName), contentType);
   }
 
   if (req.method === 'GET' && url.pathname === '/api/sources') {

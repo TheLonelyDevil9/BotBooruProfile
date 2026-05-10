@@ -22,9 +22,26 @@
   --ld-card-preview-height: min(760px, calc(100vh - 136px));
   --ld-card-full-art: none;
   --ld-wallpaper: url("https://file.garden/aeRvgfxptRQB-dB-/_1%20Profile%20Background.png");
-  --ld-font-body: 'Source Sans 3', sans-serif;
-  --ld-font-display: 'Sora', sans-serif;
-  --ld-font-ui: 'Source Sans 3', sans-serif;
+  --ld-font-body: 'Source Sans 3', 'Source Sans Pro', -apple-system, 'Segoe UI', system-ui, sans-serif;
+  --ld-font-display: 'Sora', -apple-system, 'Segoe UI', system-ui, sans-serif;
+  --ld-font-ui: 'Source Sans 3', 'Source Sans Pro', -apple-system, 'Segoe UI', system-ui, sans-serif;
+}
+
+@supports not (color: oklch(0.5 0.1 0)) {
+  :root {
+    --ld-orange: #d97706;
+    --ld-orange-hot: #f59e0b;
+    --ld-teal: #6f9c97;
+    --ld-teal-border: rgba(111, 156, 151, 0.42);
+    --ld-text: #f5f0e8;
+    --ld-copy: rgba(235, 228, 216, 0.92);
+    --ld-muted: rgba(200, 194, 184, 0.78);
+    --ld-bg: #121008;
+    --ld-panel: rgba(30, 24, 16, 0.94);
+    --ld-panel-quiet: rgba(22, 18, 12, 0.88);
+    --ld-border: rgba(200, 140, 60, 0.34);
+    --ld-border-soft: rgba(230, 226, 220, 0.12);
+  }
 }
 
 html {
@@ -42,7 +59,7 @@ body {
     radial-gradient(circle at 15% 5%, oklch(0.72 0.18 49 / 0.2), transparent 30%),
     radial-gradient(circle at 86% 10%, oklch(0.66 0.06 190 / 0.14), transparent 28%),
     var(--ld-wallpaper),
-    linear-gradient(180deg, oklch(0.15 0.018 48), var(--ld-bg) 48%, oklch(0.06 0.012 48)) !important;
+    linear-gradient(180deg, oklch(0.15 0.018 48), var(--ld-bg) 42%, var(--ld-bg)) !important;
   background-position: center top, top left, top right, center top, center top !important;
   background-repeat: no-repeat !important;
   background-size: cover, auto, auto, cover, auto !important;
@@ -73,7 +90,13 @@ header[role="banner"] {
 .ant-layout-footer,
 .ant-layout-footer *,
 footer.ant-layout-footer,
-footer.ant-layout-footer * {
+footer.ant-layout-footer *,
+html body .ant-layout > *:last-child,
+html body .ant-layout > *:last-child *,
+html body .ant-layout > main ~ *,
+html body .ant-layout > main ~ * *,
+html body [class*="Footer"],
+html body [class*="footer-"] {
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
@@ -84,16 +107,10 @@ footer.ant-layout-footer * {
 .ant-layout-footer::after,
 footer::before,
 footer::after,
-footer.ant-layout-footer::before,
-footer.ant-layout-footer::after,
 html body .ant-layout-footer *::before,
 html body .ant-layout-footer *::after {
   content: none !important;
   display: none !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-  box-shadow: none !important;
 }
 
 html body .ant-layout-footer,
@@ -103,23 +120,10 @@ html body .ant-layout > .ant-layout-footer,
 html body [class*="ant-layout-footer"],
 html body #root > .ant-layout > main + footer,
 html body #root > .ant-layout > footer,
-html body .ant-layout footer.ant-layout-footer.css-f6nzt4 {
+html body #root > .ant-layout > *:last-child {
   min-height: 0 !important;
   margin: 0 !important;
   padding: 18px 16px 28px !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-  box-shadow: none !important;
-}
-
-html body .ant-layout-footer > div,
-html body footer.ant-layout-footer > div,
-html body footer *,
-html body .ant-layout-footer [class*="footer"],
-html body footer[class*="footer"],
-html body .ant-layout-footer [style*="background"],
-html body footer.ant-layout-footer [style*="background"] {
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
@@ -131,6 +135,11 @@ html body footer.ant-layout-footer [style*="background"] {
   flex: 0 0 100% !important;
   max-width: 100% !important;
   position: relative !important;
+  pointer-events: none !important;
+}
+
+.ant-col-lg-6 > * {
+  pointer-events: auto !important;
 }
 
 .ant-col-lg-6 > .ant-avatar,
@@ -144,7 +153,7 @@ html body footer.ant-layout-footer [style*="background"] {
   position: fixed !important;
   top: 82px !important;
   left: 50% !important;
-  z-index: 10030 !important;
+  z-index: 900 !important;
   display: flex !important;
   flex-wrap: nowrap;
   align-items: center;
@@ -200,7 +209,7 @@ html body footer.ant-layout-footer [style*="background"] {
   top: 82px !important;
   right: 18px !important;
   bottom: auto !important;
-  z-index: 10020 !important;
+  z-index: 890 !important;
   min-height: 38px;
 }
 
@@ -259,6 +268,8 @@ html body .ant-pagination .ant-pagination-next button {
   gap: clamp(22px, 2.6vw, 38px);
   width: 100%;
   max-width: min(1540px, calc(100vw - 32px)) !important;
+  overflow-x: hidden;
+  overflow-x: clip;
   margin: 0 auto;
   padding: clamp(34px, 4vw, 58px) clamp(18px, 2vw, 28px) 0;
   box-sizing: border-box;
@@ -286,6 +297,15 @@ html body .ant-pagination .ant-pagination-next button {
   text-decoration-color: oklch(0.8 0.17 56 / 0.5);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
+}
+
+.ld-bio a:focus-visible,
+.ld-jump-link:focus-visible,
+.ld-float-link:focus-visible,
+.ld-media-card:focus-visible {
+  outline: 2px solid var(--ld-orange-hot);
+  outline-offset: 2px;
+  border-radius: var(--ld-radius);
 }
 
 .ld-bio h1,
@@ -328,6 +348,15 @@ html body .ant-pagination .ant-pagination-next button {
   contain-intrinsic-size: 420px;
 }
 
+.ld-profile-card,
+.ld-hero-panel {
+  animation: ld-fade-up 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.ld-hero-panel {
+  animation-delay: 80ms;
+}
+
 .ld-profile-card {
   display: flex;
   flex-direction: column;
@@ -351,7 +380,20 @@ html body .ant-pagination .ant-pagination-next button {
   height: 100%;
   object-fit: cover;
   object-position: center 42%;
-  filter: saturate(1.06) brightness(1.05) contrast(1.03);
+  filter: saturate(1.05) brightness(1.04) contrast(1.02);
+}
+
+.ld-avatar-frame {
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ld-avatar-frame:hover {
+  transform: scale(1.02);
+}
+
+.ld-avatar-frame:hover img {
+  filter: saturate(1.1) brightness(1.08) contrast(1.02);
+  transition: filter 300ms ease-out;
 }
 
 .ld-profile-name {
@@ -463,6 +505,7 @@ html body .ant-pagination .ant-pagination-next button {
 .ld-hero-heading {
   color: var(--ld-orange-hot);
   font-size: clamp(2.1rem, 3.6vw, 3.45rem);
+  letter-spacing: 0;
   line-height: 0.98;
 }
 
@@ -471,17 +514,29 @@ html body .ant-pagination .ant-pagination-next button {
   text-decoration-color: oklch(0.8 0.17 56 / 0.55);
 }
 
+.ld-hero-heading {
+  animation: ld-heading-glow 4s ease-in-out infinite;
+}
+
 .ld-hero-focus {
   display: grid;
   gap: 11px;
 }
 
 #ld-top .ld-hero-focus-label,
-.ld-hero-panel .ld-hero-focus-label,
+.ld-hero-panel .ld-hero-focus-label {
+  margin: 0;
+  color: var(--ld-teal) !important;
+  font-weight: 800 !important;
+}
+
 .ld-intro-lines {
   margin: 0;
   color: var(--ld-teal) !important;
   font-weight: 800 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.84rem;
 }
 
 .ld-hero-actions {
@@ -502,17 +557,17 @@ html body .ant-pagination .ant-pagination-next button {
 }
 
 .ld-hero-media-stack {
-  display: grid !important;
-  grid-template-columns: minmax(0, 1.54fr) minmax(0, 1fr) !important;
+  display: grid;
+  grid-template-columns: minmax(0, 1.54fr) minmax(0, 1fr);
   grid-template-areas:
     "squish ending"
-    "squish peek" !important;
-  gap: clamp(10px, 1.25vw, 16px) !important;
-  align-items: center !important;
-  align-content: center !important;
-  justify-self: stretch !important;
-  width: 100% !important;
-  max-width: min(100%, 560px) !important;
+    "squish peek";
+  gap: clamp(10px, 1.25vw, 16px);
+  align-items: center;
+  align-content: center;
+  justify-self: stretch;
+  width: 100%;
+  max-width: min(100%, 560px);
 }
 
 .ld-hero-corner-gif,
@@ -531,29 +586,29 @@ html body .ant-pagination .ant-pagination-next button {
 .ld-hero-ending-gif,
 .ld-hero-peek-gif {
   display: block;
-  width: 100% !important;
-  max-width: 100% !important;
-  height: auto !important;
-  min-height: 0 !important;
-  object-fit: contain !important;
-  object-position: center center !important;
-  align-self: center !important;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center center;
+  align-self: center;
   filter: saturate(1.05) brightness(1.04) contrast(1.02);
 }
 
 .ld-hero-corner-gif {
-  grid-area: squish !important;
-  aspect-ratio: 480 / 360 !important;
+  grid-area: squish;
+  aspect-ratio: 480 / 360;
 }
 
 .ld-hero-ending-gif {
-  grid-area: ending !important;
-  aspect-ratio: 498 / 281 !important;
+  grid-area: ending;
+  aspect-ratio: 498 / 281;
 }
 
 .ld-hero-peek-gif {
-  grid-area: peek !important;
-  aspect-ratio: 398 / 210 !important;
+  grid-area: peek;
+  aspect-ratio: 398 / 210;
 }
 
 .ld-hero-media,
@@ -561,7 +616,7 @@ html body .ant-pagination .ant-pagination-next button {
 .ld-philosophy-media {
   display: block;
   width: 100%;
-  filter: saturate(1.04) brightness(1.04) contrast(1.02);
+  filter: saturate(1.05) brightness(1.04) contrast(1.02);
 }
 
 .ld-hero-media {
@@ -586,6 +641,7 @@ html body .ant-pagination .ant-pagination-next button {
   margin-bottom: 14px;
   color: var(--ld-orange-hot);
   font-size: clamp(1.26rem, 1.05rem + 0.56vw, 1.54rem);
+  letter-spacing: 0;
   line-height: 1.1;
 }
 
@@ -679,9 +735,12 @@ html body .ant-pagination .ant-pagination-next button {
 #ld-top .ld-statement,
 .ld-bio .ld-statement {
   margin: 0;
-  padding: 12px 14px;
-  color: var(--ld-text) !important;
+  padding: 14px 16px;
+  color: var(--ld-orange-hot) !important;
+  font-size: 1.04rem;
+  font-style: italic;
   font-weight: 700 !important;
+  line-height: 1.55;
 }
 
 .ld-panel--disclaimers .ld-list li,
@@ -706,7 +765,8 @@ html body .ant-pagination .ant-pagination-next button {
 
 .ld-media-card:hover {
   border-color: oklch(0.8 0.17 56 / 0.62);
-  transform: translateY(-1px);
+  box-shadow: 0 12px 32px oklch(0.025 0.012 48 / 0.4);
+  transform: translateY(-2px);
 }
 
 .ld-media-card img {
@@ -772,11 +832,12 @@ html body .ant-pagination .ant-pagination-next button {
   position: fixed;
   right: clamp(10px, 1.5vw, 18px);
   bottom: calc(env(safe-area-inset-bottom) + 16px);
-  z-index: 10040 !important;
+  z-index: 950 !important;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 8px;
+  animation: ld-float-in 500ms cubic-bezier(0.16, 1, 0.3, 1) 600ms both;
 }
 
 .ld-float-link {
@@ -895,7 +956,7 @@ html body .ant-col-lg-18 [role="tabpanel"] .character-list-container::before {
 
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover,
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible {
-    z-index: 10050 !important;
+    z-index: 1060 !important;
     overflow: visible !important;
   }
 
@@ -917,7 +978,7 @@ html body .ant-col-lg-18 [role="tabpanel"] .character-list-container::before {
     box-shadow: var(--ld-shadow-soft) !important;
     color: var(--ld-text) !important;
     transform: none !important;
-    transition: border-color 140ms ease-out, box-shadow 140ms ease-out !important;
+    transition: border-color 160ms ease-out, box-shadow 160ms ease-out !important;
   }
 
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .char-card-class,
@@ -925,7 +986,7 @@ html body .ant-col-lg-18 [role="tabpanel"] .character-list-container::before {
     position: fixed !important;
     top: calc(50% + 34px) !important;
     left: 50% !important;
-    z-index: 10051 !important;
+    z-index: 1061 !important;
     width: var(--ld-card-preview-width) !important;
     height: var(--ld-card-preview-height) !important;
     min-width: 0 !important;
@@ -938,7 +999,7 @@ html body .ant-col-lg-18 [role="tabpanel"] .character-list-container::before {
     transform: translate(-50%, -50%) !important;
     transform-origin: center center !important;
     animation: ld-card-preview-center-in 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
-    transition: border-color 140ms ease-out, box-shadow 140ms ease-out !important;
+    transition: border-color 160ms ease-out, box-shadow 160ms ease-out !important;
   }
 
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .char-card-class *,
@@ -1342,6 +1403,45 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
   }
 }
 
+@keyframes ld-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ld-heading-glow {
+  0%, 100% {
+    text-shadow: none;
+  }
+  50% {
+    text-shadow: 0 0 28px oklch(0.72 0.18 49 / 0.3);
+  }
+}
+
+@keyframes ld-float-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .ld-profile-grid .ld-panel {
+    animation: ld-fade-up 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+}
+
 @media (max-width: 1080px) {
   .ld-profile-hero,
   .ld-profile-grid,
@@ -1401,6 +1501,7 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
   .ld-hero-actions .ld-jump-link {
     width: 100%;
     flex: 1 1 100%;
+    min-height: 44px;
     white-space: normal;
   }
 
@@ -1413,9 +1514,9 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
   .ld-float-link {
     min-width: 122px;
     max-width: calc(100vw - 24px);
-    min-height: 34px;
-    padding: 0.5rem 0.7rem;
-    font-size: 0.78rem;
+    min-height: 44px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
   }
 
   .ant-col-lg-6 > .text-sm {
@@ -1447,6 +1548,28 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
 
   .ld-art-showcase > a.ld-art-card:nth-of-type(2) {
     margin-top: 0;
+  }
+}
+
+@media print {
+  .ld-float-nav,
+  .ant-col-lg-6 > .text-sm,
+  .ant-col-lg-6 > button.ant-btn {
+    display: none !important;
+  }
+
+  .ld-bio {
+    max-width: 100% !important;
+  }
+
+  .ld-profile-hero,
+  .ld-profile-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .ld-bio a {
+    color: var(--ld-orange-hot) !important;
+    text-decoration: underline !important;
   }
 }
 
