@@ -55,11 +55,11 @@ body {
   color: var(--ld-text) !important;
   font-family: var(--ld-font-body) !important;
   background:
-    linear-gradient(180deg, oklch(0.08 0.012 48 / 0.08), oklch(0.04 0.01 48 / 0.56)),
-    radial-gradient(circle at 15% 5%, oklch(0.72 0.18 49 / 0.2), transparent 30%),
-    radial-gradient(circle at 86% 10%, oklch(0.66 0.06 190 / 0.14), transparent 28%),
+    linear-gradient(180deg, oklch(0.035 0.012 48 / 0.48), oklch(0.025 0.012 48 / 0.82)),
+    radial-gradient(circle at 15% 5%, oklch(0.72 0.18 49 / 0.11), transparent 30%),
+    radial-gradient(circle at 86% 10%, oklch(0.66 0.06 190 / 0.08), transparent 28%),
     var(--ld-wallpaper),
-    linear-gradient(180deg, oklch(0.15 0.018 48), var(--ld-bg) 42%, var(--ld-bg)) !important;
+    linear-gradient(180deg, oklch(0.09 0.016 48), var(--ld-bg) 32%, var(--ld-bg)) !important;
   background-position: center top, top left, top right, center top, center top !important;
   background-repeat: no-repeat !important;
   background-size: cover, auto, auto, cover, auto !important;
