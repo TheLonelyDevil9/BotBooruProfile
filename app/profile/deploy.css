@@ -1720,6 +1720,10 @@ html body .ld-bio .ld-panel--disclaimers ul.ld-list > li:last-of-type {
   margin-top: clamp(20px, 1.5vw, 28px) !important;
 }
 
+html body .ld-bio .ld-panel--disclaimers > li:last-of-type {
+  margin-top: clamp(20px, 1.5vw, 28px) !important;
+}
+
 /* Final live-Chub chrome correction: keep the follower/follow pill pure black. */
 html body .ant-col-lg-6 > .text-sm,
 html body .ant-col-lg-6 > .text-sm .ant-btn,
