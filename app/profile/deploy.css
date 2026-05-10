@@ -18,6 +18,9 @@
   --ld-radius: 12px;
   --ld-panel-pad: clamp(20px, 2vw, 30px);
   --ld-copy-max: 72ch;
+  --ld-card-preview-width: min(980px, calc(100vw - 64px));
+  --ld-card-preview-height: min(760px, calc(100vh - 136px));
+  --ld-card-full-art: none;
   --ld-wallpaper: url("https://file.garden/aeRvgfxptRQB-dB-/_1%20Profile%20Background.png");
   --ld-font-body: 'Source Sans 3', sans-serif;
   --ld-font-display: 'Sora', sans-serif;
@@ -72,6 +75,53 @@ header[role="banner"] {
 footer.ant-layout-footer,
 footer.ant-layout-footer * {
   background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+.ant-layout-footer::before,
+.ant-layout-footer::after,
+footer::before,
+footer::after,
+footer.ant-layout-footer::before,
+footer.ant-layout-footer::after,
+html body .ant-layout-footer *::before,
+html body .ant-layout-footer *::after {
+  content: none !important;
+  display: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+html body .ant-layout-footer,
+html body footer.ant-layout-footer,
+html body footer,
+html body .ant-layout > .ant-layout-footer,
+html body [class*="ant-layout-footer"],
+html body #root > .ant-layout > main + footer,
+html body #root > .ant-layout > footer,
+html body .ant-layout footer.ant-layout-footer.css-f6nzt4 {
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 18px 16px 28px !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+html body .ant-layout-footer > div,
+html body footer.ant-layout-footer > div,
+html body footer *,
+html body .ant-layout-footer [class*="footer"],
+html body footer[class*="footer"],
+html body .ant-layout-footer [style*="background"],
+html body footer.ant-layout-footer [style*="background"] {
+  background: transparent !important;
+  background-color: transparent !important;
   background-image: none !important;
   box-shadow: none !important;
 }
@@ -273,9 +323,7 @@ html body .ant-pagination .ant-pagination-next button {
   box-shadow: var(--ld-shadow);
 }
 
-.ld-panel,
-.ld-media-card,
-.ld-art-showcase {
+.ld-panel {
   content-visibility: auto;
   contain-intrinsic-size: 420px;
 }
@@ -650,6 +698,8 @@ html body .ant-pagination .ant-pagination-next button {
 .ld-media-card {
   display: block;
   overflow: hidden;
+  line-height: 0;
+  background: transparent !important;
   text-decoration: none !important;
   transition: border-color 160ms ease-out, transform 160ms ease-out;
 }
@@ -660,7 +710,10 @@ html body .ant-pagination .ant-pagination-next button {
 }
 
 .ld-media-card img {
+  display: block;
+  width: 100%;
   height: auto;
+  vertical-align: bottom;
 }
 
 .ld-footer-link {
@@ -682,6 +735,10 @@ html body .ant-pagination .ant-pagination-next button {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(180px, 0.8fr);
   gap: 14px;
+}
+
+.ld-hero-info-grid {
+  align-items: stretch;
 }
 
 .ld-art-showcase {
@@ -741,11 +798,13 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
 
 html body .ant-col-lg-18 [role="tabpanel"] #chara-list::before,
 html body .ant-col-lg-18 [role="tabpanel"] .character-list-container::before {
-  content: "Card Browser" !important;
+  content: "Hover over any card for a good look!" !important;
+  grid-column: 1 / -1;
   display: grid;
   place-items: center;
+  width: 100%;
   min-height: 38px;
-  margin-bottom: 16px;
+  margin: 0 0 16px;
   padding: 7px 12px;
   border: 1px solid var(--ld-border);
   border-radius: 10px;
@@ -780,6 +839,24 @@ html body .ant-col-lg-18 [role="tabpanel"] .character-list-container::before {
     padding: 0 !important;
   }
 
+  html body .ant-col-lg-18 [role="tabpanel"] .ant-list-items:has(a.cursor-pointer[href*="/characters/"])::before,
+  html body .ant-col-lg-18 [role="tabpanel"] .ant-row:has(a.cursor-pointer[href*="/characters/"])::before {
+    content: "Hover over any card for a good look!" !important;
+    grid-column: 1 / -1;
+    display: grid;
+    place-items: center;
+    min-height: 38px;
+    padding: 7px 12px;
+    border: 1px solid var(--ld-border);
+    border-radius: 10px;
+    background: oklch(0.06 0.012 48 / 0.92);
+    color: var(--ld-text);
+    font-family: var(--ld-font-ui);
+    font-size: 0.86rem;
+    font-weight: 800;
+    pointer-events: none;
+  }
+
   html body .ant-col-lg-18 [role="tabpanel"] .ant-list-items:has(a.cursor-pointer[href*="/characters/"]) > [class*="ant-col"],
   html body .ant-col-lg-18 [role="tabpanel"] #chara-list:has(a.cursor-pointer[href*="/characters/"]) > [class*="ant-col"],
   html body .ant-col-lg-18 [role="tabpanel"] .character-list-container:has(a.cursor-pointer[href*="/characters/"]) > [class*="ant-col"],
@@ -802,8 +879,42 @@ html body .ant-col-lg-18 [role="tabpanel"] .character-list-container::before {
     overflow: hidden !important;
   }
 
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible {
+    z-index: 10050 !important;
+    overflow: visible !important;
+  }
+
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]::after {
-    content: none !important;
+    content: "Hold to preview" !important;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    z-index: 10052;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 24px;
+    padding: 4px 8px;
+    border: 1px solid oklch(0.8 0.17 56 / 0.72);
+    border-radius: 999px;
+    background: oklch(0.05 0.012 48 / 0.94);
+    color: var(--ld-orange-hot);
+    box-shadow: var(--ld-shadow-soft);
+    font-family: var(--ld-font-ui);
+    font-size: 0.72rem;
+    font-weight: 800;
+    line-height: 1;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(3px);
+    transition: opacity 140ms ease-out, transform 140ms ease-out;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover::after,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible::after {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .char-card-class {
@@ -829,9 +940,47 @@ html body .ant-col-lg-18 [role="tabpanel"] .character-list-container::before {
 
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .char-card-class,
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .char-card-class {
-    border-color: oklch(0.8 0.17 56 / 0.58) !important;
-    box-shadow: var(--ld-shadow) !important;
-    transform: translateY(-1px) !important;
+    position: fixed !important;
+    top: calc(50% + 34px) !important;
+    left: 50% !important;
+    z-index: 10051 !important;
+    width: var(--ld-card-preview-width) !important;
+    height: var(--ld-card-preview-height) !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: var(--ld-card-preview-width) !important;
+    max-height: var(--ld-card-preview-height) !important;
+    border-color: oklch(0.8 0.17 56 / 0.72) !important;
+    box-shadow: 0 30px 90px oklch(0.025 0.012 48 / 0.76) !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .card-main-body,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .card-main-body {
+    grid-template-columns: minmax(0, 62%) minmax(280px, 38%) !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .card-main-body > .ant-col:first-child,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .card-main-body > .ant-col:first-child {
+    isolation: isolate;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"]:hover .card-main-body > .ant-col:first-child > div > div:first-child::after,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"]:focus-visible .card-main-body > .ant-col:first-child > div > div:first-child::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background-image: var(--ld-card-full-art);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .card-main-body > .ant-col:first-child img,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .card-main-body > .ant-col:first-child img {
+    object-fit: contain !important;
   }
 }
 

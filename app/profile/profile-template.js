@@ -81,6 +81,23 @@ function renderArtCredits(items) {
   return items.map((item) => `                <li><a href="${escapeHtml(item.url)}">${formatInline(item.label)}</a></li>`).join('\n');
 }
 
+function renderRequestsAndCredits(content, indent = '          ') {
+  const block = `<div class="ld-compact-grid ld-hero-info-grid">
+            <section class="ld-panel ld-panel--compact">
+              <h2>${formatInline(content.rightColumn.requests.title)}</h2>
+              <p class="ld-footer-link"><a href="${escapeHtml(content.rightColumn.requests.linkUrl)}">${formatInline(content.rightColumn.requests.linkLabel)}</a><span class="ld-footer-subtext">${formatInline(content.rightColumn.requests.subtext)}</span></p>
+            </section>
+            <section class="ld-panel ld-panel--compact">
+              <h2>${formatInline(content.rightColumn.artCredits.title)}</h2>
+              <ul class="ld-list">
+${renderArtCredits(content.rightColumn.artCredits.items)}
+              </ul>
+            </section>
+          </div>`;
+
+  return block.replace(/^.+$/gm, (line) => `${indent}${line}`);
+}
+
 function renderArtShowcase(showcase) {
   const items = Array.isArray(showcase?.items) ? showcase.items : [];
   if (!items.length) return '';
@@ -153,6 +170,7 @@ ${renderActions(content.hero.actions)}
             </div>
           </section>
           ${renderMedia(content.hero.bannerUrl, 'ld-hero-media', 'Firefly animated banner')}
+${renderRequestsAndCredits(content)}
         </div>
       </section>
 
@@ -233,20 +251,6 @@ ${renderChildItems(content.rightColumn.sizeProblem.items)}
           <a class="ld-media-card" href="${escapeHtml(content.rightColumn.midImageUrl)}"${imageWindowAttrs('mid page image')}>
             <img src="${escapeHtml(content.rightColumn.midImageUrl)}" alt="Decorative mid-page image">
           </a>
-
-          <div class="ld-compact-grid">
-            <section class="ld-panel ld-panel--compact">
-              <h2>${formatInline(content.rightColumn.requests.title)}</h2>
-              <p class="ld-footer-link"><a href="${escapeHtml(content.rightColumn.requests.linkUrl)}">${formatInline(content.rightColumn.requests.linkLabel)}</a><span class="ld-footer-subtext">${formatInline(content.rightColumn.requests.subtext)}</span></p>
-            </section>
-
-            <section class="ld-panel ld-panel--compact">
-              <h2>${formatInline(content.rightColumn.artCredits.title)}</h2>
-              <ul class="ld-list">
-${renderArtCredits(content.rightColumn.artCredits.items)}
-              </ul>
-            </section>
-          </div>
 
           <section class="ld-panel ld-panel--disclaimers">
             <h2>${formatInline(content.rightColumn.disclaimers.title)}</h2>
