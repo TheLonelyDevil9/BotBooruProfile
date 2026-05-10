@@ -1890,6 +1890,11 @@ html body .ant-col-lg-6 .ld-bio {
   isolation: isolate !important;
 }
 
+html body .ant-col-lg-6 > button.ant-btn.ant-btn-default.ant-btn-color-default.ant-btn-variant-outlined {
+  z-index: 2147482995 !important;
+  pointer-events: auto !important;
+}
+
 html body .ld-bio .ld-float-nav::before,
 html body .ld-float-nav::before {
   content: "" !important;
