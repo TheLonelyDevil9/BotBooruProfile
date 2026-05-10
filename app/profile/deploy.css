@@ -1880,6 +1880,16 @@ html body .ld-float-nav {
   opacity: 1 !important;
 }
 
+html body .ant-col-lg-6 {
+  z-index: 2147482990 !important;
+  isolation: isolate !important;
+}
+
+html body .ant-col-lg-6 .ld-bio {
+  z-index: 2147482991 !important;
+  isolation: isolate !important;
+}
+
 html body .ld-bio .ld-float-nav::before,
 html body .ld-float-nav::before {
   content: "" !important;
