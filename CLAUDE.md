@@ -4,8 +4,8 @@ Guidance for working in this repository.
 
 ## External North Stars
 
-- Project philosophy skill: `C:\Users\TheLonelyDevil\.agents\skills\agent-harness-pointers\SKILL.md`
-- Prompting guidance skill: `C:\Users\TheLonelyDevil\.agents\skills\llm-prompting-guide\SKILL.md`
+- Project philosophy skill: `C:\Users\TheLonelyDevil\.claude\skills\agent-harness-pointers\SKILL.md`
+- Prompting guidance skill: `C:\Users\TheLonelyDevil\.claude\skills\llm-prompting-guide\SKILL.md`
 
 Use these as durable operating context before making project-wide changes, workflow changes, prompt changes, or repo guidance changes. Keep repository guidance concise and discoverable, then link to deeper sources instead of turning this file into a long manual.
 
