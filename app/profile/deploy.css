@@ -1867,6 +1867,11 @@ html body .ant-col-lg-6 > button.ant-btn.ant-btn-default.ant-btn-color-default.a
   background-image: none !important;
 }
 
+html body .ant-col-lg-6 > .text-sm {
+  z-index: 2147482996 !important;
+  isolation: isolate !important;
+}
+
 /* Final mobile floating-control hard stop: these controls are intentionally
    viewport-hovering shortcuts. Keep profile shortcuts above profile/card
    layers, while Chub's own app chrome stays above the profile blob. */
@@ -1882,7 +1887,8 @@ html body .ld-float-nav {
 }
 
 html body .ant-col-lg-6 {
-  z-index: 2147482990 !important;
+  position: relative !important;
+  z-index: 2147482994 !important;
   isolation: isolate !important;
 }
 
