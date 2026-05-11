@@ -1686,12 +1686,12 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
 
 @media (max-width: 720px) {
   html {
-    scroll-padding-bottom: calc(112px + env(safe-area-inset-bottom));
+    scroll-padding-bottom: calc(154px + env(safe-area-inset-bottom));
   }
 
   .ld-bio {
     max-width: calc(100vw - 20px) !important;
-    padding: 24px 0 calc(118px + env(safe-area-inset-bottom));
+    padding: 24px 0 calc(158px + env(safe-area-inset-bottom));
   }
 
   .ld-profile-card,
@@ -1724,7 +1724,7 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
   .ld-float-nav {
     right: auto;
     left: 50%;
-    bottom: calc(env(safe-area-inset-bottom) + 10px);
+    bottom: calc(env(safe-area-inset-bottom) + 66px);
     width: min(100vw - 24px, 420px);
     max-width: calc(100vw - 24px);
     display: grid;
@@ -1868,7 +1868,8 @@ html body .ant-col-lg-6 > button.ant-btn.ant-btn-default.ant-btn-color-default.a
 }
 
 /* Final mobile floating-control hard stop: these controls are intentionally
-   viewport-hovering shortcuts, so they must render above every profile layer. */
+   viewport-hovering shortcuts. Keep profile shortcuts above profile/card
+   layers, while Chub's own app chrome stays above the profile blob. */
 html body .ld-bio .ld-float-nav,
 html body .ld-float-nav {
   position: fixed !important;
@@ -1885,7 +1886,10 @@ html body .ant-col-lg-6 {
   isolation: isolate !important;
 }
 
-html body .ant-col-lg-6 .ld-bio {
+html body .ant-col-lg-18,
+html body .ant-col-lg-18 .ld-bio,
+html body .ld-bio {
+  position: relative !important;
   z-index: 2147482991 !important;
   isolation: isolate !important;
 }
@@ -1909,6 +1913,124 @@ html body .ant-menu-submenu-popup,
 html body .ant-menu-submenu-popup * {
   z-index: 2147483647 !important;
   pointer-events: auto !important;
+}
+
+@media (max-width: 769px) {
+  html body .ant-layout-footer,
+  html body .ant-layout-footer *,
+  html body footer.ant-layout-footer,
+  html body footer.ant-layout-footer *,
+  html body .ant-layout .fixed.bottom-0,
+  html body .ant-layout .fixed.bottom-0 *,
+  html body .ant-layout .navigator.bottom,
+  html body .ant-layout .navigator.bottom *,
+  html body .ant-layout .bottom.navigator,
+  html body .ant-layout .bottom.navigator *,
+  html body .ant-layout [class*="layout-bottom"],
+  html body .ant-layout [class*="layout-bottom"] *,
+  html body .ant-layout .z-index-top,
+  html body .ant-layout .z-index-top * {
+    z-index: 2147483647 !important;
+    pointer-events: auto !important;
+  }
+
+  html body .ant-layout-footer,
+  html body footer.ant-layout-footer,
+  html body .ant-layout .fixed.bottom-0,
+  html body .ant-layout .navigator.bottom,
+  html body .ant-layout .bottom.navigator,
+  html body .ant-layout [class*="layout-bottom"],
+  html body .ant-layout .z-index-top {
+    isolation: isolate !important;
+  }
+
+  html body .ant-layout-footer > div,
+  html body footer.ant-layout-footer > div,
+  html body .ant-layout .fixed.bottom-0 > div,
+  html body .ant-layout .navigator.bottom > div,
+  html body .ant-layout .bottom.navigator > div,
+  html body .ant-layout [class*="layout-bottom"] > div,
+  html body .ant-layout .z-index-top > div {
+    position: relative !important;
+    z-index: 2147483647 !important;
+    pointer-events: auto !important;
+  }
+
+  html body .ant-layout-footer :is(a, button)[href*="/search"],
+  html body .ant-layout-footer :is(a, button)[href*="/create"],
+  html body .ant-layout-footer :is(a, button)[href*="/profile"],
+  html body .ant-layout-footer :is(a, button)[href*="/my_chats"],
+  html body .ant-layout-footer :is(a, button)[href*="/chats"],
+  html body .ant-layout-footer :is(a, button)[href*="/notifications"],
+  html body .ant-layout-footer :is(a, button)[aria-label*="search" i],
+  html body .ant-layout-footer :is(a, button)[aria-label*="create" i],
+  html body .ant-layout-footer :is(a, button)[aria-label*="profile" i],
+  html body .ant-layout-footer :is(a, button)[aria-label*="chat" i],
+  html body .ant-layout-footer :is(a, button)[aria-label*="notification" i],
+  html body .ant-layout .fixed.bottom-0 :is(a, button)[href*="/search"],
+  html body .ant-layout .fixed.bottom-0 :is(a, button)[href*="/create"],
+  html body .ant-layout .fixed.bottom-0 :is(a, button)[href*="/profile"],
+  html body .ant-layout .fixed.bottom-0 :is(a, button)[href*="/my_chats"],
+  html body .ant-layout .fixed.bottom-0 :is(a, button)[href*="/chats"],
+  html body .ant-layout .fixed.bottom-0 :is(a, button)[href*="/notifications"],
+  html body .ant-layout .navigator.bottom :is(a, button)[href*="/search"],
+  html body .ant-layout .navigator.bottom :is(a, button)[href*="/create"],
+  html body .ant-layout .navigator.bottom :is(a, button)[href*="/profile"],
+  html body .ant-layout .navigator.bottom :is(a, button)[href*="/my_chats"],
+  html body .ant-layout .navigator.bottom :is(a, button)[href*="/chats"],
+  html body .ant-layout .navigator.bottom :is(a, button)[href*="/notifications"],
+  html body .ant-layout .bottom.navigator :is(a, button)[href*="/search"],
+  html body .ant-layout .bottom.navigator :is(a, button)[href*="/create"],
+  html body .ant-layout .bottom.navigator :is(a, button)[href*="/profile"],
+  html body .ant-layout .bottom.navigator :is(a, button)[href*="/my_chats"],
+  html body .ant-layout .bottom.navigator :is(a, button)[href*="/chats"],
+  html body .ant-layout .bottom.navigator :is(a, button)[href*="/notifications"],
+  html body .ant-layout [class*="layout-bottom"] :is(a, button)[href*="/search"],
+  html body .ant-layout [class*="layout-bottom"] :is(a, button)[href*="/create"],
+  html body .ant-layout [class*="layout-bottom"] :is(a, button)[href*="/profile"],
+  html body .ant-layout [class*="layout-bottom"] :is(a, button)[href*="/my_chats"],
+  html body .ant-layout [class*="layout-bottom"] :is(a, button)[href*="/chats"],
+  html body .ant-layout [class*="layout-bottom"] :is(a, button)[href*="/notifications"],
+  html body .ant-layout .z-index-top :is(a, button)[href*="/search"],
+  html body .ant-layout .z-index-top :is(a, button)[href*="/create"],
+  html body .ant-layout .z-index-top :is(a, button)[href*="/profile"],
+  html body .ant-layout .z-index-top :is(a, button)[href*="/my_chats"],
+  html body .ant-layout .z-index-top :is(a, button)[href*="/chats"],
+  html body .ant-layout .z-index-top :is(a, button)[href*="/notifications"],
+  html body .ant-layout-footer :is(a, button)[aria-label*="search" i],
+  html body .ant-layout-footer :is(a, button)[aria-label*="create" i],
+  html body .ant-layout-footer :is(a, button)[aria-label*="profile" i],
+  html body .ant-layout-footer :is(a, button)[aria-label*="chat" i],
+  html body .ant-layout-footer :is(a, button)[aria-label*="notification" i],
+  html body .ant-layout .fixed.bottom-0 :is(a, button)[aria-label*="search" i],
+  html body .ant-layout .fixed.bottom-0 :is(a, button)[aria-label*="create" i],
+  html body .ant-layout .fixed.bottom-0 :is(a, button)[aria-label*="profile" i],
+  html body .ant-layout .fixed.bottom-0 :is(a, button)[aria-label*="chat" i],
+  html body .ant-layout .fixed.bottom-0 :is(a, button)[aria-label*="notification" i],
+  html body .ant-layout .navigator.bottom :is(a, button)[aria-label*="search" i],
+  html body .ant-layout .navigator.bottom :is(a, button)[aria-label*="create" i],
+  html body .ant-layout .navigator.bottom :is(a, button)[aria-label*="profile" i],
+  html body .ant-layout .navigator.bottom :is(a, button)[aria-label*="chat" i],
+  html body .ant-layout .navigator.bottom :is(a, button)[aria-label*="notification" i],
+  html body .ant-layout .bottom.navigator :is(a, button)[aria-label*="search" i],
+  html body .ant-layout .bottom.navigator :is(a, button)[aria-label*="create" i],
+  html body .ant-layout .bottom.navigator :is(a, button)[aria-label*="profile" i],
+  html body .ant-layout .bottom.navigator :is(a, button)[aria-label*="chat" i],
+  html body .ant-layout .bottom.navigator :is(a, button)[aria-label*="notification" i],
+  html body .ant-layout [class*="layout-bottom"] :is(a, button)[aria-label*="search" i],
+  html body .ant-layout [class*="layout-bottom"] :is(a, button)[aria-label*="create" i],
+  html body .ant-layout [class*="layout-bottom"] :is(a, button)[aria-label*="profile" i],
+  html body .ant-layout [class*="layout-bottom"] :is(a, button)[aria-label*="chat" i],
+  html body .ant-layout [class*="layout-bottom"] :is(a, button)[aria-label*="notification" i],
+  html body .ant-layout .z-index-top :is(a, button)[aria-label*="search" i],
+  html body .ant-layout .z-index-top :is(a, button)[aria-label*="create" i],
+  html body .ant-layout .z-index-top :is(a, button)[aria-label*="profile" i],
+  html body .ant-layout .z-index-top :is(a, button)[aria-label*="chat" i],
+  html body .ant-layout .z-index-top :is(a, button)[aria-label*="notification" i] {
+    position: relative !important;
+    z-index: 2147483647 !important;
+    pointer-events: auto !important;
+  }
 }
 
 html body .ld-bio .ld-float-nav::before,
@@ -1962,7 +2084,7 @@ html body header[role="banner"] .ant-badge-dot {
   html body .ld-float-nav {
     left: 50% !important;
     right: auto !important;
-    bottom: calc(env(safe-area-inset-bottom) + 10px) !important;
+    bottom: calc(env(safe-area-inset-bottom) + 66px) !important;
     width: min(420px, calc(100vw - 18px)) !important;
     max-width: calc(100vw - 18px) !important;
     transform: translateX(-50%) !important;

@@ -110,6 +110,7 @@ These were verified live on 2026-05-10 and should remain at the end of `deploy.c
   - `html body .ld-bio .ld-panel--disclaimers > li:last-of-type`
 - Live verification target for the feet-line spacing was `margin-top: 28px` at the inspected desktop viewport.
 - The hover hint text is expected to be orange. If text search misses it, check pseudo-element content before assuming the change failed.
+- The profile's floating jump bar should sit above profile/card content, but Chub's own mobile bottom controls must still win the absolute top layer. The final floating-control block keeps the jump bar at `2147483000`, lifts Chub mobile chrome selectors to `2147483647`, and offsets the jump bar above the bottom nav on mobile.
 
 ## Card Browser Grid
 
