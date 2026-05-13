@@ -2263,8 +2263,8 @@ html body .ld-bio .ld-profile-column > .ld-art-card img {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: blur(4px) saturate(1.08) brightness(0.94);
-    transform: scale(1.025);
+    filter: blur(1.5px) saturate(1.06) brightness(0.98);
+    transform: scale(1.01);
     pointer-events: none;
   }
 
@@ -2290,5 +2290,12 @@ html body .ld-bio .ld-profile-column > .ld-art-card img {
     z-index: 2;
     opacity: 1;
     background-size: contain;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"]:hover .card-main-body > .ant-col:first-child > div > div:first-child::before,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"]:focus-visible .card-main-body > .ant-col:first-child > div > div:first-child::before {
+    opacity: 0.45;
+    filter: blur(0.5px) saturate(1.04) brightness(1);
+    transform: scale(1.004);
   }
 }
