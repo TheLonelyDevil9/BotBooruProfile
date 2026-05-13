@@ -100,15 +100,11 @@ ${renderArtCredits(content.rightColumn.artCredits.items)}
   return block.replace(/^.+$/gm, (line) => `${indent}${line}`);
 }
 
-function renderArtShowcase(showcase) {
-  const items = Array.isArray(showcase?.items) ? showcase.items : [];
-  if (!items.length) return '';
-
-  return `      <section class="ld-art-showcase" aria-label="Firefly artwork showcase">
-${items.map((item) => `        <a class="ld-media-card ld-art-card" href="${escapeHtml(item.url)}"${imageWindowAttrs(item.label || item.alt)}>
-          <img src="${escapeHtml(item.url)}" alt="${escapeHtml(item.alt || item.label)}" loading="lazy" decoding="async">
-        </a>`).join('\n')}
-      </section>`;
+function renderArtCard(item) {
+  if (!item?.url) return '';
+  return `<a class="ld-media-card ld-art-card" href="${escapeHtml(item.url)}"${imageWindowAttrs(item.label || item.alt)}>
+  <img src="${escapeHtml(item.url)}" alt="${escapeHtml(item.alt || item.label)}" loading="lazy" decoding="async">
+</a>`;
 }
 
 function renderActions(actions) {
@@ -197,12 +193,7 @@ ${renderChildCopyBlocks(content.leftColumn.philosophy.whyBullets)}
             <img src="${escapeHtml(content.leftColumn.dividerImageUrl)}" alt="Firefly illustration divider" loading="lazy" decoding="async">
           </a>
 
-          <section class="ld-panel">
-            <h2>Preset Recommendation</h2>
-            <ul class="ld-list">
-${renderRecommendations(content.leftColumn.presetRecommendations)}
-            </ul>
-          </section>
+${renderArtCard(content.artShowcase?.items?.[0]).replace(/^/gm, '          ')}
 
           <section class="ld-panel ld-panel--compact">
             <h2>${formatInline(content.leftColumn.modelRecommendations.title)}</h2>
@@ -252,9 +243,17 @@ ${renderSimpleList(content.leftColumn.modelRecommendations.otherRecs).replace(/^
 ${renderChildItems(content.rightColumn.disclaimers.items)}
             </ul>
           </section>
+
+${renderArtCard(content.artShowcase?.items?.[1]).replace(/^/gm, '          ')}
+
+          <section class="ld-panel">
+            <h2>Preset Recommendation</h2>
+            <ul class="ld-list">
+${renderRecommendations(content.leftColumn.presetRecommendations)}
+            </ul>
+          </section>
         </div>
       </div>
-${renderArtShowcase(content.artShowcase)}
       <div class="ld-anchor" id="ld-cards" aria-hidden="true"></div>
       <div class="ld-float-nav">
         <a class="ld-float-link ld-float-link--secondary" href="${escapeHtml(content.floatingNav.profileUrl)}">${formatInline(content.floatingNav.profileLabel)}</a>

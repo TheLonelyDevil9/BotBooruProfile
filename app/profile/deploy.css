@@ -2143,7 +2143,7 @@ html body header[role="banner"] .ant-badge-dot {
 }
 
 /* Final transition polish: give the profile-to-card-browser break more room,
-   lighten the page wash, and preload full-art card images before hover. */
+   lighten the page wash, rebalance the profile panes, and keep card art sharp. */
 body {
   background:
     linear-gradient(180deg, oklch(0.018 0.01 48 / 0.62), oklch(0.014 0.008 48 / 0.82)),
@@ -2161,24 +2161,92 @@ html body .ld-bio {
   padding-bottom: calc(clamp(170px, 14vw, 280px) + env(safe-area-inset-bottom)) !important;
 }
 
+html body .ld-bio .ld-profile-grid {
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr) !important;
+  gap: clamp(28px, 3vw, 48px) !important;
+  align-items: start !important;
+}
+
+html body .ld-bio .ld-profile-column {
+  gap: clamp(20px, 2.1vw, 30px) !important;
+}
+
+@media (min-width: 1081px) {
+  html body .ld-bio .ld-profile-column:nth-child(2) {
+    padding-top: clamp(34px, 4.4vw, 76px) !important;
+  }
+}
+
+html body .ld-bio .ld-profile-column > .ld-art-card {
+  align-self: start !important;
+  min-height: clamp(340px, 31vw, 520px) !important;
+}
+
+html body .ld-bio .ld-profile-column > .ld-art-card img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: clamp(340px, 31vw, 520px) !important;
+  object-fit: cover !important;
+}
+
 @media (max-width: 720px) {
   html body .ld-bio {
     padding-bottom: calc(clamp(170px, 34vw, 230px) + env(safe-area-inset-bottom)) !important;
   }
 }
 
+@media (max-width: 1080px) {
+  html body .ld-bio .ld-profile-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  html body .ld-bio .ld-profile-column:nth-child(2) {
+    padding-top: 0 !important;
+  }
+}
+
+@media (max-width: 720px) {
+  html body .ld-bio .ld-profile-column > .ld-art-card,
+  html body .ld-bio .ld-profile-column > .ld-art-card img {
+    min-height: clamp(240px, 72vw, 340px) !important;
+  }
+}
+
 @media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child {
+    isolation: isolate !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child > div > div:first-child::before {
+    content: "";
+    position: absolute;
+    inset: -18px;
+    z-index: 0;
+    opacity: 0.58;
+    background-image: var(--ld-card-full-art);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(16px) saturate(1.12) brightness(0.9);
+    transform: scale(1.08);
+    pointer-events: none;
+  }
+
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child > div > div:first-child::after {
     content: "";
     position: absolute;
     inset: 0;
-    z-index: 0;
-    opacity: 0;
+    z-index: 1;
+    opacity: 1;
     background-image: var(--ld-card-full-art);
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: 1px 1px;
+    background-size: cover;
     pointer-events: none;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child img {
+    opacity: 0 !important;
   }
 
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"]:hover .card-main-body > .ant-col:first-child > div > div:first-child::after,
