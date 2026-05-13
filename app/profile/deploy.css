@@ -18,8 +18,8 @@
   --ld-radius: 12px;
   --ld-panel-pad: clamp(20px, 2vw, 30px);
   --ld-copy-max: 72ch;
-  --ld-card-preview-width: min(920px, calc(100vw - 32px));
-  --ld-card-preview-height: min(620px, calc(100vh - 112px));
+  --ld-card-preview-width: min(980px, calc(100vw - 32px));
+  --ld-card-preview-height: min(660px, calc(100vh - 96px));
   --ld-card-full-art: none;
   --ld-wallpaper: url("https://file.garden/aeRvgfxptRQB-dB-/_1%20Profile%20Background.png");
   --ld-font-body: 'Source Sans 3', 'Source Sans Pro', -apple-system, 'Segoe UI', system-ui, sans-serif;
@@ -2140,15 +2140,51 @@ html body header[role="banner"] .ant-badge-dot {
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .card-main-body {
     grid-template-columns: minmax(0, 62%) minmax(280px, 38%) !important;
   }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .custom-scroll,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .custom-scroll {
+    display: block !important;
+    max-height: calc((24px * 5) + (6px * 4) + 2px) !important;
+    padding: 1px 0 2px !important;
+    overflow: hidden !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .custom-scroll > .mt-2,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .custom-scroll > .mt-2 {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    grid-auto-rows: 24px !important;
+    align-items: stretch !important;
+    gap: 6px !important;
+    max-height: calc((24px * 5) + (6px * 4)) !important;
+    margin-top: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .custom-scroll span.cursor-pointer,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .custom-scroll span.cursor-pointer {
+    display: flex !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .custom-scroll .ant-tag,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .custom-scroll .ant-tag {
+    width: 100% !important;
+    min-height: 24px !important;
+    justify-content: center !important;
+    padding: 2px 5px 3px !important;
+  }
 }
 
 /* Final transition polish: give the profile-to-card-browser break more room,
    lighten the page wash, rebalance the profile panes, and keep card art sharp. */
 body {
   background:
-    linear-gradient(180deg, oklch(0.018 0.01 48 / 0.62), oklch(0.014 0.008 48 / 0.82)),
-    radial-gradient(circle at 15% 5%, oklch(0.72 0.18 49 / 0.07), transparent 32%),
-    radial-gradient(circle at 86% 10%, oklch(0.66 0.06 190 / 0.055), transparent 30%),
+    linear-gradient(180deg, oklch(0.02 0.01 48 / 0.44), oklch(0.016 0.008 48 / 0.68)),
+    radial-gradient(circle at 15% 5%, oklch(0.72 0.18 49 / 0.08), transparent 32%),
+    radial-gradient(circle at 86% 10%, oklch(0.66 0.06 190 / 0.065), transparent 30%),
     var(--ld-wallpaper),
     linear-gradient(180deg, oklch(0.045 0.012 48), var(--ld-bg) 22%, var(--ld-bg)) !important;
   background-position: center top, top left, top right, center top, center top !important;
@@ -2227,8 +2263,8 @@ html body .ld-bio .ld-profile-column > .ld-art-card img {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: blur(16px) saturate(1.12) brightness(0.9);
-    transform: scale(1.08);
+    filter: blur(4px) saturate(1.08) brightness(0.94);
+    transform: scale(1.025);
     pointer-events: none;
   }
 
