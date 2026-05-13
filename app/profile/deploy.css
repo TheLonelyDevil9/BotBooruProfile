@@ -18,8 +18,8 @@
   --ld-radius: 12px;
   --ld-panel-pad: clamp(20px, 2vw, 30px);
   --ld-copy-max: 72ch;
-  --ld-card-preview-width: min(980px, calc(100vw - 64px));
-  --ld-card-preview-height: min(760px, calc(100vh - 136px));
+  --ld-card-preview-width: min(920px, calc(100vw - 32px));
+  --ld-card-preview-height: min(620px, calc(100vh - 112px));
   --ld-card-full-art: none;
   --ld-wallpaper: url("https://file.garden/aeRvgfxptRQB-dB-/_1%20Profile%20Background.png");
   --ld-font-body: 'Source Sans 3', 'Source Sans Pro', -apple-system, 'Segoe UI', system-ui, sans-serif;
@@ -49,10 +49,14 @@ html {
   scroll-padding-top: 88px;
   scroll-padding-bottom: calc(96px + env(safe-area-inset-bottom));
   background: var(--ld-bg) !important;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body {
   overflow-x: hidden;
+  overflow-y: visible;
+  min-height: 100vh;
   color: var(--ld-text) !important;
   font-family: var(--ld-font-body) !important;
   background:
@@ -825,13 +829,13 @@ html body .ant-layout .ld-bio .ld-footer-link {
   line-height: 0;
   background: oklch(0.045 0.01 48 / 1) !important;
   text-decoration: none !important;
-  transition: border-color 160ms ease-out, transform 160ms ease-out;
+  transition: border-color 160ms ease-out, transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .ld-media-card:hover {
-  border-color: oklch(0.8 0.17 56 / 0.62);
-  box-shadow: 0 12px 32px oklch(0.025 0.012 48 / 0.4);
-  transform: translateY(-2px);
+  border-color: var(--ld-orange-hot);
+  box-shadow: 0 16px 48px oklch(0.025 0.012 48 / 0.5), 0 0 0 2px var(--ld-orange-hot), 0 0 24px oklch(0.72 0.18 49 / 0.4);
+  transform: translateY(-8px) scale(1.03);
 }
 
 .ld-media-card img {
@@ -840,6 +844,11 @@ html body .ant-layout .ld-bio .ld-footer-link {
   height: auto;
   background: oklch(0.045 0.01 48 / 1);
   vertical-align: bottom;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ld-media-card:hover img {
+  transform: scale(1.05);
 }
 
 #ld-top .ld-media-card,
@@ -1106,14 +1115,16 @@ html body .ant-col-lg-18 [role="tabpanel"] .ant-row:has(a.cursor-pointer[href*="
     box-shadow: var(--ld-shadow-soft) !important;
     color: var(--ld-text) !important;
     transform: none !important;
-    transition: border-color 160ms ease-out, box-shadow 160ms ease-out !important;
+    transition: border-color 160ms ease-out, box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), transform 200ms cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .char-card-class,
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .char-card-class {
     position: fixed !important;
-    top: calc(50% + 34px) !important;
-    left: 50% !important;
+    top: max(78px, calc((100vh - var(--ld-card-preview-height)) / 2 + 34px)) !important;
+    left: max(16px, calc((100vw - var(--ld-card-preview-width)) / 2)) !important;
+    right: auto !important;
+    bottom: auto !important;
     z-index: 1061 !important;
     width: var(--ld-card-preview-width) !important;
     height: var(--ld-card-preview-height) !important;
@@ -1124,7 +1135,7 @@ html body .ant-col-lg-18 [role="tabpanel"] .ant-row:has(a.cursor-pointer[href*="
     border-color: oklch(0.8 0.17 56 / 0.72) !important;
     box-shadow: 0 30px 90px oklch(0.025 0.012 48 / 0.76) !important;
     pointer-events: none !important;
-    transform: translate(-50%, -50%) !important;
+    transform: none !important;
     transform-origin: center center !important;
     animation: ld-card-preview-center-in 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
     transition: border-color 160ms ease-out, box-shadow 160ms ease-out !important;
@@ -1166,12 +1177,12 @@ html body .ant-col-lg-18 [role="tabpanel"] .ant-row:has(a.cursor-pointer[href*="
   @keyframes ld-card-preview-center-in {
     from {
       opacity: 0.98;
-      transform: translate(-50%, -50%) scale(0.985);
+      transform: scale(0.985);
     }
 
     to {
       opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
+      transform: scale(1);
     }
   }
 }
@@ -1263,6 +1274,7 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"
   object-fit: cover !important;
   object-position: center center !important;
   filter: saturate(1.06) brightness(1.05) contrast(1.02) !important;
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .card-main-body > .ant-col:nth-child(2) {
@@ -2101,5 +2113,78 @@ html body header[role="banner"] .ant-badge-dot {
     min-height: 50px !important;
     border-width: 2px !important;
     box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08) !important;
+  }
+}
+
+/* Card browser preview hard stop: keep popouts screen-pinned and inside the viewport. */
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .char-card-class,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .char-card-class {
+    position: fixed !important;
+    top: max(78px, calc((100vh - var(--ld-card-preview-height)) / 2 + 34px)) !important;
+    left: max(16px, calc((100vw - var(--ld-card-preview-width)) / 2)) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: var(--ld-card-preview-width) !important;
+    height: var(--ld-card-preview-height) !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: var(--ld-card-preview-width) !important;
+    max-height: var(--ld-card-preview-height) !important;
+    pointer-events: none !important;
+    transform: none !important;
+    transform-origin: center center !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .card-main-body,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .card-main-body {
+    grid-template-columns: minmax(0, 62%) minmax(280px, 38%) !important;
+  }
+}
+
+/* Final transition polish: give the profile-to-card-browser break more room,
+   lighten the page wash, and preload full-art card images before hover. */
+body {
+  background:
+    linear-gradient(180deg, oklch(0.018 0.01 48 / 0.62), oklch(0.014 0.008 48 / 0.82)),
+    radial-gradient(circle at 15% 5%, oklch(0.72 0.18 49 / 0.07), transparent 32%),
+    radial-gradient(circle at 86% 10%, oklch(0.66 0.06 190 / 0.055), transparent 30%),
+    var(--ld-wallpaper),
+    linear-gradient(180deg, oklch(0.045 0.012 48), var(--ld-bg) 22%, var(--ld-bg)) !important;
+  background-position: center top, top left, top right, center top, center top !important;
+  background-repeat: no-repeat !important;
+  background-size: cover, auto, auto, 100vw auto, auto !important;
+  background-attachment: scroll !important;
+}
+
+html body .ld-bio {
+  padding-bottom: calc(clamp(170px, 14vw, 280px) + env(safe-area-inset-bottom)) !important;
+}
+
+@media (max-width: 720px) {
+  html body .ld-bio {
+    padding-bottom: calc(clamp(170px, 34vw, 230px) + env(safe-area-inset-bottom)) !important;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child > div > div:first-child::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0;
+    background-image: var(--ld-card-full-art);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 1px 1px;
+    pointer-events: none;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"]:hover .card-main-body > .ant-col:first-child > div > div:first-child::after,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"]:focus-visible .card-main-body > .ant-col:first-child > div > div:first-child::after {
+    z-index: 2;
+    opacity: 1;
+    background-size: contain;
   }
 }

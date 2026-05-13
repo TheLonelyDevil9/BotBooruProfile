@@ -219,15 +219,6 @@ ${renderSimpleList(content.leftColumn.modelRecommendations.otherRecs).replace(/^
 
         <div class="ld-profile-column">
           <section class="ld-panel">
-            <h2>${formatInline(content.rightColumn.sizeProblem.title)}</h2>
-            <ul class="ld-list">
-${renderChildItems(content.rightColumn.sizeProblem.items)}
-            </ul>
-          </section>
-
-          <p class="ld-statement">${formatInline(content.rightColumn.statement)}</p>
-
-          <section class="ld-panel">
             <h2>${formatInline(content.rightColumn.recommendedReading.title)}</h2>
             <ul class="ld-list">
               <li>
