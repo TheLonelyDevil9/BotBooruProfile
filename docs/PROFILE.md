@@ -13,7 +13,7 @@ This project only maintains the Chub creator profile for `The_Lonely_Devil`.
    node build-profile-blob.js
    ```
 
-4. Vet visual changes on the real Chub page before treating them as done. Use Chrome DevTools MCP and Playwright together against `https://chub.ai/users/The_Lonely_Devil`.
+4. Vet visual changes on the real Chub page before treating them as done. Use Chrome DevTools MCP and Playwright together against `https://chub.ai/users/The_Lonely_Devil` for live visual/sanitizer/deployment checks.
 5. Publish `app/profile/paste-blob.html` into Chub's About Me field and verify the live page again.
 
 Local preview is useful for layout iteration, but it is not authoritative. Chub wraps the profile in Ant Design markup, injects sanitizer output, and applies its own cascade around the bio.
@@ -31,6 +31,8 @@ Local preview is useful for layout iteration, but it is not authoritative. Chub 
 - Prefer narrow selectors over global Ant Design overrides.
 - Keep the inline `<style>` nested inside the bio root.
 - Suppress Chub-injected `<spacer>` elements with CSS.
+- Keep Chub chrome overlays above profile layers. The final CSS should leave `.ld-bio`/main profile content low, keep the floating jump bar below the header, and only raise Chub dropdown/select/popover surfaces enough to win interaction.
+- Use spacer-safe selectors for layout targeting. Chub-injected `<spacer>` nodes can break raw `:nth-child()` assumptions, so final alignment rules should target real section classes, `:first-of-type`, or sibling `.ld-profile-column` relationships.
 - Record live Chub quirks and limitations in `docs/CHUB-PROFILE-QUIRKS.md`.
 
 ## Live Deployment Notes
@@ -38,6 +40,7 @@ Local preview is useful for layout iteration, but it is not authoritative. Chub 
 - A rebuilt `paste-blob.html` can still leave the live profile stale until it is saved through Chub.
 - If using Chub's gateway route, preserve the existing `name`, `profile`, `email`, and `preferred_language` account fields while updating `about_me`.
 - Verify live copy and CSS after save. Chub can reshape lists, inject `<spacer>`, and expose some visual labels through CSS pseudo-elements rather than normal text nodes.
+- The account dropdown and header search dropdown rely on final fixed-position fallbacks because Ant Design may compute portal geometry from a broken live height model. Re-check both after every About Me save.
 - For visual tuning, the preferred loop is live DOM patch, user judgment, source edit, rebuild, live deploy, live verification.
 
 ## Card Hover Previews
@@ -49,3 +52,14 @@ Local preview is useful for layout iteration, but it is not authoritative. Chub 
 ```
 
 The desktop hover rules in `deploy.css` use that image as the large preview art while preserving Chub's native title, chat count, tags, author/date, and visible stat ribbon.
+
+Current desktop previews are screen-pinned, pointer-passable inspection panels. The final source layer caps them at `min(1760px, calc(100vw - 32px))` by `min(940px, calc(100vh - 88px))`, reserves header clearance, and uses a wider art/details split of `68% / 32%`.
+
+## Current Header Popup Contract
+
+The final `deploy.css` layer keeps Chub's own portal surfaces above the profile without returning to max-int profile z-index values:
+
+- Account dropdowns matching `.ant-dropdown-placement-bottomRight` and containing the account menu links (`/profile`, `/my_characters`) are fixed at `top: 62px`, `right: 16px`, with a viewport-capped max height.
+- Header search dropdowns for `rc_select_2` and `rc_select_3` are fixed at `top: 60px`, `left: 74px`, with width capped to the viewport.
+- Dropdown/select/popover/submenu/tooltip surfaces use `z-index: 1300`; the header uses `1200`; card previews stay below at `920`.
+- Header descendant `z-index` values are reset to `auto` so old max-int profile overrides do not leak into Chub's controls.

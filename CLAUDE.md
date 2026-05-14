@@ -2,10 +2,12 @@
 
 Guidance for working in this repository.
 
+Follow the global AI-stack standards hub first: `C:\Users\TheLonelyDevil\.codex\AI_STACK_STANDARDS.md`. Workspace-only routing lives in `D:\AIStuff\AGENTS.md`.
+
 ## External North Stars
 
-- Project philosophy skill: `C:\Users\TheLonelyDevil\.claude\skills\agent-harness-pointers\SKILL.md`
-- Prompting guidance skill: `C:\Users\TheLonelyDevil\.claude\skills\llm-prompting-guide\SKILL.md`
+- Project philosophy: use the active `agent-harness-pointers` skill when the current runtime exposes it; otherwise apply the same repo-legibility, durable-guidance, small-feedback-loop principles directly.
+- Prompting guidance: use the active `llm-prompting-guide` skill for the current runtime.
 
 Use these as durable operating context before making project-wide changes, workflow changes, prompt changes, or repo guidance changes. Keep repository guidance concise and discoverable, then link to deeper sources instead of turning this file into a long manual.
 
@@ -54,9 +56,9 @@ Keep commits focused on the completed contribution. Do not include temporary scr
 
 ## Browser Checks
 
-Use Chrome DevTools MCP and Playwright together against the same live or preview URL. The usual shared Chrome endpoint is `http://127.0.0.1:9222` with stable Chrome at `C:/Program Files/Google/Chrome/Application/chrome.exe` and profile `C:/Users/TheLonelyDevil/AppData/Local/Codex/Chrome-Verification`.
+Use Chrome DevTools MCP and Playwright together against the same live or preview URL for high-risk visual, sanitizer, live-profile, or deployment checks. The usual shared Chrome endpoint is `http://127.0.0.1:9222` with stable Chrome at `C:/Program Files/Google/Chrome/Application/chrome.exe` and profile `C:/Users/TheLonelyDevil/AppData/Local/Codex/Chrome-Verification`.
 
-If either browser MCP cannot connect to the shared Chrome endpoint, treat that as a verification blocker unless the user explicitly accepts a fallback. Report the exact failure.
+For low-risk local edits, start with rebuild/static checks and escalate to the paired browser path when rendered Chub behavior matters. If a required browser tool cannot connect, report the exact failure and any fallback coverage.
 
 ## Chub Gotchas
 

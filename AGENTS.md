@@ -2,9 +2,11 @@
 
 OpenCode compatibility entrypoint for this Chub profile project.
 
+Follow the global AI-stack standards hub first: `C:\Users\TheLonelyDevil\.codex\AI_STACK_STANDARDS.md`. Workspace-only routing lives in `D:\AIStuff\AGENTS.md`.
+
 ## Operating North Stars
 
-- Before substantial project work, use the active `agent-harness-pointers` skill for the current runtime as the north star: keep the repo legible to agents, encode durable guidance in versioned docs/tooling, favor small verifiable feedback loops, and treat human attention as the scarce resource.
+- Before substantial project work, use the active `agent-harness-pointers` skill when the current runtime exposes it. If it is unavailable, use the same operating rule directly: keep the repo legible to agents, encode durable guidance in versioned docs/tooling, favor small verifiable feedback loops, and treat human attention as the scarce resource.
 - For prompts, agent instructions, or workflow shaping, use the active `llm-prompting-guide` skill for the current runtime as the prompting guide: be clear and direct, provide context and examples where useful, structure long inputs, and ask for explicit output formats.
 - Keep `D:\AIStuff\_MDs\References\Geechan's Desloppifier.md` and the active `geechan-desloppifier` skill for the current runtime in persistent mind as standing prose-quality filters: preserve the author's intent while avoiding dialogue echoing, negative parallelisms, tricolon abuse, superficial analyses, punchy fragment emphasis, em-dash overuse, thematic conclusions, verbose copulatives, inflated stakes, forced zeugmas, magic adverbs, ornate nouns, somatic cliches, poetic metaphor overuse, and crutch vocabulary.
 - Keep this file as a map, not a manual. Put project-specific details in `CLAUDE.md`, `docs/`, or source-adjacent notes when they need to persist.
@@ -20,7 +22,7 @@ Before changing profile HTML, CSS, copy, deployment snippets, or visual layout, 
 - The deploy artifact is `app/profile/paste-blob.html`.
 - For visual tuning, vet changes on the real Chub profile before committing them: patch the live `https://chub.ai/users/The_Lonely_Devil` DOM temporarily, let the user judge the actual Chub shell, then mirror the approved values into `app/profile/deploy.css` and rebuild `paste-blob.html`.
 - A rebuilt local blob is not a live deployment. After source changes are approved, persist `paste-blob.html` into Chub's About Me field and verify the live page. Keep the workflow and quirks in `docs/CHUB-PROFILE-QUIRKS.md` current.
-- For browser checks, use Chrome DevTools MCP and Playwright together against the same live or preview URL. If the shared CDP endpoint is unavailable, report the exact blocker before using a fallback.
+- For high-risk visual, live-profile, sanitizer, or deployment checks, use Chrome DevTools MCP and Playwright together against the same live or preview URL. For low-risk local edits, start with rebuild/static checks and escalate to the paired browser path when rendered Chub behavior matters. If a required browser tool is unavailable, report the blocker and any fallback coverage.
 
 ## Git History
 

@@ -53,5 +53,9 @@ Paste or publish `app/profile/paste-blob.html` into Chub's About Me field, then 
 - Keep custom classes prefixed with `ld-`.
 - Avoid broad Ant Design selectors unless the live page requires them.
 - Desktop card hover previews use each card's live `data.avatar` URL from the gateway-pulled Published JSON, keyed by `Published/project-ids.json`.
+- Keep profile/sidebar/floating layers below Chub's own header overlays. The final `deploy.css` layer intentionally uses a small z-index ladder instead of max-int values so the top-right account dropdown and search overlays remain clickable.
+- Chub/Ant can still calculate popup portals offscreen when the live page reports a viewport-sized `documentElement.scrollHeight` but a much taller `body.scrollHeight`. The final CSS includes fixed-position fallbacks for the top-right account menu and header search select dropdowns so visible popups stay onscreen.
+- Desktop card hover previews are intentionally large inspection panels, currently capped around `1760px` by `940px` while still leaving top clearance for Chub's header.
+- Chub inserts `<spacer>` elements into the pasted bio. Spacer-safe layout selectors should target real classes and element types, for example `section.ld-panel--compact:first-of-type` and sibling `.ld-profile-column` selectors, rather than relying on raw `:nth-child()` positions.
 - Keep `docs/CHUB-PROFILE-QUIRKS.md` current when live Chub behavior forces a workaround.
 - For visual tuning, patch the live Chub DOM first with Chrome DevTools MCP and Playwright, let the user judge the actual shell, then mirror the approved values into source and deploy.

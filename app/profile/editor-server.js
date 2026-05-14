@@ -6,7 +6,7 @@ const { buildCardPreviewCss } = require('./card-preview-css');
 const { buildDeployBio } = require('./profile-template');
 
 const rootDir = __dirname;
-const port = 4312;
+const port = Number(process.env.PORT || 4312);
 
 function sendJson(res, statusCode, payload) {
   res.writeHead(statusCode, { 'Content-Type': 'application/json; charset=utf-8' });
@@ -56,6 +56,10 @@ function serveFile(res, filePath, contentType) {
 const staticFiles = new Map([
   ['/preview.html', ['preview.html', 'text/html']],
   ['/paste-blob.html', ['paste-blob.html', 'text/html']],
+  ['/chub-shell.html', ['chub-shell.html', 'text/html']],
+  ['/chub-shell.css', ['chub-shell.css', 'text/css']],
+  ['/chub-shell.js', ['chub-shell.js', 'application/javascript']],
+  ['/mock-recovery.css', ['mock-recovery.css', 'text/css']],
 ]);
 
 const server = http.createServer((req, res) => {

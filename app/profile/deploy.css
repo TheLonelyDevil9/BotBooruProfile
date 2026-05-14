@@ -271,6 +271,137 @@ html body .ant-pagination .ant-pagination-next button {
   color: var(--ld-orange-hot) !important;
 }
 
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: fit-content !important;
+  max-width: calc(100vw - 32px) !important;
+  margin: clamp(16px, 2vw, 26px) auto !important;
+  padding: 8px 10px !important;
+  border: 1px solid var(--ld-border-soft) !important;
+  border-radius: 999px !important;
+  background:
+    linear-gradient(135deg, oklch(0.12 0.024 48 / 0.94), oklch(0.07 0.018 48 / 0.92)) !important;
+  box-shadow: var(--ld-shadow-soft) !important;
+  color: var(--ld-muted) !important;
+  font-family: var(--ld-font-ui) !important;
+}
+
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination li,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-options {
+  margin: 0 !important;
+}
+
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-total-text,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-options,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-options-quick-jumper {
+  color: var(--ld-muted) !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+}
+
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-item,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-prev,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-next,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-jump-prev,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-jump-next {
+  min-width: 34px !important;
+  height: 34px !important;
+  line-height: 34px !important;
+}
+
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-item,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-prev button,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-next button,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-prev .ant-pagination-item-link,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-next .ant-pagination-item-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 34px !important;
+  height: 34px !important;
+  border: 1px solid var(--ld-border-soft) !important;
+  border-radius: 11px !important;
+  background: oklch(0.085 0.018 48 / 0.94) !important;
+  box-shadow: inset 0 1px 0 oklch(0.96 0.01 72 / 0.06) !important;
+  color: var(--ld-orange-hot) !important;
+  font-weight: 800 !important;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease !important;
+}
+
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-item a,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-prev a,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-next a,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-jump-prev a,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-jump-next a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-item-active {
+  border-color: oklch(0.82 0.18 56 / 0.88) !important;
+  background: linear-gradient(135deg, var(--ld-orange-hot), var(--ld-orange)) !important;
+  box-shadow: 0 10px 24px oklch(0.72 0.18 49 / 0.22) !important;
+  color: oklch(0.13 0.03 48) !important;
+}
+
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-item-active a {
+  color: oklch(0.13 0.03 48) !important;
+}
+
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-item:not(.ant-pagination-item-active):hover,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-prev:not(.ant-pagination-disabled):hover button,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-next:not(.ant-pagination-disabled):hover button,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-prev:not(.ant-pagination-disabled):hover .ant-pagination-item-link,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-next:not(.ant-pagination-disabled):hover .ant-pagination-item-link {
+  border-color: var(--ld-border) !important;
+  background: oklch(0.16 0.04 48 / 0.96) !important;
+  color: var(--ld-orange-hot) !important;
+  transform: translateY(-1px) !important;
+}
+
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-disabled,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-disabled button,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-disabled .ant-pagination-item-link {
+  cursor: not-allowed !important;
+  opacity: 0.45 !important;
+}
+
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-options .ant-select-selector,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-options-quick-jumper input {
+  min-height: 34px !important;
+  border-color: var(--ld-border-soft) !important;
+  border-radius: 11px !important;
+  background: oklch(0.085 0.018 48 / 0.94) !important;
+  color: var(--ld-text) !important;
+  box-shadow: inset 0 1px 0 oklch(0.96 0.01 72 / 0.06) !important;
+}
+
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-options .ant-select-selection-item,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-options .ant-select-arrow,
+html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-options-quick-jumper input::placeholder {
+  color: var(--ld-muted) !important;
+}
+
+@media (max-width: 720px) {
+  html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination {
+    width: 100% !important;
+    border-radius: 18px !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] .ant-pagination .ant-pagination-options {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+}
+
 .ld-bio {
   position: relative;
   z-index: 1;
@@ -2297,5 +2428,252 @@ html body .ld-bio .ld-profile-column > .ld-art-card img {
     opacity: 0.45;
     filter: blur(0.5px) saturate(1.04) brightness(1);
     transform: scale(1.004);
+  }
+}
+
+/* Final Chub chrome interaction fix: keep the profile art/card layers below
+   Chub's header overlays, and give desktop card previews more inspection room. */
+html body .ant-col-lg-18,
+html body .ant-col-lg-18 .ld-bio,
+html body .ld-bio {
+  position: relative !important;
+  z-index: 1 !important;
+  isolation: isolate !important;
+}
+
+html body .ant-col-lg-6 {
+  position: relative !important;
+  z-index: 40 !important;
+  isolation: isolate !important;
+}
+
+html body .ant-col-lg-6 > .text-sm {
+  z-index: 42 !important;
+}
+
+html body .ant-col-lg-6 > button.ant-btn.ant-btn-default.ant-btn-color-default.ant-btn-variant-outlined {
+  z-index: 43 !important;
+  pointer-events: auto !important;
+}
+
+html body .ld-bio .ld-float-nav,
+html body .ld-float-nav {
+  z-index: 80 !important;
+  pointer-events: none !important;
+}
+
+html body .ld-bio .ld-float-link,
+html body .ld-float-link {
+  z-index: 81 !important;
+  pointer-events: auto !important;
+}
+
+html body .ant-layout-header,
+html body header[role="banner"] {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1200 !important;
+  isolation: isolate !important;
+  pointer-events: auto !important;
+}
+
+html body .ant-layout-header :is(a, button, input, textarea, select, [role="button"], [role="combobox"], .ant-select, .ant-select-selector, .ant-menu, .ant-menu-item, .ant-menu-submenu, .ant-avatar, .ant-dropdown-trigger),
+html body header[role="banner"] :is(a, button, input, textarea, select, [role="button"], [role="combobox"], .ant-select, .ant-select-selector, .ant-menu, .ant-menu-item, .ant-menu-submenu, .ant-avatar, .ant-dropdown-trigger) {
+  pointer-events: auto !important;
+}
+
+html body .ant-dropdown:not(.ant-dropdown-hidden),
+html body .ant-select-dropdown:not(.ant-select-dropdown-hidden),
+html body .ant-popover,
+html body .ant-menu-submenu-popup,
+html body .ant-tooltip {
+  z-index: 1300 !important;
+  pointer-events: auto !important;
+}
+
+html body .ant-dropdown:not(.ant-dropdown-hidden) *,
+html body .ant-select-dropdown:not(.ant-select-dropdown-hidden) *,
+html body .ant-popover *,
+html body .ant-menu-submenu-popup *,
+html body .ant-tooltip * {
+  pointer-events: auto !important;
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .char-card-class,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .char-card-class {
+    --ld-card-preview-width: min(1420px, calc(100vw - 144px));
+    --ld-card-preview-height: min(765px, calc(100vh - 160px));
+    position: fixed !important;
+    top: max(72px, calc((100vh - var(--ld-card-preview-height)) / 2 + 12px)) !important;
+    left: max(72px, calc((100vw - var(--ld-card-preview-width)) / 2)) !important;
+    right: auto !important;
+    bottom: auto !important;
+    z-index: 920 !important;
+    width: var(--ld-card-preview-width) !important;
+    height: var(--ld-card-preview-height) !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: var(--ld-card-preview-width) !important;
+    max-height: var(--ld-card-preview-height) !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+    transform: none !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .card-main-body,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .card-main-body {
+    grid-template-columns: minmax(0, 68%) minmax(320px, 32%) !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .custom-scroll,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .custom-scroll,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .custom-scroll > .mt-2,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .custom-scroll > .mt-2 {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: flex-start !important;
+    align-content: flex-start !important;
+    gap: 6px !important;
+    max-height: 126px !important;
+    overflow: hidden !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .custom-scroll span.cursor-pointer,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .custom-scroll span.cursor-pointer {
+    flex: 0 1 auto !important;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .custom-scroll .ant-tag,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .custom-scroll .ant-tag {
+    width: auto !important;
+    max-width: 100% !important;
+    min-height: 24px !important;
+    padding: 2px 7px 3px !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+}
+
+/* Final Chub portal and spacer-safe alignment fix: keep Ant popups onscreen
+   after the profile style, and target real panels instead of sanitizer spacers. */
+html body .ant-layout-header,
+html body header[role="banner"] {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1200 !important;
+  isolation: isolate !important;
+  pointer-events: auto !important;
+}
+
+html body .ant-layout-header *,
+html body header[role="banner"] * {
+  z-index: auto !important;
+  pointer-events: auto !important;
+}
+
+html body .ant-layout-header :is(a, button, input, textarea, select, [role="button"], [role="combobox"], .ant-select, .ant-select-selector, .ant-menu, .ant-menu-item, .ant-menu-submenu, .ant-avatar, .ant-dropdown-trigger),
+html body header[role="banner"] :is(a, button, input, textarea, select, [role="button"], [role="combobox"], .ant-select, .ant-select-selector, .ant-menu, .ant-menu-item, .ant-menu-submenu, .ant-avatar, .ant-dropdown-trigger) {
+  pointer-events: auto !important;
+}
+
+html body .ant-dropdown:not(.ant-dropdown-hidden),
+html body .ant-select-dropdown:not(.ant-select-dropdown-hidden),
+html body .ant-popover,
+html body .ant-menu-submenu-popup,
+html body .ant-tooltip {
+  z-index: 1300 !important;
+  pointer-events: auto !important;
+}
+
+html body .ant-dropdown:not(.ant-dropdown-hidden) *,
+html body .ant-select-dropdown:not(.ant-select-dropdown-hidden) *,
+html body .ant-popover *,
+html body .ant-menu-submenu-popup *,
+html body .ant-tooltip * {
+  pointer-events: auto !important;
+}
+
+html body .ant-dropdown:not(.ant-dropdown-hidden).ant-dropdown-placement-bottomRight:has(a[href="/profile"]):has(a[href="/my_characters"]),
+html body .ant-dropdown:not(.ant-dropdown-hidden)[class*="ant-dropdown-placement-bottomRight"]:has(a[href="/profile"]):has(a[href="/my_characters"]) {
+  position: fixed !important;
+  top: 62px !important;
+  right: 16px !important;
+  bottom: auto !important;
+  left: auto !important;
+  inset: 62px 16px auto auto !important;
+  max-height: min(620px, calc(100vh - 78px)) !important;
+  overflow: auto !important;
+  z-index: 1300 !important;
+  pointer-events: auto !important;
+  transform: none !important;
+}
+
+html body .ant-select-dropdown:not(.ant-select-dropdown-hidden):has([id="rc_select_2_list"]),
+html body .ant-select-dropdown:not(.ant-select-dropdown-hidden):has([id^="rc_select_2_"]),
+html body .ant-select-dropdown:not(.ant-select-dropdown-hidden)[id*="rc_select_2"],
+html body .ant-select-dropdown:not(.ant-select-dropdown-hidden):has([id="rc_select_3_list"]),
+html body .ant-select-dropdown:not(.ant-select-dropdown-hidden):has([id^="rc_select_3_"]),
+html body .ant-select-dropdown:not(.ant-select-dropdown-hidden)[id*="rc_select_3"] {
+  position: fixed !important;
+  top: 60px !important;
+  left: 74px !important;
+  right: auto !important;
+  bottom: auto !important;
+  inset: 60px auto auto 74px !important;
+  width: min(768px, calc(100vw - 96px)) !important;
+  max-width: calc(100vw - 96px) !important;
+  max-height: min(620px, calc(100vh - 76px)) !important;
+  overflow: auto !important;
+  transform: none !important;
+}
+
+html body .ld-bio .ld-hero-info-grid > section.ld-panel--compact:first-of-type {
+  display: flex !important;
+  min-height: 230px !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+html body .ld-bio .ld-hero-info-grid > section.ld-panel--compact:first-of-type h2 {
+  width: 100% !important;
+  text-align: center !important;
+}
+
+html body .ld-bio .ld-hero-info-grid > section.ld-panel--compact:first-of-type .ld-footer-link {
+  width: min(100%, 560px) !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+html body .ld-bio .ld-hero-info-grid > section.ld-panel--compact:first-of-type .ld-footer-link a {
+  font-size: clamp(1.08rem, 1rem + 0.28vw, 1.24rem) !important;
+  font-weight: 900 !important;
+  line-height: 1.18 !important;
+}
+
+html body .ld-bio .ld-hero-info-grid > section.ld-panel--compact:first-of-type .ld-footer-subtext {
+  font-size: clamp(0.98rem, 0.94rem + 0.14vw, 1.08rem) !important;
+  line-height: 1.42 !important;
+}
+
+html body .ld-bio .ld-profile-grid > .ld-profile-column {
+  padding-top: 0 !important;
+}
+
+@media (min-width: 1081px) {
+  html body .ld-bio .ld-profile-grid > .ld-profile-column ~ .ld-profile-column {
+    padding-top: clamp(34px, 4.4vw, 76px) !important;
+  }
+}
+
+@media (max-width: 1080px) {
+  html body .ld-bio .ld-profile-grid > .ld-profile-column,
+  html body .ld-bio .ld-profile-grid > .ld-profile-column ~ .ld-profile-column {
+    padding-top: 0 !important;
   }
 }

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chub Profile Shell Mockup</title>
+  <link rel="stylesheet" href="/chub-shell.css">
+</head>
+<body>
+  <div id="root">
+    <div class="ant-layout css-625x50">
+      <header class="ant-layout-header css-625x50" role="banner">
+        <ul class="ant-menu-overflow ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark css-625x50" role="menu">
+          <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child no-padding ml-0 pl-0 mr-2" role="menuitem">
+            <span class="ant-menu-title-content">
+              <a href="/" aria-label="logo"><img class="ld-shell-logo" src="https://chub.ai/logo.png" alt=""></a>
+            </span>
+          </li>
+          <li class="ant-menu-overflow-item ant-menu-submenu ant-menu-submenu-horizontal" role="none">
+            <div class="ant-menu-submenu-title" role="menuitem" aria-haspopup="true">Create +</div>
+          </li>
+          <li class="ld-shell-search-slot" role="none">
+            <div class="no-arrow no-vertical-anything">
+              <div class="ant-select ant-select-outlined need-spacer no-show-search css-625x50 ant-select-multiple ant-select-show-arrow ant-select-show-search" data-shell-search>
+                <div class="ant-select-selector">
+                  <span class="ant-select-selection-wrap">
+                    <div class="ant-select-selection-overflow">
+                      <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix">
+                        <div class="ant-select-selection-search">
+                          <input class="ant-select-selection-search-input" id="rc_select_2" role="combobox" aria-controls="rc_select_2_list" aria-expanded="false" aria-haspopup="listbox" autocomplete="off" placeholder="Search for...">
+                          <span class="ant-select-selection-search-mirror">&nbsp;</span>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="ant-select-selection-placeholder">Search for...</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child no-padding notifications h-full" role="menuitem">
+            <span class="ant-menu-title-content"><span class="ld-shell-bell" aria-label="notifications">!</span></span>
+          </li>
+          <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child no-padding pr-0 mr-0" role="menuitem">
+            <span class="ant-menu-title-content">
+              <span class="ant-avatar ant-avatar-lg ant-avatar-circle ant-avatar-image ant-dropdown-trigger css-625x50" tabindex="0" data-shell-avatar>
+                <img src="https://file.garden/aeRvgfxptRQB-dB-/Firefly%20Spring%20Missive.png" alt="">
+              </span>
+            </span>
+          </li>
+        </ul>
+      </header>
+
+      <main class="ant-layout-content">
+        <div class="ant-row css-625x50 ld-shell-profile-row">
+          <aside class="ant-col ant-col-lg-6 css-625x50">
+            <div class="text-sm"><span class="mr-4">555 Followers, 6 Following</span><button class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined">Unfollow</button></div>
+            <button class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined">Nominate...</button>
+          </aside>
+          <section class="ant-col ant-col-lg-18 css-625x50">
+            <div id="profile-mount" aria-live="polite">Loading profile...</div>
+            <section class="ld-shell-tabs ant-tabs css-625x50">
+              <div class="ant-tabs-nav">
+                <div class="ant-tabs-nav-wrap">
+                  <div class="ant-tabs-tab ant-tabs-tab-active"><button class="ant-tabs-tab-btn" id="rc-tabs-0-tab-characters">Characters</button></div>
+                  <div class="ant-tabs-tab"><button class="ant-tabs-tab-btn">Lorebooks</button></div>
+                  <div class="ant-tabs-tab"><button class="ant-tabs-tab-btn">Presets</button></div>
+                </div>
+              </div>
+              <div class="ant-tabs-content-holder">
+                <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-labelledby="rc-tabs-0-tab-characters">
+                  <div class="ld-shell-controls">
+                    <div class="ant-select ant-select-outlined css-625x50"><div class="ant-select-selector">Creation Time</div></div>
+                    <input class="ant-input css-625x50" type="search" placeholder="Search..." value="Firefly">
+                    <div class="ant-select ant-select-outlined css-625x50"><div class="ant-select-selector">Includes Tags</div></div>
+                    <p><strong>76</strong> results</p>
+                  </div>
+                  <div id="chara-list" class="ant-row css-625x50 character-list-container"></div>
+                </div>
+              </div>
+            </section>
+          </section>
+        </div>
+      </main>
+
+      <footer class="ant-layout-footer">
+        <a href="https://docs.chub.ai/">docs</a>
+        <a href="https://chub.ai/status">System Status</a>
+        <a href="https://chub.ai/tos">TOS</a>
+      </footer>
+    </div>
+  </div>
+
+  <div class="ant-dropdown ant-dropdown-hidden css-625x50 ant-dropdown-placement-bottomRight" data-shell-profile-menu>
+    <ul class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical" role="menu">
+      <li class="ant-dropdown-menu-item" role="menuitem"><a href="/profile">Profile</a></li>
+      <li class="ant-dropdown-menu-item" role="menuitem"><a href="/create_character">Create Character</a></li>
+      <li class="ant-dropdown-menu-item" role="menuitem"><a href="/create_lorebook">Create Lorebook</a></li>
+      <li class="ant-dropdown-menu-item" role="menuitem"><a href="/imagine">Imagine</a></li>
+      <li class="ant-dropdown-menu-item" role="menuitem"><a href="/my_characters">My Characters</a></li>
+      <li class="ant-dropdown-menu-item" role="menuitem"><a href="/my_lorebooks">My Lorebooks</a></li>
+      <li class="ant-dropdown-menu-item" role="menuitem"><a href="/favorites">My Favorites</a></li>
+      <li class="ant-dropdown-menu-item" role="menuitem"><a href="/my_chats">My Chats</a></li>
+      <li class="ant-dropdown-menu-item" role="menuitem"><a href="/my_presets">My Presets</a></li>
+      <li class="ant-dropdown-menu-item" role="menuitem"><a href="/my_stages">My Stages</a></li>
+      <li class="ant-dropdown-menu-item" role="menuitem"><a href="/subscription">Subscription</a></li>
+      <li class="ant-dropdown-menu-item" role="menuitem"><a href="/blocks">Blocks</a></li>
+      <li class="ant-dropdown-menu-item" role="menuitem"><button type="button">Logout</button></li>
+    </ul>
+  </div>
+
+  <div class="ant-select-dropdown ant-select-dropdown-hidden css-625x50 ant-select-dropdown-placement-bottomLeft" data-shell-search-menu>
+    <div id="rc_select_2_list" role="listbox">
+      <a class="ld-shell-search-result" href="/characters/The_Lonely_Devil/firefly-acbe9d8b183b">
+        <img src="https://avatars.charhub.io/avatars/The_Lonely_Devil/firefly-acbe9d8b183b/avatar.webp" alt="">
+        <span><strong>Firefly</strong><small>The_Lonely_Devil</small></span>
+      </a>
+      <a class="ld-shell-search-result" href="/search?search=Firefly">
+        <span><strong>Search all Chub for Firefly</strong><small>Global route check</small></span>
+      </a>
+    </div>
+  </div>
+
+  <script src="/chub-shell.js"></script>
+</body>
+</html>

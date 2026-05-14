@@ -73,6 +73,7 @@ After a save, reload `https://chub.ai/users/The_Lonely_Devil` and inspect the li
 - Profile CSS can affect Chub's surrounding page, not only the bio. Keep selectors narrow and scoped where possible.
 - Custom profile classes use the `ld-` prefix.
 - Broad Ant Design selectors are risky. Prefer Chub-facing selectors scoped under `.ant-col-lg-18 [role="tabpanel"]` when touching the card browser.
+- Chub-injected `<spacer>` elements count for raw child-position selectors even when hidden. Avoid important layout fixes that depend on `.ld-profile-column:nth-child(2)` or `.ld-hero-info-grid > .ld-panel:first-child` unless there is a later spacer-safe override. Prefer real element/class relationships such as `section.ld-panel--compact:first-of-type` or `.ld-profile-column ~ .ld-profile-column`.
 - Chub card markup is Ant Design based and can shift. The profile currently targets:
   - `.ant-col-lg-18 [role="tabpanel"]`
   - `.ant-list-items`
@@ -110,7 +111,35 @@ These were verified live on 2026-05-10 and should remain at the end of `deploy.c
   - `html body .ld-bio .ld-panel--disclaimers > li:last-of-type`
 - Live verification target for the feet-line spacing was `margin-top: 28px` at the inspected desktop viewport.
 - The hover hint text is expected to be orange. If text search misses it, check pseudo-element content before assuming the change failed.
-- The profile's floating jump bar should sit above profile/card content, but Chub's own mobile bottom controls must still win the absolute top layer. The final floating-control block keeps the jump bar at `2147483000`, lifts Chub mobile chrome selectors to `2147483647`, and offsets the jump bar above the bottom nav on mobile.
+- The profile's floating jump bar should sit above profile/card content, but Chub's own header, dropdowns, search overlays, and mobile bottom controls must still win the interaction layer. Older recovered blocks may still contain max-int values such as `2147483000` and `2147483647`; the current final block must supersede them with a lower z-index ladder so profile layers do not compete with Chub chrome.
+
+## Current Chrome Layer Contract
+
+The final source block is named:
+`Final Chub chrome interaction fix: keep the profile art/card layers below Chub's header overlays, and give desktop card previews more inspection room.`
+
+Keep it after older chrome/card-browser blocks in `deploy.css`. It is intentionally not max-int based:
+
+- Main profile/bio area: `z-index: 1`.
+- Sidebar column: `z-index: 40`.
+- Follower/follow controls: `z-index: 42` and `43`.
+- Floating profile/cards jump bar: `z-index: 80`; individual links: `81`.
+- Enlarged card preview: `z-index: 920`.
+- Chub header/banner: `z-index: 1200`.
+- Chub dropdown, select dropdown, popover, submenu, and tooltip surfaces: `z-index: 1300`.
+
+The goal is to keep profile content visually layered while restoring Chub's top-right account dropdown and search dropdown interaction. If either dropdown opens but cannot be clicked, inspect `elementFromPoint`, computed `z-index`, and `pointer-events` at the menu item coordinates before raising any profile layer.
+
+## Current Ant Portal Placement Contract
+
+Live inspection on 2026-05-14 showed that the Chub shell can report `document.documentElement.scrollHeight` as roughly the viewport height while `document.body.scrollHeight` remains the full long profile height. Ant Design popup placement then used offscreen inline geometry:
+
+- Account dropdown: `.ant-dropdown-placement-bottomRight` existed, but had inline `inset: -9090px 16px auto auto` and rendered offscreen until a final fixed-position fallback was injected after the profile style.
+- Header search dropdown: `.ant-select-dropdown-placement-bottomLeft` could keep inline `left: -19200px` / negative inset values. A generic `top` fix was not enough; the source fallback must also set `left`, `right`, and `inset`.
+- Chub's header search currently exposes `rc_select_2` and `rc_select_3` controls. The source fallback targets visible dropdowns containing those IDs and pins them at `top: 60px`, `left: 74px`, `width: min(768px, calc(100vw - 96px))`.
+- The account menu fallback pins visible bottom-right dropdowns at `top: 62px`, `right: 16px`, and `max-height: min(620px, calc(100vh - 78px))`. It is scoped to the account menu shape with `/profile` and `/my_characters` links so ordinary card/context dropdowns are not forced into the avatar menu position.
+
+The live-proven test injected the fallback after the pasted profile style. In source, keep the final fallback after older recovered max-int blocks so it wins the cascade.
 
 ## Card Browser Grid
 
@@ -223,7 +252,9 @@ These were verified live on 2026-05-10 and should remain at the end of `deploy.c
 - Check that the preview does not block mouse travel to nearby cards.
 - Check that normal-card tags have clean borders and are not shaved by the tag rail.
 - Check that generated `--ld-card-full-art` rules exist for the expected card count.
-- Use Chrome DevTools MCP and Playwright together against the same live or preview URL. If either cannot connect to the shared Chrome endpoint, report the exact blocker unless the user explicitly accepts a fallback.
+- Check that the account menu appears onscreen near the top-right and that `elementFromPoint` over the first menu item hits the menu link, not the profile body.
+- Check that the header search dropdown appears onscreen near `left:74px/top:60px` and that the visible options are clickable.
+- Use Chrome DevTools MCP and Playwright together against the same live or preview URL for live visual/sanitizer/deployment checks. If a required browser tool cannot connect to the shared Chrome endpoint, report the exact blocker and any fallback coverage.
 
 ## Known Failure Signatures
 
@@ -242,15 +273,18 @@ These were verified live on 2026-05-10 and should remain at the end of `deploy.c
 - **Normal tags have shaved borders/text**: `.custom-scroll`, `.custom-scroll > .mt-2`, or `.ant-tag` are clipping with too-small line-height. Restore the final tag anti-clip rules.
 - **Tags sit directly under the tagline**: the right card data column lost its bottom-aligned flex layout. The tags and creator line should live in the lower metadata group, visually aligned near the bottom of the normal card.
 - **Profile images open in the same tab**: confirm the live pasted markup contains `target="_blank"`. If it does, Chub may be intercepting anchor clicks at the SPA layer.
+- **Account dropdown exists but is invisible**: inspect `.ant-dropdown-placement-bottomRight` for negative inline `inset` or `top` values such as `-9090px`. The final fixed-position fallback must be after the pasted profile style, scoped to the account menu links, and should compute to `position: fixed`, `top: 62px`, `right: 16px`.
+- **Search dropdown focus works but options are offscreen**: inspect `.ant-select-dropdown-placement-bottomLeft` for `left: -19200px` or a negative inset. The final search fallback must set `position: fixed`, `top: 60px`, `left: 74px`, `right: auto`, and `inset: 60px auto auto 74px`.
+- **Hero request card or profile columns look offset after save**: Chub's hidden `<spacer>` nodes likely shifted an old `:nth-child()` selector. Add a final spacer-safe override using real classes or sibling selectors instead of child index assumptions.
 
 ## Static Checks
 
 Run these after rebuilding:
 
 ```bash
-cd /mnt/d/AIStuff/ChubProfile
+cd /d/AIStuff/ChubProfile
 rg -n 'role="tabpanel"\]:(is|has)' app/profile/paste-blob.html
-rg -n 'Card browser hard stop v2|Card browser enhancement|Card browser approach lanes|position: fixed|pointer-events: none|font-variant-numeric: tabular-nums|--ld-card-preview-zoom-width' app/profile/deploy.css app/profile/paste-blob.html
+rg -n 'Card browser hard stop v2|Card browser enhancement|Card browser approach lanes|Final Chub chrome interaction fix|Final Chub portal and spacer-safe alignment fix|position: fixed|pointer-events: none|font-variant-numeric: tabular-nums|z-index: 1300|1760px|940px|rc_select_2|rc_select_3|62px 16px auto auto|60px auto auto 74px' app/profile/deploy.css app/profile/paste-blob.html
 rg -n 'cursor: zoom|background-size: auto 132%|background-size: auto 168%|transition: background-size' app/profile/deploy.css app/profile/paste-blob.html
 rg -n 'post-school-Fly' app/profile/profile-content.json app/profile/deploy-bio.html app/profile/paste-blob.html
 rg -n 'Why, yes, I like feet\\.\\.\\. How could you tell\\?|Wow, I just needed some motivation|Geechan.s Universal Roleplay Prompt|Opus 4\\.7/4\\.6 Max|Hover over any card' app/profile/profile-content.json app/profile/paste-blob.html
@@ -260,7 +294,7 @@ rg -n 'html body \\.ld-bio \\.ld-panel--disclaimers|html body \\.ant-col-lg-6 > 
 Expected:
 
 - The first command should produce no matches.
-- The second command should find the final hard-stop, enhancement, and approach-lane card blocks.
+- The second command should find the final hard-stop, enhancement, approach-lane, Chub chrome/preview, and portal/alignment blocks.
 - The third command should produce no matches; CSS-only art hover zoom is intentionally removed.
 - The fourth command should produce no matches; the intended label is `Post-school-Fly`.
 - The fifth command should find the approved live copy.
@@ -287,8 +321,8 @@ Expected:
 - It raises desktop grid minima to reduce cramped columns at 120% zoom, currently `500px` and `540px` for `max-width:1500px`.
 - It gives normal stat pills non-shrinking width and tabular numbers.
 - It turns hover previews into fixed, screen-pinned panels with top/header clearance and explicit side/bottom insets.
-- The enhancement layer increases the popout to roughly `1760px` by `920px`, constrained to the current viewport.
-- The enhancement layer shifts preview layout toward the art, currently `70% / 30%` on wide desktop.
+- The latest final chrome/preview layer increases the popout to roughly `1760px` by `940px`, constrained to the current viewport.
+- The latest final chrome/preview layer shifts preview layout toward the art, currently `68% / 32%` on wide desktop.
 - The enhancement layer does not add inner art zoom. It preserves one contained sharp full-art image.
 - The approach-lane layer makes normal cards more compact, widens grid gaps, and makes the fixed hover panel pass pointer events through to the card grid.
 - The approach-lane layer also restores enough vertical room for tag pills so their borders do not clip.
@@ -297,3 +331,4 @@ Expected:
 - It neutralizes transform/contain/filter/will-change on known card-list ancestors because those can trap fixed positioning.
 - It disables the blurred side pseudo-element for preview art.
 - It leaves generated `--ld-card-full-art` declarations after the block, which is safe because those rules only set a CSS variable per card.
+- It keeps the enlarged preview below Chub header/dropdown layers so account/search chrome can still win clicks.
