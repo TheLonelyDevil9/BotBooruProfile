@@ -2308,6 +2308,16 @@ html body .ant-tooltip * {
   }
 }
 
+/* Badge overlap fix: scope the footer into a z-index 0 stacking context so the
+   card preview (inside .ant-col-lg-18 at z-index 1) paints above app-store
+   badges that have inline z-index 10.  Desktop hover only. */
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  html body footer.ant-layout-footer {
+    position: relative !important;
+    z-index: 0 !important;
+  }
+}
+
 /* Final Chub portal and spacer-safe alignment fix: keep Ant popups onscreen
    after the profile style, and target real panels instead of sanitizer spacers. */
 html body .ant-layout-header,
