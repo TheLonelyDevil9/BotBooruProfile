@@ -126,7 +126,7 @@ Keep it after older chrome/card-browser blocks in `deploy.css`. It is intentiona
 - Floating profile/cards jump bar: `z-index: 80`; individual links: `81`.
 - Enlarged card preview: `z-index: 920`.
 - Chub header/banner: `z-index: 1200`.
-- Chub dropdown, select dropdown, popover, submenu, and tooltip surfaces: `z-index: 1300`.
+- Visible Chub dropdown, select dropdown, popover, submenu, and tooltip portal surfaces: `z-index: 2147483647`.
 
 The goal is to keep profile content visually layered while restoring Chub's top-right account dropdown and search dropdown interaction. If either dropdown opens but cannot be clicked, inspect `elementFromPoint`, computed `z-index`, and `pointer-events` at the menu item coordinates before raising any profile layer.
 
@@ -137,7 +137,7 @@ Live inspection on 2026-05-14 showed that the Chub shell can report `document.do
 - Account dropdown: `.ant-dropdown-placement-bottomRight` existed, but had inline `inset: -9090px 16px auto auto` and rendered offscreen until a final fixed-position fallback was injected after the profile style.
 - Header search dropdown: `.ant-select-dropdown-placement-bottomLeft` could keep inline `left: -19200px` / negative inset values. A generic `top` fix was not enough; the source fallback must also set `left`, `right`, and `inset`.
 - Chub's header search currently exposes `rc_select_2` and `rc_select_3` controls. The source fallback targets visible dropdowns containing those IDs and pins them at `top: 60px`, `left: 74px`, `width: min(768px, calc(100vw - 96px))`.
-- The account menu fallback pins visible bottom-right dropdowns at `top: 62px`, `right: 16px`, and `max-height: min(620px, calc(100vh - 78px))`. It is scoped to the account menu shape with `/profile` and `/my_characters` links so ordinary card/context dropdowns are not forced into the avatar menu position.
+- The account menu fallback pins visible bottom-right dropdowns at `top: 62px`, `right: 16px`, and `max-height: min(620px, calc(100vh - 78px))`. It is scoped to current account-menu links such as `/profile`, `/create_character`, `/create_lorebook`, `/my_characters`, and `/my_chats` so ordinary card/context dropdowns are not forced into the avatar menu position.
 
 The live-proven test injected the fallback after the pasted profile style. In source, keep the final fallback after older recovered max-int blocks so it wins the cascade.
 
@@ -284,7 +284,7 @@ Run these after rebuilding:
 ```bash
 cd /d/AIStuff/ChubProfile
 rg -n 'role="tabpanel"\]:(is|has)' app/profile/paste-blob.html
-rg -n 'Card browser hard stop v2|Card browser enhancement|Card browser approach lanes|Final Chub chrome interaction fix|Final Chub portal and spacer-safe alignment fix|position: fixed|pointer-events: none|font-variant-numeric: tabular-nums|z-index: 1300|1760px|940px|rc_select_2|rc_select_3|62px 16px auto auto|60px auto auto 74px' app/profile/deploy.css app/profile/paste-blob.html
+rg -n 'Card browser hard stop v2|Card browser enhancement|Card browser approach lanes|Final Chub chrome interaction fix|Final Chub portal and spacer-safe alignment fix|Final open-popup top layer|position: fixed|pointer-events: none|font-variant-numeric: tabular-nums|z-index: 2147483647|1760px|940px|rc_select_2|rc_select_3|62px 16px auto auto|60px auto auto 74px' app/profile/deploy.css app/profile/paste-blob.html
 rg -n 'cursor: zoom|background-size: auto 132%|background-size: auto 168%|transition: background-size' app/profile/deploy.css app/profile/paste-blob.html
 rg -n 'post-school-Fly' app/profile/profile-content.json app/profile/deploy-bio.html app/profile/paste-blob.html
 rg -n 'Why, yes, I like feet\\.\\.\\. How could you tell\\?|Wow, I just needed some motivation|Geechan.s Universal Roleplay Prompt|Opus 4\\.7/4\\.6 Max|Hover over any card' app/profile/profile-content.json app/profile/paste-blob.html

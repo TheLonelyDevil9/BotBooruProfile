@@ -2238,7 +2238,7 @@ html body .ant-select-dropdown:not(.ant-select-dropdown-hidden),
 html body .ant-popover,
 html body .ant-menu-submenu-popup,
 html body .ant-tooltip {
-  z-index: 1300 !important;
+  z-index: 2147483647 !important;
   pointer-events: auto !important;
 }
 
@@ -2335,7 +2335,7 @@ html body .ant-select-dropdown:not(.ant-select-dropdown-hidden),
 html body .ant-popover,
 html body .ant-menu-submenu-popup,
 html body .ant-tooltip {
-  z-index: 1300 !important;
+  z-index: 2147483647 !important;
   pointer-events: auto !important;
 }
 
@@ -2357,7 +2357,7 @@ html body .ant-dropdown:not(.ant-dropdown-hidden)[class*="ant-dropdown-placement
   inset: 62px 16px auto auto !important;
   max-height: min(620px, calc(100vh - 78px)) !important;
   overflow: auto !important;
-  z-index: 1300 !important;
+  z-index: 2147483647 !important;
   pointer-events: auto !important;
   transform: none !important;
 }
@@ -2427,4 +2427,46 @@ html body .ld-bio .ld-profile-grid > .ld-profile-column {
   html body .ld-bio .ld-profile-grid > .ld-profile-column ~ .ld-profile-column {
     padding-top: 0 !important;
   }
+}
+
+/* Final open-popup top layer: Chub page actions and local tweaks can use very
+   high z-index values, so only visible Ant portal surfaces get the max layer. */
+html body .ant-dropdown:not(.ant-dropdown-hidden),
+html body .ant-select-dropdown:not(.ant-select-dropdown-hidden),
+html body .ant-popover,
+html body .ant-menu-submenu-popup,
+html body .ant-tooltip {
+  z-index: 2147483647 !important;
+  pointer-events: auto !important;
+}
+
+html body .ant-dropdown:not(.ant-dropdown-hidden) *,
+html body .ant-select-dropdown:not(.ant-select-dropdown-hidden) *,
+html body .ant-popover *,
+html body .ant-menu-submenu-popup *,
+html body .ant-tooltip * {
+  pointer-events: auto !important;
+}
+
+html body .ant-dropdown:not(.ant-dropdown-hidden).ant-dropdown-placement-bottomRight:has(a[href*="/profile"]),
+html body .ant-dropdown:not(.ant-dropdown-hidden).ant-dropdown-placement-bottomRight:has(a[href*="/create_character"]),
+html body .ant-dropdown:not(.ant-dropdown-hidden).ant-dropdown-placement-bottomRight:has(a[href*="/create_lorebook"]),
+html body .ant-dropdown:not(.ant-dropdown-hidden).ant-dropdown-placement-bottomRight:has(a[href*="/my_characters"]),
+html body .ant-dropdown:not(.ant-dropdown-hidden).ant-dropdown-placement-bottomRight:has(a[href*="/my_chats"]),
+html body .ant-dropdown:not(.ant-dropdown-hidden)[class*="ant-dropdown-placement-bottomRight"]:has(a[href*="/profile"]),
+html body .ant-dropdown:not(.ant-dropdown-hidden)[class*="ant-dropdown-placement-bottomRight"]:has(a[href*="/create_character"]),
+html body .ant-dropdown:not(.ant-dropdown-hidden)[class*="ant-dropdown-placement-bottomRight"]:has(a[href*="/create_lorebook"]),
+html body .ant-dropdown:not(.ant-dropdown-hidden)[class*="ant-dropdown-placement-bottomRight"]:has(a[href*="/my_characters"]),
+html body .ant-dropdown:not(.ant-dropdown-hidden)[class*="ant-dropdown-placement-bottomRight"]:has(a[href*="/my_chats"]) {
+  position: fixed !important;
+  top: 62px !important;
+  right: 16px !important;
+  bottom: auto !important;
+  left: auto !important;
+  inset: 62px 16px auto auto !important;
+  max-height: min(620px, calc(100vh - 78px)) !important;
+  overflow: auto !important;
+  z-index: 2147483647 !important;
+  pointer-events: auto !important;
+  transform: none !important;
 }

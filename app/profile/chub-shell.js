@@ -210,14 +210,21 @@ function installShellControls() {
   });
 }
 
+function shouldLoadMockRecovery() {
+  const params = new URLSearchParams(window.location.search);
+  return params.has('mockRecovery');
+}
+
 async function installProfile() {
   const response = await fetch('/paste-blob.html', { cache: 'no-store' });
   const html = await response.text();
   document.querySelector('#profile-mount').innerHTML = html;
-  const recovery = document.createElement('link');
-  recovery.rel = 'stylesheet';
-  recovery.href = `/mock-recovery.css?t=${Date.now()}`;
-  document.head.appendChild(recovery);
+  if (shouldLoadMockRecovery()) {
+    const recovery = document.createElement('link');
+    recovery.rel = 'stylesheet';
+    recovery.href = `/mock-recovery.css?t=${Date.now()}`;
+    document.head.appendChild(recovery);
+  }
 }
 
 function installCards() {

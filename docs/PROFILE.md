@@ -59,7 +59,7 @@ Current desktop previews are screen-pinned, pointer-passable inspection panels. 
 
 The final `deploy.css` layer keeps Chub's own portal surfaces above the profile without returning to max-int profile z-index values:
 
-- Account dropdowns matching `.ant-dropdown-placement-bottomRight` and containing the account menu links (`/profile`, `/my_characters`) are fixed at `top: 62px`, `right: 16px`, with a viewport-capped max height.
+- Account dropdowns matching `.ant-dropdown-placement-bottomRight` and containing current account menu links such as `/profile`, `/create_character`, `/create_lorebook`, `/my_characters`, or `/my_chats` are fixed at `top: 62px`, `right: 16px`, with a viewport-capped max height.
 - Header search dropdowns for `rc_select_2` and `rc_select_3` are fixed at `top: 60px`, `left: 74px`, with width capped to the viewport.
-- Dropdown/select/popover/submenu/tooltip surfaces use `z-index: 1300`; the header uses `1200`; card previews stay below at `920`.
+- Visible dropdown/select/popover/submenu/tooltip portal surfaces use `z-index: 2147483647`; the header uses `1200`; card previews stay below at `920`.
 - Header descendant `z-index` values are reset to `auto` so old max-int profile overrides do not leak into Chub's controls.
