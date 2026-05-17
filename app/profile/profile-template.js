@@ -19,6 +19,34 @@ function formatMultiline(text) {
   return formatInline(text).replace(/\n/g, '<br>');
 }
 
+const IMAGE_DIMENSIONS = new Map([
+  ['https://file.garden/aeRvgfxptRQB-dB-/Firefly%20Spring%20Missive.png', [1281, 1079]],
+  ['https://file.garden/aeRvgfxptRQB-dB-/_7%20FFSquish.gif', [480, 360]],
+  ['https://file.garden/aeRvgfxptRQB-dB-/_5%20Ending%20GIF.gif', [498, 281]],
+  ['https://file.garden/aeRvgfxptRQB-dB-/fireflypeek.gif', [398, 210]],
+  ['https://file.garden/aeRvgfxptRQB-dB-/_2%20Top%20Firefly.GIF', [1280, 720]],
+  ['https://file.garden/aeRvgfxptRQB-dB-/_6%20Wa%20Arararagi%20dance.gif', [500, 500]],
+  ['https://file.garden/aeRvgfxptRQB-dB-/_3%20After%20Firefly%2C%20before%20other%20content.png', [3840, 2160]],
+  ['https://file.garden/aeRvgfxptRQB-dB-/_9%20Firefly%20After%20School.jpg', [2026, 1428]],
+  ['https://file.garden/aeRvgfxptRQB-dB-/_4.jpg', [3976, 2484]],
+  ['https://file.garden/aeRvgfxptRQB-dB-/_8%20Firefly%20Pocky%20Couch.png', [4352, 3904]],
+]);
+
+function imageDimensionAttrs(url) {
+  const dimensions = IMAGE_DIMENSIONS.get(String(url ?? ''));
+  if (!dimensions) return '';
+  const [width, height] = dimensions;
+  return ` width="${width}" height="${height}"`;
+}
+
+function imageAttrs(url, { lazy = false, fetchpriority = '' } = {}) {
+  let attrs = imageDimensionAttrs(url);
+  if (lazy) attrs += ' loading="lazy"';
+  attrs += ' decoding="async"';
+  if (fetchpriority) attrs += ` fetchpriority="${escapeHtml(fetchpriority)}"`;
+  return attrs;
+}
+
 function renderLink(label, url, className = '') {
   const cls = className ? ` class="${className}"` : '';
   return `<a${cls} href="${escapeHtml(url)}">${formatInline(label)}</a>`;
@@ -103,7 +131,7 @@ ${renderArtCredits(content.rightColumn.artCredits.items)}
 function renderArtCard(item) {
   if (!item?.url) return '';
   return `<a class="ld-media-card ld-art-card" href="${escapeHtml(item.url)}"${imageWindowAttrs(item.label || item.alt)}>
-  <img src="${escapeHtml(item.url)}" alt="${escapeHtml(item.alt || item.label)}" loading="lazy" decoding="async">
+  <img src="${escapeHtml(item.url)}" alt="${escapeHtml(item.alt || item.label)}"${imageAttrs(item.url, { lazy: true })}>
 </a>`;
 }
 
@@ -117,11 +145,10 @@ function isVideoUrl(url) {
 
 function renderMedia(url, className, alt, lazy = false) {
   if (!url) return '';
-  const loadAttrs = lazy ? ' loading="lazy" decoding="async"' : ' decoding="async"';
   if (isVideoUrl(url)) {
     return `<video class="${className}" src="${escapeHtml(url)}" autoplay muted loop playsinline preload="metadata" aria-label="${escapeHtml(alt)}"></video>`;
   }
-  return `<img class="${className}" src="${escapeHtml(url)}" alt="${escapeHtml(alt)}"${loadAttrs}>`;
+  return `<img class="${className}" src="${escapeHtml(url)}" alt="${escapeHtml(alt)}"${imageAttrs(url, { lazy })}>`;
 }
 
 function buildDeployBio(content) {
@@ -129,7 +156,7 @@ function buildDeployBio(content) {
       <section class="ld-profile-hero">
         <div class="ld-profile-card">
           <div class="ld-avatar-frame">
-            <img src="${escapeHtml(content.topCard.avatarUrl)}" alt="The_Lonely_Devil avatar">
+            <img src="${escapeHtml(content.topCard.avatarUrl)}" alt="The_Lonely_Devil avatar"${imageAttrs(content.topCard.avatarUrl, { fetchpriority: 'high' })}>
           </div>
           <h1 class="ld-profile-name">${formatInline(content.topCard.profileName)}</h1>
           <div class="ld-profile-about">
@@ -185,12 +212,12 @@ ${content.leftColumn.philosophy.paragraphs.map((paragraph) => `                <
                 <h3 class="ld-link-heading"><a href="${escapeHtml(content.leftColumn.philosophy.whyUrl)}" target="_blank" rel="noreferrer">${formatInline(content.leftColumn.philosophy.whyLabel)}</a></h3>
 ${renderChildCopyBlocks(content.leftColumn.philosophy.whyBullets)}
               </div>
-              <img class="ld-philosophy-media" src="${escapeHtml(content.leftColumn.philosophy.mediaUrl)}" alt="Arararagi dance gif" loading="lazy" decoding="async">
+              <img class="ld-philosophy-media" src="${escapeHtml(content.leftColumn.philosophy.mediaUrl)}" alt="Arararagi dance gif"${imageAttrs(content.leftColumn.philosophy.mediaUrl, { lazy: true })}>
             </div>
           </section>
 
           <a class="ld-media-card" href="${escapeHtml(content.leftColumn.dividerImageUrl)}"${imageWindowAttrs('divider image')}>
-            <img src="${escapeHtml(content.leftColumn.dividerImageUrl)}" alt="Firefly illustration divider" loading="lazy" decoding="async">
+            <img src="${escapeHtml(content.leftColumn.dividerImageUrl)}" alt="Firefly illustration divider"${imageAttrs(content.leftColumn.dividerImageUrl, { lazy: true })}>
           </a>
 
 ${renderArtCard(content.artShowcase?.items?.[0]).replace(/^/gm, '          ')}
@@ -234,7 +261,7 @@ ${renderSimpleList(content.leftColumn.modelRecommendations.otherRecs).replace(/^
           </section>
 
           <a class="ld-media-card" href="${escapeHtml(content.rightColumn.midImageUrl)}"${imageWindowAttrs('mid page image')}>
-            <img src="${escapeHtml(content.rightColumn.midImageUrl)}" alt="Firefly bed illustration" loading="lazy" decoding="async">
+            <img src="${escapeHtml(content.rightColumn.midImageUrl)}" alt="Firefly bed illustration"${imageAttrs(content.rightColumn.midImageUrl, { lazy: true })}>
           </a>
 
           <section class="ld-panel ld-panel--disclaimers">

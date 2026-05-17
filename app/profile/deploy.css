@@ -632,6 +632,22 @@ html body .ant-layout .ld-bio .ld-footer-link {
   object-fit: cover;
 }
 
+.ld-bio img[alt="Firefly illustration divider"] {
+  aspect-ratio: 16 / 9;
+}
+
+.ld-bio img[alt="Firefly after school artwork"] {
+  aspect-ratio: 2026 / 1428;
+}
+
+.ld-bio img[alt="Firefly bed illustration"] {
+  aspect-ratio: 3976 / 2484;
+}
+
+.ld-bio img[alt="Firefly pocky couch artwork"] {
+  aspect-ratio: 4352 / 3904;
+}
+
 .ld-profile-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.03fr) minmax(0, 1fr);
@@ -731,6 +747,8 @@ html body .ant-layout .ld-bio .ld-footer-link {
 
 .ld-philosophy-media {
   width: min(100%, 205px);
+  height: auto;
+  aspect-ratio: 1 / 1;
   justify-self: end;
 }
 
@@ -1998,7 +2016,7 @@ html body .ld-float-link:not(.ld-float-link--secondary) {
   }
 }
 
-/* Card browser preview hard stop: keep popouts screen-pinned and inside the viewport. */
+/* Card browser preview hard stop v3: keep popouts screen-pinned and inside the viewport. */
 @media (hover: hover) and (pointer: fine) and (min-width: 900px) {
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .char-card-class,
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .char-card-class {
@@ -2135,51 +2153,51 @@ html body .ld-bio .ld-profile-column > .ld-art-card img {
     isolation: isolate !important;
   }
 
-  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child > div > div:first-child::before {
-    content: "";
-    position: absolute;
-    inset: -18px;
-    z-index: 0;
-    opacity: 0.58;
-    background-image: var(--ld-card-full-art);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    filter: blur(1.5px) saturate(1.06) brightness(0.98);
-    transform: scale(1.01);
-    pointer-events: none;
-  }
-
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child > div > div:first-child::before,
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child > div > div:first-child::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    opacity: 1;
-    background-image: var(--ld-card-full-art);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    pointer-events: none;
+    content: none !important;
+    background-image: none !important;
   }
 
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child img {
-    opacity: 0 !important;
-  }
-
-  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"]:hover .card-main-body > .ant-col:first-child > div > div:first-child::after,
-  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"]:focus-visible .card-main-body > .ant-col:first-child > div > div:first-child::after {
-    z-index: 2;
-    opacity: 1;
-    background-size: contain;
+    opacity: 1 !important;
   }
 
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"]:hover .card-main-body > .ant-col:first-child > div > div:first-child::before,
   html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"]:focus-visible .card-main-body > .ant-col:first-child > div > div:first-child::before {
+    content: "" !important;
+    position: absolute;
+    inset: -18px;
+    z-index: 0;
     opacity: 0.45;
+    background-image: var(--ld-card-full-art) !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
     filter: blur(0.5px) saturate(1.04) brightness(1);
     transform: scale(1.004);
+    pointer-events: none;
   }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"]:hover .card-main-body > .ant-col:first-child > div > div:first-child::after,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"]:focus-visible .card-main-body > .ant-col:first-child > div > div:first-child::after {
+    content: "" !important;
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    opacity: 1;
+    background-image: var(--ld-card-full-art) !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"]:hover .card-main-body > .ant-col:first-child img,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"]:focus-visible .card-main-body > .ant-col:first-child img {
+    opacity: 0 !important;
+  }
+
 }
 
 /* Final Chub chrome interaction fix: keep the profile art/card layers below

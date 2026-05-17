@@ -284,7 +284,7 @@ Run these after rebuilding:
 ```bash
 cd /d/AIStuff/ChubProfile
 rg -n 'role="tabpanel"\]:(is|has)' app/profile/paste-blob.html
-rg -n 'Card browser hard stop v2|Card browser enhancement|Card browser approach lanes|Final Chub chrome interaction fix|Final Chub portal and spacer-safe alignment fix|Final open-popup top layer|position: fixed|pointer-events: none|font-variant-numeric: tabular-nums|z-index: 2147483647|1760px|940px|rc_select_2|rc_select_3|62px 16px auto auto|60px auto auto 74px' app/profile/deploy.css app/profile/paste-blob.html
+rg -n 'Card browser preview hard stop v3|Card browser enhancement|Card browser approach lanes|Final Chub chrome interaction fix|Final Chub portal and spacer-safe alignment fix|Final open-popup top layer|position: fixed|pointer-events: none|font-variant-numeric: tabular-nums|z-index: 2147483647|1760px|940px|rc_select_2|rc_select_3|62px 16px auto auto|60px auto auto 74px' app/profile/deploy.css app/profile/paste-blob.html
 rg -n 'cursor: zoom|background-size: auto 132%|background-size: auto 168%|transition: background-size' app/profile/deploy.css app/profile/paste-blob.html
 rg -n 'post-school-Fly' app/profile/profile-content.json app/profile/deploy-bio.html app/profile/paste-blob.html
 rg -n 'Why, yes, I like feet\\.\\.\\. How could you tell\\?|Wow, I just needed some motivation|Geechan.s Universal Roleplay Prompt|Opus 4\\.7/4\\.6 Max|Hover over any card' app/profile/profile-content.json app/profile/paste-blob.html
@@ -311,7 +311,7 @@ Expected:
 - The older final card-browser block is named:
   `Card browser hard stop: viewport-safe previews and 120% zoom count pills. Keep this last.`
 - The current final override is named:
-  `Card browser hard stop v2: screen-pinned previews and unsquashable 120% zoom count pills. Keep this last.`
+  `Card browser preview hard stop v3: keep popouts screen-pinned and inside the viewport.`
 - The current zoom/enlargement layer is named:
   `Card browser enhancement: larger popout without inner art zoom. Keep this after the hard stop.`
 - The current approach-lane layer is named:
