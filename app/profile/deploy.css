@@ -2540,3 +2540,239 @@ html body .ant-dropdown:not(.ant-dropdown-hidden)[class*="ant-dropdown-placement
     z-index: 1 !important;
   }
 }
+
+/* Final card browser density and modest preview scale: make the desktop card
+   browser read as a compact, centered gallery lane with real side gutters.
+   The lane owns the search/sort/header controls and the grid, so cards never
+   hang over Chub's right viewport edge. */
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  html body .ant-col-lg-18 {
+    --ld-card-browser-gutter: clamp(96px, 9vw, 260px);
+    --ld-card-browser-lane: min(2040px, calc(100vw - (var(--ld-card-browser-gutter) * 2)), calc(100% - 32px));
+    --ld-card-browser-card-min: clamp(280px, 15vw, 320px);
+    --ld-card-browser-gap: clamp(18px, 1.15vw, 22px);
+  }
+
+  html body .ant-col-lg-18 .ant-tabs {
+    box-sizing: border-box !important;
+    width: var(--ld-card-browser-lane) !important;
+    max-width: calc(100vw - 32px) !important;
+    margin-inline: auto !important;
+    padding-inline: 0 !important;
+  }
+
+  html body .ant-col-lg-18 .ant-tabs-nav,
+  html body .ant-col-lg-18 .ant-tabs-content-holder,
+  html body .ant-col-lg-18 [role="tabpanel"] {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-inline: 0 !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] {
+    padding-inline: 0 !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] .ant-list-items:has(a.cursor-pointer[href*="/characters/"]),
+  html body .ant-col-lg-18 [role="tabpanel"] #chara-list:has(a.cursor-pointer[href*="/characters/"]),
+  html body .ant-col-lg-18 [role="tabpanel"] .character-list-container:has(a.cursor-pointer[href*="/characters/"]),
+  html body .ant-col-lg-18 [role="tabpanel"] .ant-row:has(a.cursor-pointer[href*="/characters/"]) {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--ld-card-browser-card-min)), 1fr)) !important;
+    gap: var(--ld-card-browser-gap) !important;
+    padding-inline: 0 !important;
+    overflow: visible !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] {
+    height: 350px !important;
+    min-height: 350px !important;
+    max-height: 350px !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .ant-card-head {
+    flex-basis: 36px !important;
+    min-height: 36px !important;
+    padding: 6px 9px !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .char-card-class > .ant-card-body {
+    width: 100% !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .card-title-row {
+    gap: 6px !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .card-title-row > span:first-child {
+    font-size: 0.82rem !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .card-title-row > div:last-child {
+    font-size: 0.68rem !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .char-card-class .card-main-body {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: minmax(156px, 52%) minmax(0, 1fr) !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .char-card-class .card-main-body > a.cursor-pointer[href*="/characters/"] {
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .card-main-body > .ant-col:first-child {
+    border-right: 0 !important;
+    border-bottom: 2px solid var(--ld-teal-border) !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .card-main-body > .ant-col:nth-child(2) {
+    gap: 6px !important;
+    padding: 8px 9px 9px !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .ant-card-meta-description,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .ant-card-meta-description .quote-color {
+    max-height: 3.8em !important;
+    font-size: 0.74rem !important;
+    line-height: 1.25 !important;
+    -webkit-line-clamp: 3 !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .custom-scroll,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .custom-scroll > .mt-2 {
+    gap: 4px !important;
+    max-height: 50px !important;
+    padding: 1px 0 !important;
+    overflow: hidden !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .custom-scroll .ant-tag {
+    min-height: 20px !important;
+    padding: 2px 5px !important;
+    border-width: 1px !important;
+    font-size: 0.66rem !important;
+    line-height: 1.05 !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .card-main-body > .ant-col:nth-child(2) > div:last-child {
+    gap: 6px !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .card-main-body > .ant-col:nth-child(2) > div:last-child > div:nth-child(2) {
+    min-height: 18px !important;
+    font-size: 0.7rem !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .stats {
+    inset: auto 8px 8px 8px !important;
+    height: 26px !important;
+    min-height: 26px !important;
+    max-height: 26px !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .stats .fake-ribbon {
+    gap: 5px !important;
+    height: 26px !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"] .stats .fake-ribbon > div {
+    height: 23px !important;
+    min-height: 23px !important;
+    padding: 3px 6px !important;
+    border-width: 1px !important;
+    font-size: 0.66rem !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .char-card-class,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .char-card-class {
+    --ld-card-preview-width: min(1040px, calc(100vw - 128px));
+    --ld-card-preview-height: min(640px, calc(100vh - 148px));
+    top: max(72px, calc((100vh - var(--ld-card-preview-height)) / 2 + 8px)) !important;
+    left: max(64px, calc((100vw - var(--ld-card-preview-width)) / 2)) !important;
+    width: var(--ld-card-preview-width) !important;
+    height: var(--ld-card-preview-height) !important;
+    max-width: var(--ld-card-preview-width) !important;
+    max-height: var(--ld-card-preview-height) !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .ant-card-head,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .ant-card-head {
+    flex-basis: 38px !important;
+    min-height: 38px !important;
+    padding: 7px 10px !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .card-title-row > span:first-child,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .card-title-row > span:first-child {
+    font-size: 0.88rem !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .card-title-row > div:last-child,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .card-title-row > div:last-child {
+    font-size: 0.76rem !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .char-card-class .card-main-body,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .char-card-class .card-main-body {
+    grid-template-columns: minmax(0, 64%) minmax(280px, 36%) !important;
+    grid-template-rows: 1fr !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .char-card-class .card-main-body > a.cursor-pointer,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .char-card-class .card-main-body > a.cursor-pointer {
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .card-main-body > .ant-col:first-child,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .card-main-body > .ant-col:first-child {
+    border-right: 2px solid var(--ld-teal-border) !important;
+    border-bottom: 0 !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .card-main-body > .ant-col:nth-child(2),
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .card-main-body > .ant-col:nth-child(2) {
+    gap: 8px !important;
+    padding: 12px 13px 11px !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .ant-card-meta-description,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .ant-card-meta-description,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .ant-card-meta-description .quote-color,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .ant-card-meta-description .quote-color {
+    max-height: 5.4em !important;
+    font-size: 0.8rem !important;
+    line-height: 1.32 !important;
+    -webkit-line-clamp: 4 !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .custom-scroll,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .custom-scroll,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .custom-scroll > .mt-2,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .custom-scroll > .mt-2 {
+    gap: 6px !important;
+    max-height: 112px !important;
+    padding: 1px 0 2px !important;
+  }
+
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:hover .custom-scroll .ant-tag,
+  html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/"]:focus-visible .custom-scroll .ant-tag {
+    min-height: 23px !important;
+    padding: 2px 7px 3px !important;
+    border-width: 2px !important;
+    font-size: 0.7rem !important;
+  }
+}
