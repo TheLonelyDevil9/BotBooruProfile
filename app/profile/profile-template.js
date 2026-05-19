@@ -135,8 +135,24 @@ function renderArtCard(item) {
 </a>`;
 }
 
+const ACTION_VARIANT_CLASSES = new Map([
+  ['support', 'ld-hero-action--support'],
+]);
+
+function actionClassName(item) {
+  const classes = ['ld-jump-link', 'ld-jump-link--ghost'];
+  const variant = String(item?.variant ?? '').trim().toLowerCase();
+  const variantClass = ACTION_VARIANT_CLASSES.get(variant);
+
+  if (variantClass) {
+    classes.push(variantClass);
+  }
+
+  return classes.join(' ');
+}
+
 function renderActions(actions) {
-  return actions.map((item) => `                  <a class="ld-jump-link ld-jump-link--ghost" href="${escapeHtml(item.url)}">${formatInline(item.label)}</a>`).join('\n');
+  return actions.map((item) => `                  <a class="${actionClassName(item)}" href="${escapeHtml(item.url)}">${formatInline(item.label)}</a>`).join('\n');
 }
 
 function isVideoUrl(url) {

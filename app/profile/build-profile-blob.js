@@ -10,7 +10,7 @@ const dir = __dirname;
 const css = fs.readFileSync(path.join(dir, 'deploy.css'), 'utf8');
 const content = JSON.parse(fs.readFileSync(path.join(dir, 'profile-content.json'), 'utf8'));
 const bio = buildDeployBio(content);
-const generatedCss = css.includes('--ld-card-full-art') ? buildCardPreviewCss() : '';
+const generatedCss = /--ld-card-(?:preview-art|full-art)/.test(css) ? buildCardPreviewCss() : '';
 const cssWithGenerated = generatedCss ? `${css}\n\n${generatedCss}` : css;
 const { blob, cssMin, bioTrimmed } = buildPasteBlob(cssWithGenerated, bio);
 const bioPath = path.join(dir, 'deploy-bio.html');
@@ -22,5 +22,5 @@ console.log(`paste-blob.html: ${blob.length} chars (${Math.round(blob.length/102
 console.log(`  <style>: ${cssMin.length} chars`);
 console.log(`  bio HTML: ${bioTrimmed.length} chars`);
 if (generatedCss) {
-  console.log(`  card hover previews: ${(generatedCss.match(/--ld-card-full-art/g) || []).length} cards`);
+  console.log(`  card hover previews: ${(generatedCss.match(/--ld-card-preview-art:/g) || []).length} cards`);
 }

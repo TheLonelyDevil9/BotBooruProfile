@@ -36,7 +36,7 @@ function writeBlob(blob) {
 }
 
 function withGeneratedCss(css) {
-  const generatedCss = css.includes('--ld-card-full-art') ? buildCardPreviewCss() : '';
+  const generatedCss = /--ld-card-(?:preview-art|full-art)/.test(css) ? buildCardPreviewCss() : '';
   return generatedCss ? `${css}\n\n${generatedCss}` : css;
 }
 
