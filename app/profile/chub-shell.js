@@ -132,7 +132,7 @@ function renderCard(card) {
           <div class="ant-col css-625x50">
             <div>
               <div>
-                <img class="sc-ktwOfi eCEqAJ" src="${avatarUrl(card.slug)}" alt="${escapeHtml(card.name)}">
+                <img class="sc-ktwOfi eCEqAJ" src="${avatarUrl(card.slug)}" alt="${escapeHtml(card.name)}" loading="lazy" decoding="async" fetchpriority="low">
               </div>
             </div>
             <span class="sc-brSamD fqUhVt quote-color stats">

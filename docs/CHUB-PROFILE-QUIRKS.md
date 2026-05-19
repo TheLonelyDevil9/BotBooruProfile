@@ -73,6 +73,7 @@ After a save, reload `https://chub.ai/users/The_Lonely_Devil` and inspect the li
 - Profile CSS can affect Chub's surrounding page, not only the bio. Keep selectors narrow and scoped where possible.
 - Custom profile classes use the `ld-` prefix.
 - Broad Ant Design selectors are risky. Prefer Chub-facing selectors scoped under `.ant-col-lg-18 [role="tabpanel"]` when touching the card browser.
+- Inline scripts inside `.ld-bio` are not reliable. Live evidence showed Chub stripped the executable thumbnail-swap script from the rendered bio while leaving the script marker only in metadata, so native card thumbnail upgrades must stay CSS-only.
 - Chub-injected `<spacer>` elements count for raw child-position selectors even when hidden. Avoid important layout fixes that depend on `.ld-profile-column:nth-child(2)` or `.ld-hero-info-grid > .ld-panel:first-child` unless there is a later spacer-safe override. Prefer real element/class relationships such as `section.ld-panel--compact:first-of-type` or `.ld-profile-column ~ .ld-profile-column`.
 - Chub card markup is Ant Design based and can shift. The profile currently targets:
   - `.ant-col-lg-18 [role="tabpanel"]`
@@ -228,6 +229,10 @@ The live-proven test injected the fallback after the pasted profile style. In so
 - It uses `data.avatar` as the image URL when available.
 - The fallback URL is:
   `https://avatars.charhub.io/avatars/The_Lonely_Devil/<slug>/chara_card_v2.png`
+- The generated `--ld-card-full-art` rules feed both the hover preview and the CSS-only native card-grid thumbnail overlay.
+- Generated per-card rules also set `--ld-card-thumbnail-native-opacity:0`; the native grid overlay lives on the first `.card-main-body` image column, hides the low-res `avatar.webp` image only for mapped cards, and keeps `.stats` pills above the pseudo-element.
+- `app/profile/card-preview-css.js` owns native thumbnail crop decisions in `CARD_THUMB_CROPS`, keyed by stable slug. Each generated rule emits `--ld-card-crop-x` and `--ld-card-crop-y`; the overlay CSS uses those variables with a `center 42%` fallback. When adding/removing cards, audit the full-art `chara_card_v2.png` at the native Chub grid pane aspect ratio and add a slug-keyed crop entry instead of changing the global fallback.
+- Do not reintroduce `data-ld-card-thumbnail-swap` into `deploy-bio.html` or `paste-blob.html`; Chub strips executable scripts from the bio.
 - Rebuild output should include the card hover preview count, currently expected around `76 cards`.
 
 ## Profile Images And External Links
@@ -246,6 +251,9 @@ The live-proven test injected the fallback after the pasted profile style. In so
 - On the live page, confirm follower/follow pill and Follow button backgrounds are `rgb(0, 0, 0)` when the design calls for pure black.
 - On the live page, confirm disclaimer spacing in computed styles, not just source CSS. The sanitizer can change the selector path.
 - Check normal card counts at browser zoom 100% and 120%.
+- Check that generated `deploy-bio.html` and `paste-blob.html` do not contain `data-ld-card-thumbnail-swap`.
+- Check that the generated blob contains the native thumbnail overlay CSS and generated high-res `--ld-card-full-art` / `chara_card_v2.png` mappings.
+- Check that generated mapped-card rules include `--ld-card-crop-x` and `--ld-card-crop-y` for every generated `--ld-card-full-art` rule, and spot-check live computed `::before` `background-position` against the slug crop map.
 - Check hover previews near left, middle, and right columns.
 - Check that hover previews stay below the Chub header.
 - Check that full-art preview sides are not blurry.

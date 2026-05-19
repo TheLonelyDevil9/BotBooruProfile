@@ -2776,3 +2776,31 @@ html body .ant-dropdown:not(.ant-dropdown-hidden)[class*="ant-dropdown-placement
     font-size: 0.7rem !important;
   }
 }
+
+/* Native card-grid thumbnail overlay: Chub strips executable bio scripts, so
+   reuse the generated --ld-card-full-art mappings instead of swapping img src. */
+html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+}
+
+html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  background-image: var(--ld-card-full-art) !important;
+  background-size: cover !important;
+  background-position: var(--ld-card-crop-x, center) var(--ld-card-crop-y, 42%) !important;
+  background-repeat: no-repeat !important;
+}
+
+html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child img {
+  opacity: var(--ld-card-thumbnail-native-opacity, 1) !important;
+}
+
+html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child .stats {
+  z-index: 5 !important;
+}
