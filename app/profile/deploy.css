@@ -21,6 +21,7 @@
   --ld-card-preview-width: min(980px, calc(100vw - 32px));
   --ld-card-preview-height: min(660px, calc(100vh - 96px));
   --ld-card-preview-art: var(--ld-card-full-art);
+  --ld-card-thumbnail-native-opacity: 1;
   --ld-card-preview-native-opacity: 1;
   --ld-card-full-art: none;
   --ld-wallpaper: url("https://file.garden/aeRvgfxptRQB-dB-/_1%20Profile%20Background.png");
@@ -2799,10 +2800,10 @@ html body .ant-dropdown:not(.ant-dropdown-hidden)[class*="ant-dropdown-placement
   }
 }
 
-/* Native card-grid thumbnail policy: keep Chub's lightweight avatar.webp in the
-   resting grid. Full PNG card art is reserved for the hover/focus preview layer
-   above, because loading every full card PNG as a thumbnail makes the profile
-   crawl. */
+/* Native card-grid thumbnail overlay: Chub strips executable bio scripts, so
+   reuse the generated high-res full-art mappings instead of swapping img src.
+   Browser interpolation stays on auto so downscaled PNGs remain smooth rather
+   than jagged on low-density or zoomed displays. */
 html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child {
   position: relative !important;
   overflow: hidden !important;
@@ -2810,13 +2811,21 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/T
 }
 
 html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child::before {
-  content: none !important;
-  display: none !important;
-  background-image: none !important;
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  background-image: var(--ld-card-full-art, var(--ld-card-preview-art)) !important;
+  background-size: cover !important;
+  background-position: var(--ld-card-crop-x, center) var(--ld-card-crop-y, 42%) !important;
+  background-repeat: no-repeat !important;
+  image-rendering: auto !important;
 }
 
 html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child img {
-  opacity: 1 !important;
+  opacity: var(--ld-card-thumbnail-native-opacity, 1) !important;
+  image-rendering: auto !important;
 }
 
 html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child img[src*="/avatar.webp"] {

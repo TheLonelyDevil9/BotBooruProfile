@@ -193,7 +193,7 @@ function buildCardPreviewCss(publishedDir = DEFAULT_PUBLISHED_DIR) {
     const slug = cssEscapeAttribute(entry.slug);
     const imageUrl = cssEscapeAttribute(entry.imageUrl);
     const crop = getCardThumbCrop(entry.slug);
-    return `.ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/${CREATOR}/${slug}"]{--ld-card-preview-art:url("${imageUrl}");--ld-card-preview-native-opacity:0;--ld-card-crop-x:${crop.x};--ld-card-crop-y:${crop.y}}`;
+    return `.ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/${CREATOR}/${slug}"]{--ld-card-full-art:url("${imageUrl}");--ld-card-preview-art:url("${imageUrl}");--ld-card-thumbnail-native-opacity:0;--ld-card-preview-native-opacity:0;--ld-card-crop-x:${crop.x};--ld-card-crop-y:${crop.y}}`;
   });
 
   return [
