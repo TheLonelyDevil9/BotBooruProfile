@@ -4,6 +4,7 @@ const path = require('path');
 const DEFAULT_PUBLISHED_DIR = 'D:\\AIStuff\\Cardmaking\\Published';
 const CREATOR = 'The_Lonely_Devil';
 const DEFAULT_CARD_THUMB_CROP = { x: 'center', y: '42%' };
+const DEFAULT_CARD_THUMBNAIL_BASE_URL = 'https://file.garden/aeRvgfxptRQB-dB-/chub-profile-card-thumbnails';
 
 // CSS-only native Chub thumbnail focal points. Keys are the stable Chub slug
 // path segments from Published/project-ids.json; values are CSS-ready
@@ -108,6 +109,10 @@ function cssEscapeAttribute(value) {
   return String(value).replace(/\\/g, '\\\\').replace(/"/g, '\\"');
 }
 
+function cssEscapeUrl(value) {
+  return cssEscapeAttribute(value).replace(/\n/g, '');
+}
+
 function cssCustomPropertyValue(value, fallback) {
   const normalized = String(value || '').trim();
   if (/^(?:center|(?:100|\d{1,2})(?:\.\d+)?%)$/.test(normalized)) {
@@ -123,6 +128,20 @@ function getCardThumbCrop(slug) {
     x: cssCustomPropertyValue(crop.x, DEFAULT_CARD_THUMB_CROP.x),
     y: cssCustomPropertyValue(crop.y, DEFAULT_CARD_THUMB_CROP.y),
   };
+}
+
+function encodeUrlPathSegment(value) {
+  return encodeURIComponent(value).replace(/%40/g, '@');
+}
+
+function normalizeBaseUrl(baseUrl) {
+  return String(baseUrl || '').trim().replace(/\/+$/, '');
+}
+
+function getCardThumbnailUrl(slug, baseUrl = DEFAULT_CARD_THUMBNAIL_BASE_URL) {
+  const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
+  if (!normalizedBaseUrl) return '';
+  return `${normalizedBaseUrl}/${encodeUrlPathSegment(`${slug}.jpg`)}`;
 }
 
 function readJson(filePath) {
@@ -183,17 +202,28 @@ function getCardEntries(publishedDir = DEFAULT_PUBLISHED_DIR) {
     .sort((a, b) => a.slug.localeCompare(b.slug));
 }
 
-function buildCardPreviewCss(publishedDir = DEFAULT_PUBLISHED_DIR) {
+function buildCardPreviewCss(
+  publishedDir = DEFAULT_PUBLISHED_DIR,
+  options = {},
+) {
   const entries = getCardEntries(publishedDir);
   if (!entries.length) {
     return '';
   }
 
+  const thumbnailBaseUrl = normalizeBaseUrl(
+    options.thumbnailBaseUrl
+      || process.env.CHUB_PROFILE_CARD_THUMBNAIL_BASE_URL
+      || DEFAULT_CARD_THUMBNAIL_BASE_URL,
+  );
+
   const rules = entries.map((entry) => {
     const slug = cssEscapeAttribute(entry.slug);
-    const imageUrl = cssEscapeAttribute(entry.imageUrl);
+    const imageUrl = cssEscapeUrl(entry.imageUrl);
+    const thumbnailUrl = cssEscapeUrl(getCardThumbnailUrl(entry.slug, thumbnailBaseUrl));
     const crop = getCardThumbCrop(entry.slug);
-    return `.ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/${CREATOR}/${slug}"]{--ld-card-full-art:url("${imageUrl}");--ld-card-preview-art:url("${imageUrl}");--ld-card-thumbnail-native-opacity:0;--ld-card-preview-native-opacity:0;--ld-card-crop-x:${crop.x};--ld-card-crop-y:${crop.y}}`;
+    const thumbnailRule = thumbnailUrl ? `--ld-card-thumbnail-art:url("${thumbnailUrl}");` : '';
+    return `.ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/${CREATOR}/${slug}"]{--ld-card-full-art:url("${imageUrl}");--ld-card-preview-art:url("${imageUrl}");${thumbnailRule}--ld-card-thumbnail-native-opacity:0;--ld-card-preview-native-opacity:0;--ld-card-crop-x:${crop.x};--ld-card-crop-y:${crop.y}}`;
   });
 
   return [
@@ -206,8 +236,10 @@ module.exports = {
   CARD_THUMB_CROPS,
   DEFAULT_PUBLISHED_DIR,
   DEFAULT_CARD_THUMB_CROP,
+  DEFAULT_CARD_THUMBNAIL_BASE_URL,
   buildCardPreviewCss,
   getCardThumbCrop,
+  getCardThumbnailUrl,
   getCardEntries,
   getProjectCards,
   resolveExistingDir,

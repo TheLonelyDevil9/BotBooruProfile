@@ -106,6 +106,10 @@ function cardUrl(slug) {
   return `https://avatars.charhub.io/avatars/The_Lonely_Devil/${slug}/chara_card_v2.png`;
 }
 
+function thumbnailUrl(slug) {
+  return `https://file.garden/aeRvgfxptRQB-dB-/chub-profile-card-thumbnails/${slug}.jpg`;
+}
+
 function characterUrl(slug) {
   return `/characters/The_Lonely_Devil/${slug}`;
 }
@@ -115,7 +119,7 @@ function renderCard(card) {
     .map((tag) => `<span class="cursor-pointer"><span class="ant-tag css-625x50">${escapeHtml(tag)}</span></span>`)
     .join('');
 
-  return `<a class="cursor-pointer" href="${characterUrl(card.slug)}" style="--ld-card-full-art:url('${cardUrl(card.slug)}');--ld-card-preview-art:url('${cardUrl(card.slug)}');--ld-card-thumbnail-native-opacity:0;--ld-card-preview-native-opacity:0">
+  return `<a class="cursor-pointer" href="${characterUrl(card.slug)}" style="--ld-card-full-art:url('${cardUrl(card.slug)}');--ld-card-preview-art:url('${cardUrl(card.slug)}');--ld-card-thumbnail-art:url('${thumbnailUrl(card.slug)}');--ld-card-thumbnail-native-opacity:0;--ld-card-preview-native-opacity:0">
     <div class="ant-card ant-card-bordered ant-card-hoverable ant-card-small d-flex flex-column char-card-class css-625x50">
       <div class="ant-card-head">
         <div class="ant-card-head-wrapper">

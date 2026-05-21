@@ -2801,9 +2801,9 @@ html body .ant-dropdown:not(.ant-dropdown-hidden)[class*="ant-dropdown-placement
 }
 
 /* Native card-grid thumbnail overlay: Chub strips executable bio scripts, so
-   reuse the generated high-res full-art mappings instead of swapping img src.
-   Browser interpolation stays on auto so downscaled PNGs remain smooth rather
-   than jagged on low-density or zoomed displays. */
+   use generated Filegarden JPG crops for resting thumbnails and keep Chub PNGs
+   for hover inspection. Browser interpolation stays on auto so downscaled art
+   remains smooth rather than jagged on low-density or zoomed displays. */
 html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/The_Lonely_Devil/"] .card-main-body > .ant-col:first-child {
   position: relative !important;
   overflow: hidden !important;
@@ -2816,7 +2816,7 @@ html body .ant-col-lg-18 [role="tabpanel"] a.cursor-pointer[href*="/characters/T
   inset: 0 !important;
   z-index: 1 !important;
   pointer-events: none !important;
-  background-image: var(--ld-card-full-art, var(--ld-card-preview-art)) !important;
+  background-image: var(--ld-card-thumbnail-art, var(--ld-card-full-art, var(--ld-card-preview-art))) !important;
   background-size: cover !important;
   background-position: var(--ld-card-crop-x, center) var(--ld-card-crop-y, 42%) !important;
   background-repeat: no-repeat !important;

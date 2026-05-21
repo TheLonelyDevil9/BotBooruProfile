@@ -10,6 +10,8 @@ app/profile/demo-*.png
 app/profile/live-*.png
 app/profile/search-*.png
 app/profile/test-*.png
+app/profile/.card-thumbnail-cache/
+app/profile/filegarden-card-thumbnails/
 chub-card-polish-mock.png
 
 # Brainstorm / superpowers scratch
