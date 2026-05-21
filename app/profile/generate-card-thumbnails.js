@@ -315,8 +315,8 @@ function generateJpg(inputPath, outputPath, geometry, options) {
     '-crop', `${options.width}x${options.height}+${geometry.x}+${geometry.y}`,
     '+repage',
     '-strip',
-    '-interlace', 'Plane',
     '-sampling-factor', '4:4:4',
+    '-interlace', 'None',
     '-quality', String(options.quality),
     outputPath,
   ]);
