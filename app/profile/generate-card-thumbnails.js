@@ -37,6 +37,8 @@ Options:
                     Default: app/profile/filegarden-card-thumbnails
   --cache <dir>     Source PNG cache directory.
                     Default: app/profile/.card-thumbnail-cache
+  --filter <text>   Limit generation/upload to slugs containing text.
+  --slug <slug>     Limit generation/upload to an exact slug. Repeatable.
   --base-url <url>  Expected Filegarden URL folder for manifest output.
                     Default: ${DEFAULT_BASE_URL}
   --user-id <id>    Filegarden API user id for --upload.
@@ -75,6 +77,8 @@ function parseArgs(argv) {
     outDir: DEFAULT_OUTPUT_DIR,
     cacheDir: DEFAULT_CACHE_DIR,
     baseUrl: null,
+    filter: '',
+    slugs: [],
     width: DEFAULT_WIDTH,
     height: DEFAULT_HEIGHT,
     quality: DEFAULT_QUALITY,
@@ -91,8 +95,21 @@ function parseArgs(argv) {
 
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
+    const next = argv[i + 1];
     if (arg === '--help') {
       options.help = true;
+      continue;
+    }
+    if (arg === '--filter') {
+      if (!next) throw new Error('--filter requires a value.');
+      options.filter = next.trim();
+      i += 1;
+      continue;
+    }
+    if (arg === '--slug') {
+      if (!next) throw new Error('--slug requires a value.');
+      options.slugs.push(next.trim());
+      i += 1;
       continue;
     }
     if (arg === '--no-sheets') {
@@ -112,7 +129,6 @@ function parseArgs(argv) {
       continue;
     }
 
-    const next = argv[i + 1];
     if (!next) throw new Error(`${arg} requires a value.`);
 
     if (arg === '--out') {
@@ -144,6 +160,39 @@ function parseArgs(argv) {
   }
 
   return options;
+}
+
+function selectEntries(entries, options) {
+  const requestedSlugs = Array.isArray(options.slugs) ? options.slugs.filter(Boolean) : [];
+  const requestedSet = new Set(requestedSlugs);
+
+  let selected = entries;
+  if (requestedSlugs.length > 0) {
+    const missing = requestedSlugs.filter(slug => !entries.some(entry => entry.slug === slug));
+    if (missing.length > 0) {
+      throw new Error(`No card entries matched slug(s): ${missing.join(', ')}`);
+    }
+    selected = selected.filter(entry => requestedSet.has(entry.slug));
+  }
+  if (options.filter) {
+    selected = selected.filter(entry => entry.slug.includes(options.filter));
+  }
+  if (requestedSlugs.length > 0 && selected.length !== requestedSlugs.length) {
+    const selectedSlugs = new Set(selected.map(entry => entry.slug));
+    const excluded = requestedSlugs.filter(slug => !selectedSlugs.has(slug));
+    if (excluded.length > 0) {
+      throw new Error(`Filter "${options.filter}" excluded slug(s): ${excluded.join(', ')}`);
+    }
+  }
+  if (selected.length === 0) {
+    const scope = requestedSlugs.length > 0
+      ? `slug(s) ${requestedSlugs.join(', ')}`
+      : options.filter
+        ? `filter "${options.filter}"`
+        : 'published roster';
+    throw new Error(`No card entries matched the requested ${scope}.`);
+  }
+  return selected;
 }
 
 function publicFilegardenIdFromUserId(userId) {
@@ -446,6 +495,7 @@ async function deleteFilegardenItem(options, authCookie, item) {
     `/users/${options.filegardenUserId}/pipe/${item.id}`,
     authCookie,
   );
+  if (response.statusCode === 404) return;
   if (response.statusCode < 200 || response.statusCode >= 300) {
     const parsed = parseJsonResponse(response.body, 'Filegarden delete');
     throw new Error(`Filegarden delete failed for ${item.name} with HTTP ${response.statusCode}: ${parsed.error || 'unknown error'}`);
@@ -454,7 +504,7 @@ async function deleteFilegardenItem(options, authCookie, item) {
 
 async function uploadFilegardenFile(options, authCookie, parentId, record, existingItems) {
   const fileName = path.basename(record.outputPath);
-  const existing = existingItems.find(item => item.name === fileName && item.parent === parentId);
+  const existing = existingItems.find(item => item.name === fileName);
   const bytes = fs.statSync(record.outputPath).size;
 
   if (bytes > MAX_UPLOAD_BYTES) {
@@ -476,21 +526,36 @@ async function uploadFilegardenFile(options, authCookie, parentId, record, exist
     await deleteFilegardenItem(options, authCookie, existing);
   }
 
-  const metadata = encodeURI(JSON.stringify({
-    parent: parentId,
-    name: fileName,
-  }));
-  const response = await filegardenRequest(
-    'POST',
-    `/users/${options.filegardenUserId}/pipe`,
-    authCookie,
-    fs.readFileSync(record.outputPath),
-    {
-      'Content-Type': 'application/octet-stream',
-      'X-Data': metadata,
-    },
-  );
-  const parsed = parseJsonResponse(response.body, `Filegarden upload ${fileName}`);
+  const uploadOnce = async () => {
+    const metadata = encodeURI(JSON.stringify({
+      parent: parentId,
+      name: fileName,
+    }));
+    const response = await filegardenRequest(
+      'POST',
+      `/users/${options.filegardenUserId}/pipe`,
+      authCookie,
+      fs.readFileSync(record.outputPath),
+      {
+        'Content-Type': 'application/octet-stream',
+        'X-Data': metadata,
+      },
+    );
+    return {
+      response,
+      parsed: parseJsonResponse(response.body, `Filegarden upload ${fileName}`),
+    };
+  };
+
+  let { response, parsed } = await uploadOnce();
+  if (response.statusCode === 422 && /already exists/i.test(parsed.error || response.body || '')) {
+    const refreshedItems = await listFilegardenItems(options, parentId, authCookie);
+    const duplicate = refreshedItems.find(item => item.name === fileName);
+    if (duplicate) {
+      await deleteFilegardenItem(options, authCookie, duplicate);
+      ({ response, parsed } = await uploadOnce());
+    }
+  }
   if (response.statusCode < 200 || response.statusCode >= 300) {
     throw new Error(`Filegarden upload failed for ${fileName} with HTTP ${response.statusCode}: ${parsed.error || 'unknown error'}`);
   }
@@ -570,9 +635,11 @@ async function generate(options) {
 
   const entries = getCardEntries();
   if (!entries.length) throw new Error('No card entries found.');
+  const selectedEntries = selectEntries(entries, options);
+  process.stdout.write(`Selected ${selectedEntries.length}/${entries.length} published card(s).\n`);
 
   const records = [];
-  for (const entry of entries) {
+  for (const entry of selectedEntries) {
     const crop = getCardThumbCrop(entry.slug);
     const sourcePath = path.join(options.cacheDir, `${entry.slug}.png`);
     const outputPath = path.join(options.outDir, `${entry.slug}.jpg`);

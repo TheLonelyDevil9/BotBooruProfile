@@ -14,7 +14,16 @@ This project only maintains the Chub creator profile for `The_Lonely_Devil`.
    ```
 
 4. Vet visual changes on the real Chub page before treating them as done. Use Chrome DevTools MCP and Playwright together against `https://chub.ai/users/The_Lonely_Devil` for live visual/sanitizer/deployment checks.
-5. Publish `app/profile/paste-blob.html` into Chub's About Me field and verify the live page again.
+5. Deploy through the gateway helper from `app/profile`, then verify the live page again:
+
+   ```bash
+   cd /d/AIStuff/ChubProfile/app/profile
+   node build-profile-blob.js
+   node push-profile.js --check
+   node push-profile.js --push
+   ```
+
+   Use `node push-profile.js --dry-run` for planning. A pre-push `--check` is read-only and can exit nonzero when it finds the expected pending difference; after `--push`, rerun `--check` if you want separate read-only confirmation.
 
 Local preview is useful for layout iteration, but it is not authoritative. Chub wraps the profile in Ant Design markup, injects sanitizer output, and applies its own cascade around the bio.
 
@@ -37,8 +46,10 @@ Local preview is useful for layout iteration, but it is not authoritative. Chub 
 
 ## Live Deployment Notes
 
-- A rebuilt `paste-blob.html` can still leave the live profile stale until it is saved through Chub.
-- If using Chub's gateway route, preserve the existing `name`, `profile`, `email`, and `preferred_language` account fields while updating `about_me`.
+- A rebuilt `paste-blob.html` can still leave the live profile stale until `push-profile.js` uploads it through Chub's gateway route.
+- The gateway helper preserves the existing `name`, `profile`, `email`, and `preferred_language` account fields while updating only `about_me`.
+- Token source is `CHUB_TOKEN` first, then `D:/AIStuff/Cardmaking/Tools/chub-token.txt`; never print or commit token values.
+- Manual About Me paste is emergency fallback only if the gateway helper is unavailable or Chub rejects the scripted route.
 - Verify live copy and CSS after save. Chub can reshape lists, inject `<spacer>`, and expose some visual labels through CSS pseudo-elements rather than normal text nodes.
 - The account dropdown and header search dropdown rely on final fixed-position fallbacks because Ant Design may compute portal geometry from a broken live height model. Re-check both after every About Me save.
 - For visual tuning, the preferred loop is live DOM patch, user judgment, source edit, rebuild, live deploy, live verification.

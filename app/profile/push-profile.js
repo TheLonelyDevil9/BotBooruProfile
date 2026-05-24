@@ -9,7 +9,10 @@ const path = require('path');
 const ACCOUNT_ENDPOINT = 'https://gateway.chub.ai/api/account';
 const UPDATE_ENDPOINT = 'https://gateway.chub.ai/user/update';
 const DEFAULT_ARTIFACT_PATH = path.join(__dirname, 'paste-blob.html');
-const TOKEN_FILE_PATH = 'D:/AIStuff/Cardmaking/Tools/chub-token.txt';
+const TOKEN_FILE_PATHS = [
+  'D:/AIStuff/Cardmaking/Tools/chub-token.txt',
+  'D:/AIStuff/Cardmaking/_Tools/chub-token.txt',
+];
 const HTTP_TIMEOUT_MS = 30_000;
 const ERROR_BODY_SNIPPET_CHARS = 240;
 
@@ -35,7 +38,7 @@ Options:
   --file <path>  Artifact to use instead of paste-blob.html next to this script.
 
 Auth:
-  Token source is CHUB_TOKEN first, then D:/AIStuff/Cardmaking/Tools/chub-token.txt.
+  Token source is CHUB_TOKEN first, then the Cardmaking token file.
   Token values and auth header values are never printed.
 
 Safety:
@@ -119,15 +122,16 @@ function readToken() {
     return envToken;
   }
 
-  if (fs.existsSync(TOKEN_FILE_PATH)) {
-    const fileToken = fs.readFileSync(TOKEN_FILE_PATH, 'utf8').trim();
+  for (const tokenFilePath of TOKEN_FILE_PATHS) {
+    if (!fs.existsSync(tokenFilePath)) continue;
+    const fileToken = fs.readFileSync(tokenFilePath, 'utf8').trim();
     if (fileToken) {
       tokenForRedaction = fileToken;
       return fileToken;
     }
   }
 
-  throw new Error('Missing Chub token. Set CHUB_TOKEN or create D:/AIStuff/Cardmaking/Tools/chub-token.txt.');
+  throw new Error('Missing Chub token. Set CHUB_TOKEN or create a Cardmaking token file.');
 }
 
 function redactParsedBody(value, depth = 0) {

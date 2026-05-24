@@ -17,9 +17,10 @@ ChubProfile/
 │       ├── deploy.css               # editable CSS source
 │       ├── editor.html
 │       ├── editor-server.js
-│       ├── paste-blob.html          # generated Chub paste output
+│       ├── paste-blob.html          # generated Chub About Me deploy artifact
 │       ├── profile-content.json     # editable content source
-│       └── profile-template.js
+│       ├── profile-template.js
+│       └── push-profile.js          # gateway About Me deploy helper
 └── docs/
     └── PROFILE.md
 ```

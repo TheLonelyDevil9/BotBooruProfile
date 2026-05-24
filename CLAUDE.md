@@ -4,6 +4,8 @@ Guidance for working in this repository.
 
 Follow the global AI-stack standards hub first: `C:\Users\TheLonelyDevil\.codex\AI_STACK_STANDARDS.md`. Workspace-only routing lives in `D:\AIStuff\AGENTS.md`.
 
+This file is the canonical local operating guide. `AGENTS.md` is the thin compatibility entrypoint and should point here instead of duplicating detailed workflow rules.
+
 ## External North Stars
 
 - Project philosophy: use the active `agent-harness-pointers` skill when the current runtime exposes it; otherwise apply the same repo-legibility, durable-guidance, small-feedback-loop principles directly.
@@ -15,7 +17,7 @@ Use these as durable operating context before making project-wide changes, workf
 
 Custom Chub.ai creator profile for `The_Lonely_Devil`.
 
-The project builds a single About Me paste blob:
+The project builds a single About Me deploy blob:
 
 - profile CSS
 - profile bio HTML
@@ -91,12 +93,23 @@ When checking live output, inspect all three when relevant:
 
 ## Deploy
 
-Rebuild, then publish the contents of:
+Canonical live deploy uses the gateway helper, not manual About Me paste by default:
+
+```bash
+cd /d/AIStuff/ChubProfile/app/profile
+node build-profile-blob.js
+node push-profile.js --check
+node push-profile.js --push
+```
+
+Use `node push-profile.js --dry-run` for planning without writing. A pre-push `--check` is read-only and may report `DIFFER`/exit nonzero when a real change is pending; use it to confirm the local artifact does not already match live before pushing. You can run `--check` again after `--push` when you want a separate read-only verification.
+
+The script uploads the generated artifact:
 
 ```text
 app/profile/paste-blob.html
 ```
 
-into Chub's About Me field. Do not stop at local rebuild when the user asks to patch the live profile.
+through `POST https://gateway.chub.ai/user/update`, preserving the existing `name`, `profile`, `email`, and `preferred_language` account fields while updating only `about_me`. Token source is `CHUB_TOKEN` first, then `D:/AIStuff/Cardmaking/Tools/chub-token.txt`; never print token values in logs, commits, or chat.
 
-If deploying through Chub's gateway route, preserve existing account fields while changing only `about_me`. Use the existing local token file pattern from `D:/AIStuff/Cardmaking/Tools/chub-token.txt`, but never print token values in logs, commits, or chat. See `docs/CHUB-PROFILE-QUIRKS.md` for the route, payload fields, and live verification checklist.
+Manual About Me paste is emergency fallback only if the gateway helper is unavailable or Chub rejects the scripted route. If that fallback is used, paste the full contents of `paste-blob.html`, preserve account fields in the editor, verify the live page, and record why the fallback was necessary. See `docs/CHUB-PROFILE-QUIRKS.md` for the route, payload fields, and live verification checklist.

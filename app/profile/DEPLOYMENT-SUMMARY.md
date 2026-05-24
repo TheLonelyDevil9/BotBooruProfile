@@ -18,13 +18,13 @@
 
 The same final layer enlarges desktop card previews to `min(1760px, calc(100vw - 32px))` by `min(940px, calc(100vh - 88px))` with a `68% / 32%` art/details split.
 
-**Status:** Source CSS and generated blobs must be rebuilt locally, then the rebuilt `paste-blob.html` must be saved through Chub before live verification can pass.
+**Status:** Source CSS and generated blobs must be rebuilt locally, then `push-profile.js` must upload the rebuilt `paste-blob.html` through Chub's gateway before live verification can pass. Manual About Me paste is emergency fallback only.
 
 ### Portal Placement And Spacer-Safe Alignment
 
 **Problem:** Live Chub/Ant Design still positioned the account dropdown and search dropdown offscreen even after lowering the profile z-index ladder. The account menu could receive `inset: -9090px 16px auto auto`, and the search select dropdown could retain `left: -19200px`. Separately, Chub-injected `<spacer>` nodes made some `:nth-child()` alignment rules target the wrong panels and columns.
 
-**Solution:** The latest final `deploy.css` layer pins visible Ant portal surfaces after the pasted profile style wins the cascade:
+**Solution:** The latest final `deploy.css` layer pins visible Ant portal surfaces after the deployed profile style wins the cascade:
 
 - Account menu: scoped to the account menu links, then `position: fixed`, `top: 62px`, `right: 16px`, `inset: 62px 16px auto auto`, capped to the viewport.
 - Header search dropdowns for `rc_select_2` and `rc_select_3`: `position: fixed`, `top: 60px`, `left: 74px`, `inset: 60px auto auto 74px`, width capped to `min(768px, calc(100vw - 96px))`.
@@ -81,14 +81,22 @@ The same final layer enlarges desktop card previews to `min(1760px, calc(100vw -
 
 ## Next Steps
 
-1. **Use the generated paste blob:**
+1. **Build the generated deploy artifact:**
    - Source changes are rebuilt into `D:/AIStuff/ChubProfile/app/profile/paste-blob.html`
    - Use the full generated About Me blob, not only the `<style>` tag
 
-2. **Upload to Chub:**
-   - Go to https://chub.ai/users/The_Lonely_Devil/edit
-   - Paste the new CSS blob into the profile bio field
-   - Save changes
+   ```bash
+   cd /d/AIStuff/ChubProfile/app/profile
+   node build-profile-blob.js
+   ```
+
+2. **Upload to Chub through the gateway helper:**
+   - Optional planning check: `node push-profile.js --dry-run`
+   - Read-only comparison: `node push-profile.js --check` (may report `DIFFER` before a pending update)
+   - Live deploy: `node push-profile.js --push`
+   - The helper reads auth from `CHUB_TOKEN` first, then `D:/AIStuff/Cardmaking/Tools/chub-token.txt`; never print token values.
+   - The gateway payload preserves `name`, `profile`, `email`, and `preferred_language`, and updates only `about_me` with the generated artifact.
+   - Manual About Me paste is emergency fallback only if the gateway helper is unavailable or Chub rejects the scripted route.
 
 3. **Verify on live site:**
    - Hard refresh the profile page (Ctrl+Shift+R)

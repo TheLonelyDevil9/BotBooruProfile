@@ -4,6 +4,8 @@ OpenCode compatibility entrypoint for this Chub profile project.
 
 Follow the global AI-stack standards hub first: `C:\Users\TheLonelyDevil\.codex\AI_STACK_STANDARDS.md`. Workspace-only routing lives in `D:\AIStuff\AGENTS.md`.
 
+Keep this file as the quick entrypoint. `CLAUDE.md` is the canonical local operating guide for source files, build/deploy commands, Chub quirks, live vetting, browser checks, and git expectations.
+
 ## Operating North Stars
 
 - Before substantial project work, use the active `agent-harness-pointers` skill when the current runtime exposes it. If it is unavailable, use the same operating rule directly: keep the repo legible to agents, encode durable guidance in versioned docs/tooling, favor small verifiable feedback loops, and treat human attention as the scarce resource.
@@ -19,10 +21,8 @@ Before changing profile HTML, CSS, copy, deployment snippets, or visual layout, 
 - Rebuild generated files with `node build-profile-blob.js` from `app/profile`.
 - Keep Chub-facing selectors scoped with the `ld-` prefix where possible.
 - Avoid broad Ant Design overrides unless they are already proven necessary on the live page.
-- The deploy artifact is `app/profile/paste-blob.html`.
-- For visual tuning, vet changes on the real Chub profile before committing them: patch the live `https://chub.ai/users/The_Lonely_Devil` DOM temporarily, let the user judge the actual Chub shell, then mirror the approved values into `app/profile/deploy.css` and rebuild `paste-blob.html`.
-- A rebuilt local blob is not a live deployment. After source changes are approved, persist `paste-blob.html` into Chub's About Me field and verify the live page. Keep the workflow and quirks in `docs/CHUB-PROFILE-QUIRKS.md` current.
-- For high-risk visual, live-profile, sanitizer, or deployment checks, use Chrome DevTools MCP and Playwright together against the same live or preview URL. For low-risk local edits, start with rebuild/static checks and escalate to the paired browser path when rendered Chub behavior matters. If a required browser tool is unavailable, report the blocker and any fallback coverage.
+- The generated deploy artifact is `app/profile/paste-blob.html`; the canonical live deploy uploads that artifact through `app/profile/push-profile.js`.
+- For visual tuning, deploys, live-profile checks, and Chub sanitizer behavior, follow `CLAUDE.md` and `docs/CHUB-PROFILE-QUIRKS.md` rather than duplicating the workflow here.
 
 ## Git History
 
@@ -32,6 +32,5 @@ Before changing profile HTML, CSS, copy, deployment snippets, or visual layout, 
 ## Local Tooling Notes
 
 - Use Git Bash for repo commands unless a task explicitly requires another shell.
-- From PowerShell, run commands through `C:\Program Files\Git\bin\bash.exe`, for example:
-  `& 'C:\Program Files\Git\bin\bash.exe' -lc 'cd /d/AIStuff/ChubProfile && <command>'`
+- From PowerShell, run commands through `C:\Program Files\Git\bin\bash.exe`; see `CLAUDE.md` for the wrapper example.
 - Treat WSL notes in older docs as historical fallback guidance. If a command must use WSL, say why in the handoff.

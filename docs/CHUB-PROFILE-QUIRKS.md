@@ -4,10 +4,22 @@ This document is the scratchpad for every hard-earned limitation in this profile
 
 ## Deploy Model
 
-- The only artifact the user actually pastes into Chub is `app/profile/paste-blob.html`.
-- `app/profile/deploy-bio.html` is generated for debugging and local inspection. It is not the intended paste target.
+- Canonical live deploy is the gateway push helper, not manual About Me paste.
+- `app/profile/paste-blob.html` remains the generated deploy artifact; `app/profile/push-profile.js` uploads its full contents to Chub's `about_me` field.
+- `app/profile/deploy-bio.html` is generated for debugging and local inspection. It is not the intended deploy target.
 - Do not hand-edit generated files. Change `app/profile/profile-content.json`, `app/profile/profile-template.js`, or `app/profile/deploy.css`, then rebuild with `node build-profile-blob.js` from `app/profile`.
-- A correct local blob does not mean the live Chub profile is current. The generated `paste-blob.html` must be saved back into Chub's About Me field before live verification can pass.
+- Canonical deploy flow:
+
+  ```bash
+  cd /d/AIStuff/ChubProfile/app/profile
+  node build-profile-blob.js
+  node push-profile.js --check
+  node push-profile.js --push
+  ```
+
+- Use `node push-profile.js --dry-run` to inspect the planned account-field preservation and artifact hashes without writing.
+- `node push-profile.js --check` is read-only. Before a push it may report `DIFFER` and exit nonzero when a change is pending; after a push it should report `MATCH` when live `about_me` matches the local artifact.
+- A correct local blob does not mean the live Chub profile is current. The generated `paste-blob.html` must be uploaded through the gateway helper before live verification can pass.
 - Chub's custom CSS upload path has been unreliable for this profile. The working path is an inline `<style>` inserted inside the root `<div class="ld-bio">`.
 - The builder injects the CSS into the first root `<div>` through `app/profile/blob-generator.js`.
 - The preferred visual-tuning loop is:
@@ -15,26 +27,26 @@ This document is the scratchpad for every hard-earned limitation in this profile
   2. Let the user judge the real Chub shell.
   3. Mirror approved values into source files.
   4. Rebuild `paste-blob.html`.
-  5. Persist the blob into Chub.
+  5. Deploy with `node push-profile.js --push` through the gateway helper.
   6. Verify the live page again.
+- Manual About Me paste is emergency fallback only if the gateway helper is unavailable or Chub rejects the scripted route. If used, paste the full contents of `paste-blob.html`, preserve the rest of the account fields in the editor, verify live, and record why the fallback was necessary.
 
 ## Live Chub Save Route
 
-The Chub profile editor saves through the gateway, not through this repo.
+`push-profile.js` saves through Chub's gateway route.
 
 - Account read:
   `GET https://gateway.chub.ai/api/account?nocache=<timestamp>&tokens=false`
 - Profile save:
   `POST https://gateway.chub.ai/user/update`
-- Auth headers used by Chub:
-  - `CH-API-KEY`
-  - `samwise`
-- Local token source pattern:
-  `D:/AIStuff/Cardmaking/Tools/chub-token.txt`
+- Auth/token source:
+  - `CHUB_TOKEN`
+  - fallback file `D:/AIStuff/Cardmaking/Tools/chub-token.txt`
+- The helper sends the token in `CH-API-KEY`. Browser captures may also show Chub session details such as `samwise`; do not log or document header values.
 
-Never print, paste, commit, or summarize token values. It is acceptable to document header names and file paths.
+Never print, expose, commit, or summarize token values. It is acceptable to document header names and file paths.
 
-When saving through the gateway route, preserve the existing account fields and change only the generated bio payload:
+When saving through the gateway route, preserve the existing account fields and update only the generated bio payload:
 
 - `about_me`: full contents of `app/profile/paste-blob.html`
 - `name`: existing account name
@@ -42,7 +54,7 @@ When saving through the gateway route, preserve the existing account fields and 
 - `email`: existing account email
 - `preferred_language`: existing account language, defaulting to `en-us` only when absent
 
-After a save, reload `https://chub.ai/users/The_Lonely_Devil` and inspect the live DOM. Do not trust the local preview or the generated file as proof of deployment.
+After a gateway push, reload `https://chub.ai/users/The_Lonely_Devil` and inspect the live DOM. Do not trust the local preview or the generated file as proof of deployment.
 
 ## Local Tooling
 
@@ -55,7 +67,7 @@ After a save, reload `https://chub.ai/users/The_Lonely_Devil` and inspect the li
 
 ## CSS Generation
 
-- `app/profile/blob-generator.js` minifies CSS before creating the paste blob.
+- `app/profile/blob-generator.js` minifies CSS before creating the generated deploy blob.
 - The minifier must preserve spaces before pseudo selectors. Removing spaces around `:` broke selectors such as `[role="tabpanel"] .ant-list-items:has(...)` by turning descendant selectors into invalid or different selectors.
 - Current minifier rule intentionally does not include `:`:
   `.replace(/\s*([{};,>~])\s*/g, '$1')`
@@ -140,7 +152,7 @@ Live inspection on 2026-05-14 showed that the Chub shell can report `document.do
 - Chub's header search currently exposes `rc_select_2` and `rc_select_3` controls. The source fallback targets visible dropdowns containing those IDs and pins them at `top: 60px`, `left: 74px`, `width: min(768px, calc(100vw - 96px))`.
 - The account menu fallback pins visible bottom-right dropdowns at `top: 62px`, `right: 16px`, and `max-height: min(620px, calc(100vh - 78px))`. It is scoped to current account-menu links such as `/profile`, `/create_character`, `/create_lorebook`, `/my_characters`, and `/my_chats` so ordinary card/context dropdowns are not forced into the avatar menu position.
 
-The live-proven test injected the fallback after the pasted profile style. In source, keep the final fallback after older recovered max-int blocks so it wins the cascade.
+The live-proven test injected the fallback after the deployed profile style. In source, keep the final fallback after older recovered max-int blocks so it wins the cascade.
 
 ## Card Browser Grid
 
@@ -238,13 +250,13 @@ The live-proven test injected the fallback after the pasted profile style. In so
 ## Profile Images And External Links
 
 - Profile media links are generated with `target="_blank" rel="noopener noreferrer"`.
-- If Chub still opens a profile image in the same tab after deployment, likely causes include sanitizer changes, SPA link interception, or an old paste still being live.
+- If Chub still opens a profile image in the same tab after deployment, likely causes include sanitizer changes, SPA link interception, or an old About Me blob still being live.
 - Inline JavaScript click handlers may be stripped by Chub and should not be assumed reliable without live verification.
 
 ## Verification Checklist
 
 - Rebuild from `app/profile` after every source edit.
-- If the user wants to see the real result, publish the rebuilt blob to Chub before asking them to judge it.
+- If the user wants to see the real result, push the rebuilt blob through the gateway before asking them to judge it.
 - Check `paste-blob.html` for valid `:has()` selectors with required descendant spaces.
 - On the live page, confirm requested copy through `.textContent` and `.innerHTML`.
 - On the live page, confirm generated labels or hover helper text through pseudo-element computed styles where relevant.
@@ -266,7 +278,7 @@ The live-proven test injected the fallback after the pasted profile style. In so
 
 ## Known Failure Signatures
 
-- **Local preview is fixed but Chub is unchanged**: the rebuilt blob was not saved back into Chub. Persist `paste-blob.html` through the Chub editor or gateway route, then reload the live profile.
+- **Local preview is fixed but Chub is unchanged**: the rebuilt blob was not pushed through the gateway. Run `node push-profile.js --check`, then `node push-profile.js --push`; use manual editor paste only as an emergency fallback, then reload the live profile.
 - **Live copy appears unfixed but source is correct**: Chub may still be serving the previous About Me blob, or the check is reading the wrong DOM surface. Verify account save status, then inspect `.innerHTML`, `.textContent`, and pseudo-element content.
 - **Pure black pill is still tinted**: a Chub/Ant Design background or gradient is winning. Re-check the final high-specificity `html body .ant-col-lg-6` overrides and make sure `background-image:none` is included.
 - **Disclaimer spacing works locally but not live**: Chub may have stripped the `<ul>` wrapper. Keep both `ul.ld-list > li:last-of-type` and direct-section `> li:last-of-type` selectors.
@@ -280,8 +292,8 @@ The live-proven test injected the fallback after the pasted profile style. In so
 - **Normal stat numbers clip at 120% zoom**: the image column is too narrow or `.fake-ribbon` children can shrink. Raise grid/card minima before shrinking type.
 - **Normal tags have shaved borders/text**: `.custom-scroll`, `.custom-scroll > .mt-2`, or `.ant-tag` are clipping with too-small line-height. Restore the final tag anti-clip rules.
 - **Tags sit directly under the tagline**: the right card data column lost its bottom-aligned flex layout. The tags and creator line should live in the lower metadata group, visually aligned near the bottom of the normal card.
-- **Profile images open in the same tab**: confirm the live pasted markup contains `target="_blank"`. If it does, Chub may be intercepting anchor clicks at the SPA layer.
-- **Account dropdown exists but is invisible**: inspect `.ant-dropdown-placement-bottomRight` for negative inline `inset` or `top` values such as `-9090px`. The final fixed-position fallback must be after the pasted profile style, scoped to the account menu links, and should compute to `position: fixed`, `top: 62px`, `right: 16px`.
+- **Profile images open in the same tab**: confirm the live About Me markup contains `target="_blank"`. If it does, Chub may be intercepting anchor clicks at the SPA layer.
+- **Account dropdown exists but is invisible**: inspect `.ant-dropdown-placement-bottomRight` for negative inline `inset` or `top` values such as `-9090px`. The final fixed-position fallback must be after the deployed profile style, scoped to the account menu links, and should compute to `position: fixed`, `top: 62px`, `right: 16px`.
 - **Search dropdown focus works but options are offscreen**: inspect `.ant-select-dropdown-placement-bottomLeft` for `left: -19200px` or a negative inset. The final search fallback must set `position: fixed`, `top: 60px`, `left: 74px`, `right: auto`, and `inset: 60px auto auto 74px`.
 - **Hero request card or profile columns look offset after save**: Chub's hidden `<spacer>` nodes likely shifted an old `:nth-child()` selector. Add a final spacer-safe override using real classes or sibling selectors instead of child index assumptions.
 
