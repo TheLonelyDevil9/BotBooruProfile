@@ -65,6 +65,7 @@ const CARD_THUMB_CROPS = Object.freeze({
   'natalie-137d843c759e': { x: '50%', y: '24%' },
   'nefer-b727bb047c46': { x: '55%', y: '42%' },
   'nicole-1d6ba8ccddd6': { x: '50%', y: '30%' },
+  'nicole-reeyn-7f3884c38f5a': { x: '50%', y: '12%' },
   'nino-nakano-ccb8aabbf52c': { x: '50%', y: '12%' },
   'noelle-6f9ea3a121a4': { x: '50%', y: '16%' },
   'robin-b9f03eed7ebc': { x: '50%', y: '16%' },

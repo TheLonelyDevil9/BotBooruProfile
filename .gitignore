@@ -5,6 +5,7 @@
 .stfolder/
 
 # Local screenshots and visual scratch artifacts
+screenshots/
 app/profile/profile-*.png
 app/profile/demo-*.png
 app/profile/live-*.png
