@@ -2522,6 +2522,24 @@ html body .ant-dropdown:not(.ant-dropdown-hidden)[class*="ant-dropdown-placement
   transform: none !important;
 }
 
+/* Final desktop placement for Chub's native profile actions: keep the follow
+   cluster centered to the viewport and the block action pinned to the edge. */
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  html body .ant-col-lg-6 > .text-sm {
+    top: calc(72px + env(safe-area-inset-top)) !important;
+    left: 50vw !important;
+    right: auto !important;
+    max-width: min(560px, calc(100vw - 260px)) !important;
+    transform: translateX(-50%) !important;
+  }
+
+  html body .ant-col-lg-6 > button.ant-btn.ant-btn-default.ant-btn-color-default.ant-btn-variant-outlined:not(.ant-btn-block) {
+    top: calc(72px + env(safe-area-inset-top)) !important;
+    right: max(8px, env(safe-area-inset-right)) !important;
+    bottom: auto !important;
+  }
+}
+
 /* Final mobile wallpaper viewport fix: body backgrounds scroll with the page on
    Chub mobile, so keep the wallpaper in a fixed viewport layer instead. */
 @media (hover: none), (pointer: coarse), (max-width: 899px) {
