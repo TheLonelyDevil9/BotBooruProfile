@@ -10,7 +10,9 @@ const dir = __dirname;
 const css = fs.readFileSync(path.join(dir, 'deploy.css'), 'utf8');
 const content = JSON.parse(fs.readFileSync(path.join(dir, 'profile-content.json'), 'utf8'));
 const bio = buildDeployBio(content);
-const generatedCss = /--ld-card-(?:preview-art|full-art)/.test(css) ? buildCardPreviewCss() : '';
+const generatedCss = /--ld-card-(?:preview-art|full-art)/.test(css)
+  ? buildCardPreviewCss(undefined, { slugs: content.cardPreviewSlugs })
+  : '';
 const cssWithGenerated = generatedCss ? `${css}\n\n${generatedCss}` : css;
 const { blob, cssMin, bioTrimmed } = buildPasteBlob(cssWithGenerated, bio);
 const bioPath = path.join(dir, 'deploy-bio.html');

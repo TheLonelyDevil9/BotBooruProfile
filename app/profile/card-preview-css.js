@@ -207,11 +207,23 @@ function getCardEntries(publishedDir = DEFAULT_PUBLISHED_DIR) {
     .sort((a, b) => a.slug.localeCompare(b.slug));
 }
 
+function normalizeSlugFilter(slugs) {
+  if (!Array.isArray(slugs) || !slugs.length) return null;
+  const filter = new Set(
+    slugs
+      .map((slug) => String(slug || '').trim())
+      .filter(Boolean),
+  );
+  return filter.size ? filter : null;
+}
+
 function buildCardPreviewCss(
   publishedDir = DEFAULT_PUBLISHED_DIR,
   options = {},
 ) {
-  const entries = getCardEntries(publishedDir);
+  const slugFilter = normalizeSlugFilter(options.slugs);
+  const entries = getCardEntries(publishedDir)
+    .filter((entry) => !slugFilter || slugFilter.has(entry.slug));
   if (!entries.length) {
     return '';
   }
