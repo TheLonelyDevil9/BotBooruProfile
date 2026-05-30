@@ -506,6 +506,10 @@ html body .ant-layout .ld-bio .ld-footer-link {
   align-items: center;
 }
 
+.ld-hero-panel-main--text-only {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .ld-hero-stack {
   display: flex;
   flex-direction: column;
@@ -531,6 +535,30 @@ html body .ant-layout .ld-bio .ld-footer-link {
 .ld-hero-focus {
   display: grid;
   gap: 11px;
+}
+
+.ld-hero-focus-body {
+  display: grid;
+  gap: 12px;
+  max-width: min(100%, 84ch);
+  color: var(--ld-copy);
+  font-size: clamp(1rem, 0.96rem + 0.12vw, 1.08rem);
+  line-height: 1.62;
+}
+
+.ld-hero-focus-body p {
+  margin: 0;
+  max-width: none;
+}
+
+.ld-hero-focus-body code {
+  padding: 0.02rem 0.28rem 0.08rem;
+  border: 1px solid var(--ld-border-soft);
+  border-radius: 5px;
+  background: oklch(0.02 0.008 48 / 0.72);
+  color: var(--ld-orange-hot);
+  font-family: ui-monospace, 'Cascadia Code', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.92em;
 }
 
 #ld-top .ld-hero-focus-label,

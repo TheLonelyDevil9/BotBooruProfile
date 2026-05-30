@@ -9,6 +9,7 @@ function escapeHtml(value) {
 
 function formatInline(text) {
   return escapeHtml(text)
+    .replace(/`([^`]+?)`/g, '<code>$1</code>')
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/~~(.+?)~~/g, '<s>$1</s>')
     .replace(/\*(?!\*)([^*]+?)\*(?!\*)/g, '<em>$1</em>')
@@ -155,6 +156,18 @@ function renderActions(actions) {
   return actions.map((item) => `                  <a class="${actionClassName(item)}" href="${escapeHtml(item.url)}">${formatInline(item.label)}</a>`).join('\n');
 }
 
+function renderHeroFocus(hero) {
+  if (Array.isArray(hero.focusBody) && hero.focusBody.length) {
+    return `<div class="ld-hero-focus-body">
+${hero.focusBody.map((paragraph) => `                    <p>${formatMultiline(paragraph)}</p>`).join('\n')}
+                  </div>`;
+  }
+
+  return `<ul class="ld-list ld-profile-list">
+${renderSimpleList(hero.focusItems ?? []).replace(/^/gm, '                    ')}
+                  </ul>`;
+}
+
 function isVideoUrl(url) {
   return /\.(mp4|webm|mov)(?:[?#]|$)/i.test(String(url ?? ''));
 }
@@ -168,6 +181,15 @@ function renderMedia(url, className, alt, lazy = false) {
 }
 
 function buildDeployBio(content) {
+  const heroMedia = [
+    renderMedia(content.hero.cornerGifUrl, 'ld-hero-corner-gif', 'Firefly squish gif'),
+    renderMedia(content.hero.endingGifUrl, 'ld-hero-ending-gif', 'Ending profile gif'),
+    renderMedia(content.hero.peekGifUrl, 'ld-hero-peek-gif', 'Firefly peek gif'),
+  ].filter(Boolean).join('\n                ');
+  const heroPanelClass = heroMedia
+    ? 'ld-hero-panel-main'
+    : 'ld-hero-panel-main ld-hero-panel-main--text-only';
+
   return `<div class="ld-bio" data-ld-bio-root="1" id="ld-top">
       <section class="ld-profile-hero">
         <div class="ld-profile-card">
@@ -189,26 +211,22 @@ ${renderSimpleList(content.topCard.aboutBullets).replace(/^/gm, '              '
 
         <div class="ld-profile-intro">
           <section class="ld-hero-panel">
-            <div class="ld-hero-panel-main">
+            <div class="${heroPanelClass}">
               <div class="ld-hero-stack">
                 <div class="ld-hero-heading-row">
                   <h2 class="ld-hero-heading"><a href="${escapeHtml(content.hero.titleUrl)}">${formatInline(content.hero.title)}</a></h2>
                 </div>
                 <div class="ld-hero-focus">
                   <p class="ld-hero-focus-label">${formatInline(content.hero.focusLabel)}</p>
-                  <ul class="ld-list ld-profile-list">
-${renderSimpleList(content.hero.focusItems).replace(/^/gm, '                    ')}
-                  </ul>
+                  ${renderHeroFocus(content.hero)}
                 </div>
                 <div class="ld-hero-actions">
 ${renderActions(content.hero.actions)}
                 </div>
               </div>
-              <div class="ld-hero-media-stack">
-                ${renderMedia(content.hero.cornerGifUrl, 'ld-hero-corner-gif', 'Firefly squish gif')}
-                ${renderMedia(content.hero.endingGifUrl, 'ld-hero-ending-gif', 'Ending profile gif')}
-                ${renderMedia(content.hero.peekGifUrl, 'ld-hero-peek-gif', 'Firefly peek gif')}
-              </div>
+              ${heroMedia ? `<div class="ld-hero-media-stack">
+                ${heroMedia}
+              </div>` : ''}
             </div>
           </section>
           ${renderMedia(content.hero.bannerUrl, 'ld-hero-media', 'Firefly animated banner')}

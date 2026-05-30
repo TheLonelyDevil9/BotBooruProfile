@@ -26,9 +26,11 @@
     "title": "Firefly!",
     "titleUrl": "https://chub.ai/characters/The_Lonely_Devil/firefly-acbe9d8b183b",
     "focusLabel": "Currently focusing on:",
-    "focusItems": [
-      "Releasing new cards",
-      "Auditing currently-posted cards (again)"
+    "focusBody": [
+      "\"Recently, over half my cards were shadowbanned for no reason, despite my efforts to keep them all adult. When reaching out to them via discord, I was told there's no timelines as the `purge` is currently ongoing. This is unacceptable and I am deciding to move on to [BotBooru](https://botbooru.com/profile/25826), with a personal backup for my own consumption (if you wish to follow me long-term) on a GitHub.io page ([TBD]).",
+      "This message will stay up for exactly 1 week (06/Jun 2026), then I will be deleting all my cards from Chub.",
+      "For those that followed me so far and supported me, thank you! For the haters, yay I'm gone ehe.",
+      "So long, and thanks for all the fish.\""
     ],
     "actions": [
       {
@@ -49,9 +51,9 @@
         "variant": "support"
       }
     ],
-    "cornerGifUrl": "https://file.garden/aeRvgfxptRQB-dB-/_7%20FFSquish.gif",
-    "endingGifUrl": "https://file.garden/aeRvgfxptRQB-dB-/_5%20Ending%20GIF.gif",
-    "peekGifUrl": "https://file.garden/aeRvgfxptRQB-dB-/fireflypeek.gif",
+    "cornerGifUrl": "",
+    "endingGifUrl": "",
+    "peekGifUrl": "",
     "bannerUrl": "https://file.garden/aeRvgfxptRQB-dB-/_2%20Top%20Firefly.GIF"
   },
   "leftColumn": {
