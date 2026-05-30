@@ -28,12 +28,12 @@
   "hero": {
     "title": "Firefly!",
     "titleUrl": "https://chub.ai/characters/The_Lonely_Devil/firefly-acbe9d8b183b",
-    "focusLabel": "Currently focusing on:",
+    "focusLabel": "",
     "focusBody": [
-      "\"Recently, over half my cards were shadowbanned for no reason, despite my efforts to keep them all adult. When reaching out to them via discord, I was told there's no timelines as the `purge` is currently ongoing. This is unacceptable and I am deciding to move on to [BotBooru](https://botbooru.com/profile/25826), with a personal backup for my own consumption (if you wish to follow me long-term) on a GitHub.io page ([TBD]).",
-      "This message will stay up for exactly 1 week (06/Jun 2026), then I will be deleting all my cards from Chub.",
+      "Recently, over half my cards were shadowbanned for no reason, despite my efforts to keep them all adult. When reaching out to them via discord, I was told there's no timelines as the `purge` is currently ongoing. This is unacceptable and I am deciding to move on to [BotBooru](https://botbooru.com/profile/25826), with a personal backup for my own consumption (if you wish to follow me long-term) on a GitHub.io page ([TBD]).",
+      "This message will stay up for exactly 1 week (06/Jun 2026), then I will be deleting my last card from Chub (most are gone already.",
       "For those that followed me so far and supported me, thank you! For the haters, yay I'm gone ehe.",
-      "So long, and thanks for all the fish.\""
+      "So long, and thanks for all the fish."
     ],
     "actions": [
       {

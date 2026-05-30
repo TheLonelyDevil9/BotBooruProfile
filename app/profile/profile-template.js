@@ -189,6 +189,9 @@ function buildDeployBio(content) {
   const heroPanelClass = heroMedia
     ? 'ld-hero-panel-main'
     : 'ld-hero-panel-main ld-hero-panel-main--text-only';
+  const heroFocusLabel = content.hero.focusLabel
+    ? `                  <p class="ld-hero-focus-label">${formatInline(content.hero.focusLabel)}</p>`
+    : '';
 
   return `<div class="ld-bio" data-ld-bio-root="1" id="ld-top">
       <section class="ld-profile-hero">
@@ -217,7 +220,7 @@ ${renderSimpleList(content.topCard.aboutBullets).replace(/^/gm, '              '
                   <h2 class="ld-hero-heading"><a href="${escapeHtml(content.hero.titleUrl)}">${formatInline(content.hero.title)}</a></h2>
                 </div>
                 <div class="ld-hero-focus">
-                  <p class="ld-hero-focus-label">${formatInline(content.hero.focusLabel)}</p>
+${heroFocusLabel}
                   ${renderHeroFocus(content.hero)}
                 </div>
                 <div class="ld-hero-actions">
