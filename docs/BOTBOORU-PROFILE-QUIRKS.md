@@ -17,6 +17,9 @@ This document is the scratchpad for every hard-earned limitation in this profile
 - `.profile-stats-sort-row` is re-ordered below the bio; its `margin-top` (56px) creates the wallpaper-reveal gap between the bio panels and the cards/stats section.
 - Every rule needs `!important`: the site styles with Tailwind utility classes that otherwise win.
 - Page-level selectors in active use: `body`, `#profile-banner`, `.profile-avatar-wrap`, `.profile-identity-row`, `.profile-identity-info-text`, `.profile-meta-strip`, `.profile-meta-chip`, `.profile-stat-pill`, `#profile-uploads-sort-bar`, `.profile-stats-sort-row`, `.profile-followers-following`. BotBooru is in active beta; re-verify after site updates.
+- Stale selector (2026-06-10): `#profile-uploads-sort-bar` no longer exists on the live page; the cards/stats tab row is `.profile-stats-sort-row` containing `#profile-stats`, `#tab-uploads`, `#tab-favorites`, `#tab-comments`.
+- Hash navigation is dead on the live site: the SPA router strips `location.hash` (sync, before paint) and native `#fragment` anchor scrolling never fires, even from trusted clicks or direct URL loads. In-page jumps must use inline `onclick` with `scrollIntoView()`/`scrollTo()` and `return false`.
+- Inline `onclick` handlers in the bio blob survive the sanitizer and run (CSP `script-src` includes `unsafe-inline`, confirmed 2026-06-10). The `.ld-jump` fixed pills (Cards / Top) rely on this; re-verify after site updates since a sanitizer or CSP tightening silently kills them.
 - Identity pills are matched structurally (`span[class*="rounded-full"][class*="uppercase"]`, `span.rank-donator-pill`, `span[class*="bg-emerald-900"]`, `span[class*="bg-sky-900"]`); new ranks may need new rules.
 
 ## Rendering Notes

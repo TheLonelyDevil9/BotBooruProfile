@@ -33,6 +33,9 @@ html, body { margin: 0; }
 const foot = `</div>
 </div>
 </div>
+<div class="profile-stats-sort-row" style="width: min(100% - 24px, 966px); margin: 56px auto 0; padding: 24px 0 480px; color: #888; font: 14px sans-serif;">
+<span id="profile-stats">[cards/stats row stub for jump-pill testing]</span>
+</div>
 </body>
 </html>
 `;
