@@ -11,9 +11,6 @@ app/profile/demo-*.png
 app/profile/live-*.png
 app/profile/search-*.png
 app/profile/test-*.png
-app/profile/.card-thumbnail-cache/
-app/profile/filegarden-card-thumbnails/
-chub-card-polish-mock.png
 
 # Brainstorm / superpowers scratch
 .superpowers/
@@ -23,10 +20,6 @@ chub-card-polish-mock.png
 *.backup
 *.tmp
 Profile Backup*.md
-
-# Stray bundled app chunks copied into the workspace root
-appearance-settings-*.js
-use-resolved-theme-variant-*.js
 
 # Logs and dependency caches
 *.log
