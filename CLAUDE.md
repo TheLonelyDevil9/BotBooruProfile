@@ -10,6 +10,8 @@ This file is the canonical local operating guide. `AGENTS.md` is the thin compat
 
 Custom BotBooru creator profile for `The_Lonely_Devil` at `https://botbooru.com/profile/25826`.
 
+`BBP` is the standing nickname for this project (registered in the global standards hub).
+
 The project maintains a single profile bio blob:
 
 - profile CSS (page-level restyles + bio panels)
@@ -33,7 +35,7 @@ cd "/g/AI Stuff/BotBooruProfile/app/profile"
 node build-preview.js
 ```
 
-The builder regenerates `preview.html` and fails if `bio.html` exceeds the 22,500-byte bio budget.
+The builder regenerates `preview.html` and fails if `bio.html` exceeds the 32,768-byte (32KB) bio budget.
 
 ## Git History
 

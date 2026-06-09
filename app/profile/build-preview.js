@@ -40,7 +40,7 @@ const foot = `</div>
 fs.writeFileSync(outPath, head + bio + foot);
 
 const bioBytes = Buffer.byteLength(bio);
-const budget = 22500;
+const budget = 32768;
 console.log(`bio.html: ${bioBytes} bytes (budget ${budget}, ${budget - bioBytes} free)`);
 console.log(`wrote ${outPath}`);
 if (bioBytes > budget) {

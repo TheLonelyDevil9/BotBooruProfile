@@ -8,7 +8,7 @@ This document is the scratchpad for every hard-earned limitation in this profile
 - BotBooru injects the blob as `#custom-profile-root` inside `div.profile-identity-right-stack` on the profile page.
 - Deployment is a manual paste into the logged-in profile bio editor. There is no scripted write path; the user's save is the public-write gate.
 - `app/profile/bio.html` is the editable source and the paste artifact at the same time. `preview.html` is generated; do not hand-edit it.
-- Size budget: keep the blob at or under 22,500 bytes (a 22,496-byte blob was accepted live; treat 22,500 as the ceiling). `build-preview.js` enforces this.
+- Size budget: keep the blob at or under 32,768 bytes (32KB, confirmed ceiling as of 2026-06-10; earlier 22,500-byte guidance is obsolete). `build-preview.js` enforces this.
 
 ## Page Integration Contract
 
