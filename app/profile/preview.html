@@ -89,6 +89,7 @@ body::after {
 
 html {
   background: var(--ld-deep) !important;
+  scroll-behavior: smooth !important;
 }
 
 #main-content,
@@ -290,6 +291,7 @@ main,
 }
 
 #custom-profile-root .ld-bb-a {
+  position: relative !important;
   display: grid !important;
   grid-template-columns: minmax(230px, 0.74fr) minmax(0, 1.6fr) !important;
   gap: 14px !important;
@@ -428,6 +430,7 @@ main,
   min-height: 30px !important;
   padding: 6px 14px !important;
   font-size: 0.78rem !important;
+  cursor: pointer !important;
   background: oklch(0.10 0.016 48 / 0.93) !important;
   box-shadow: inset 0 1px 0 oklch(0.95 0.01 70 / 0.08), 0 10px 26px oklch(0.02 0.012 48 / 0.55) !important;
 }
@@ -435,6 +438,23 @@ main,
 #custom-profile-root .ld-jump .ld-pill:hover {
   color: var(--ld-ink) !important;
   border-color: var(--ld-orange-hot) !important;
+}
+
+#custom-profile-root .ld-jump-anchor {
+  position: absolute !important;
+  left: 0 !important;
+  width: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  appearance: none !important;
+}
+
+#custom-profile-root #ld-jump-anchor-top {
+  top: -9999px !important;
+  height: 1px !important;
 }
 
 #custom-profile-root .ld-signal {
@@ -664,9 +684,9 @@ main,
       </div>
     </article>
   </div>
+  <input type="checkbox" id="ld-jump-anchor-top" class="ld-jump-anchor" tabindex="-1">
   <nav class="ld-jump" aria-label="Quick jumps">
-    <a class="ld-pill" href="#" onclick="(document.querySelector('.profile-stats-sort-row')||document.getElementById('profile-stats'))?.scrollIntoView({behavior:'smooth'});return false">Cards &darr;</a>
-    <a class="ld-pill" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Top &uarr;</a>
+    <label class="ld-pill" for="ld-jump-anchor-top">Top &uarr;</label>
   </nav>
 </section>
 </div>
