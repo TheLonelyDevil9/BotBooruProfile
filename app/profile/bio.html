@@ -491,6 +491,20 @@ main,
 
 #custom-profile-root .ld-wide {
   grid-column: 1 / -1 !important;
+  padding: 16px !important;
+}
+
+#custom-profile-root .ld-links-grid {
+  grid-template-columns: 1.3fr 1fr 0.85fr !important;
+  gap: 12px 26px !important;
+  align-items: start !important;
+}
+
+#custom-profile-root .ld-links-col {
+  display: grid !important;
+  gap: 10px !important;
+  align-content: start !important;
+  min-width: 0 !important;
 }
 
 #custom-profile-root .ld-list {
@@ -573,7 +587,7 @@ main,
 
 @media (max-width: 1120px) {
   #custom-profile-root .ld-bb-a {
-    grid-template-columns: minmax(0, 1.38fr) minmax(220px, 0.62fr) !important;
+    grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr) !important;
   }
 }
 
@@ -583,7 +597,8 @@ main,
   }
 
   #custom-profile-root .ld-bb-a,
-  #custom-profile-root .ld-right-stack {
+  #custom-profile-root .ld-right-stack,
+  #custom-profile-root .ld-links-grid {
     grid-template-columns: 1fr !important;
   }
 
@@ -642,7 +657,7 @@ main,
         <li>Rigid in my ways, so feedback bounces off unless it makes sense.</li>
       </ul>
     </article>
-    <article class="ld-panel ld-wide">
+    <article class="ld-panel">
       <h3>Inspiration:</h3>
       <ul class="ld-list">
         <li>Heavily inspired by <a href="https://discord.gg/Nbv9pQ88Xb" target="_blank" rel="noopener noreferrer">SleepDeprived03's</a> work (search "Sleep" in the NSFW cards channel to find his two main threads). Rest in peace, you legend.</li>
@@ -650,25 +665,31 @@ main,
         <li>As he once requested, I'll be porting SleepDeprived03's cards onto BotBooru as soon as my WIP and Backlog are done.</li>
       </ul>
     </article>
-    <article class="ld-panel ld-wide">
-      <h3>Links / Credits:</h3>
-      <div class="ld-copy-block">
+  </div>
+  <article class="ld-panel ld-wide">
+    <h3>Links / Credits:</h3>
+    <div class="ld-copy-block ld-links-grid">
+      <div class="ld-links-col">
         <ul class="ld-list">
           <li>Creator of <a href="https://github.com/TheLonelyDevil9/discord-pals" target="_blank" rel="noopener noreferrer">Discord Pals</a>, with heavy inspiration from Marinara Spaghetti, and feedback and suggestions from Geechan, Purachina, and all the lovely souls over on Febs' Bruary, among many others.</li>
           <li>Primary contributor to <a href="https://github.com/platberlitz/SillyBunny" target="_blank" rel="noopener noreferrer">SillyBunny</a>, a fast customized fork of <a href="https://github.com/SillyTavern/SillyTavern" target="_blank" rel="noopener noreferrer">SillyTavern</a>.</li>
           <li>Minor contributor to <a href="https://github.com/Pasta-Devs/Marinara-Engine" target="_blank" rel="noopener noreferrer">Marinara Engine</a>, the next big thing in RP, from the Pasta Devs.</li>
         </ul>
+      </div>
+      <div class="ld-links-col">
         <h4>Recommended Reading:</h4>
         <ul class="ld-list">
           <li><a href="https://rentry.org/Sukino-Findings" target="_blank" rel="noopener noreferrer">Sukino's Findings</a> - the amazing one-stop shop.</li>
           <li><a href="https://rentry.org/geechan" target="_blank" rel="noopener noreferrer">Geechan's Rentry</a> - amazing hand-written cards and prompt presets that slap without hijacking your tone/style.</li>
           <li>LLMs? <a href="https://api.linkapi.ai" target="_blank" rel="noopener noreferrer">Think LinkAPI</a> - professional shilling. I pay for the service too, it's great.</li>
         </ul>
+      </div>
+      <div class="ld-links-col">
         <h4>Requests?</h4>
         <p>Use the <a href="https://marshmallow-qa.com/xivrxgkzwdryg9k" target="_blank" rel="noopener noreferrer">Marshmallow</a> link, or the "Suggest a Character" button. No guarantees: I only make characters I like making, in the order I like making them in.</p>
       </div>
-    </article>
-  </div>
+    </div>
+  </article>
   <input type="checkbox" id="ld-jump-anchor-top" class="ld-jump-anchor" tabindex="-1">
   <nav class="ld-jump" aria-label="Quick jumps">
     <label class="ld-pill" for="ld-jump-anchor-top">Top &uarr;</label>
