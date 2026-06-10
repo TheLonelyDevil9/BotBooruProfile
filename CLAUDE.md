@@ -57,12 +57,13 @@ Use Chrome DevTools MCP against `https://botbooru.com/profile/25826` for live vi
 
 ## Deploy
 
-Deployment is a manual paste; there is no scripted write path to BotBooru.
+There is no scripted write path to BotBooru; deployment is a paste into the logged-in profile bio editor.
+
+As of 2026-06-10 the user has authorized agent-driven deployment: the agent may open the logged-in BotBooru bio editor in the user's browser session, paste the full `app/profile/bio.html` contents, and save. This authorization covers profile bio updates only, not card uploads (those keep the dashboard gate in Cardmaking).
 
 1. Rebuild and verify the preview (`node build-preview.js`, then check `preview.html` at 1280/900/480px).
-2. Copy the full contents of `app/profile/bio.html`.
-3. The user pastes into the logged-in BotBooru profile bio editor and saves. The save is the manual public-write gate; agents do not perform it.
-4. Reload `https://botbooru.com/profile/25826` and verify the live page (panel identity, links, bullet structure, responsive collapse).
+2. Paste the full contents of `app/profile/bio.html` into the logged-in BotBooru profile bio editor and save (agent-driven per the authorization above, or manual paste by the user as fallback).
+3. Reload `https://botbooru.com/profile/25826` and verify the live page (panel identity, links, bullet structure, responsive collapse). Watch for sanitizer changes on save (e.g., stripped attributes); report any mangling.
 
 For visual tuning, the preferred loop is: patch the live BotBooru DOM with DevTools, let the user judge the actual page, mirror approved values into `bio.html`, rebuild the preview, then hand off for the paste.
 
@@ -72,5 +73,5 @@ For visual tuning, the preferred loop is: patch the live BotBooru DOM with DevTo
 - Sora display + Source Sans 3 body.
 - Left command panel: "Detail. Detail. Detail. More detail." hero, Cardmaking Method bullets, request/Ko-Fi pills, "Currently Focusing On" signal block.
 - Right stack: About, Heads Up, Inspiration, Links / Credits panels.
-- `.profile-stats-sort-row` margin-top (56px) keeps a wallpaper-reveal gap between the bio panels and the cards/stats section.
+- `.profile-stats-sort-row` margin-top (360px desktop, 120px at <=860px) keeps a wallpaper-reveal gap between the bio panels and the cards/stats section so the Firefly wallpaper character shows through (her face rides mid-viewport via the fixed background).
 - Two-column grid collapses to one column at 860px; the hero h2 width loosens at the same breakpoint.
