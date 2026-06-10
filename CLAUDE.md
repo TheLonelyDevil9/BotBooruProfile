@@ -45,7 +45,7 @@ Keep commits focused on the completed contribution. Do not include temporary scr
 
 ## Browser Checks
 
-Use Chrome DevTools MCP against `https://botbooru.com/profile/25826` for live visual checks and against `file://.../app/profile/preview.html` for local iteration. For low-risk edits, start with the preview harness and escalate to the live page when rendered BotBooru behavior matters.
+Use the `agent-browser` CLI (Chrome DevTools MCP and Playwright are banned per user instruction). Live checks: `agent-browser --state "G:/AI Stuff/Cardmaking/_Tools/.botbooru-upload/storage-state.json" open https://botbooru.com/profile/25826`, then `snapshot -i`, `screenshot`, or `eval`. Local iteration: `agent-browser open file://.../app/profile/preview.html`. For low-risk edits, start with the preview harness and escalate to the live page when rendered BotBooru behavior matters.
 
 ## BotBooru Gotchas
 
@@ -65,7 +65,7 @@ As of 2026-06-10 the user has authorized agent-driven deployment: the agent may 
 2. Paste the full contents of `app/profile/bio.html` into the logged-in BotBooru profile bio editor and save (agent-driven per the authorization above, or manual paste by the user as fallback).
 3. Reload `https://botbooru.com/profile/25826` and verify the live page (panel identity, links, bullet structure, responsive collapse). Watch for sanitizer changes on save (e.g., stripped attributes); report any mangling.
 
-For visual tuning, the preferred loop is: patch the live BotBooru DOM with DevTools, let the user judge the actual page, mirror approved values into `bio.html`, rebuild the preview, then hand off for the paste.
+For visual tuning, the preferred loop is: patch the live BotBooru DOM with `agent-browser eval`, let the user judge the actual page, mirror approved values into `bio.html`, rebuild the preview, then hand off for the paste.
 
 ## Standing Layout Notes
 
