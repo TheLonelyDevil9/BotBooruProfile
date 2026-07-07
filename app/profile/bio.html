@@ -57,7 +57,7 @@ body::before {
   background-repeat: no-repeat !important;
   background-size: min(118vw, 1700px) auto !important;
   background-attachment: fixed !important;
-  opacity: 0.35 !important;
+  opacity: 0.55 !important;
 }
 
 body::after {
@@ -67,7 +67,7 @@ body::after {
   z-index: -1 !important;
   pointer-events: none !important;
   background:
-    linear-gradient(180deg, oklch(0.018 0.01 48 / 0.56), oklch(0.014 0.008 48 / 0.70)),
+    linear-gradient(180deg, oklch(0.018 0.01 48 / 0.30), oklch(0.014 0.008 48 / 0.44)),
     radial-gradient(circle at 15% 5%, oklch(0.72 0.18 49 / 0.035), transparent 30%),
     radial-gradient(circle at 86% 10%, oklch(0.66 0.06 190 / 0.026), transparent 28%) !important;
 }
@@ -267,7 +267,7 @@ main,
 
 .profile-stats-sort-row {
   order: 3 !important;
-  margin-top: 360px !important;
+  margin-top: 520px !important;
 }
 
 #custom-profile-root .ld-bb-a,
@@ -292,20 +292,19 @@ main,
 }
 
 #custom-profile-root .ld-command {
-  min-height: 360px !important;
   display: grid !important;
   align-content: space-between !important;
-  gap: 18px !important;
-  padding: 20px !important;
+  gap: 14px !important;
+  padding: 18px 20px !important;
 }
 
 #custom-profile-root .ld-command h2 {
-  max-width: 6.8ch !important;
+  max-width: none !important;
   margin: 0 !important;
   color: var(--ld-orange-hot) !important;
-  font-size: clamp(1.5rem, 3.2vw, 2.85rem) !important;
+  font-size: clamp(1.4rem, 2.6vw, 2.3rem) !important;
   font-weight: 900 !important;
-  line-height: 1.02 !important;
+  line-height: 1.08 !important;
 }
 
 #custom-profile-root .ld-command h2 .ld-hero-word {
@@ -321,11 +320,11 @@ main,
 }
 
 #custom-profile-root .ld-command .ld-method-heading {
-  margin-top: 18px !important;
+  margin-top: 8px !important;
 }
 
 #custom-profile-root .ld-command .ld-method-body {
-  margin: 10px 0 0 !important;
+  margin: 8px 0 0 !important;
 }
 
 #custom-profile-root .ld-panel h3 {
@@ -350,7 +349,7 @@ main,
 }
 
 #custom-profile-root .ld-note {
-  margin: 14px 0 0 !important;
+  margin: 8px 0 0 !important;
   color: var(--ld-muted) !important;
   font-size: var(--ld-note-size) !important;
   line-height: 1.48 !important;
@@ -444,9 +443,9 @@ main,
 
 #custom-profile-root .ld-signal {
   display: grid !important;
-  gap: 10px !important;
-  margin-top: 16px !important;
-  padding: 14px !important;
+  gap: 8px !important;
+  margin-top: 12px !important;
+  padding: 12px 14px !important;
   border: 1px solid var(--ld-soft-line) !important;
   border-radius: 8px !important;
   background: oklch(0.07 0.014 48 / 0.70) !important;
@@ -597,21 +596,13 @@ main,
   }
 
   .profile-stats-sort-row {
-    margin-top: 120px !important;
+    margin-top: 200px !important;
   }
 
   #custom-profile-root .ld-bb-a,
   #custom-profile-root .ld-right-stack,
   #custom-profile-root .ld-links-grid {
     grid-template-columns: 1fr !important;
-  }
-
-  #custom-profile-root .ld-command {
-    min-height: 0 !important;
-  }
-
-  #custom-profile-root .ld-command h2 {
-    max-width: 10ch !important;
   }
 }
 </style>
@@ -637,10 +628,10 @@ main,
       <div class="ld-focus-block">
         <b>Currently focusing on:</b>
         <ul class="ld-list ld-list--signal">
-          <li>Bringing card parity from my 77 Chub cards over to BotBooru while I polish each of them up to my latest standards.</li>
+          <li>Card parity achieved! Releasing cards from my backlog of ~70+ cards.</li>
         </ul>
       </div>
-      <p><b>Next card:</b><span class="ld-next-value">Sparxie</span></p>
+      <p><b>Next card(s):</b><span class="ld-next-value">Sandrone, Mayoi Hachikuji, Ais Wallenstein, Emilia, Shinobu Oshino</span></p>
     </div>
   </article>
   <div class="ld-right-stack">
@@ -684,7 +675,6 @@ main,
         <ul class="ld-list">
           <li><a href="https://rentry.org/Sukino-Findings" target="_blank" rel="noopener noreferrer">Sukino's Findings</a> - the amazing one-stop shop.</li>
           <li><a href="https://rentry.org/geechan" target="_blank" rel="noopener noreferrer">Geechan's Rentry</a> - amazing hand-written cards and prompt presets that slap without hijacking your tone/style.</li>
-          <li>LLMs? <a href="https://api.linkapi.ai" target="_blank" rel="noopener noreferrer">Think LinkAPI</a> - professional shilling. I pay for the service too, it's great. Disclaimer! None of this would be possible without LinkAPI's support. I also happen to be staff over at Marinara Kitchen, which LinkAPI is partnered with. Genuinely amazing service to use.</li>
         </ul>
       </div>
       <div class="ld-links-col">
