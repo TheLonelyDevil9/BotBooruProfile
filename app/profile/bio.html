@@ -249,6 +249,7 @@ main,
   max-width: 100% !important;
   margin-top: 18px !important;
   order: 10 !important;
+  container-type: inline-size !important;
 }
 
 .profile-identity-right-stack {
@@ -280,6 +281,7 @@ main,
   display: grid !important;
   grid-template-columns: minmax(0, 1.6fr) minmax(230px, 0.74fr) !important;
   gap: 14px !important;
+  align-items: start !important;
   color: var(--ld-ink) !important;
   font-size: var(--ld-body-size) !important;
 }
@@ -293,9 +295,9 @@ main,
 
 #custom-profile-root .ld-command {
   display: grid !important;
-  align-content: space-between !important;
-  gap: 14px !important;
-  padding: 18px 20px !important;
+  align-content: start !important;
+  gap: 18px !important;
+  padding: 20px 22px !important;
 }
 
 #custom-profile-root .ld-command h2 {
@@ -400,62 +402,12 @@ main,
   background: linear-gradient(180deg, oklch(0.74 0.062 190), var(--ld-teal)) !important;
 }
 
-#custom-profile-root .ld-jump {
-  position: fixed !important;
-  right: 16px !important;
-  bottom: 16px !important;
-  z-index: 90 !important;
-  display: grid !important;
-  gap: 8px !important;
-  justify-items: stretch !important;
-}
-
-#custom-profile-root .ld-jump .ld-pill {
-  min-height: 30px !important;
-  padding: 6px 14px !important;
-  font-size: 0.78rem !important;
-  cursor: pointer !important;
-  background: oklch(0.10 0.016 48 / 0.93) !important;
-  box-shadow: inset 0 1px 0 oklch(0.95 0.01 70 / 0.08), 0 10px 26px oklch(0.02 0.012 48 / 0.55) !important;
-}
-
-#custom-profile-root .ld-jump .ld-pill:hover {
-  color: var(--ld-ink) !important;
-  border-color: var(--ld-orange-hot) !important;
-}
-
-#custom-profile-root .ld-jump-anchor {
-  position: absolute !important;
-  left: 0 !important;
-  width: 1px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  appearance: none !important;
-}
-
-#custom-profile-root #ld-jump-anchor-top {
-  top: -9999px !important;
-  height: 1px !important;
-}
-
 #custom-profile-root .ld-signal {
   display: grid !important;
-  gap: 8px !important;
-  margin-top: 12px !important;
-  padding: 12px 14px !important;
-  border: 1px solid var(--ld-soft-line) !important;
-  border-radius: 8px !important;
-  background: oklch(0.07 0.014 48 / 0.70) !important;
-}
-
-#custom-profile-root .ld-signal p {
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  background: transparent !important;
+  gap: 7px !important;
+  margin-top: 2px !important;
+  padding-top: 14px !important;
+  border-top: 1px solid var(--ld-soft-line) !important;
 }
 
 #custom-profile-root .ld-signal .ld-focus-block {
@@ -472,29 +424,68 @@ main,
   text-transform: uppercase !important;
 }
 
-#custom-profile-root .ld-signal .ld-next-value {
-  color: var(--ld-ink) !important;
-  font-weight: 900 !important;
-}
-
-#custom-profile-root .ld-right-stack {
+#custom-profile-root .ld-aside {
   display: grid !important;
-  grid-template-columns: 1fr !important;
-  gap: 14px !important;
-}
-
-#custom-profile-root .ld-right-stack .ld-panel {
+  gap: 18px !important;
+  align-content: start !important;
   min-width: 0 !important;
   padding: 16px !important;
 }
 
+#custom-profile-root .ld-aside-section + .ld-aside-section {
+  padding-top: 18px !important;
+  border-top: 1px solid var(--ld-soft-line) !important;
+}
+
 #custom-profile-root .ld-wide {
   grid-column: 1 / -1 !important;
+}
+
+#custom-profile-root .ld-more {
+  overflow: hidden !important;
+}
+
+#custom-profile-root .ld-more summary {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 14px 16px !important;
+  color: var(--ld-teal) !important;
+  font-family: var(--ld-font-display) !important;
+  font-size: var(--ld-subhead-size) !important;
+  font-weight: 900 !important;
+  line-height: 1.12 !important;
+  list-style: none !important;
+  cursor: pointer !important;
+}
+
+#custom-profile-root .ld-more summary::-webkit-details-marker {
+  display: none !important;
+}
+
+#custom-profile-root .ld-more summary::after {
+  content: "+" !important;
+  color: var(--ld-orange-hot) !important;
+  font-size: 1.35em !important;
+  line-height: 0.8 !important;
+}
+
+#custom-profile-root .ld-more[open] summary {
+  border-bottom: 1px solid var(--ld-soft-line) !important;
+}
+
+#custom-profile-root .ld-more[open] summary::after {
+  content: "\2212" !important;
+}
+
+#custom-profile-root .ld-more .ld-copy-block {
+  margin-top: 0 !important;
   padding: 16px !important;
 }
 
 #custom-profile-root .ld-links-grid {
-  grid-template-columns: 1.3fr 1fr 0.85fr !important;
+  grid-template-columns: 1.3fr 1fr 0.9fr !important;
   gap: 12px 26px !important;
   align-items: start !important;
 }
@@ -590,6 +581,13 @@ main,
   }
 }
 
+@container (max-width: 720px) {
+  #custom-profile-root .ld-bb-a,
+  #custom-profile-root .ld-links-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 @media (max-width: 860px) {
   .profile-identity-row {
     padding: 12px 10px 2px !important;
@@ -600,7 +598,6 @@ main,
   }
 
   #custom-profile-root .ld-bb-a,
-  #custom-profile-root .ld-right-stack,
   #custom-profile-root .ld-links-grid {
     grid-template-columns: 1fr !important;
   }
@@ -631,37 +628,25 @@ main,
           <li>Card parity achieved! Releasing cards from my backlog of ~70+ cards.</li>
         </ul>
       </div>
-      <p><b>Next card(s):</b><span class="ld-next-value">Sandrone, Mayoi Hachikuji, Ais Wallenstein, Emilia, Shinobu Oshino</span></p>
     </div>
   </article>
-  <div class="ld-right-stack">
-    <article class="ld-panel">
+  <article class="ld-panel ld-aside">
+    <div class="ld-aside-section">
       <h3>About:</h3>
       <ul class="ld-list">
         <li>Lazy bum turned hobbyist cardmaker. Mostly into Hoyoverse games, anime, and long-form roleplay cards.</li>
         <li>Around the scene since mid-2024, starting with pre-lobotomy CharacterAI. Yeah, THAT C.AI. Now, a Chub creator-refugee.</li>
-        <li>Context for why I'm now here: <a href="https://chub.ai/users/The_Lonely_Devil" target="_blank" rel="noopener noreferrer">my Chub profile text</a>.</li>
       </ul>
-    </article>
-    <article class="ld-panel">
+    </div>
+    <div class="ld-aside-section">
       <h3>Heads Up:</h3>
       <ul class="ld-list">
         <li>ALL of my cards are NSFW and foot fetish focused, so consider yourself warned in the least shocking way possible.</li>
-        <li>Not your thing? You're welcome to skip over me for creators more suited to your tastes. (looking at that one guy who's already asked)</li>
-        <li>Rigid in my ways, so feedback bounces off unless it makes logical sense.</li>
       </ul>
-    </article>
-    <article class="ld-panel">
-      <h3>Inspiration:</h3>
-      <ul class="ld-list">
-        <li>Heavily inspired by <a href="https://discord.gg/Nbv9pQ88Xb" target="_blank" rel="noopener noreferrer">SleepDeprived03's</a> work (search "Sleep" in the NSFW cards channel to find his two main threads). Rest in peace, you legend.</li>
-        <li>Also inspired by <a href="https://bronya-rand.github.io/reimagined-couscous/" target="_blank" rel="noopener noreferrer">Bronya Rand's</a> work. Thank you both for your hard work.</li>
-        <li>As he once requested, I'll be porting SleepDeprived03's cards onto BotBooru as soon as my WIP and Backlog are done.</li>
-      </ul>
-    </article>
-  </div>
-  <article class="ld-panel ld-wide">
-    <h3>Links / Credits:</h3>
+    </div>
+  </article>
+  <details class="ld-panel ld-wide ld-more">
+    <summary>Links / Credits:</summary>
     <div class="ld-copy-block ld-links-grid">
       <div class="ld-links-col">
         <ul class="ld-list">
@@ -671,20 +656,19 @@ main,
         </ul>
       </div>
       <div class="ld-links-col">
+        <h4>Inspiration:</h4>
+        <ul class="ld-list">
+          <li>Heavily inspired by <a href="https://discord.gg/Nbv9pQ88Xb" target="_blank" rel="noopener noreferrer">SleepDeprived03's</a> work (search "Sleep" in the NSFW cards channel to find his two main threads). Rest in peace, you legend.</li>
+          <li>Also inspired by <a href="https://bronya-rand.github.io/reimagined-couscous/" target="_blank" rel="noopener noreferrer">Bronya Rand's</a> work. Thank you both for your hard work.</li>
+        </ul>
+      </div>
+      <div class="ld-links-col">
         <h4>Recommended Reading:</h4>
         <ul class="ld-list">
           <li><a href="https://rentry.org/Sukino-Findings" target="_blank" rel="noopener noreferrer">Sukino's Findings</a> - the amazing one-stop shop.</li>
           <li><a href="https://rentry.org/geechan" target="_blank" rel="noopener noreferrer">Geechan's Rentry</a> - amazing hand-written cards and prompt presets that slap without hijacking your tone/style.</li>
         </ul>
       </div>
-      <div class="ld-links-col">
-        <h4>Requests?</h4>
-        <p>Use the <a href="https://marshmallow-qa.com/xivrxgkzwdryg9k" target="_blank" rel="noopener noreferrer">Marshmallow</a> link, or the "Suggest a Character" button. No guarantees: I only make characters I like making, in the order I like making them in.</p>
-      </div>
     </div>
-  </article>
-  <input type="checkbox" id="ld-jump-anchor-top" class="ld-jump-anchor" tabindex="-1">
-  <nav class="ld-jump" aria-label="Quick jumps">
-    <label class="ld-pill" for="ld-jump-anchor-top">Top &uarr;</label>
-  </nav>
+  </details>
 </section>

@@ -14,12 +14,11 @@ This document is the scratchpad for every hard-earned limitation in this profile
 
 - `#custom-profile-root` gets `flex: 0 0 100%; order: 10` so the bio spans full width; `.profile-identity-right-stack` is set to `display: contents` to free its children into the parent flex row.
 - `.profile-followers-following` and the remaining right-stack sibling are pushed right with `order` + `margin-left: auto`.
-- `.profile-stats-sort-row` is re-ordered below the bio; its `margin-top` (56px) creates the wallpaper-reveal gap between the bio panels and the cards/stats section.
+- `.profile-stats-sort-row` is re-ordered below the bio; its `margin-top` (520px desktop, 200px at <=860px) creates the wallpaper-reveal gap between the bio panels and the cards/stats section.
 - Every rule needs `!important`: the site styles with Tailwind utility classes that otherwise win.
 - Page-level selectors in active use: `body`, `#profile-banner`, `.profile-avatar-wrap`, `.profile-identity-row`, `.profile-identity-info-text`, `.profile-meta-strip`, `.profile-meta-chip`, `.profile-stat-pill`, `#profile-uploads-sort-bar`, `.profile-stats-sort-row`, `.profile-followers-following`. BotBooru is in active beta; re-verify after site updates.
 - Stale selector (2026-06-10): `#profile-uploads-sort-bar` no longer exists on the live page; the cards/stats tab row is `.profile-stats-sort-row` containing `#profile-stats`, `#tab-uploads`, `#tab-favorites`, `#tab-comments`.
-- Hash navigation is dead on the live site: the SPA router strips `location.hash` (sync, before paint) and native `#fragment` anchor scrolling never fires, even from trusted clicks or direct URL loads. In-page jumps must use inline `onclick` with `scrollIntoView()`/`scrollTo()` and `return false`.
-- Inline `onclick` handlers DO NOT survive the bio save: the editor's sanitizer strips event-handler attributes (confirmed live 2026-06-10; earlier DOM-injection test bypassed the save path and gave a false positive). CSP allows `unsafe-inline`, but sanitizer kills it first. JS-free workaround in use: hidden `<input type="checkbox" class="ld-jump-anchor">` positioned at the scroll target + `<label class="ld-pill" for="...">` pill; label click focuses the input -> browser scrolls it into view. `html { scroll-behavior: smooth }` makes it animated.
+- Hash navigation is dead on the live site: the SPA router strips `location.hash` (sync, before paint) and native `#fragment` anchor scrolling never fires, even from trusted clicks or direct URL loads. Inline `onclick` handlers also do not survive the bio save because the editor sanitizer strips event-handler attributes. The prior hidden-checkbox jump workaround was removed when the profile was compacted; retain these constraints if in-page navigation returns later.
 - Identity pills are matched structurally (`span[class*="rounded-full"][class*="uppercase"]`, `span.rank-donator-pill`, `span[class*="bg-emerald-900"]`, `span[class*="bg-sky-900"]`); new ranks may need new rules.
 
 ## Rendering Notes
@@ -28,13 +27,13 @@ This document is the scratchpad for every hard-earned limitation in this profile
 - The banner replaces BotBooru's own image with the firefly GIF via `background-image` on `#profile-banner` and hides the site's gradient overlay children.
 - Fonts: Sora (display) + Source Sans 3 (body) via Google Fonts `@import` at the top of the `<style>` block. file.garden hosts the wallpaper and banner GIF.
 - Bullet dots are `::before` pseudo-elements on `.ld-list li` (teal 5px, `top: 0.75em`), so text-only checks miss them; verify visually.
-- The two-column grid (`minmax(230px, 0.74fr) minmax(0, 1.6fr)`) tightens at 1120px and collapses to one column at 860px.
+- The two-column grid (`minmax(0, 1.6fr) minmax(230px, 0.74fr)`) tightens at 1120px and collapses when the profile container reaches 720px; the 860px viewport rule remains as a fallback.
 
 ## Verification Checklist
 
 After any change, before and after the live paste:
 
 1. `node build-preview.js` passes the size budget.
-2. `preview.html` at 1280 / 900 / 480px: bullet alignment, strong lead-ins, link styling (orange, hover underline), no phantom gaps, single-column collapse.
-3. Live page after paste: wallpaper + banner load, avatar ring, identity pills, panel borders, the 56px gap above the cards/stats row, anchors open in new tabs.
+2. `preview.html` at 1280 / 900 / 480px: bullet alignment, strong lead-ins, link styling (orange, hover underline), disclosure expansion, no phantom gaps, single-column collapse.
+3. Live page after paste: wallpaper + banner load, avatar ring, identity pills, panel borders, the 520px desktop / 200px compact gap above the cards/stats row, anchors open in new tabs.
 4. Copy rules: no literal markdown syntax, no bare URLs, no literal backticks, no em dashes.

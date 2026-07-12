@@ -71,7 +71,8 @@ For visual tuning, the preferred loop is: patch the live BotBooru DOM with `agen
 
 - Ember/amber + teal Firefly aesthetic on deep brown; `--ld-line: #FFBF00` panel borders.
 - Sora display + Source Sans 3 body.
-- Left command panel: "Detail. Detail. Detail. More detail." hero, Cardmaking Method bullets, request/Ko-Fi pills, "Currently Focusing On" signal block.
-- Right stack: About, Heads Up, Inspiration, Links / Credits panels.
-- `.profile-stats-sort-row` margin-top (360px desktop, 120px at <=860px) keeps a wallpaper-reveal gap between the bio panels and the cards/stats section so the Firefly wallpaper character shows through (her face rides mid-viewport via the fixed background).
-- Two-column grid collapses to one column at 860px; the hero h2 width loosens at the same breakpoint.
+- Left command panel: "Detail. Detail. Detail. More detail." hero, Cardmaking Method bullets, request/Ko-Fi pills, and the flattened "Currently Focusing On" signal block.
+- Right panel: About and Heads Up share one panel with a subtle divider.
+- Links / Credits is a closed-by-default disclosure containing project credits, Inspiration, and Recommended Reading.
+- `.profile-stats-sort-row` margin-top (520px desktop, 200px at <=860px) keeps a wallpaper-reveal gap between the bio panels and the cards/stats section so the Firefly wallpaper character shows through (her face rides mid-viewport via the fixed background).
+- The profile container collapses the two-column grid at 720px; the 860px viewport rule remains as a fallback and also tightens the surrounding BotBooru layout.
