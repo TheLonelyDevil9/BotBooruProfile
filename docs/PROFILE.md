@@ -12,7 +12,7 @@ This project only maintains the BotBooru creator profile for `The_Lonely_Devil` 
    node build-preview.js
    ```
 
-   The builder fails if the blob exceeds the 22,500-byte bio budget.
+   The builder fails if the blob exceeds the 32,768-byte (32KB) bio budget.
 
 3. Open `preview.html` via `file://` and check 1280px, 900px, and 480px widths: bullet alignment, lead-in hierarchy, link styling, panel identity, single-column collapse at 860px.
 4. Vet visual changes on the real BotBooru page before treating them as done. For tuning, patch the live DOM with Chrome DevTools MCP, let the user judge, then mirror approved values into `bio.html`.
@@ -22,11 +22,11 @@ The local preview is useful for layout iteration, but it is not authoritative. B
 
 ## Current Profile Shape
 
-- Root: `section.ld-bb-a` inside `#custom-profile-root`
-- Page level: wallpapered body, firefly banner, teal-ringed avatar, restyled identity pills and meta chips
-- Left: command panel (hero h2, Cardmaking Method bullets, request/Ko-Fi pills, "Currently Focusing On" signal block)
-- Right: About, Heads Up, Inspiration, Links / Credits panels
-- Below: 56px wallpaper-reveal gap before the cards/stats section
+- Root: `section.ld-bb-a` inside `#custom-profile-root` (SAM HUD system, 2026-07-16)
+- Page level: cover-fit fixed wallpaper (38% 40%), firefly banner with amber corner brackets, teal-ringed avatar with dashed amber outline, squared HUD identity pills and meta chips
+- Left: command panel (nameplate "Cardmaking // Method", "Firefly!" feature link, hero h2, method bullets, "Why do I do this?" note, CTA buttons, "Currently focusing on" readout)
+- Right: "About // Heads Up" panel (Heads Up in warn red)
+- Below: permanently expanded "Links // Credits" panel, then the 500px (200px at <=860px) wallpaper-reveal gap before the cards/stats section
 
 ## Styling Rules
 

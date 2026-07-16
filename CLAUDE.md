@@ -69,10 +69,11 @@ For visual tuning, the preferred loop is: patch the live BotBooru DOM with `agen
 
 ## Standing Layout Notes
 
-- Ember/amber + teal Firefly aesthetic on deep brown; `--ld-line: #FFBF00` panel borders.
-- Sora display + Source Sans 3 body.
-- Left command panel: "Detail. Detail. Detail. More detail." hero, Cardmaking Method bullets, request/Ko-Fi pills, and the flattened "Currently Focusing On" signal block.
-- Right panel: About and Heads Up share one panel with a subtle divider.
-- Links / Credits is a closed-by-default disclosure containing project credits, Inspiration, and Recommended Reading.
-- `.profile-stats-sort-row` margin-top (520px desktop, 200px at <=860px) keeps a wallpaper-reveal gap between the bio panels and the cards/stats section so the Firefly wallpaper character shows through (her face rides mid-viewport via the fixed background).
+- SAM HUD system (adopted 2026-07-16): ember/amber + teal Firefly aesthetic on deep brown, corner-cut panels (`clip-path`, `--ld-cut`), amber nameplate tabs with plain labels and `//` separators (Cardmaking // Method, About // Heads Up, Links // Credits; no in-universe naming), telemetry tick rule under the hero, chevron bullets, chamfered CTA buttons.
+- Chakra Petch display/labels + Source Sans 3 body.
+- Left command panel: "Detail. Detail. Detail. More detail." hero, Cardmaking Method bullets, "Why do I do this?" note, request/Ko-Fi CTAs, and the "Currently focusing on" readout with a blinking cursor (static under reduced motion).
+- Right panel: About + Heads Up; Heads Up is styled in `--ld-warn` ember-red.
+- Links // Credits is a permanently expanded wide panel (plain `article`; the closed-by-default `<details>` disclosure was removed 2026-07-16).
+- Wallpaper is `background-size: cover` at `background-position: 38% 40%` (fixed attachment) so the art fills every viewport width with no side bands and Firefly's face stays in frame down to 480px. `.profile-stats-sort-row` margin-top (500px desktop, 200px at <=860px) keeps the wallpaper-reveal gap between the bio panels and the cards/stats section.
 - The profile container collapses the two-column grid at 720px; the 860px viewport rule remains as a fallback and also tightens the surrounding BotBooru layout.
+- Rank-pill overrides carry `[class*="rounded-full"]` so they out-rank the base pill rule (both are `!important`; the base rule sets `background`, so the cascade resolves by selector specificity).
