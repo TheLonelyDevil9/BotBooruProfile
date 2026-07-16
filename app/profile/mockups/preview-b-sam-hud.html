@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup preview: b-sam-hud.html</title>
+<style>
+html, body { margin: 0; }
+body { background: #121212; color: #d6d3d1; font-family: system-ui, "Segoe UI", sans-serif; }
+.bb-nav { display: flex; align-items: center; gap: 18px; padding: 10px 18px; background: #1c1210; font-size: 13px; color: #a8a29e; }
+.bb-nav .bb-logo { font-weight: 800; font-size: 17px; color: #f5f5f4; }
+.bb-nav .bb-logo b { color: #ef4444; }
+.bb-nav .bb-right { margin-left: auto; display: flex; gap: 8px; }
+.bb-nav .bb-tag { padding: 3px 8px; border-radius: 4px; background: #7f1d1d; color: #fecaca; font-size: 11px; font-weight: 700; }
+.bb-main { width: min(100% - 24px, 966px); margin-inline: auto; padding-top: 14px; }
+#profile-banner { height: 300px; border-radius: 12px; background: #292524; }
+.profile-avatar-wrap { width: 104px; height: 104px; border-radius: 50%; flex: 0 0 auto; }
+.profile-avatar-wrap img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.profile-identity-row { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 14px; padding: 14px 4px; }
+.profile-identity-info-text h1 { margin: 0 0 6px; font-size: 26px; color: #fafaf9; }
+.profile-identity-info-text .bb-pill-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.bb-pill-row span { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 999px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1; }
+.bb-pill-row .rank-donator-pill { background: #493511; color: #fde68a; }
+.bb-pill-row .bb-emerald { background: rgba(6,78,59,0.8); color: #d1fae5; }
+.bb-pill-row .bb-sky { background: rgba(12,74,110,0.8); color: #e0f2fe; }
+.profile-meta-strip { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.profile-meta-chip { display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 999px; background: #292524; font-size: 12px; font-weight: 600; }
+.profile-followers-following { font-size: 13px; color: #a8a29e; padding-top: 6px; }
+.profile-followers-following b { color: #fafaf9; }
+.profile-stats-sort-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 4px; }
+.profile-stat-pill { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; background: #292524; font-size: 13px; font-weight: 700; }
+.bb-sort { margin-left: auto; font-size: 12px; color: #78716c; }
+.bb-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; padding: 12px 4px 80px; }
+.bb-card { aspect-ratio: 2 / 3; border-radius: 8px; background: linear-gradient(180deg, #1f2430, #171b24); border: 1px solid #2b3040; position: relative; }
+.bb-card::after { content: ""; position: absolute; left: 8px; right: 8px; bottom: 8px; height: 12px; border-radius: 3px; background: #2b3040; }
+@media (max-width: 700px) { .bb-cards { grid-template-columns: repeat(2, 1fr); } #profile-banner { height: 180px; } }
+</style>
+</head>
+<body>
+<div class="bb-nav"><span class="bb-logo"><b>&#10084;</b> BotBooru</span><span>Posts</span><span>Lorebooks</span><span>Community</span><span>Tags</span><div class="bb-right"><span class="bb-tag">NSFW: ON</span></div></div>
+<main class="bb-main">
+<div id="profile-banner"></div>
+<div class="profile-identity-row">
+<div class="profile-avatar-wrap"><img src="https://botbooru.com/avatars/a6e3a4f3e20047ee83c6e8e2a0af1014.gif" alt="avatar"></div>
+<div class="profile-identity-info-text">
+<h1>The_Lonely_Devil</h1>
+<div class="bb-pill-row flex flex-wrap items-center gap-1.5">
+<span class="inline-flex items-center rounded-full uppercase rank-donator-pill">&lt;3 Donator</span>
+<span class="inline-flex items-center rounded-full uppercase bb-emerald bg-emerald-900/80">OC creator</span>
+<span class="inline-flex items-center rounded-full uppercase bb-sky bg-sky-900/80">Verified creator</span>
+</div>
+<div class="profile-meta-strip">
+<span class="profile-meta-chip">&#9670; Diamond 932%</span>
+<span class="profile-meta-chip">Joined May 30, 2026</span>
+</div>
+</div>
+<div class="profile-followers-following"><b>203</b> Followers &nbsp; <b>6</b> Following</div>
+<div class="profile-identity-right-stack">
+<div id="custom-profile-root">
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap");
+
+:root {
+  --ld-ink: oklch(0.94 0.014 70);
+  --ld-copy: oklch(0.86 0.018 72);
+  --ld-muted: oklch(0.70 0.018 72);
+  --ld-deep: oklch(0.055 0.014 48);
+  --ld-panel: oklch(0.105 0.016 48 / 0.93);
+  --ld-line: #FFBF00;
+  --ld-line-dim: oklch(0.75 0.14 84 / 0.55);
+  --ld-soft-line: oklch(0.90 0.02 80 / 0.13);
+  --ld-orange: oklch(0.74 0.16 54);
+  --ld-orange-hot: oklch(0.82 0.15 62);
+  --ld-teal: oklch(0.70 0.075 190);
+  --ld-warn: oklch(0.66 0.17 40);
+  --ld-shadow: 0 20px 52px oklch(0.02 0.012 48 / 0.54);
+  --ld-wallpaper: url("https://file.garden/aeRvgfxptRQB-dB-/_1%20Profile%20Background.png");
+  --ld-firefly: url("https://file.garden/aeRvgfxptRQB-dB-/_2%20Top%20Firefly.GIF");
+  --ld-font-body: "Source Sans 3", "Source Sans Pro", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --ld-font-hud: "Chakra Petch", "Segoe UI", system-ui, sans-serif;
+  --ld-body-size: 0.93rem;
+  --ld-cut: 14px;
+}
+
+body {
+  color: var(--ld-ink) !important;
+  position: relative !important;
+  z-index: 0 !important;
+  isolation: isolate !important;
+  min-height: 100vh !important;
+  background: var(--ld-deep) !important;
+  font-family: var(--ld-font-body) !important;
+}
+
+body :where(a, button, div, input, label, li, p, select, small, span, strong, textarea) {
+  font-family: var(--ld-font-body) !important;
+}
+
+body :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--ld-font-hud) !important;
+}
+
+body::before {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: -2 !important;
+  pointer-events: none !important;
+  background: var(--ld-wallpaper) !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+  background-size: min(118vw, 1700px) auto !important;
+  background-attachment: fixed !important;
+  opacity: 0.5 !important;
+}
+
+body::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+  background:
+    linear-gradient(180deg, oklch(0.018 0.01 48 / 0.34), oklch(0.014 0.008 48 / 0.5)),
+    radial-gradient(circle at 85% 8%, oklch(0.66 0.075 190 / 0.04), transparent 30%) !important;
+}
+
+html {
+  background: var(--ld-deep) !important;
+  scroll-behavior: smooth !important;
+}
+
+#main-content, main, #profile-view-shell, #profile-view,
+.profile-layout-root, .profile-main-col, .profile-header-block, .profile-identity-row {
+  background: transparent !important;
+}
+
+#profile-banner {
+  position: relative !important;
+  min-height: clamp(300px, 31vw, 390px) !important;
+  border: 1px solid var(--ld-line-dim) !important;
+  border-radius: 2px !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+  background-color: var(--ld-deep) !important;
+  background-image: var(--ld-firefly) !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  filter: brightness(1.1) saturate(1.05) !important;
+  box-shadow: 0 14px 34px oklch(0.02 0.012 48 / 0.34) !important;
+}
+
+#profile-banner::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 10px auto auto 10px !important;
+  width: 30px !important;
+  height: 30px !important;
+  pointer-events: none !important;
+  background: none !important;
+  border-top: 2px solid var(--ld-line) !important;
+  border-left: 2px solid var(--ld-line) !important;
+  box-shadow: none !important;
+}
+
+#profile-banner::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: auto 10px 10px auto !important;
+  width: 30px !important;
+  height: 30px !important;
+  pointer-events: none !important;
+  background: none !important;
+  border-bottom: 2px solid var(--ld-line) !important;
+  border-right: 2px solid var(--ld-line) !important;
+  box-shadow: none !important;
+}
+
+#profile-banner > .pointer-events-none.absolute.inset-0,
+#profile-banner > div[style*="linear-gradient"] {
+  display: none !important;
+  background: none !important;
+}
+
+.profile-avatar-wrap {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 0 !important;
+  padding: 4px !important;
+  border: 2px solid var(--ld-teal) !important;
+  border-radius: 50% !important;
+  background: oklch(0.05 0.014 48) !important;
+  outline: 1px dashed var(--ld-line-dim) !important;
+  outline-offset: 5px !important;
+  box-shadow: 0 18px 38px oklch(0.02 0.012 48 / 0.6) !important;
+}
+
+.profile-avatar-wrap img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+.profile-identity-row {
+  margin-top: 0 !important;
+  padding: 16px 18px 4px !important;
+  align-items: flex-start !important;
+  flex-wrap: wrap !important;
+}
+
+.profile-identity-info-text h1 {
+  color: var(--ld-orange-hot) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 14px 38px oklch(0.72 0.16 54 / 0.3) !important;
+}
+
+.profile-identity-info-text {
+  flex: 1 1 280px !important;
+  min-width: min(100%, 240px) !important;
+}
+
+.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span[class*="rounded-full"][class*="uppercase"] {
+  min-height: 22px !important;
+  padding: 0 10px !important;
+  border: 1px solid oklch(0.86 0.03 80 / 0.42) !important;
+  border-radius: 2px !important;
+  background: oklch(0.10 0.016 48 / 0.92) !important;
+  font-family: var(--ld-font-hud) !important;
+  line-height: 1 !important;
+  letter-spacing: 0.06em !important;
+  text-shadow: none !important;
+}
+
+.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span.rank-donator-pill[class*="rounded-full"] {
+  color: oklch(0.91 0.105 86) !important;
+  border-color: var(--ld-line-dim) !important;
+  background: oklch(0.22 0.05 74 / 0.95) !important;
+}
+
+.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span[class*="bg-emerald-900"][class*="rounded-full"] {
+  color: oklch(0.89 0.062 166) !important;
+  border-color: oklch(0.72 0.088 166 / 0.7) !important;
+  background: oklch(0.20 0.045 166 / 0.95) !important;
+}
+
+.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span[class*="bg-sky-900"][class*="rounded-full"] {
+  color: oklch(0.91 0.052 228) !important;
+  border-color: oklch(0.72 0.095 228 / 0.7) !important;
+  background: oklch(0.20 0.05 232 / 0.95) !important;
+}
+
+.profile-meta-strip { margin-top: 16px !important; }
+
+.profile-meta-chip, .profile-stat-pill {
+  min-height: 32px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid var(--ld-line-dim) !important;
+  border-radius: 2px !important;
+  color: var(--ld-copy) !important;
+  background: oklch(0.09 0.016 48 / 0.94) !important;
+  font-family: var(--ld-font-hud) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em !important;
+}
+
+.profile-stat-pill.is-active {
+  color: oklch(0.13 0.018 50) !important;
+  border-color: var(--ld-line) !important;
+  background: var(--ld-line) !important;
+  font-weight: 700 !important;
+}
+
+#custom-profile-root {
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-top: 22px !important;
+  order: 10 !important;
+  container-type: inline-size !important;
+}
+
+.profile-identity-right-stack { display: contents !important; }
+.profile-followers-following { order: 2 !important; margin-left: auto !important; }
+.profile-identity-right-stack > div:not(#custom-profile-root):not(.profile-followers-following) { order: 3 !important; margin-left: auto !important; }
+.profile-stats-sort-row { order: 3 !important; margin-top: 500px !important; }
+
+#custom-profile-root .ld-bb-a, #custom-profile-root .ld-bb-a * { box-sizing: border-box !important; }
+
+#custom-profile-root .ld-bb-a {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.55fr) minmax(240px, 0.8fr) !important;
+  gap: 16px !important;
+  align-items: start !important;
+  color: var(--ld-ink) !important;
+  font-size: var(--ld-body-size) !important;
+}
+
+#custom-profile-root .ld-panel {
+  position: relative !important;
+  border: 1px solid var(--ld-line-dim) !important;
+  background: linear-gradient(180deg, var(--ld-panel), oklch(0.075 0.014 48 / 0.95)) !important;
+  box-shadow: var(--ld-shadow) !important;
+  clip-path: polygon(var(--ld-cut) 0, 100% 0, 100% calc(100% - var(--ld-cut)), calc(100% - var(--ld-cut)) 100%, 0 100%, 0 var(--ld-cut)) !important;
+}
+
+#custom-profile-root .ld-plate {
+  position: absolute !important;
+  top: 0 !important;
+  left: 22px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  padding: 5px 12px !important;
+  border: 1px solid var(--ld-line-dim) !important;
+  border-top: 0 !important;
+  background: oklch(0.07 0.014 48) !important;
+  color: var(--ld-line) !important;
+  font-family: var(--ld-font-hud) !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  z-index: 1 !important;
+}
+
+#custom-profile-root .ld-plate::before {
+  content: "" !important;
+  width: 7px !important;
+  height: 7px !important;
+  background: var(--ld-teal) !important;
+  clip-path: polygon(0 0, 100% 50%, 0 100%) !important;
+}
+
+#custom-profile-root .ld-plate--warn { color: var(--ld-warn) !important; border-color: oklch(0.6 0.14 40 / 0.6) !important; }
+#custom-profile-root .ld-plate--warn::before { background: var(--ld-warn) !important; }
+
+#custom-profile-root .ld-command {
+  display: grid !important;
+  align-content: start !important;
+  gap: 18px !important;
+  padding: 30px 26px 24px !important;
+}
+
+#custom-profile-root .ld-command h2 {
+  margin: 0 !important;
+  color: var(--ld-orange-hot) !important;
+  font-size: clamp(1.5rem, 3.4cqw, 2.5rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.04 !important;
+  letter-spacing: 0.005em !important;
+  text-transform: uppercase !important;
+  text-wrap: balance !important;
+}
+
+#custom-profile-root .ld-command h2 .ld-w-teal { color: var(--ld-teal) !important; }
+
+#custom-profile-root .ld-telemetry {
+  height: 8px !important;
+  background: repeating-linear-gradient(90deg, var(--ld-line-dim) 0 2px, transparent 2px 16px) !important;
+  opacity: 0.7 !important;
+}
+
+#custom-profile-root .ld-panel h3 {
+  margin: 0 !important;
+  color: var(--ld-teal) !important;
+  font-size: 0.98rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  line-height: 1.15 !important;
+}
+
+#custom-profile-root .ld-panel p, #custom-profile-root .ld-panel li {
+  color: var(--ld-copy) !important;
+  font-size: var(--ld-body-size) !important;
+  line-height: 1.52 !important;
+  overflow-wrap: anywhere !important;
+}
+
+#custom-profile-root .ld-list {
+  display: grid !important;
+  gap: 10px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+#custom-profile-root .ld-list li { position: relative !important; padding-left: 17px !important; }
+
+#custom-profile-root .ld-list li::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0.72em !important;
+  width: 7px !important;
+  height: 8px !important;
+  background: var(--ld-teal) !important;
+  clip-path: polygon(0 0, 100% 50%, 0 100%) !important;
+  transform: translateY(-50%) !important;
+}
+
+#custom-profile-root .ld-list li strong { color: var(--ld-ink) !important; font-weight: 700 !important; }
+
+#custom-profile-root .ld-note {
+  margin: 0 !important;
+  color: var(--ld-muted) !important;
+  font-size: 0.89rem !important;
+  line-height: 1.5 !important;
+}
+
+#custom-profile-root .ld-note b {
+  color: var(--ld-teal) !important;
+  font-family: var(--ld-font-hud) !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+#custom-profile-root .ld-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  align-items: center !important;
+}
+
+#custom-profile-root .ld-pill {
+  min-height: 38px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 1 1 190px !important;
+  max-width: 280px !important;
+  padding: 9px 20px !important;
+  border: 0 !important;
+  color: oklch(0.14 0.02 55) !important;
+  background: linear-gradient(180deg, oklch(0.86 0.14 84), var(--ld-line)) !important;
+  font-family: var(--ld-font-hud) !important;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  line-height: 1.1 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  clip-path: polygon(9px 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%, 0 9px) !important;
+}
+
+#custom-profile-root .ld-pill--teal {
+  background: linear-gradient(180deg, oklch(0.76 0.08 190), oklch(0.62 0.075 190)) !important;
+}
+
+#custom-profile-root .ld-ops {
+  display: grid !important;
+  gap: 8px !important;
+  padding: 12px 14px !important;
+  border: 1px solid var(--ld-soft-line) !important;
+  background: oklch(0.07 0.014 48 / 0.7) !important;
+}
+
+#custom-profile-root .ld-ops b {
+  color: var(--ld-teal) !important;
+  font-family: var(--ld-font-hud) !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+}
+
+#custom-profile-root .ld-ops span { color: var(--ld-copy) !important; font-size: 0.93rem !important; line-height: 1.5 !important; }
+
+#custom-profile-root .ld-ops span::after {
+  content: "\258C" !important;
+  margin-left: 4px !important;
+  color: var(--ld-line) !important;
+  animation: ld-blink 1.2s steps(2, start) infinite !important;
+}
+
+@keyframes ld-blink { to { visibility: hidden; } }
+
+@media (prefers-reduced-motion: reduce) {
+  #custom-profile-root .ld-ops span::after { animation: none !important; opacity: 0.7 !important; }
+}
+
+#custom-profile-root .ld-aside {
+  display: grid !important;
+  gap: 20px !important;
+  align-content: start !important;
+  min-width: 0 !important;
+  padding: 28px 20px 20px !important;
+}
+
+#custom-profile-root .ld-aside-section { position: relative !important; display: grid !important; gap: 10px !important; }
+
+#custom-profile-root .ld-aside-section + .ld-aside-section {
+  padding-top: 20px !important;
+  border-top: 1px solid var(--ld-soft-line) !important;
+}
+
+#custom-profile-root .ld-hazard h3 { color: var(--ld-warn) !important; }
+#custom-profile-root .ld-hazard .ld-list li::before { background: var(--ld-warn) !important; }
+
+#custom-profile-root .ld-wide { grid-column: 1 / -1 !important; }
+
+#custom-profile-root .ld-more { overflow: hidden !important; }
+
+#custom-profile-root .ld-more summary {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 18px 22px 14px !important;
+  color: var(--ld-teal) !important;
+  font-family: var(--ld-font-hud) !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  list-style: none !important;
+  cursor: pointer !important;
+}
+
+#custom-profile-root .ld-more summary::-webkit-details-marker { display: none !important; }
+
+#custom-profile-root .ld-more summary::after {
+  content: "+" !important;
+  color: var(--ld-orange-hot) !important;
+  font-size: 1.35em !important;
+  line-height: 0.8 !important;
+}
+
+#custom-profile-root .ld-more[open] summary { border-bottom: 1px solid var(--ld-soft-line) !important; }
+#custom-profile-root .ld-more[open] summary::after { content: "\2212" !important; }
+
+#custom-profile-root .ld-links-grid {
+  display: grid !important;
+  grid-template-columns: 1.3fr 1fr 0.9fr !important;
+  gap: 14px 28px !important;
+  align-items: start !important;
+  padding: 16px 22px 22px !important;
+}
+
+#custom-profile-root .ld-links-col { display: grid !important; gap: 10px !important; align-content: start !important; min-width: 0 !important; }
+
+#custom-profile-root .ld-links-col h4 {
+  margin: 0 !important;
+  color: var(--ld-teal) !important;
+  font-family: var(--ld-font-hud) !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+#custom-profile-root .ld-bb-a a:not(.ld-pill) {
+  color: var(--ld-orange-hot) !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
+
+#custom-profile-root .ld-bb-a a:not(.ld-pill):hover { text-decoration: underline !important; }
+
+@media (max-width: 1120px) {
+  #custom-profile-root .ld-bb-a { grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr) !important; }
+}
+
+@container (max-width: 720px) {
+  #custom-profile-root .ld-bb-a, #custom-profile-root .ld-links-grid { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 860px) {
+  .profile-identity-row { padding: 12px 10px 2px !important; }
+  .profile-stats-sort-row { margin-top: 200px !important; }
+  #custom-profile-root .ld-bb-a, #custom-profile-root .ld-links-grid { grid-template-columns: 1fr !important; }
+}
+</style>
+<section class="ld-bb-a" aria-label="The_Lonely_Devil profile">
+  <article class="ld-panel ld-command">
+    <span class="ld-plate">System // Cardmaking</span>
+    <h2>Detail. <span class="ld-w-teal">Detail.</span> Detail. <span class="ld-w-teal">More</span> detail.</h2>
+    <div class="ld-telemetry"></div>
+    <ul class="ld-list">
+      <li><strong>AI-assisted cardmaking with heavy human oversight.</strong></li>
+      <li><strong>Big-ish cards.</strong> (be happy you missed my allergic-to-lorebooks 8k-token phase)</li>
+      <li><strong>Canonical detail.</strong> True to the character's lore, up to the mentioned time.</li>
+      <li><strong>Embedded lorebooks.</strong> Keeps active tokens low.</li>
+      <li><strong>Extra care where it counts most.</strong> Character voice, openings, and (my) scenario definitions.</li>
+    </ul>
+    <p class="ld-note"><b>Operator note:</b> I was sick of cards with no substance and/or wrong information. I wanted cards anyone could pick up as a baseline, modify to their liking, or use as-is.</p>
+    <div class="ld-actions">
+      <a class="ld-pill" href="https://marshmallow-qa.com/xivrxgkzwdryg9k" target="_blank" rel="noopener noreferrer">Requests / Feedback</a>
+      <a class="ld-pill ld-pill--teal" href="https://ko-fi.com/thelonelydevil" target="_blank" rel="noopener noreferrer">Support: Ko-Fi</a>
+    </div>
+    <div class="ld-ops">
+      <b>Active ops</b>
+      <span>Card parity achieved! Releasing cards from my backlog of ~70+ cards.</span>
+    </div>
+  </article>
+  <article class="ld-panel ld-aside">
+    <span class="ld-plate">Pilot log</span>
+    <div class="ld-aside-section">
+      <h3>About</h3>
+      <ul class="ld-list">
+        <li>Lazy bum turned hobbyist cardmaker. Mostly into Hoyoverse games, anime, and long-form roleplay cards.</li>
+        <li>Around the scene since mid-2024, starting with pre-lobotomy CharacterAI. Yeah, THAT C.AI. Now, a Chub creator-refugee.</li>
+      </ul>
+    </div>
+    <div class="ld-aside-section ld-hazard">
+      <h3>Hazard notice</h3>
+      <ul class="ld-list">
+        <li>ALL of my cards are NSFW and foot fetish focused, so consider yourself warned in the least shocking way possible.</li>
+      </ul>
+    </div>
+  </article>
+  <details class="ld-panel ld-wide ld-more">
+    <summary>Uplinks // Credits</summary>
+    <div class="ld-links-grid">
+      <div class="ld-links-col">
+        <ul class="ld-list">
+          <li>Creator of <a href="https://github.com/TheLonelyDevil9/discord-pals" target="_blank" rel="noopener noreferrer">Discord Pals</a>, with heavy inspiration from Marinara Spaghetti, and feedback and suggestions from Geechan, Purachina, and all the lovely souls over on Febs' Bruary, among many others.</li>
+          <li>Primary contributor to <a href="https://github.com/platberlitz/SillyBunny" target="_blank" rel="noopener noreferrer">SillyBunny</a>, a fast customized fork of <a href="https://github.com/SillyTavern/SillyTavern" target="_blank" rel="noopener noreferrer">SillyTavern</a>.</li>
+          <li>Minor contributor to <a href="https://github.com/Pasta-Devs/Marinara-Engine" target="_blank" rel="noopener noreferrer">Marinara Engine</a>, the next big thing in RP, from the Pasta Devs.</li>
+        </ul>
+      </div>
+      <div class="ld-links-col">
+        <h4>Inspiration</h4>
+        <ul class="ld-list">
+          <li>Heavily inspired by <a href="https://discord.gg/Nbv9pQ88Xb" target="_blank" rel="noopener noreferrer">SleepDeprived03's</a> work (search "Sleep" in the NSFW cards channel to find his two main threads). Rest in peace, you legend.</li>
+          <li>Also inspired by <a href="https://bronya-rand.github.io/reimagined-couscous/" target="_blank" rel="noopener noreferrer">Bronya Rand's</a> work. Thank you both for your hard work.</li>
+        </ul>
+      </div>
+      <div class="ld-links-col">
+        <h4>Recommended Reading</h4>
+        <ul class="ld-list">
+          <li><a href="https://rentry.org/Sukino-Findings" target="_blank" rel="noopener noreferrer">Sukino's Findings</a> - the amazing one-stop shop.</li>
+          <li><a href="https://rentry.org/geechan" target="_blank" rel="noopener noreferrer">Geechan's Rentry</a> - amazing hand-written cards and prompt presets that slap without hijacking your tone/style.</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+</section>
+
+</div>
+</div>
+</div>
+<div class="profile-stats-sort-row">
+<span id="profile-stats" class="profile-stat-pill is-active">102 Cards</span>
+<span class="profile-stat-pill">1 Favorites</span>
+<span class="profile-stat-pill">22 Comments</span>
+<span class="bb-sort">SORT: Latest &middot; Downloads &middot; Favs &middot; Tagme</span>
+</div>
+<div class="bb-cards"><div class="bb-card"></div><div class="bb-card"></div><div class="bb-card"></div><div class="bb-card"></div><div class="bb-card"></div><div class="bb-card"></div><div class="bb-card"></div><div class="bb-card"></div><div class="bb-card"></div><div class="bb-card"></div></div>
+</main>
+</body>
+</html>

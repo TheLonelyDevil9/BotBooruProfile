@@ -1,0 +1,520 @@
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap");
+
+:root {
+  --ld-ink: oklch(0.94 0.014 70);
+  --ld-copy: oklch(0.87 0.018 72);
+  --ld-muted: oklch(0.71 0.018 72);
+  --ld-deep: oklch(0.055 0.014 48);
+  --ld-slab-ink: oklch(0.16 0.03 55);
+  --ld-slab-ink-soft: oklch(0.26 0.045 55);
+  --ld-line: #FFBF00;
+  --ld-soft-line: oklch(0.90 0.02 80 / 0.14);
+  --ld-orange: oklch(0.74 0.16 54);
+  --ld-orange-hot: oklch(0.82 0.15 62);
+  --ld-teal: oklch(0.70 0.065 190);
+  --ld-wallpaper: url("https://file.garden/aeRvgfxptRQB-dB-/_1%20Profile%20Background.png");
+  --ld-firefly: url("https://file.garden/aeRvgfxptRQB-dB-/_2%20Top%20Firefly.GIF");
+  --ld-font-body: "Source Sans 3", "Source Sans Pro", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --ld-font-display: "Sora", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --ld-body-size: 0.94rem;
+}
+
+body {
+  color: var(--ld-ink) !important;
+  position: relative !important;
+  z-index: 0 !important;
+  isolation: isolate !important;
+  min-height: 100vh !important;
+  background: var(--ld-deep) !important;
+  font-family: var(--ld-font-body) !important;
+}
+
+body :where(a, button, div, input, label, li, p, select, small, span, strong, textarea) {
+  font-family: var(--ld-font-body) !important;
+}
+
+body :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--ld-font-display) !important;
+}
+
+body::before {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: -2 !important;
+  pointer-events: none !important;
+  background: var(--ld-wallpaper) !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+  background-size: min(118vw, 1700px) auto !important;
+  background-attachment: fixed !important;
+  opacity: 0.42 !important;
+}
+
+body::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+  background: linear-gradient(180deg, oklch(0.018 0.01 48 / 0.38), oklch(0.014 0.008 48 / 0.52)) !important;
+}
+
+html {
+  background: var(--ld-deep) !important;
+  scroll-behavior: smooth !important;
+}
+
+#main-content, main, #profile-view-shell, #profile-view,
+.profile-layout-root, .profile-main-col, .profile-header-block, .profile-identity-row {
+  background: transparent !important;
+}
+
+#profile-banner {
+  position: relative !important;
+  min-height: clamp(300px, 31vw, 390px) !important;
+  border: 0 !important;
+  border-bottom: 3px solid var(--ld-line) !important;
+  border-radius: 4px !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+  background-color: var(--ld-deep) !important;
+  background-image: var(--ld-firefly) !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  filter: brightness(1.08) saturate(1.05) !important;
+  box-shadow: 0 18px 44px oklch(0.02 0.012 48 / 0.4) !important;
+}
+
+#profile-banner::before, #profile-banner::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+#profile-banner > .pointer-events-none.absolute.inset-0,
+#profile-banner > div[style*="linear-gradient"] {
+  display: none !important;
+  background: none !important;
+}
+
+.profile-avatar-wrap {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 0 !important;
+  padding: 3px !important;
+  border: 2px solid var(--ld-line) !important;
+  border-radius: 50% !important;
+  background: oklch(0.05 0.014 48) !important;
+  box-shadow: 0 0 0 6px oklch(0.80 0.14 80 / 0.10), 0 18px 38px oklch(0.02 0.012 48 / 0.6) !important;
+}
+
+.profile-avatar-wrap img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+.profile-identity-row {
+  margin-top: 0 !important;
+  padding: 16px 18px 4px !important;
+  align-items: flex-start !important;
+  flex-wrap: wrap !important;
+}
+
+.profile-identity-info-text h1 {
+  color: var(--ld-line) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em !important;
+  text-shadow: 0 14px 38px oklch(0.72 0.16 54 / 0.3) !important;
+}
+
+.profile-identity-info-text {
+  flex: 1 1 280px !important;
+  min-width: min(100%, 240px) !important;
+}
+
+.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span[class*="rounded-full"][class*="uppercase"] {
+  min-height: 22px !important;
+  padding: 0 10px !important;
+  border: 1px solid oklch(0.86 0.03 80 / 0.4) !important;
+  border-radius: 3px !important;
+  background: oklch(0.10 0.016 48 / 0.9) !important;
+  line-height: 1 !important;
+  letter-spacing: 0.04em !important;
+  text-shadow: none !important;
+}
+
+.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span.rank-donator-pill[class*="rounded-full"] {
+  color: var(--ld-slab-ink) !important;
+  border-color: var(--ld-line) !important;
+  background: var(--ld-line) !important;
+  font-weight: 800 !important;
+}
+
+.profile-meta-strip { margin-top: 16px !important; }
+
+.profile-meta-chip, .profile-stat-pill {
+  min-height: 32px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid var(--ld-soft-line) !important;
+  border-radius: 3px !important;
+  color: var(--ld-copy) !important;
+  background: oklch(0.10 0.016 48 / 0.92) !important;
+  font-weight: 700 !important;
+}
+
+.profile-meta-strip .profile-meta-chip:first-child {
+  border-color: var(--ld-line) !important;
+  color: var(--ld-line) !important;
+}
+
+.profile-stat-pill.is-active {
+  color: var(--ld-slab-ink) !important;
+  border-color: var(--ld-line) !important;
+  background: var(--ld-line) !important;
+}
+
+#custom-profile-root {
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-top: 20px !important;
+  order: 10 !important;
+  container-type: inline-size !important;
+}
+
+.profile-identity-right-stack { display: contents !important; }
+.profile-followers-following { order: 2 !important; margin-left: auto !important; }
+.profile-identity-right-stack > div:not(#custom-profile-root):not(.profile-followers-following) { order: 3 !important; margin-left: auto !important; }
+.profile-stats-sort-row { order: 3 !important; margin-top: 480px !important; }
+
+#custom-profile-root .ld-bb-a, #custom-profile-root .ld-bb-a * { box-sizing: border-box !important; }
+
+#custom-profile-root .ld-bb-a {
+  position: relative !important;
+  display: grid !important;
+  gap: 0 !important;
+  color: var(--ld-ink) !important;
+  font-size: var(--ld-body-size) !important;
+  background: linear-gradient(180deg, oklch(0.085 0.016 48 / 0.94), oklch(0.06 0.014 48 / 0.96)) !important;
+  border-radius: 4px !important;
+  overflow: hidden !important;
+  box-shadow: 0 24px 60px oklch(0.02 0.012 48 / 0.55) !important;
+}
+
+#custom-profile-root .ld-hero {
+  background: var(--ld-line) !important;
+  color: var(--ld-slab-ink) !important;
+  padding: clamp(26px, 4cqw, 44px) clamp(22px, 4cqw, 46px) clamp(24px, 3.4cqw, 38px) !important;
+  display: grid !important;
+  gap: 20px !important;
+}
+
+#custom-profile-root .ld-hero h2 {
+  margin: 0 !important;
+  color: var(--ld-slab-ink) !important;
+  font-size: clamp(2rem, 5.4cqw, 3.4rem) !important;
+  font-weight: 800 !important;
+  line-height: 0.99 !important;
+  letter-spacing: -0.025em !important;
+  text-wrap: balance !important;
+  max-width: 18ch !important;
+}
+
+#custom-profile-root .ld-hero h2 .ld-echo { opacity: 0.44 !important; }
+
+#custom-profile-root .ld-hero .ld-why {
+  margin: 0 !important;
+  color: var(--ld-slab-ink-soft) !important;
+  font-size: 1.02rem !important;
+  font-weight: 600 !important;
+  line-height: 1.5 !important;
+  max-width: 62ch !important;
+}
+
+#custom-profile-root .ld-hero .ld-why b { color: var(--ld-slab-ink) !important; }
+
+#custom-profile-root .ld-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  align-items: center !important;
+}
+
+#custom-profile-root .ld-pill {
+  min-height: 40px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 9px 22px !important;
+  border: 2px solid var(--ld-slab-ink) !important;
+  border-radius: 3px !important;
+  color: var(--ld-slab-ink) !important;
+  background: transparent !important;
+  font-weight: 800 !important;
+  font-size: 0.86rem !important;
+  line-height: 1.05 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  transition: background 0.15s ease-out, color 0.15s ease-out !important;
+}
+
+#custom-profile-root .ld-pill:hover {
+  background: var(--ld-slab-ink) !important;
+  color: var(--ld-line) !important;
+  text-decoration: none !important;
+}
+
+#custom-profile-root .ld-pill--solid {
+  background: var(--ld-slab-ink) !important;
+  color: var(--ld-line) !important;
+}
+
+#custom-profile-root .ld-pill--solid:hover {
+  background: transparent !important;
+  color: var(--ld-slab-ink) !important;
+}
+
+#custom-profile-root .ld-focus {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: baseline !important;
+  gap: 6px 14px !important;
+  padding: 15px clamp(22px, 4cqw, 46px) !important;
+  border-bottom: 1px solid var(--ld-soft-line) !important;
+  background: oklch(0.10 0.02 55 / 0.5) !important;
+}
+
+#custom-profile-root .ld-focus b {
+  color: var(--ld-teal) !important;
+  font-family: var(--ld-font-display) !important;
+  font-size: 0.82rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+#custom-profile-root .ld-focus span {
+  color: var(--ld-copy) !important;
+  font-size: 0.95rem !important;
+}
+
+#custom-profile-root .ld-cols {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.55fr) minmax(240px, 0.85fr) !important;
+  gap: 0 !important;
+}
+
+#custom-profile-root .ld-sec {
+  padding: clamp(22px, 3.4cqw, 34px) clamp(22px, 4cqw, 46px) !important;
+}
+
+#custom-profile-root .ld-cols > .ld-sec { border-right: 1px solid var(--ld-soft-line) !important; }
+
+#custom-profile-root .ld-side {
+  display: grid !important;
+  align-content: start !important;
+}
+
+#custom-profile-root .ld-side .ld-sec { padding-inline: clamp(20px, 3cqw, 30px) !important; border-right: 0 !important; }
+#custom-profile-root .ld-side .ld-sec + .ld-sec { border-top: 1px solid var(--ld-soft-line) !important; }
+
+#custom-profile-root .ld-sec h3 {
+  margin: 0 !important;
+  color: var(--ld-orange-hot) !important;
+  font-size: 1.16rem !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+}
+
+#custom-profile-root .ld-sec p, #custom-profile-root .ld-sec li {
+  color: var(--ld-copy) !important;
+  font-size: var(--ld-body-size) !important;
+  line-height: 1.55 !important;
+  overflow-wrap: anywhere !important;
+}
+
+#custom-profile-root .ld-list {
+  display: grid !important;
+  gap: 10px !important;
+  margin: 14px 0 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+#custom-profile-root .ld-list li { position: relative !important; padding-left: 18px !important; }
+
+#custom-profile-root .ld-list li::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0.72em !important;
+  width: 6px !important;
+  height: 6px !important;
+  background: var(--ld-line) !important;
+  transform: translateY(-50%) rotate(45deg) !important;
+}
+
+#custom-profile-root .ld-list li strong { color: var(--ld-ink) !important; font-weight: 700 !important; }
+
+#custom-profile-root .ld-note {
+  margin: 12px 0 0 !important;
+  color: var(--ld-muted) !important;
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+}
+
+#custom-profile-root .ld-more { border-top: 1px solid var(--ld-soft-line) !important; }
+
+#custom-profile-root .ld-more summary {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 16px clamp(22px, 4cqw, 46px) !important;
+  color: var(--ld-orange-hot) !important;
+  font-family: var(--ld-font-display) !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  list-style: none !important;
+  cursor: pointer !important;
+}
+
+#custom-profile-root .ld-more summary::-webkit-details-marker { display: none !important; }
+
+#custom-profile-root .ld-more summary::after {
+  content: "+" !important;
+  color: var(--ld-line) !important;
+  font-size: 1.4em !important;
+  line-height: 0.8 !important;
+}
+
+#custom-profile-root .ld-more[open] summary::after { content: "\2212" !important; }
+
+#custom-profile-root .ld-links-grid {
+  display: grid !important;
+  grid-template-columns: 1.3fr 1fr 0.9fr !important;
+  gap: 14px 30px !important;
+  align-items: start !important;
+  padding: 0 clamp(22px, 4cqw, 46px) clamp(24px, 3.4cqw, 34px) !important;
+}
+
+#custom-profile-root .ld-links-col { display: grid !important; gap: 10px !important; align-content: start !important; min-width: 0 !important; }
+
+#custom-profile-root .ld-links-col h4 {
+  margin: 0 !important;
+  color: var(--ld-teal) !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+}
+
+#custom-profile-root .ld-links-col .ld-list { margin-top: 2px !important; }
+
+#custom-profile-root .ld-bb-a a:not(.ld-pill) {
+  color: var(--ld-orange-hot) !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
+
+#custom-profile-root .ld-bb-a a:not(.ld-pill):hover { text-decoration: underline !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  #custom-profile-root .ld-pill { transition: none !important; }
+}
+
+@media (max-width: 1120px) {
+  #custom-profile-root .ld-cols { grid-template-columns: minmax(0, 1.2fr) minmax(230px, 0.9fr) !important; }
+}
+
+@container (max-width: 720px) {
+  #custom-profile-root .ld-cols, #custom-profile-root .ld-links-grid { grid-template-columns: 1fr !important; }
+  #custom-profile-root .ld-cols > .ld-sec { border-right: 0 !important; border-bottom: 1px solid var(--ld-soft-line) !important; }
+}
+
+@media (max-width: 860px) {
+  .profile-identity-row { padding: 12px 10px 2px !important; }
+  .profile-stats-sort-row { margin-top: 190px !important; }
+  #custom-profile-root .ld-cols, #custom-profile-root .ld-links-grid { grid-template-columns: 1fr !important; }
+  #custom-profile-root .ld-cols > .ld-sec { border-right: 0 !important; border-bottom: 1px solid var(--ld-soft-line) !important; }
+}
+</style>
+<section class="ld-bb-a" aria-label="The_Lonely_Devil profile">
+  <header class="ld-hero">
+    <h2><span class="ld-echo">Detail. Detail. Detail.</span> More detail.</h2>
+    <p class="ld-why"><b>Why?</b> I was sick of cards with no substance and/or wrong information. I wanted cards anyone could pick up as a baseline, modify to their liking, or use as-is.</p>
+    <div class="ld-actions">
+      <a class="ld-pill ld-pill--solid" href="https://marshmallow-qa.com/xivrxgkzwdryg9k" target="_blank" rel="noopener noreferrer">Requests / Anonymous Feedback</a>
+      <a class="ld-pill" href="https://ko-fi.com/thelonelydevil" target="_blank" rel="noopener noreferrer">Ko-Fi</a>
+    </div>
+  </header>
+  <div class="ld-focus">
+    <b>Currently focusing on</b>
+    <span>Card parity achieved! Releasing cards from my backlog of ~70+ cards.</span>
+  </div>
+  <div class="ld-cols">
+    <article class="ld-sec">
+      <h3>Cardmaking Method</h3>
+      <ul class="ld-list">
+        <li><strong>AI-assisted cardmaking with heavy human oversight.</strong></li>
+        <li><strong>Big-ish cards.</strong> (be happy you missed my allergic-to-lorebooks 8k-token phase)</li>
+        <li><strong>Canonical detail.</strong> True to the character's lore, up to the mentioned time.</li>
+        <li><strong>Embedded lorebooks.</strong> Keeps active tokens low.</li>
+        <li><strong>Extra care where it counts most.</strong> Character voice, openings, and (my) scenario definitions.</li>
+      </ul>
+    </article>
+    <aside class="ld-side">
+      <div class="ld-sec">
+        <h3>About</h3>
+        <ul class="ld-list">
+          <li>Lazy bum turned hobbyist cardmaker. Mostly into Hoyoverse games, anime, and long-form roleplay cards.</li>
+          <li>Around the scene since mid-2024, starting with pre-lobotomy CharacterAI. Yeah, THAT C.AI. Now, a Chub creator-refugee.</li>
+        </ul>
+      </div>
+      <div class="ld-sec">
+        <h3>Heads Up</h3>
+        <ul class="ld-list">
+          <li>ALL of my cards are NSFW and foot fetish focused, so consider yourself warned in the least shocking way possible.</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+  <details class="ld-more">
+    <summary>Links / Credits</summary>
+    <div class="ld-links-grid">
+      <div class="ld-links-col">
+        <ul class="ld-list">
+          <li>Creator of <a href="https://github.com/TheLonelyDevil9/discord-pals" target="_blank" rel="noopener noreferrer">Discord Pals</a>, with heavy inspiration from Marinara Spaghetti, and feedback and suggestions from Geechan, Purachina, and all the lovely souls over on Febs' Bruary, among many others.</li>
+          <li>Primary contributor to <a href="https://github.com/platberlitz/SillyBunny" target="_blank" rel="noopener noreferrer">SillyBunny</a>, a fast customized fork of <a href="https://github.com/SillyTavern/SillyTavern" target="_blank" rel="noopener noreferrer">SillyTavern</a>.</li>
+          <li>Minor contributor to <a href="https://github.com/Pasta-Devs/Marinara-Engine" target="_blank" rel="noopener noreferrer">Marinara Engine</a>, the next big thing in RP, from the Pasta Devs.</li>
+        </ul>
+      </div>
+      <div class="ld-links-col">
+        <h4>Inspiration</h4>
+        <ul class="ld-list">
+          <li>Heavily inspired by <a href="https://discord.gg/Nbv9pQ88Xb" target="_blank" rel="noopener noreferrer">SleepDeprived03's</a> work (search "Sleep" in the NSFW cards channel to find his two main threads). Rest in peace, you legend.</li>
+          <li>Also inspired by <a href="https://bronya-rand.github.io/reimagined-couscous/" target="_blank" rel="noopener noreferrer">Bronya Rand's</a> work. Thank you both for your hard work.</li>
+        </ul>
+      </div>
+      <div class="ld-links-col">
+        <h4>Recommended Reading</h4>
+        <ul class="ld-list">
+          <li><a href="https://rentry.org/Sukino-Findings" target="_blank" rel="noopener noreferrer">Sukino's Findings</a> - the amazing one-stop shop.</li>
+          <li><a href="https://rentry.org/geechan" target="_blank" rel="noopener noreferrer">Geechan's Rentry</a> - amazing hand-written cards and prompt presets that slap without hijacking your tone/style.</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+</section>

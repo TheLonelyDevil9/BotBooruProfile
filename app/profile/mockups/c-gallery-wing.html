@@ -1,0 +1,524 @@
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap");
+
+:root {
+  --ld-ink: oklch(0.95 0.012 70);
+  --ld-copy: oklch(0.88 0.016 72);
+  --ld-muted: oklch(0.72 0.016 72);
+  --ld-deep: oklch(0.055 0.014 48);
+  --ld-glass: oklch(0.075 0.014 48 / 0.68);
+  --ld-line: #FFBF00;
+  --ld-soft-line: oklch(0.92 0.02 80 / 0.15);
+  --ld-orange: oklch(0.74 0.16 54);
+  --ld-orange-hot: oklch(0.83 0.14 66);
+  --ld-teal: oklch(0.72 0.07 190);
+  --ld-shadow: 0 24px 60px oklch(0.02 0.012 48 / 0.5);
+  --ld-wallpaper: url("https://file.garden/aeRvgfxptRQB-dB-/_1%20Profile%20Background.png");
+  --ld-firefly: url("https://file.garden/aeRvgfxptRQB-dB-/_2%20Top%20Firefly.GIF");
+  --ld-font-body: "Source Sans 3", "Source Sans Pro", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --ld-font-display: "Sora", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --ld-body-size: 0.97rem;
+}
+
+body {
+  color: var(--ld-ink) !important;
+  position: relative !important;
+  z-index: 0 !important;
+  isolation: isolate !important;
+  min-height: 100vh !important;
+  background: var(--ld-deep) !important;
+  font-family: var(--ld-font-body) !important;
+}
+
+body :where(a, button, div, input, label, li, p, select, small, span, strong, textarea) {
+  font-family: var(--ld-font-body) !important;
+}
+
+body :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--ld-font-display) !important;
+}
+
+body::before {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: -2 !important;
+  pointer-events: none !important;
+  background: var(--ld-wallpaper) !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+  background-size: min(118vw, 1700px) auto !important;
+  background-attachment: fixed !important;
+  opacity: 0.74 !important;
+}
+
+body::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+  background: linear-gradient(180deg, oklch(0.02 0.01 48 / 0.2), oklch(0.014 0.008 48 / 0.4) 60%, oklch(0.014 0.008 48 / 0.55)) !important;
+}
+
+html {
+  background: var(--ld-deep) !important;
+  scroll-behavior: smooth !important;
+}
+
+#main-content, main, #profile-view-shell, #profile-view,
+.profile-layout-root, .profile-main-col, .profile-header-block, .profile-identity-row {
+  background: transparent !important;
+}
+
+#profile-banner {
+  position: relative !important;
+  min-height: clamp(300px, 32vw, 400px) !important;
+  border: 0 !important;
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+  background-color: var(--ld-deep) !important;
+  background-image: var(--ld-firefly) !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  filter: brightness(1.12) saturate(1.06) !important;
+  box-shadow: 0 24px 60px oklch(0.02 0.012 48 / 0.5) !important;
+}
+
+#profile-banner::before, #profile-banner::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  background: none !important;
+  box-shadow: inset 0 0 0 1px oklch(0.95 0.05 84 / 0.22) !important;
+  border-radius: 18px !important;
+}
+
+#profile-banner > .pointer-events-none.absolute.inset-0,
+#profile-banner > div[style*="linear-gradient"] {
+  display: none !important;
+  background: none !important;
+}
+
+.profile-avatar-wrap {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 0 !important;
+  padding: 3px !important;
+  border: 2px solid oklch(0.95 0.04 84 / 0.9) !important;
+  border-radius: 50% !important;
+  background: oklch(0.05 0.014 48) !important;
+  box-shadow: 0 0 24px oklch(0.8 0.14 80 / 0.28), 0 18px 38px oklch(0.02 0.012 48 / 0.6) !important;
+}
+
+.profile-avatar-wrap img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+.profile-identity-row {
+  margin-top: 0 !important;
+  padding: 16px 18px 4px !important;
+  align-items: flex-start !important;
+  flex-wrap: wrap !important;
+}
+
+.profile-identity-info-text h1 {
+  color: var(--ld-ink) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em !important;
+  text-shadow: 0 4px 22px oklch(0.02 0.012 48 / 0.8) !important;
+}
+
+.profile-identity-info-text {
+  flex: 1 1 280px !important;
+  min-width: min(100%, 240px) !important;
+}
+
+.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span[class*="rounded-full"][class*="uppercase"] {
+  min-height: 22px !important;
+  padding: 0 10px !important;
+  border: 1px solid oklch(0.92 0.03 80 / 0.3) !important;
+  border-radius: 999px !important;
+  background: oklch(0.08 0.014 48 / 0.6) !important;
+  backdrop-filter: blur(8px) !important;
+  line-height: 1 !important;
+  letter-spacing: 0.04em !important;
+  text-shadow: none !important;
+}
+
+.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span.rank-donator-pill[class*="rounded-full"] {
+  color: oklch(0.93 0.1 86) !important;
+  border-color: oklch(0.85 0.12 84 / 0.7) !important;
+}
+
+.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span[class*="bg-emerald-900"][class*="rounded-full"] {
+  color: oklch(0.9 0.06 166) !important;
+  border-color: oklch(0.75 0.08 166 / 0.6) !important;
+}
+
+.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span[class*="bg-sky-900"][class*="rounded-full"] {
+  color: oklch(0.92 0.05 228) !important;
+  border-color: oklch(0.75 0.09 228 / 0.6) !important;
+}
+
+.profile-meta-strip { margin-top: 16px !important; }
+
+.profile-meta-chip, .profile-stat-pill {
+  min-height: 33px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid oklch(0.92 0.03 80 / 0.22) !important;
+  border-radius: 999px !important;
+  color: var(--ld-copy) !important;
+  background: oklch(0.08 0.014 48 / 0.62) !important;
+  backdrop-filter: blur(8px) !important;
+  font-weight: 700 !important;
+}
+
+.profile-meta-strip .profile-meta-chip:first-child {
+  color: oklch(0.93 0.1 86) !important;
+  border-color: oklch(0.85 0.12 84 / 0.6) !important;
+}
+
+.profile-stat-pill.is-active {
+  color: oklch(0.13 0.018 50) !important;
+  border-color: transparent !important;
+  background: linear-gradient(180deg, oklch(0.87 0.13 84), var(--ld-line)) !important;
+}
+
+#custom-profile-root {
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-top: 6px !important;
+  order: 10 !important;
+  container-type: inline-size !important;
+}
+
+.profile-identity-right-stack { display: contents !important; }
+.profile-followers-following { order: 2 !important; margin-left: auto !important; }
+.profile-identity-right-stack > div:not(#custom-profile-root):not(.profile-followers-following) { order: 3 !important; margin-left: auto !important; }
+.profile-stats-sort-row { order: 3 !important; margin-top: 150px !important; }
+
+#custom-profile-root .ld-bb-a, #custom-profile-root .ld-bb-a * { box-sizing: border-box !important; }
+
+#custom-profile-root .ld-bb-a {
+  position: relative !important;
+  display: grid !important;
+  gap: 18px !important;
+  color: var(--ld-ink) !important;
+  font-size: var(--ld-body-size) !important;
+}
+
+#custom-profile-root .ld-heroband {
+  min-height: clamp(280px, 30cqw, 380px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  align-items: flex-start !important;
+  gap: 14px !important;
+  padding: 24px 8px !important;
+  background: linear-gradient(to top, oklch(0.02 0.01 48 / 0.6), oklch(0.02 0.01 48 / 0.28) 45%, transparent 72%) !important;
+}
+
+#custom-profile-root .ld-heroband h2 {
+  margin: 0 !important;
+  color: var(--ld-ink) !important;
+  font-size: clamp(2.1rem, 5.6cqw, 3.6rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.0 !important;
+  letter-spacing: -0.02em !important;
+  max-width: 15ch !important;
+  text-shadow: 0 4px 18px oklch(0.02 0.012 48 / 0.9), 0 22px 70px oklch(0.02 0.012 48 / 0.7) !important;
+}
+
+#custom-profile-root .ld-heroband h2 .ld-hero-amber { color: var(--ld-line) !important; }
+
+#custom-profile-root .ld-heroband p {
+  margin: 0 !important;
+  color: var(--ld-copy) !important;
+  font-size: 1.04rem !important;
+  font-weight: 600 !important;
+  max-width: 58ch !important;
+  line-height: 1.55 !important;
+  text-shadow: 0 2px 12px oklch(0.02 0.012 48 / 0.95) !important;
+}
+
+#custom-profile-root .ld-panel {
+  border: 0 !important;
+  border-radius: 16px !important;
+  background: var(--ld-glass) !important;
+  backdrop-filter: blur(14px) saturate(1.12) !important;
+  box-shadow: inset 0 0 0 1px var(--ld-soft-line), var(--ld-shadow) !important;
+}
+
+#custom-profile-root .ld-cols {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.55fr) minmax(250px, 0.85fr) !important;
+  gap: 18px !important;
+  align-items: start !important;
+}
+
+#custom-profile-root .ld-sec { padding: 26px 28px !important; display: grid !important; gap: 14px !important; align-content: start !important; }
+
+#custom-profile-root .ld-panel h3 {
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  color: var(--ld-orange-hot) !important;
+  font-size: 1.08rem !important;
+  font-weight: 800 !important;
+  line-height: 1.12 !important;
+}
+
+#custom-profile-root .ld-panel h3::before {
+  content: "" !important;
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 50% !important;
+  background: var(--ld-teal) !important;
+  box-shadow: 0 0 10px oklch(0.72 0.07 190 / 0.8) !important;
+  flex: 0 0 auto !important;
+}
+
+#custom-profile-root .ld-panel p, #custom-profile-root .ld-panel li {
+  color: var(--ld-copy) !important;
+  font-size: var(--ld-body-size) !important;
+  line-height: 1.6 !important;
+  overflow-wrap: anywhere !important;
+}
+
+#custom-profile-root .ld-list {
+  display: grid !important;
+  gap: 11px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+#custom-profile-root .ld-list li { position: relative !important; padding-left: 16px !important; }
+
+#custom-profile-root .ld-list li::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0.78em !important;
+  width: 5px !important;
+  height: 5px !important;
+  border-radius: 50% !important;
+  background: var(--ld-teal) !important;
+  transform: translateY(-50%) !important;
+}
+
+#custom-profile-root .ld-list li strong { color: var(--ld-ink) !important; font-weight: 700 !important; }
+
+#custom-profile-root .ld-note { margin: 0 !important; color: var(--ld-muted) !important; font-size: 0.92rem !important; line-height: 1.55 !important; }
+
+#custom-profile-root .ld-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  align-items: center !important;
+  margin-top: 4px !important;
+}
+
+#custom-profile-root .ld-pill {
+  min-height: 40px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 9px 22px !important;
+  border: 1px solid oklch(0.9 0.1 84 / 0.55) !important;
+  border-radius: 12px !important;
+  color: var(--ld-orange-hot) !important;
+  background: oklch(0.09 0.016 48 / 0.5) !important;
+  font-weight: 700 !important;
+  font-size: 0.88rem !important;
+  line-height: 1.1 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  transition: background 0.15s ease-out, color 0.15s ease-out !important;
+}
+
+#custom-profile-root .ld-pill:hover {
+  background: var(--ld-line) !important;
+  color: oklch(0.15 0.025 55) !important;
+  border-color: var(--ld-line) !important;
+  text-decoration: none !important;
+}
+
+#custom-profile-root .ld-pill--teal {
+  color: oklch(0.12 0.014 48) !important;
+  border-color: transparent !important;
+  background: linear-gradient(180deg, oklch(0.78 0.08 190), oklch(0.64 0.07 190)) !important;
+}
+
+#custom-profile-root .ld-pill--teal:hover { background: oklch(0.82 0.08 190) !important; color: oklch(0.12 0.014 48) !important; }
+
+#custom-profile-root .ld-focus {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: baseline !important;
+  gap: 6px 14px !important;
+  padding: 16px 28px !important;
+}
+
+#custom-profile-root .ld-focus b {
+  color: var(--ld-teal) !important;
+  font-family: var(--ld-font-display) !important;
+  font-size: 0.86rem !important;
+  font-weight: 800 !important;
+  white-space: nowrap !important;
+}
+
+#custom-profile-root .ld-focus span { color: var(--ld-copy) !important; font-size: 0.97rem !important; }
+
+#custom-profile-root .ld-wide { grid-column: 1 / -1 !important; }
+
+#custom-profile-root .ld-more { overflow: hidden !important; }
+
+#custom-profile-root .ld-more summary {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 17px 28px !important;
+  color: var(--ld-orange-hot) !important;
+  font-family: var(--ld-font-display) !important;
+  font-size: 1.02rem !important;
+  font-weight: 800 !important;
+  list-style: none !important;
+  cursor: pointer !important;
+}
+
+#custom-profile-root .ld-more summary::-webkit-details-marker { display: none !important; }
+
+#custom-profile-root .ld-more summary::after {
+  content: "+" !important;
+  color: var(--ld-line) !important;
+  font-size: 1.4em !important;
+  line-height: 0.8 !important;
+}
+
+#custom-profile-root .ld-more[open] summary { box-shadow: inset 0 -1px 0 var(--ld-soft-line) !important; }
+#custom-profile-root .ld-more[open] summary::after { content: "\2212" !important; }
+
+#custom-profile-root .ld-links-grid {
+  display: grid !important;
+  grid-template-columns: 1.3fr 1fr 0.9fr !important;
+  gap: 14px 30px !important;
+  align-items: start !important;
+  padding: 20px 28px 26px !important;
+}
+
+#custom-profile-root .ld-links-col { display: grid !important; gap: 11px !important; align-content: start !important; min-width: 0 !important; }
+
+#custom-profile-root .ld-links-col h4 {
+  margin: 0 !important;
+  color: var(--ld-teal) !important;
+  font-size: 0.98rem !important;
+  font-weight: 800 !important;
+}
+
+#custom-profile-root .ld-bb-a a:not(.ld-pill) {
+  color: var(--ld-orange-hot) !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
+
+#custom-profile-root .ld-bb-a a:not(.ld-pill):hover { text-decoration: underline !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  #custom-profile-root .ld-pill { transition: none !important; }
+}
+
+@media (max-width: 1120px) {
+  #custom-profile-root .ld-cols { grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.9fr) !important; }
+}
+
+@container (max-width: 720px) {
+  #custom-profile-root .ld-cols, #custom-profile-root .ld-links-grid { grid-template-columns: 1fr !important; }
+  #custom-profile-root .ld-heroband { min-height: 240px !important; }
+}
+
+@media (max-width: 860px) {
+  .profile-identity-row { padding: 12px 10px 2px !important; }
+  .profile-stats-sort-row { margin-top: 90px !important; }
+  #custom-profile-root .ld-cols, #custom-profile-root .ld-links-grid { grid-template-columns: 1fr !important; }
+  #custom-profile-root .ld-heroband { min-height: 240px !important; }
+}
+</style>
+<section class="ld-bb-a" aria-label="The_Lonely_Devil profile">
+  <header class="ld-heroband">
+    <h2>Detail. Detail. Detail. <span class="ld-hero-amber">More detail.</span></h2>
+    <p>I was sick of cards with no substance and/or wrong information. I wanted cards anyone could pick up as a baseline, modify to their liking, or use as-is.</p>
+  </header>
+  <div class="ld-cols">
+    <article class="ld-panel ld-sec">
+      <h3>Cardmaking Method</h3>
+      <ul class="ld-list">
+        <li><strong>AI-assisted cardmaking with heavy human oversight.</strong></li>
+        <li><strong>Big-ish cards.</strong> (be happy you missed my allergic-to-lorebooks 8k-token phase)</li>
+        <li><strong>Canonical detail.</strong> True to the character's lore, up to the mentioned time.</li>
+        <li><strong>Embedded lorebooks.</strong> Keeps active tokens low.</li>
+        <li><strong>Extra care where it counts most.</strong> Character voice, openings, and (my) scenario definitions.</li>
+      </ul>
+      <div class="ld-actions">
+        <a class="ld-pill" href="https://marshmallow-qa.com/xivrxgkzwdryg9k" target="_blank" rel="noopener noreferrer">Requests / Anonymous Feedback</a>
+        <a class="ld-pill ld-pill--teal" href="https://ko-fi.com/thelonelydevil" target="_blank" rel="noopener noreferrer">Ko-Fi</a>
+      </div>
+    </article>
+    <aside class="ld-panel ld-sec">
+      <h3>About</h3>
+      <ul class="ld-list">
+        <li>Lazy bum turned hobbyist cardmaker. Mostly into Hoyoverse games, anime, and long-form roleplay cards.</li>
+        <li>Around the scene since mid-2024, starting with pre-lobotomy CharacterAI. Yeah, THAT C.AI. Now, a Chub creator-refugee.</li>
+      </ul>
+      <h3>Heads Up</h3>
+      <ul class="ld-list">
+        <li>ALL of my cards are NSFW and foot fetish focused, so consider yourself warned in the least shocking way possible.</li>
+      </ul>
+    </aside>
+  </div>
+  <div class="ld-panel ld-focus">
+    <b>Currently focusing on</b>
+    <span>Card parity achieved! Releasing cards from my backlog of ~70+ cards.</span>
+  </div>
+  <details class="ld-panel ld-more">
+    <summary>Links / Credits</summary>
+    <div class="ld-links-grid">
+      <div class="ld-links-col">
+        <ul class="ld-list">
+          <li>Creator of <a href="https://github.com/TheLonelyDevil9/discord-pals" target="_blank" rel="noopener noreferrer">Discord Pals</a>, with heavy inspiration from Marinara Spaghetti, and feedback and suggestions from Geechan, Purachina, and all the lovely souls over on Febs' Bruary, among many others.</li>
+          <li>Primary contributor to <a href="https://github.com/platberlitz/SillyBunny" target="_blank" rel="noopener noreferrer">SillyBunny</a>, a fast customized fork of <a href="https://github.com/SillyTavern/SillyTavern" target="_blank" rel="noopener noreferrer">SillyTavern</a>.</li>
+          <li>Minor contributor to <a href="https://github.com/Pasta-Devs/Marinara-Engine" target="_blank" rel="noopener noreferrer">Marinara Engine</a>, the next big thing in RP, from the Pasta Devs.</li>
+        </ul>
+      </div>
+      <div class="ld-links-col">
+        <h4>Inspiration</h4>
+        <ul class="ld-list">
+          <li>Heavily inspired by <a href="https://discord.gg/Nbv9pQ88Xb" target="_blank" rel="noopener noreferrer">SleepDeprived03's</a> work (search "Sleep" in the NSFW cards channel to find his two main threads). Rest in peace, you legend.</li>
+          <li>Also inspired by <a href="https://bronya-rand.github.io/reimagined-couscous/" target="_blank" rel="noopener noreferrer">Bronya Rand's</a> work. Thank you both for your hard work.</li>
+        </ul>
+      </div>
+      <div class="ld-links-col">
+        <h4>Recommended Reading</h4>
+        <ul class="ld-list">
+          <li><a href="https://rentry.org/Sukino-Findings" target="_blank" rel="noopener noreferrer">Sukino's Findings</a> - the amazing one-stop shop.</li>
+          <li><a href="https://rentry.org/geechan" target="_blank" rel="noopener noreferrer">Geechan's Rentry</a> - amazing hand-written cards and prompt presets that slap without hijacking your tone/style.</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+</section>
