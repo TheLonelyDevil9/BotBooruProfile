@@ -5,7 +5,7 @@ Three divergent revamp directions for the profile blob, each a deployable-shaped
 | Variant | File | Idea |
 | --- | --- | --- |
 | A | `a-ember-poster.html` | Amber-drenched poster slab hero, ink CTAs, borderless hairline sections |
-| B | `b-sam-hud.html` | Firefly/SAM cockpit: corner-cut panels, nameplate tabs, telemetry ticks, Chakra Petch display |
+| B | `b-sam-hud.html` | CHOSEN 2026-07-16. Firefly/SAM cockpit: corner-cut panels, nameplate tabs (plain labels with `//` separators, no in-universe naming), telemetry ticks, Chakra Petch display. Promoted to `../bio.html` with live-profile copy as source of truth |
 | C | `c-gallery-wing.html` | Art-led: wallpaper promoted, hero type over exposed art band, glass caption panels |
 
 ## Preview

@@ -14,29 +14,28 @@ html, body { margin: 0; }
 <div class="profile-identity-right-stack">
 <div id="custom-profile-root">
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Source+Sans+3:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap");
 
 :root {
   --ld-ink: oklch(0.94 0.014 70);
   --ld-copy: oklch(0.86 0.018 72);
   --ld-muted: oklch(0.70 0.018 72);
   --ld-deep: oklch(0.055 0.014 48);
-  --ld-panel: oklch(0.12 0.018 48 / 0.91);
+  --ld-panel: oklch(0.105 0.016 48 / 0.93);
   --ld-line: #FFBF00;
-  --ld-soft-line: oklch(0.90 0.02 80 / 0.12);
+  --ld-line-dim: oklch(0.75 0.14 84 / 0.55);
+  --ld-soft-line: oklch(0.90 0.02 80 / 0.13);
   --ld-orange: oklch(0.74 0.16 54);
   --ld-orange-hot: oklch(0.82 0.15 62);
-  --ld-teal: oklch(0.68 0.062 190);
-  --ld-red: oklch(0.62 0.18 30);
+  --ld-teal: oklch(0.70 0.075 190);
+  --ld-warn: oklch(0.66 0.17 40);
   --ld-shadow: 0 20px 52px oklch(0.02 0.012 48 / 0.54);
   --ld-wallpaper: url("https://file.garden/aeRvgfxptRQB-dB-/_1%20Profile%20Background.png");
   --ld-firefly: url("https://file.garden/aeRvgfxptRQB-dB-/_2%20Top%20Firefly.GIF");
   --ld-font-body: "Source Sans 3", "Source Sans Pro", -apple-system, "Segoe UI", system-ui, sans-serif;
-  --ld-font-display: "Sora", -apple-system, "Segoe UI", system-ui, sans-serif;
-  --ld-font-ui: "Source Sans 3", "Source Sans Pro", -apple-system, "Segoe UI", system-ui, sans-serif;
-  --ld-body-size: 0.92rem;
-  --ld-note-size: 0.90rem;
-  --ld-subhead-size: 1.08rem;
+  --ld-font-hud: "Chakra Petch", "Segoe UI", system-ui, sans-serif;
+  --ld-body-size: 0.93rem;
+  --ld-cut: 14px;
 }
 
 body {
@@ -53,12 +52,8 @@ body :where(a, button, div, input, label, li, p, select, small, span, strong, te
   font-family: var(--ld-font-body) !important;
 }
 
-body :where(h1, h2, h3, h4, h5, h6),
-.profile-identity-info-text h1,
-#custom-profile-root .ld-command h2,
-#custom-profile-root .ld-panel h3,
-#custom-profile-root .ld-copy-block h4 {
-  font-family: var(--ld-font-display) !important;
+body :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--ld-font-hud) !important;
 }
 
 body::before {
@@ -72,7 +67,7 @@ body::before {
   background-repeat: no-repeat !important;
   background-size: min(118vw, 1700px) auto !important;
   background-attachment: fixed !important;
-  opacity: 0.55 !important;
+  opacity: 0.5 !important;
 }
 
 body::after {
@@ -82,9 +77,8 @@ body::after {
   z-index: -1 !important;
   pointer-events: none !important;
   background:
-    linear-gradient(180deg, oklch(0.018 0.01 48 / 0.30), oklch(0.014 0.008 48 / 0.44)),
-    radial-gradient(circle at 15% 5%, oklch(0.72 0.18 49 / 0.035), transparent 30%),
-    radial-gradient(circle at 86% 10%, oklch(0.66 0.06 190 / 0.026), transparent 28%) !important;
+    linear-gradient(180deg, oklch(0.018 0.01 48 / 0.34), oklch(0.014 0.008 48 / 0.5)),
+    radial-gradient(circle at 85% 8%, oklch(0.66 0.075 190 / 0.04), transparent 30%) !important;
 }
 
 html {
@@ -92,22 +86,16 @@ html {
   scroll-behavior: smooth !important;
 }
 
-#main-content,
-main,
-#profile-view-shell,
-#profile-view,
-.profile-layout-root,
-.profile-main-col,
-.profile-header-block,
-.profile-identity-row {
+#main-content, main, #profile-view-shell, #profile-view,
+.profile-layout-root, .profile-main-col, .profile-header-block, .profile-identity-row {
   background: transparent !important;
 }
 
 #profile-banner {
   position: relative !important;
   min-height: clamp(300px, 31vw, 390px) !important;
-  border: 0.5px solid var(--ld-line) !important;
-  border-radius: 12px !important;
+  border: 1px solid var(--ld-line-dim) !important;
+  border-radius: 2px !important;
   overflow: hidden !important;
   isolation: isolate !important;
   background-color: var(--ld-deep) !important;
@@ -115,25 +103,33 @@ main,
   background-position: center center !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
-  filter: brightness(1.1) saturate(1.05) contrast(1.03) !important;
+  filter: brightness(1.1) saturate(1.05) !important;
   box-shadow: 0 14px 34px oklch(0.02 0.012 48 / 0.34) !important;
 }
 
 #profile-banner::before {
   content: "" !important;
   position: absolute !important;
-  inset: 0 !important;
+  inset: 10px auto auto 10px !important;
+  width: 30px !important;
+  height: 30px !important;
   pointer-events: none !important;
   background: none !important;
+  border-top: 2px solid var(--ld-line) !important;
+  border-left: 2px solid var(--ld-line) !important;
   box-shadow: none !important;
 }
 
 #profile-banner::after {
   content: "" !important;
   position: absolute !important;
-  inset: 0 !important;
+  inset: auto 10px 10px auto !important;
+  width: 30px !important;
+  height: 30px !important;
   pointer-events: none !important;
   background: none !important;
+  border-bottom: 2px solid var(--ld-line) !important;
+  border-right: 2px solid var(--ld-line) !important;
   box-shadow: none !important;
 }
 
@@ -152,7 +148,9 @@ main,
   border: 2px solid var(--ld-teal) !important;
   border-radius: 50% !important;
   background: oklch(0.05 0.014 48) !important;
-  box-shadow: 0 0 0 6px oklch(0.66 0.06 190 / 0.12), 0 18px 38px oklch(0.02 0.012 48 / 0.60) !important;
+  outline: 1px dashed var(--ld-line-dim) !important;
+  outline-offset: 5px !important;
+  box-shadow: 0 18px 38px oklch(0.02 0.012 48 / 0.6) !important;
 }
 
 .profile-avatar-wrap img {
@@ -166,16 +164,17 @@ main,
 
 .profile-identity-row {
   margin-top: 0 !important;
-  padding: 14px 18px 4px !important;
+  padding: 16px 18px 4px !important;
   align-items: flex-start !important;
   flex-wrap: wrap !important;
 }
 
 .profile-identity-info-text h1 {
   color: var(--ld-orange-hot) !important;
-  font-weight: 900 !important;
-  letter-spacing: 0 !important;
-  text-shadow: 0 14px 38px oklch(0.72 0.16 54 / 0.28) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 14px 38px oklch(0.72 0.16 54 / 0.3) !important;
 }
 
 .profile-identity-info-text {
@@ -183,301 +182,311 @@ main,
   min-width: min(100%, 240px) !important;
 }
 
-.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] {
-  gap: 6px !important;
-  align-items: center !important;
-}
-
 .profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span[class*="rounded-full"][class*="uppercase"] {
   min-height: 22px !important;
-  padding: 0 9px !important;
-  border: 1px solid oklch(0.86 0.03 80 / 0.44) !important;
-  border-radius: 999px !important;
-  background-clip: padding-box !important;
-  box-shadow: inset 0 0 0 1px oklch(0.98 0.01 80 / 0.10), 0 3px 10px oklch(0.02 0.012 48 / 0.30) !important;
+  padding: 0 10px !important;
+  border: 1px solid oklch(0.86 0.03 80 / 0.42) !important;
+  border-radius: 2px !important;
+  background: oklch(0.10 0.016 48 / 0.92) !important;
+  font-family: var(--ld-font-hud) !important;
   line-height: 1 !important;
-  letter-spacing: 0.035em !important;
+  letter-spacing: 0.06em !important;
   text-shadow: none !important;
-  overflow: hidden !important;
 }
 
-.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span.rank-donator-pill {
+.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span.rank-donator-pill[class*="rounded-full"] {
   color: oklch(0.91 0.105 86) !important;
-  border-color: oklch(0.82 0.135 82 / 0.88) !important;
-  background: linear-gradient(180deg, oklch(0.33 0.076 76 / 0.96), oklch(0.20 0.050 70 / 0.96)) !important;
-  box-shadow: inset 0 0 0 1px oklch(0.98 0.04 86 / 0.14), 0 0 10px oklch(0.78 0.13 82 / 0.22) !important;
+  border-color: var(--ld-line-dim) !important;
+  background: oklch(0.22 0.05 74 / 0.95) !important;
 }
 
-.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span[class*="bg-emerald-900"] {
+.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span[class*="bg-emerald-900"][class*="rounded-full"] {
   color: oklch(0.89 0.062 166) !important;
-  border-color: oklch(0.72 0.088 166 / 0.82) !important;
-  background: linear-gradient(180deg, oklch(0.30 0.060 166 / 0.96), oklch(0.16 0.040 166 / 0.96)) !important;
-  box-shadow: inset 0 0 0 1px oklch(0.94 0.04 166 / 0.12), 0 0 10px oklch(0.68 0.09 166 / 0.22) !important;
+  border-color: oklch(0.72 0.088 166 / 0.7) !important;
+  background: oklch(0.20 0.045 166 / 0.95) !important;
 }
 
-.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span[class*="bg-sky-900"] {
+.profile-identity-info-text > div[class*="flex-wrap"][class*="gap-1.5"] > span[class*="bg-sky-900"][class*="rounded-full"] {
   color: oklch(0.91 0.052 228) !important;
-  border-color: oklch(0.72 0.095 228 / 0.84) !important;
-  background: linear-gradient(180deg, oklch(0.30 0.065 232 / 0.96), oklch(0.17 0.050 236 / 0.96)) !important;
-  box-shadow: inset 0 0 0 1px oklch(0.94 0.04 228 / 0.12), 0 0 10px oklch(0.68 0.10 228 / 0.24) !important;
+  border-color: oklch(0.72 0.095 228 / 0.7) !important;
+  background: oklch(0.20 0.05 232 / 0.95) !important;
 }
 
-.profile-meta-strip {
-  margin-top: 18px !important;
-}
+.profile-meta-strip { margin-top: 16px !important; }
 
-.profile-meta-chip,
-.profile-stat-pill,
-#profile-uploads-sort-bar button {
-  min-height: 34px !important;
+.profile-meta-chip, .profile-stat-pill {
+  min-height: 32px !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  border: 1.5px solid var(--ld-line) !important;
-  border-radius: 999px !important;
-  background: oklch(0.085 0.016 48 / 0.96) !important;
-  box-shadow: inset 0 1px 0 oklch(0.95 0.01 70 / 0.10), 0 5px 14px oklch(0.02 0.012 48 / 0.42) !important;
-  font-weight: 800 !important;
-  text-align: center !important;
-}
-
-.profile-meta-strip .profile-meta-chip:not(:first-child),
-.profile-stat-pill,
-#profile-uploads-sort-bar button {
+  border: 1px solid var(--ld-line-dim) !important;
+  border-radius: 2px !important;
   color: var(--ld-copy) !important;
-}
-
-.profile-meta-strip .profile-meta-chip:first-child {
-  border-color: #FFBF00 !important;
-  background: linear-gradient(180deg, oklch(0.20 0.050 58 / 0.98), oklch(0.10 0.026 48 / 0.98)) !important;
+  background: oklch(0.09 0.016 48 / 0.94) !important;
+  font-family: var(--ld-font-hud) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em !important;
 }
 
 .profile-stat-pill.is-active {
   color: oklch(0.13 0.018 50) !important;
-  border-color: transparent !important;
-  background: linear-gradient(180deg, var(--ld-orange-hot), var(--ld-orange)) !important;
+  border-color: var(--ld-line) !important;
+  background: var(--ld-line) !important;
+  font-weight: 700 !important;
 }
 
 #custom-profile-root {
   flex: 0 0 100% !important;
   width: 100% !important;
   max-width: 100% !important;
-  margin-top: 18px !important;
+  margin-top: 22px !important;
   order: 10 !important;
   container-type: inline-size !important;
 }
 
-.profile-identity-right-stack {
-  display: contents !important;
-}
+.profile-identity-right-stack { display: contents !important; }
+.profile-followers-following { order: 2 !important; margin-left: auto !important; }
+.profile-identity-right-stack > div:not(#custom-profile-root):not(.profile-followers-following) { order: 3 !important; margin-left: auto !important; }
+.profile-stats-sort-row { order: 3 !important; margin-top: 500px !important; }
 
-.profile-followers-following {
-  order: 2 !important;
-  margin-left: auto !important;
-}
-
-.profile-identity-right-stack > div:not(#custom-profile-root):not(.profile-followers-following) {
-  order: 3 !important;
-  margin-left: auto !important;
-}
-
-.profile-stats-sort-row {
-  order: 3 !important;
-  margin-top: 520px !important;
-}
-
-#custom-profile-root .ld-bb-a,
-#custom-profile-root .ld-bb-a * {
-  box-sizing: border-box !important;
-}
+#custom-profile-root .ld-bb-a, #custom-profile-root .ld-bb-a * { box-sizing: border-box !important; }
 
 #custom-profile-root .ld-bb-a {
   position: relative !important;
   display: grid !important;
-  grid-template-columns: minmax(0, 1.6fr) minmax(230px, 0.74fr) !important;
-  gap: 14px !important;
+  grid-template-columns: minmax(0, 1.55fr) minmax(240px, 0.8fr) !important;
+  gap: 16px !important;
   align-items: start !important;
   color: var(--ld-ink) !important;
   font-size: var(--ld-body-size) !important;
 }
 
 #custom-profile-root .ld-panel {
-  border: 1.5px solid var(--ld-line) !important;
-  border-radius: 8px !important;
-  background: linear-gradient(180deg, var(--ld-panel), oklch(0.08 0.014 48 / 0.94)) !important;
+  position: relative !important;
+  border: 1px solid var(--ld-line-dim) !important;
+  background: linear-gradient(180deg, var(--ld-panel), oklch(0.075 0.014 48 / 0.95)) !important;
   box-shadow: var(--ld-shadow) !important;
+  clip-path: polygon(var(--ld-cut) 0, 100% 0, 100% calc(100% - var(--ld-cut)), calc(100% - var(--ld-cut)) 100%, 0 100%, 0 var(--ld-cut)) !important;
 }
+
+#custom-profile-root .ld-plate {
+  position: absolute !important;
+  top: 0 !important;
+  left: 22px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  padding: 5px 12px !important;
+  border: 1px solid var(--ld-line-dim) !important;
+  border-top: 0 !important;
+  background: oklch(0.07 0.014 48) !important;
+  color: var(--ld-line) !important;
+  font-family: var(--ld-font-hud) !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  z-index: 1 !important;
+}
+
+#custom-profile-root .ld-plate::before {
+  content: "" !important;
+  width: 7px !important;
+  height: 7px !important;
+  background: var(--ld-teal) !important;
+  clip-path: polygon(0 0, 100% 50%, 0 100%) !important;
+}
+
+#custom-profile-root .ld-plate--warn { color: var(--ld-warn) !important; border-color: oklch(0.6 0.14 40 / 0.6) !important; }
+#custom-profile-root .ld-plate--warn::before { background: var(--ld-warn) !important; }
 
 #custom-profile-root .ld-command {
   display: grid !important;
   align-content: start !important;
   gap: 18px !important;
-  padding: 20px 22px !important;
+  padding: 34px 26px 24px !important;
 }
 
 #custom-profile-root .ld-command h2 {
-  max-width: none !important;
   margin: 0 !important;
   color: var(--ld-orange-hot) !important;
-  font-size: clamp(1.4rem, 2.6vw, 2.3rem) !important;
-  font-weight: 900 !important;
-  line-height: 1.08 !important;
+  font-size: clamp(1.5rem, 3.4cqw, 2.5rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.04 !important;
+  letter-spacing: 0.005em !important;
+  text-transform: uppercase !important;
+  text-wrap: balance !important;
 }
 
-#custom-profile-root .ld-command h2 .ld-hero-word {
-  display: inline !important;
-}
+#custom-profile-root .ld-command h2 .ld-w-teal { color: var(--ld-teal) !important; }
 
-#custom-profile-root .ld-command h2 .ld-hero-word--orange {
-  color: var(--ld-orange-hot) !important;
-}
-
-#custom-profile-root .ld-command h2 .ld-hero-word--teal {
-  color: var(--ld-teal) !important;
-}
-
-#custom-profile-root .ld-command .ld-method-heading {
-  margin-top: 8px !important;
-}
-
-#custom-profile-root .ld-command .ld-method-body {
-  margin: 8px 0 0 !important;
+#custom-profile-root .ld-telemetry {
+  height: 8px !important;
+  background: repeating-linear-gradient(90deg, var(--ld-line-dim) 0 2px, transparent 2px 16px) !important;
+  opacity: 0.7 !important;
 }
 
 #custom-profile-root .ld-panel h3 {
   margin: 0 !important;
   color: var(--ld-teal) !important;
-  font-size: var(--ld-subhead-size) !important;
-  font-weight: 900 !important;
-  line-height: 1.12 !important;
+  font-size: 0.98rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  line-height: 1.15 !important;
 }
 
-#custom-profile-root .ld-panel p,
-#custom-profile-root .ld-panel li {
+#custom-profile-root .ld-panel p, #custom-profile-root .ld-panel li {
   color: var(--ld-copy) !important;
   font-size: var(--ld-body-size) !important;
-  line-height: 1.50 !important;
+  line-height: 1.52 !important;
   overflow-wrap: anywhere !important;
 }
 
-#custom-profile-root .ld-list li strong {
-  color: var(--ld-ink) !important;
-  font-weight: 700 !important;
+#custom-profile-root .ld-list {
+  display: grid !important;
+  gap: 10px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
 }
 
+#custom-profile-root .ld-list li { position: relative !important; padding-left: 17px !important; }
+
+#custom-profile-root .ld-list li::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0.72em !important;
+  width: 7px !important;
+  height: 8px !important;
+  background: var(--ld-teal) !important;
+  clip-path: polygon(0 0, 100% 50%, 0 100%) !important;
+  transform: translateY(-50%) !important;
+}
+
+#custom-profile-root .ld-list li strong { color: var(--ld-ink) !important; font-weight: 700 !important; }
+
 #custom-profile-root .ld-note {
-  margin: 8px 0 0 !important;
+  margin: 0 !important;
   color: var(--ld-muted) !important;
-  font-size: var(--ld-note-size) !important;
-  line-height: 1.48 !important;
+  font-size: 0.89rem !important;
+  line-height: 1.5 !important;
+}
+
+#custom-profile-root .ld-note b {
+  color: var(--ld-teal) !important;
+  font-family: var(--ld-font-hud) !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
 }
 
 #custom-profile-root .ld-actions {
   display: flex !important;
   flex-wrap: wrap !important;
-  gap: 9px !important;
+  gap: 10px !important;
   align-items: center !important;
-}
-
-#custom-profile-root .ld-command > .ld-actions {
-  justify-content: center !important;
 }
 
 #custom-profile-root .ld-pill {
-  min-height: 34px !important;
+  min-height: 38px !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 7px !important;
-  padding: 7px 12px !important;
-  border: 1.5px solid var(--ld-line) !important;
-  border-radius: 999px !important;
-  color: var(--ld-copy) !important;
-  background: oklch(0.10 0.016 48 / 0.84) !important;
-  box-shadow: inset 0 1px 0 oklch(0.95 0.01 70 / 0.08) !important;
-  font-weight: 800 !important;
-  line-height: 1 !important;
+  flex: 1 1 210px !important;
+  max-width: 320px !important;
+  padding: 9px 20px !important;
+  border: 0 !important;
+  color: oklch(0.14 0.02 55) !important;
+  background: linear-gradient(180deg, oklch(0.86 0.14 84), var(--ld-line)) !important;
+  font-family: var(--ld-font-hud) !important;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  line-height: 1.1 !important;
   text-align: center !important;
   text-decoration: none !important;
-}
-
-#custom-profile-root .ld-command > .ld-actions .ld-pill {
-  flex: 1 1 180px !important;
-  min-width: 180px !important;
-  max-width: 260px !important;
-  border-radius: 8px !important;
-  padding-inline: 24px !important;
-  font-size: 0.82rem !important;
-  line-height: 1.08 !important;
+  clip-path: polygon(9px 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%, 0 9px) !important;
 }
 
 #custom-profile-root .ld-pill--teal {
-  color: oklch(0.10 0.014 48) !important;
-  border-color: transparent !important;
-  background: linear-gradient(180deg, oklch(0.74 0.062 190), var(--ld-teal)) !important;
+  background: linear-gradient(180deg, oklch(0.76 0.08 190), oklch(0.62 0.075 190)) !important;
 }
 
-#custom-profile-root .ld-signal {
+#custom-profile-root .ld-ops {
   display: grid !important;
-  gap: 7px !important;
-  margin-top: 2px !important;
-  padding-top: 14px !important;
-  border-top: 1px solid var(--ld-soft-line) !important;
+  gap: 8px !important;
+  padding: 12px 14px !important;
+  border: 1px solid var(--ld-soft-line) !important;
+  background: oklch(0.07 0.014 48 / 0.7) !important;
 }
 
-#custom-profile-root .ld-signal .ld-focus-block {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-#custom-profile-root .ld-signal b {
-  display: block !important;
+#custom-profile-root .ld-ops b {
   color: var(--ld-teal) !important;
-  font-size: var(--ld-subhead-size) !important;
-  font-weight: 900 !important;
-  letter-spacing: 0 !important;
+  font-family: var(--ld-font-hud) !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
+}
+
+#custom-profile-root .ld-ops span { color: var(--ld-copy) !important; font-size: 0.93rem !important; line-height: 1.5 !important; }
+
+#custom-profile-root .ld-ops span::after {
+  content: "\258C" !important;
+  margin-left: 4px !important;
+  color: var(--ld-line) !important;
+  animation: ld-blink 1.2s steps(2, start) infinite !important;
+}
+
+@keyframes ld-blink { to { visibility: hidden; } }
+
+@media (prefers-reduced-motion: reduce) {
+  #custom-profile-root .ld-ops span::after { animation: none !important; opacity: 0.7 !important; }
 }
 
 #custom-profile-root .ld-aside {
   display: grid !important;
-  gap: 18px !important;
+  gap: 20px !important;
   align-content: start !important;
   min-width: 0 !important;
-  padding: 16px !important;
+  padding: 34px 20px 20px !important;
 }
 
+#custom-profile-root .ld-aside-section { position: relative !important; display: grid !important; gap: 10px !important; }
+
 #custom-profile-root .ld-aside-section + .ld-aside-section {
-  padding-top: 18px !important;
+  padding-top: 20px !important;
   border-top: 1px solid var(--ld-soft-line) !important;
 }
 
-#custom-profile-root .ld-wide {
-  grid-column: 1 / -1 !important;
-}
+#custom-profile-root .ld-hazard h3 { color: var(--ld-warn) !important; }
+#custom-profile-root .ld-hazard .ld-list li::before { background: var(--ld-warn) !important; }
 
-#custom-profile-root .ld-more {
-  overflow: hidden !important;
-}
+#custom-profile-root .ld-wide { grid-column: 1 / -1 !important; }
+
+#custom-profile-root .ld-more { overflow: hidden !important; }
 
 #custom-profile-root .ld-more summary {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
   gap: 16px !important;
-  padding: 14px 16px !important;
+  padding: 18px 22px 14px !important;
   color: var(--ld-teal) !important;
-  font-family: var(--ld-font-display) !important;
-  font-size: var(--ld-subhead-size) !important;
-  font-weight: 900 !important;
-  line-height: 1.12 !important;
+  font-family: var(--ld-font-hud) !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
   list-style: none !important;
   cursor: pointer !important;
 }
 
-#custom-profile-root .ld-more summary::-webkit-details-marker {
-  display: none !important;
-}
+#custom-profile-root .ld-more summary::-webkit-details-marker { display: none !important; }
 
 #custom-profile-root .ld-more summary::after {
   content: "+" !important;
@@ -486,166 +495,75 @@ main,
   line-height: 0.8 !important;
 }
 
-#custom-profile-root .ld-more[open] summary {
-  border-bottom: 1px solid var(--ld-soft-line) !important;
-}
-
-#custom-profile-root .ld-more[open] summary::after {
-  content: "\2212" !important;
-}
-
-#custom-profile-root .ld-more .ld-copy-block {
-  margin-top: 0 !important;
-  padding: 16px !important;
-}
+#custom-profile-root .ld-more[open] summary { border-bottom: 1px solid var(--ld-soft-line) !important; }
+#custom-profile-root .ld-more[open] summary::after { content: "\2212" !important; }
 
 #custom-profile-root .ld-links-grid {
+  display: grid !important;
   grid-template-columns: 1.3fr 1fr 0.9fr !important;
-  gap: 12px 26px !important;
+  gap: 14px 28px !important;
   align-items: start !important;
+  padding: 16px 22px 22px !important;
 }
 
-#custom-profile-root .ld-links-col {
-  display: grid !important;
-  gap: 10px !important;
-  align-content: start !important;
-  min-width: 0 !important;
-}
+#custom-profile-root .ld-links-col { display: grid !important; gap: 10px !important; align-content: start !important; min-width: 0 !important; }
 
-#custom-profile-root .ld-list {
-  display: grid !important;
-  gap: 9px !important;
-  margin: 12px 0 0 !important;
-  padding: 0 !important;
-  list-style: none !important;
-}
-
-#custom-profile-root .ld-list li {
-  position: relative !important;
-  padding-left: 15px !important;
-}
-
-#custom-profile-root .ld-list li::before {
-  content: "" !important;
-  position: absolute !important;
-  left: 0 !important;
-  top: 0.75em !important;
-  width: 5px !important;
-  height: 5px !important;
-  border-radius: 50% !important;
-  background: var(--ld-teal) !important;
-  transform: translateY(-50%) !important;
-}
-
-#custom-profile-root .ld-list.ld-note {
-  gap: 8px !important;
-}
-
-#custom-profile-root .ld-list--signal {
-  gap: 7px !important;
-  margin: 7px 0 0 !important;
-}
-
-#custom-profile-root .ld-copy-block .ld-list {
+#custom-profile-root .ld-links-col h4 {
   margin: 0 !important;
-}
-
-#custom-profile-root .ld-copy-block h4 + .ld-list {
-  margin-top: 2px !important;
-}
-
-#custom-profile-root .ld-copy-block {
-  display: grid !important;
-  gap: 10px !important;
-  margin-top: 12px !important;
-}
-
-#custom-profile-root .ld-copy-block p {
-  margin: 0 !important;
-}
-
-#custom-profile-root .ld-copy-block h4 {
-  margin: 8px 0 0 !important;
   color: var(--ld-teal) !important;
-  font-size: var(--ld-subhead-size) !important;
-  font-weight: 900 !important;
-  line-height: 1.12 !important;
+  font-family: var(--ld-font-hud) !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
 }
 
-#custom-profile-root .ld-copy-block h4:first-child {
-  margin-top: 0 !important;
-}
-
-#custom-profile-root .ld-copy-block h4 + p {
-  margin-top: 2px !important;
-}
-
-#custom-profile-root .ld-panel a:not(.ld-pill) {
+#custom-profile-root .ld-bb-a a:not(.ld-pill) {
   color: var(--ld-orange-hot) !important;
-  font-weight: 800 !important;
+  font-weight: 700 !important;
   text-decoration: none !important;
 }
 
-#custom-profile-root .ld-panel a:not(.ld-pill):hover {
-  text-decoration: underline !important;
-}
+#custom-profile-root .ld-bb-a a:not(.ld-pill):hover { text-decoration: underline !important; }
 
 @media (max-width: 1120px) {
-  #custom-profile-root .ld-bb-a {
-    grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr) !important;
-  }
+  #custom-profile-root .ld-bb-a { grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr) !important; }
 }
 
 @container (max-width: 720px) {
-  #custom-profile-root .ld-bb-a,
-  #custom-profile-root .ld-links-grid {
-    grid-template-columns: 1fr !important;
-  }
+  #custom-profile-root .ld-bb-a, #custom-profile-root .ld-links-grid { grid-template-columns: 1fr !important; }
 }
 
 @media (max-width: 860px) {
-  .profile-identity-row {
-    padding: 12px 10px 2px !important;
-  }
-
-  .profile-stats-sort-row {
-    margin-top: 200px !important;
-  }
-
-  #custom-profile-root .ld-bb-a,
-  #custom-profile-root .ld-links-grid {
-    grid-template-columns: 1fr !important;
-  }
+  .profile-identity-row { padding: 12px 10px 2px !important; }
+  .profile-stats-sort-row { margin-top: 200px !important; }
+  #custom-profile-root .ld-bb-a, #custom-profile-root .ld-links-grid { grid-template-columns: 1fr !important; }
 }
 </style>
 <section class="ld-bb-a" aria-label="The_Lonely_Devil profile">
   <article class="ld-panel ld-command">
-    <div>
-      <h2><span class="ld-hero-word ld-hero-word--orange">Detail.</span> <span class="ld-hero-word ld-hero-word--teal">Detail.</span> <span class="ld-hero-word ld-hero-word--orange">Detail.</span> <span class="ld-hero-word ld-hero-word--teal">More</span> <span class="ld-hero-word ld-hero-word--orange">detail.</span></h2>
-      <h3 class="ld-method-heading">Cardmaking Method:</h3>
-      <ul class="ld-list ld-note ld-method-body">
-        <li><strong>AI-assisted cardmaking with heavy human oversight.</strong></li>
-        <li><strong>Big-ish cards.</strong> (be happy you missed my allergic-to-lorebooks 8k-token phase)</li>
-        <li><strong>Canonical detail.</strong> True to the character's lore, up to the mentioned time.</li>
-        <li><strong>Embedded lorebooks.</strong> Keeps active tokens low.</li>
-        <li><strong>Extra care where it counts most.</strong> Character voice, openings, and (my) scenario definitions.</li>
-      </ul>
-      <p class="ld-note ld-why">Why do I do this? I was sick of cards with no substance and/or wrong information. I wanted cards anyone could pick up as a baseline, modify to their liking, or use as-is.</p>
-    </div>
+    <span class="ld-plate">Cardmaking // Method</span>
+    <h2>Detail. <span class="ld-w-teal">Detail.</span> Detail. <span class="ld-w-teal">More</span> detail.</h2>
+    <div class="ld-telemetry"></div>
+    <ul class="ld-list">
+      <li><strong>AI-assisted cardmaking with heavy human oversight.</strong></li>
+      <li><strong>Big-ish cards.</strong> (be happy you missed my allergic-to-lorebooks 8k-token phase)</li>
+      <li><strong>Canonical detail.</strong> True to the character's lore, up to the mentioned time.</li>
+      <li><strong>Embedded lorebooks.</strong> Keeps active tokens low.</li>
+      <li><strong>Extra care where it counts most.</strong> Character voice, openings, and (my) scenario definitions.</li>
+    </ul>
+    <p class="ld-note"><b>Why do I do this?</b> I was sick of cards with no substance and/or wrong information. I wanted cards anyone could pick up as a baseline, modify to their liking, or use as-is.</p>
     <div class="ld-actions">
       <a class="ld-pill" href="https://marshmallow-qa.com/xivrxgkzwdryg9k" target="_blank" rel="noopener noreferrer">Requests / Anonymous Feedback</a>
       <a class="ld-pill ld-pill--teal" href="https://ko-fi.com/thelonelydevil" target="_blank" rel="noopener noreferrer">Ko-Fi</a>
     </div>
-    <div class="ld-signal">
-      <div class="ld-focus-block">
-        <b>Currently focusing on:</b>
-        <ul class="ld-list ld-list--signal">
-          <li>Card parity achieved! Releasing cards from my backlog of ~70+ cards.</li>
-        </ul>
-      </div>
+    <div class="ld-ops">
+      <b>Currently focusing on</b>
+      <span>Chisato Nishikigi, Linnea, Fuu Kasumi, Fischl, Yor Forger</span>
     </div>
   </article>
   <article class="ld-panel ld-aside">
+    <span class="ld-plate">About // Heads Up</span>
     <div class="ld-aside-section">
       <h3>About:</h3>
       <ul class="ld-list">
@@ -653,7 +571,7 @@ main,
         <li>Around the scene since mid-2024, starting with pre-lobotomy CharacterAI. Yeah, THAT C.AI. Now, a Chub creator-refugee.</li>
       </ul>
     </div>
-    <div class="ld-aside-section">
+    <div class="ld-aside-section ld-hazard">
       <h3>Heads Up:</h3>
       <ul class="ld-list">
         <li>ALL of my cards are NSFW and foot fetish focused, so consider yourself warned in the least shocking way possible.</li>
@@ -661,8 +579,8 @@ main,
     </div>
   </article>
   <details class="ld-panel ld-wide ld-more">
-    <summary>Links / Credits:</summary>
-    <div class="ld-copy-block ld-links-grid">
+    <summary>Links // Credits</summary>
+    <div class="ld-links-grid">
       <div class="ld-links-col">
         <ul class="ld-list">
           <li>Creator of <a href="https://github.com/TheLonelyDevil9/discord-pals" target="_blank" rel="noopener noreferrer">Discord Pals</a>, with heavy inspiration from Marinara Spaghetti, and feedback and suggestions from Geechan, Purachina, and all the lovely souls over on Febs' Bruary, among many others.</li>
