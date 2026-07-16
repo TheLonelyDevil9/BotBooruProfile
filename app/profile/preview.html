@@ -144,6 +144,8 @@ html {
   align-items: center !important;
   justify-content: center !important;
   line-height: 0 !important;
+  aspect-ratio: 1 / 1 !important;
+  height: auto !important;
   padding: 4px !important;
   border: 2px solid var(--ld-teal) !important;
   border-radius: 50% !important;
@@ -247,7 +249,7 @@ html {
 .profile-identity-right-stack { display: contents !important; }
 .profile-followers-following { order: 2 !important; margin-left: auto !important; }
 .profile-identity-right-stack > div:not(#custom-profile-root):not(.profile-followers-following) { order: 3 !important; margin-left: auto !important; }
-.profile-stats-sort-row { order: 3 !important; margin-top: 500px !important; }
+.profile-stats-sort-row { order: 3 !important; margin-top: 100vh !important; }
 
 #custom-profile-root .ld-bb-a, #custom-profile-root .ld-bb-a * { box-sizing: border-box !important; }
 
@@ -267,6 +269,28 @@ html {
   background: linear-gradient(180deg, var(--ld-panel), oklch(0.075 0.014 48 / 0.95)) !important;
   box-shadow: var(--ld-shadow) !important;
   clip-path: polygon(var(--ld-cut) 0, 100% 0, 100% calc(100% - var(--ld-cut)), calc(100% - var(--ld-cut)) 100%, 0 100%, 0 var(--ld-cut)) !important;
+}
+
+#custom-profile-root .ld-panel::before,
+#custom-profile-root .ld-panel::after {
+  content: "" !important;
+  position: absolute !important;
+  width: 22px !important;
+  height: 1px !important;
+  background: var(--ld-line-dim) !important;
+  pointer-events: none !important;
+}
+
+#custom-profile-root .ld-panel::before {
+  top: 6.5px !important;
+  left: -4px !important;
+  transform: rotate(-45deg) !important;
+}
+
+#custom-profile-root .ld-panel::after {
+  bottom: 6.5px !important;
+  right: -4px !important;
+  transform: rotate(-45deg) !important;
 }
 
 #custom-profile-root .ld-plate {
@@ -326,6 +350,13 @@ html {
   background: repeating-linear-gradient(90deg, var(--ld-line-dim) 0 2px, transparent 2px 16px) !important;
   opacity: 0.7 !important;
 }
+
+#custom-profile-root .ld-method {
+  display: grid !important;
+  gap: 10px !important;
+}
+
+#custom-profile-root .ld-method p { margin: 0 !important; }
 
 #custom-profile-root .ld-panel h3 {
   margin: 0 !important;
@@ -395,8 +426,8 @@ html {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  flex: 1 1 210px !important;
-  max-width: 320px !important;
+  flex: 1 1 0 !important;
+  min-width: 160px !important;
   padding: 9px 20px !important;
   border: 0 !important;
   color: oklch(0.14 0.02 55) !important;
@@ -499,11 +530,11 @@ html {
 #custom-profile-root .ld-bb-a a.ld-feature {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 9px !important;
+  gap: 12px !important;
   width: fit-content !important;
   color: var(--ld-line) !important;
   font-family: var(--ld-font-hud) !important;
-  font-size: 1.05rem !important;
+  font-size: clamp(1.35rem, 2.8cqw, 1.8rem) !important;
   font-weight: 700 !important;
   letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
@@ -512,13 +543,67 @@ html {
 
 #custom-profile-root .ld-bb-a a.ld-feature::before {
   content: "" !important;
-  width: 8px !important;
-  height: 10px !important;
+  width: 11px !important;
+  height: 14px !important;
   background: var(--ld-teal) !important;
   clip-path: polygon(0 0, 100% 50%, 0 100%) !important;
 }
 
 #custom-profile-root .ld-bb-a a.ld-feature:hover { text-decoration: underline !important; }
+
+#custom-profile-root .ld-bb-a h3 a:not(.ld-pill) { color: var(--ld-teal) !important; }
+
+#custom-profile-root .ld-tail {
+  grid-column: 1 / -1 !important;
+  position: relative !important;
+  margin: 0 !important;
+  line-height: 0 !important;
+}
+
+#custom-profile-root .ld-tail img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  border: 1px solid var(--ld-line-dim) !important;
+  border-radius: 2px !important;
+  box-shadow: var(--ld-shadow) !important;
+}
+
+#custom-profile-root .ld-tail::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 10px auto auto 10px !important;
+  width: 30px !important;
+  height: 30px !important;
+  pointer-events: none !important;
+  border-top: 2px solid var(--ld-line) !important;
+  border-left: 2px solid var(--ld-line) !important;
+}
+
+#custom-profile-root .ld-tail::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: auto 10px 10px auto !important;
+  width: 30px !important;
+  height: 30px !important;
+  pointer-events: none !important;
+  border-bottom: 2px solid var(--ld-line) !important;
+  border-right: 2px solid var(--ld-line) !important;
+}
+
+#custom-profile-root .ld-tail figcaption {
+  position: absolute !important;
+  right: 16px !important;
+  bottom: 14px !important;
+  color: var(--ld-copy) !important;
+  font-family: var(--ld-font-hud) !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  line-height: 1.2 !important;
+  text-shadow: 0 1px 8px oklch(0.02 0.012 48 / 0.95), 0 0 2px oklch(0.02 0.012 48) !important;
+}
 
 @media (max-width: 1120px) {
   #custom-profile-root .ld-bb-a { grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr) !important; }
@@ -530,7 +615,7 @@ html {
 
 @media (max-width: 860px) {
   .profile-identity-row { padding: 12px 10px 2px !important; }
-  .profile-stats-sort-row { margin-top: 200px !important; }
+  .profile-stats-sort-row { margin-top: 100vh !important; }
   #custom-profile-root .ld-bb-a, #custom-profile-root .ld-links-grid { grid-template-columns: 1fr !important; }
 }
 </style>
@@ -538,20 +623,19 @@ html {
   <article class="ld-panel ld-command">
     <span class="ld-plate">Cardmaking // Method</span>
     <a class="ld-feature" href="https://botbooru.com/character/37186" target="_blank" rel="noopener noreferrer">Firefly!</a>
-    <h2>Detail. <span class="ld-w-teal">Detail.</span> Detail. <span class="ld-w-teal">More</span> detail.</h2>
+    <h2>Detail.<br><span class="ld-w-teal">Detail.</span><br>More detail.<br><span class="ld-w-teal">Then some more.</span></h2>
     <div class="ld-telemetry"></div>
-    <ul class="ld-list">
-      <li><strong>AI-assisted cardmaking with heavy human oversight.</strong></li>
-      <li><strong>Big-ish cards.</strong> (be happy you missed my allergic-to-lorebooks 8k-token phase)</li>
-      <li><strong>Canonical detail.</strong> True to the character's lore, up to the mentioned time.</li>
-      <li><strong>Embedded lorebooks.</strong> Keeps active tokens low.</li>
-      <li><strong>Extra care where it counts most.</strong> Character voice, openings, and (my) scenario definitions.</li>
-    </ul>
+    <div class="ld-method">
+      <p>I typically collect 20-50k+ tokens of mostly canonical (unless stated otherwise) character data, to consume and condense into every single card I release. Expect them to be foot-focused, large, fleshed-out, and hopefully as lore-accurate as possible (at least as of the time the card is released).</p>
+      <p>Even OCs are fleshed out similarly, to have a detailed personality and their own quirks, then condensed.</p>
+      <p>This is all done with a massive amount of heavy lifting done by AI.</p>
+    </div>
     <p class="ld-note"><b>Why do I do this?</b> I was sick of cards with no substance and/or wrong information. I wanted cards anyone could pick up as a baseline, modify to their liking, or use as-is.</p>
     <div class="ld-actions">
-      <a class="ld-pill" href="https://marshmallow-qa.com/xivrxgkzwdryg9k" target="_blank" rel="noopener noreferrer">Requests / Anonymous Feedback</a>
+      <a class="ld-pill" href="https://marshmallow-qa.com/xivrxgkzwdryg9k" target="_blank" rel="noopener noreferrer">Requests / Feedback</a>
       <a class="ld-pill ld-pill--teal" href="https://ko-fi.com/thelonelydevil" target="_blank" rel="noopener noreferrer">Ko-Fi</a>
     </div>
+    <p class="ld-note">Use the Marshmallow link, or the "Suggest a Character" button. No guarantees: I only make characters I like making, in the order I like making them in.</p>
     <div class="ld-ops">
       <b>Currently focusing on</b>
       <span>Chisato Nishikigi, Linnea, Fuu Kasumi, Fischl, Yor Forger</span>
@@ -560,17 +644,20 @@ html {
   <article class="ld-panel ld-aside">
     <span class="ld-plate">About // Heads Up</span>
     <div class="ld-aside-section">
-      <h3>About:</h3>
+      <h3><a href="https://www.youtube.com/watch?v=iVXa0_Sk95A&amp;t=5s" target="_blank" rel="noopener noreferrer">...Who?</a></h3>
       <ul class="ld-list">
         <li>Lazy bum turned hobbyist cardmaker. Mostly into Hoyoverse games, anime, and long-form roleplay cards.</li>
         <li>Let there be em dashes (yes, they are AI-written with tremendous human oversight, in case it wasn't obvious)</li>
         <li>Around the scene since mid-2024, starting with pre-lobotomy CharacterAI. Yeah, THAT C.AI. Now, a Chub creator-refugee.</li>
+        <li>Context for why I'm now here: <a href="https://chub.ai/users/The_Lonely_Devil" target="_blank" rel="noopener noreferrer">my Chub profile text</a>.</li>
       </ul>
     </div>
     <div class="ld-aside-section ld-hazard">
       <h3>Heads Up:</h3>
       <ul class="ld-list">
         <li>ALL of my cards are NSFW and foot fetish focused, so consider yourself warned in the least shocking way possible.</li>
+        <li>Not your thing? You're welcome to skip over me for creators more suited to your tastes. (looking at that one guy who's already asked)</li>
+        <li>Why, yes, I like feet... How could you tell?</li>
       </ul>
     </div>
   </article>
@@ -589,6 +676,7 @@ html {
         <ul class="ld-list">
           <li>Heavily inspired by <a href="https://discord.gg/Nbv9pQ88Xb" target="_blank" rel="noopener noreferrer">SleepDeprived03's</a> work (search "Sleep" in the NSFW cards channel to find his two main threads). Rest in peace, you legend.</li>
           <li>Also inspired by <a href="https://bronya-rand.github.io/reimagined-couscous/" target="_blank" rel="noopener noreferrer">Bronya Rand's</a> work. Thank you both for your hard work.</li>
+          <li>As he once requested, I'll be porting SleepDeprived03's cards onto BotBooru as soon as my WIP and Backlog are done.</li>
         </ul>
       </div>
       <div class="ld-links-col">
@@ -600,6 +688,10 @@ html {
       </div>
     </div>
   </article>
+  <figure class="ld-tail">
+    <img src="https://file.garden/aeRvgfxptRQB-dB-/_9%20Firefly%20After%20School.jpg" alt="Firefly after school" loading="lazy">
+    <figcaption>Post-School-Fly &middot; <a href="https://danbooru.donmai.us/posts/10970151" target="_blank" rel="noopener noreferrer">art source</a></figcaption>
+  </figure>
 </section>
 </div>
 </div>
