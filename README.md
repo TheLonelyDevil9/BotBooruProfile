@@ -40,5 +40,5 @@ Deploy:
 - All rules use `!important` to beat the site's Tailwind utility classes.
 - Keep custom classes prefixed with `ld-`.
 - Page-level restyles (body wallpaper, banner, avatar ring, identity pills, meta chips, stats row) live in the same `<style>` block as the bio panels; treat them as part of the blob.
-- Visual identity: ember/amber `#FFBF00` panel borders, orange/teal duotone on deep brown, Sora display + Source Sans 3 body, file.garden wallpaper and firefly banner.
+- Visual identity: ember/amber `#FFBF00` panel borders, orange/teal duotone on deep brown, Sora display + Source Sans 3 body, GitHub Pages (thelonelydevil9.github.io/BotBooruProfile/assets/) wallpaper and firefly banner.
 - For visual tuning, patch the live BotBooru DOM first with Chrome DevTools MCP, let the user judge the actual page, then mirror the approved values into `bio.html` and rebuild the preview.

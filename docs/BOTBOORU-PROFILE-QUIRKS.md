@@ -25,7 +25,7 @@ This document is the scratchpad for every hard-earned limitation in this profile
 
 - The wallpaper is drawn by `body::before` (fixed, low opacity) with a darkening gradient in `body::after`; panels sit on top with translucent backgrounds. Since 2026-07-16 it is `background-size: cover` at `background-position: 38% 40%`: the source art is 5502x2345 with Firefly's face at ~38% from the left, so x-anchoring at 38% keeps the face in frame at every width (a centered position slices the face off at 480px), and cover kills the empty side bands the old `min(118vw, 1700px)` sizing left on monitors wider than 1700px. With fixed attachment the background sizes against the viewport, and full-page screenshots only paint it in the first viewport-height region; that black band below is a capture artifact, not a live bug.
 - The banner replaces BotBooru's own image with the firefly GIF via `background-image` on `#profile-banner` and hides the site's gradient overlay children.
-- Fonts: Sora (display) + Source Sans 3 (body) via Google Fonts `@import` at the top of the `<style>` block. file.garden hosts the wallpaper and banner GIF.
+- Fonts: Sora (display) + Source Sans 3 (body) via Google Fonts `@import` at the top of the `<style>` block. GitHub Pages (thelonelydevil9.github.io/BotBooruProfile/assets/) hosts the wallpaper and banner GIF.
 - Bullet dots are `::before` pseudo-elements on `.ld-list li` (teal 5px, `top: 0.75em`), so text-only checks miss them; verify visually.
 - The two-column grid (`minmax(0, 1.6fr) minmax(230px, 0.74fr)`) tightens at 1120px and collapses when the profile container reaches 720px; the 860px viewport rule remains as a fallback.
 

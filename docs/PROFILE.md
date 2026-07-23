@@ -40,4 +40,4 @@ The local preview is useful for layout iteration, but it is not authoritative. B
 
 - There is no scripted write path; the manual paste in the profile editor is the deploy and the public-write gate.
 - A rebuilt preview does not change the live profile. Verify `https://botbooru.com/profile/25826` after every paste.
-- External assets load from file.garden; fonts from Google Fonts. If either host has issues, the blob degrades to system fonts on the deep-brown base.
+- External assets load from GitHub Pages (thelonelydevil9.github.io/BotBooruProfile/assets/); fonts from Google Fonts. If either host has issues, the blob degrades to system fonts on the deep-brown base.

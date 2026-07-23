@@ -53,7 +53,7 @@ Use the `agent-browser` CLI (Chrome DevTools MCP and Playwright are banned per u
 - Every rule needs `!important` to beat BotBooru's Tailwind utilities.
 - Keep custom classes prefixed with `ld-`.
 - Page-level selectors in active use: `body`, `#profile-banner`, `.profile-avatar-wrap`, `.profile-identity-row`, `.profile-identity-info-text`, `.profile-meta-strip`, `.profile-meta-chip`, `.profile-stat-pill`, `#profile-uploads-sort-bar`, `.profile-stats-sort-row`, `.profile-followers-following`. Re-verify these against the live DOM after BotBooru updates; the site is in active beta and class names have changed before.
-- External assets (wallpaper, firefly banner) are hosted on file.garden; fonts come from Google Fonts via `@import`.
+- External assets (wallpaper, firefly banner) are hosted on GitHub Pages (thelonelydevil9.github.io/BotBooruProfile/assets/); fonts come from Google Fonts via `@import`.
 
 ## Deploy
 
