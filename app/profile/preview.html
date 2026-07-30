@@ -30,8 +30,8 @@ html, body { margin: 0; }
   --ld-teal: oklch(0.70 0.075 190);
   --ld-warn: oklch(0.66 0.17 40);
   --ld-shadow: 0 20px 52px oklch(0.02 0.012 48 / 0.54);
-  --ld-wallpaper: url("https://thelonelydevil9.github.io/BotBooruProfile/assets/profile-background.png");
-  --ld-firefly: url("https://thelonelydevil9.github.io/BotBooruProfile/assets/top-firefly.gif");
+  --ld-wallpaper: url("https://thelonelydevil9.github.io/BotBooruProfile/assets/profile-background-kuroida.webp");
+  --ld-firefly: url("https://thelonelydevil9.github.io/BotBooruProfile/assets/top-firefly.webp");
   --ld-font-body: "Source Sans 3", "Source Sans Pro", -apple-system, "Segoe UI", system-ui, sans-serif;
   --ld-font-hud: "Chakra Petch", "Segoe UI", system-ui, sans-serif;
   --ld-body-size: 0.93rem;
@@ -93,7 +93,10 @@ html {
 
 #profile-banner {
   position: relative !important;
-  min-height: clamp(300px, 31vw, 390px) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  aspect-ratio: 16 / 9 !important;
   border: 1px solid var(--ld-line-dim) !important;
   border-radius: 2px !important;
   overflow: hidden !important;
@@ -647,7 +650,7 @@ html {
     <p class="ld-note">Use the Marshmallow link, or the "Suggest a Character" button. No guarantees: I only make characters I like making, in the order I like making them in.</p>
     <div class="ld-ops">
       <b>Currently focusing on</b>
-      <span>Ayako Kuroba, Akemi Homura, Utaha Kasumigaoka, Saya Minatsuki, Layla, Violet Evergarden, Rem, Tsukihi Araragi, Megumi Katou</span>
+      <span>Releasing new cards in my backlog primarily</span>
     </div>
   </article>
   <article class="ld-panel ld-aside">
