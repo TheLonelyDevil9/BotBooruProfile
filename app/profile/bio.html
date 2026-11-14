@@ -18,7 +18,8 @@
   --ld-wallpaper: url("https://thelonelydevil9.github.io/BotBooruProfile/assets/profile-background-kuroida-kimono.webp");
   --ld-firefly: url("https://thelonelydevil9.github.io/BotBooruProfile/assets/top-firefly.webp");
   --ld-art-x: 50%;
-  --ld-art-mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent) var(--ld-art-x) 0 / 66.667vh 100% no-repeat;
+  --ld-art-zoom: 1;
+  --ld-art-mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent) var(--ld-art-x) 0 / calc(66.667vh * var(--ld-art-zoom)) 100% no-repeat;
   --ld-shade:
     linear-gradient(180deg, oklch(0.018 0.01 48 / 0.34), oklch(0.014 0.008 48 / 0.5)),
     radial-gradient(circle at 85% 8%, oklch(0.66 0.075 190 / 0.04), transparent 30%),
@@ -27,6 +28,10 @@
   --ld-font-hud: "Chakra Petch", "Segoe UI", system-ui, sans-serif;
   --ld-body-size: 0.93rem;
   --ld-cut: 14px;
+}
+
+@media (orientation: landscape) {
+  :root { --ld-art-zoom: 1.5; }
 }
 
 @media (min-width: 1280px) {
@@ -68,7 +73,7 @@ body::after {
   inset: 0 !important;
   z-index: -1 !important;
   pointer-events: none !important;
-  background: var(--ld-shade), var(--ld-wallpaper) var(--ld-art-x) 0 / auto 100% no-repeat !important;
+  background: var(--ld-shade), var(--ld-wallpaper) var(--ld-art-x) 0 / auto calc(100% * var(--ld-art-zoom)) no-repeat !important;
   -webkit-mask: var(--ld-art-mask) !important;
   mask: var(--ld-art-mask) !important;
 }
