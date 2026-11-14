@@ -1,8 +1,8 @@
 // Wraps app/profile/bio.html in a minimal fake of BotBooru's profile page context
 // so the blob can be verified in a plain file:// browser tab before pasting live.
 // The harness mimics .profile-identity-row flex wrapping, the ~966px content width, and the
-// 288px sidebar BotBooru docks at 1280px and wider, because the blob's wallpaper centres on the
-// column beside that sidebar; everything else comes from the blob's own CSS.
+// 288px sidebar BotBooru docks at 1280px and wider, because the blob sizes its wallpaper to the
+// area beside that sidebar; everything else comes from the blob's own CSS.
 "use strict";
 
 const fs = require("node:fs");

@@ -23,7 +23,7 @@ The local preview is useful for layout iteration, but it is not authoritative. B
 ## Current Profile Shape
 
 - Root: `section.ld-bb-a` inside `#custom-profile-root` (SAM HUD system, 2026-07-16)
-- Page level: fixed wallpaper showing the portrait figure from head to hips on landscape screens (whole figure on portrait screens) with a blurred side fill, firefly banner with amber corner brackets, teal-ringed avatar with dashed amber outline, squared HUD identity pills and meta chips
+- Page level: fixed wallpaper turned sideways on landscape screens so the lying figure fills the screen (upright on portrait screens), firefly banner with amber corner brackets, teal-ringed avatar with dashed amber outline, squared HUD identity pills and meta chips
 - Left: command panel (nameplate "Cardmaking // Method", "Firefly!" headliner link, four-line hero, philosophy paragraphs, "Why do I do this?" note, equal-width CTA buttons + no-guarantees note, "Currently focusing on" readout)
 - Right: "About // Heads Up" panel ("...Who?" linked heading; Heads Up in warn red)
 - Below: permanently expanded "Links // Credits" panel, the Post-School-Fly tail figure, then a 100vh wallpaper-reveal frame before the cards/stats section

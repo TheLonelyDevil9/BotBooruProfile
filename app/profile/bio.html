@@ -17,26 +17,16 @@
   --ld-shadow: 0 20px 52px oklch(0.02 0.012 48 / 0.54);
   --ld-wallpaper: url("https://thelonelydevil9.github.io/BotBooruProfile/assets/profile-background-kuroida-kimono.webp");
   --ld-firefly: url("https://thelonelydevil9.github.io/BotBooruProfile/assets/top-firefly.webp");
-  --ld-art-x: 50%;
-  --ld-art-zoom: 1;
-  --ld-art-mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent) var(--ld-art-x) 0 / calc(66.667vh * var(--ld-art-zoom)) 100% no-repeat;
-  --ld-shade:
-    linear-gradient(180deg, oklch(0.018 0.01 48 / 0.34), oklch(0.014 0.008 48 / 0.5)),
-    radial-gradient(circle at 85% 8%, oklch(0.66 0.075 190 / 0.04), transparent 30%),
-    linear-gradient(oklch(0.055 0.014 48 / 0.5) 0 0);
+  --ld-side: 0px;
   --ld-font-body: "Source Sans 3", "Source Sans Pro", -apple-system, "Segoe UI", system-ui, sans-serif;
   --ld-font-hud: "Chakra Petch", "Segoe UI", system-ui, sans-serif;
   --ld-body-size: 0.93rem;
   --ld-cut: 14px;
 }
 
-@media (orientation: landscape) {
-  :root { --ld-art-zoom: 1.5; }
-}
-
 @media (min-width: 1280px) {
-  :root { --ld-art-x: calc(50% + 144px); }
-  :root:has(#sidebar.sidebar-folded) { --ld-art-x: calc(50% + 28px); }
+  :root { --ld-side: 288px; }
+  :root:has(#sidebar.sidebar-folded) { --ld-side: 56px; }
 }
 
 body {
@@ -60,11 +50,20 @@ body :where(h1, h2, h3, h4, h5, h6) {
 body::before {
   content: "" !important;
   position: fixed !important;
-  inset: -120px !important;
+  inset: 0 !important;
   z-index: -2 !important;
   pointer-events: none !important;
-  background: var(--ld-shade), var(--ld-wallpaper) center / 100% 100% no-repeat !important;
-  filter: blur(40px) !important;
+  background: var(--ld-wallpaper) center top / cover no-repeat !important;
+  opacity: 0.5 !important;
+}
+
+@media (orientation: landscape) {
+  body::before {
+    inset: 50% auto auto calc(50% + var(--ld-side) / 2) !important;
+    width: 100vh !important;
+    height: calc(100vw - var(--ld-side)) !important;
+    transform: translate(-50%, -50%) rotate(-90deg) !important;
+  }
 }
 
 body::after {
@@ -73,9 +72,9 @@ body::after {
   inset: 0 !important;
   z-index: -1 !important;
   pointer-events: none !important;
-  background: var(--ld-shade), var(--ld-wallpaper) var(--ld-art-x) 0 / auto calc(100% * var(--ld-art-zoom)) no-repeat !important;
-  -webkit-mask: var(--ld-art-mask) !important;
-  mask: var(--ld-art-mask) !important;
+  background:
+    linear-gradient(180deg, oklch(0.018 0.01 48 / 0.34), oklch(0.014 0.008 48 / 0.5)),
+    radial-gradient(circle at 85% 8%, oklch(0.66 0.075 190 / 0.04), transparent 30%) !important;
 }
 
 html {
